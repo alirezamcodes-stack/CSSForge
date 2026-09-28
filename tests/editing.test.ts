@@ -20,7 +20,7 @@ describe('Design value boundary', () => {
   });
   it('rejects property and declaration injection before asking CSS.supports', () => {
     const supports = vi.fn(() => true);
-    for (const [property, value] of [['background-image', 'url(https://example.com)'], ['color', 'red; display:none'], ['width', '20px !important'], ['color', 'red}body{display:none'], ['color', ''], ['width', '1\npx']]) expect(validateValue(property, value, supports)).toBe(false);
+    for (const [property, value] of [['behavior', 'url(https://example.com)'], ['color', 'red; display:none'], ['width', '20px !important'], ['color', 'red}body{display:none'], ['color', ''], ['width', '1\npx']]) expect(validateValue(property, value, supports)).toBe(false);
     expect(supports).not.toHaveBeenCalled();
   });
   it('uses browser validation and retains valid CSS color syntax', () => {

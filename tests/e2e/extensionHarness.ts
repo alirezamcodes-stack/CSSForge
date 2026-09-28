@@ -18,7 +18,7 @@ export const inspector = (page: Page) => page.getByRole('complementary', { name:
 export const dock = (page: Page) => page.getByRole('navigation', { name: 'CSSForge tools' });
 export const identity = (page: Page) => page.getByTestId('selected-identity');
 export const outline = (page: Page) => page.getByTestId('target-outline');
-export async function setup(info: TestInfo) {
+export async function setup(info: TestInfo, fixtureHTML = fixture) {
   const build = path.resolve('.output/chrome-mv3');
   const manifest = JSON.parse(await readFile(path.join(build, 'manifest.json'), 'utf8'));
   expect(manifest.permissions).toEqual(['activeTab', 'scripting']);
@@ -33,7 +33,7 @@ export async function setup(info: TestInfo) {
   const worker = context.serviceWorkers()[0] ?? await context.waitForEvent('serviceworker');
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.route('**/extension-fixture.html', route => route.fulfill({ contentType: 'text/html', body: fixture }));
+  await page.route('**/extension-fixture.html', route => route.fulfill({ contentType: 'text/html', body: fixtureHTML }));
   await page.goto('/extension-fixture.html');
   const hostGeometry = await page.locator('main').boundingBox();
   const documentSize = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.scrollHeight]);

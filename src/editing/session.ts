@@ -1,122 +1,137 @@
 import { editorValue, normalizeValue, properties, validateValue, type Property } from './properties';
+import { baseContext, contextKey, discoverMedia, pseudos, type EditContext, type MediaContext } from './contexts';
 
 export type FieldValue = { computed: string; presented: string; override?: string };
 export type DesignSnapshot = { targetId: string; values: Record<Property, FieldValue>; canSize: boolean };
-export type EditState = { design: DesignSnapshot | null; undoCount: number; editedCount: number; error: string | null };
-type Target = { id: string; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; overrides: Partial<Record<Property, string>>; layer?: HTMLStyleElement; rule?: CSSStyleRule };
-export type Transaction = { targetId: string; property: Property; previous: string | undefined; value: string; order: number; gesture?: string };
+export type EditState = { design: DesignSnapshot | null; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean };
+type Values = Partial<Record<Property, string>>;
+type Scope = { context: EditContext; values: Values };
+type Target = { id: string; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; scopes: Map<string, Scope>; layer?: HTMLStyleElement; media: ReturnType<typeof discoverMedia> };
+export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; value: string }[]; order: number; gesture?: string };
+export const emptyEditState = (): EditState => ({ design: null, undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false });
 
-/** Only this module writes page edits. Author styles and style attributes remain untouched. */
+/** One session controller for core and rich editing. No author declarations are rewritten. */
 export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: () => void) {
   const win = doc.defaultView!;
   const prefix = `data-cssforge-target-${crypto.randomUUID().replaceAll('-', '')}`;
-  const targets = new Map<string, Target>();
-  let byElement = new WeakMap<Element, Target>();
-  const listeners = new Set<() => void>();
-  const history: Transaction[] = [];
-  let sequence = 0, order = 0, destroyed = false;
-  let state: EditState = { design: null, undoCount: 0, editedCount: 0, error: null };
+  const targets = new Map<string, Target>(); let byElement = new WeakMap<Element, Target>();
+  const listeners = new Set<() => void>(), history: Transaction[] = [];
+  let sequence = 0, order = 0, destroyed = false, state = emptyEditState();
+  const edited = (target: Target) => [...target.scopes.values()].some(scope => Object.keys(scope.values).length);
   const publish = (patch: Partial<EditState> = {}) => {
-    state = { ...state, undoCount: history.length, editedCount: [...targets.values()].filter(target => Object.keys(target.overrides).length).length, ...patch };
+    state = { ...state, undoCount: history.length, editedCount: [...targets.values()].filter(edited).length, ...patch };
     listeners.forEach(listener => listener());
   };
   const safe = (target: Target) => target.element.isConnected && target.element.ownerDocument === doc && target.element.getRootNode() === target.root && !owns(target.element);
-  function inspect(element: Element | null, computed?: CSSStyleDeclaration) {
+  function inspect(element: Element | null, computed?: CSSStyleDeclaration, discover = false) {
     if (destroyed) return;
     if (!element || owns(element) || !element.isConnected || !(element instanceof win.HTMLElement || element instanceof win.SVGElement)) { publish({ design: null, error: null }); return; }
     const root = element.getRootNode();
     if (root !== doc && !(root instanceof win.ShadowRoot && root.mode === 'open')) { publish({ design: null }); return; }
     let target = byElement.get(element);
     if (!target) {
-      const id = String(++sequence);
-      let attribute = prefix;
-      while (element.hasAttribute(attribute)) attribute += '-x';
-      target = { id, element, root: root as Document | ShadowRoot, attribute, overrides: {} };
+      const id = String(++sequence); let attribute = prefix; while (element.hasAttribute(attribute)) attribute += '-x';
+      target = { id, element, root: root as Document | ShadowRoot, attribute, scopes: new Map(), media: { contexts: [], limited: false } };
       targets.set(id, target); byElement.set(element, target);
     }
-    // A moved target is never silently retargeted into another tree.
     if (!safe(target)) { publish({ design: null, error: 'This element moved to another document tree. Reset session edits before inspecting it again.' }); return; }
-    const css = computed ?? win.getComputedStyle(element);
+    const changed = state.design?.targetId !== target.id;
+    if (changed) state = { ...state, context: baseContext() };
+    if (discover || changed) target.media = discoverMedia(element);
+    const context = state.context, pseudoElement = context.pseudo.startsWith('::');
+    const css = pseudoElement ? win.getComputedStyle(element, context.pseudo) : computed ?? win.getComputedStyle(element);
+    const scope = target.scopes.get(contextKey(context));
     const values = Object.fromEntries(properties.map(property => {
-      const browserValue = css.getPropertyValue(property);
-      const override = target!.overrides[property];
-      return [property, { computed: browserValue, presented: editorValue(property, browserValue, element.style.getPropertyValue(property), override), override }];
+      const browserValue = css.getPropertyValue(property), override = scope?.values[property];
+      const inline = !context.media.length && !context.pseudo ? element.style.getPropertyValue(property) : '';
+      return [property, { computed: browserValue, presented: editorValue(property, browserValue, inline, override), override }];
     })) as Record<Property, FieldValue>;
+    const mediaContexts = [...target.media.contexts];
+    for (const scope of target.scopes.values()) if (scope.context.media.length && !mediaContexts.some(item => JSON.stringify(item.queries) === JSON.stringify(scope.context.media))) mediaContexts.push({ queries: scope.context.media, source: 'session override' });
     const replaced = ['img', 'input', 'textarea', 'select', 'button', 'video', 'canvas', 'svg', 'iframe', 'object', 'embed'].includes(element.localName);
-    publish({ design: { targetId: target.id, values, canSize: css.display !== 'contents' && (css.display !== 'inline' || replaced) }, error: state.design?.targetId === target.id ? state.error : null });
+    publish({ design: { targetId: target.id, values, canSize: css.display !== 'contents' && (css.display !== 'inline' || replaced) }, mediaContexts, mediaLimited: target.media.limited, error: changed ? null : state.error });
   }
   const release = (target: Target) => {
-    target.layer?.remove(); target.layer = undefined; target.rule = undefined;
+    target.layer?.remove(); target.layer = undefined;
     if (target.element.getAttribute(target.attribute) === target.id) target.element.removeAttribute(target.attribute);
-    // Remove copied ownership markers too; never use them to recover an Element reference.
     for (const copy of target.root.querySelectorAll(`[${target.attribute}="${target.id}"]`)) copy.removeAttribute(target.attribute);
   };
-  const write = (target: Target, property: Property, value?: string) => {
-    if (!value) {
-      delete target.overrides[property]; target.rule?.style.removeProperty(property);
-      if (!Object.keys(target.overrides).length) release(target);
-      return;
-    }
-    // Remove accidental copied markers before writing; edits always use the stored DOM reference.
+  const render = (target: Target) => {
+    if (!edited(target)) { release(target); return; }
+    const layer = doc.createElement('style'); layer.dataset.cssforgeEditLayer = target.id;
+    (target.root === doc ? doc.head ?? doc.documentElement : target.root).appendChild(layer);
+    try {
+      if (!layer.sheet) throw new Error('Style layer unavailable');
+      // Base before conditional rules; media order follows proven context discovery.
+      const scopes = [...target.scopes.values()].filter(scope => Object.keys(scope.values).length).sort((a, b) => a.context.media.length - b.context.media.length);
+      for (const scope of scopes) {
+        let sheet: CSSStyleSheet | CSSMediaRule = layer.sheet;
+        for (const query of scope.context.media) { const i = sheet.insertRule(`@media ${query} {}`, sheet.cssRules.length); sheet = sheet.cssRules[i] as CSSMediaRule; }
+        const i = sheet.insertRule(`[${target.attribute}="${target.id}"]${scope.context.pseudo} {}`, sheet.cssRules.length);
+        const rule = sheet.cssRules[i] as CSSStyleRule;
+        for (const [property, value] of Object.entries(scope.values)) rule.style.setProperty(property, value, 'important');
+      }
+    } catch (error) { layer.remove(); throw error; }
     for (const copy of target.root.querySelectorAll(`[${target.attribute}="${target.id}"]`)) if (copy !== target.element) copy.removeAttribute(target.attribute);
-    if (!target.layer?.isConnected || !target.rule) {
-      release(target);
-      const layer = doc.createElement('style'); layer.dataset.cssforgeEditLayer = target.id;
-      (target.root === doc ? doc.head ?? doc.documentElement : target.root).appendChild(layer);
-      try {
-        if (!layer.sheet) throw new Error('Style layer unavailable');
-        layer.sheet.insertRule(`[${target.attribute}="${target.id}"] {}`, 0);
-        target.layer = layer; target.rule = layer.sheet.cssRules[0] as CSSStyleRule;
-        for (const [name, existing] of Object.entries(target.overrides)) target.rule.style.setProperty(name, existing, 'important');
-      } catch (error) { layer.remove(); throw error; }
+    target.element.setAttribute(target.attribute, target.id); target.layer?.remove(); target.layer = layer;
+  };
+  const applyBatch = (targetId: string, inputs: Values, gesture?: string, expectedContext = contextKey(state.context)) => {
+    const target = targets.get(targetId); const fail = (error: string) => { publish({ error }); return false; };
+    if (destroyed || !target || state.design?.targetId !== targetId || !safe(target) || expectedContext !== contextKey(state.context)) return fail('The editing target or context changed. Pick it again.');
+    if (target.element.hasAttribute(target.attribute) && target.element.getAttribute(target.attribute) !== target.id) return fail('The page changed the edit marker. Reset session edits before continuing.');
+    const key = contextKey(state.context), scope = target.scopes.get(key) ?? { context: { ...state.context, media: [...state.context.media] }, values: {} };
+    const changes: Transaction['changes'] = [];
+    for (const [name, input] of Object.entries(inputs)) {
+      const property = name as Property, value = normalizeValue(property, input);
+      if (!validateValue(property, value, win.CSS.supports.bind(win.CSS))) return fail(`Enter a valid ${property} value.`);
+      if (!state.context.pseudo.startsWith('::') && target.element.style.getPropertyPriority(property) === 'important') return fail('An inline !important declaration prevents this override. Original page styles are preserved.');
+      if ((property === 'width' || property === 'height') && !state.design!.canSize) return fail('This display mode does not provide an editable size box.');
+      if (scope.values[property] !== value) changes.push({ property, previous: scope.values[property], value });
     }
-    target.element.setAttribute(target.attribute, target.id);
-    target.rule.style.setProperty(property, value, 'important');
-    target.overrides[property] = value;
+    if (!changes.length) { publish({ error: null }); return true; }
+    const previousValues = { ...scope.values };
+    changes.forEach(change => { scope.values[change.property] = change.value; }); target.scopes.set(key, scope);
+    try { render(target); } catch { scope.values = previousValues; return fail('This page blocked the CSSForge style layer. No edit was applied.'); }
+    const last = history.at(-1);
+    if (gesture && last?.gesture === gesture && last.targetId === targetId && contextKey(last.context) === key) {
+      for (const change of changes) { const existing = last.changes.find(item => item.property === change.property); if (existing) existing.value = change.value; else last.changes.push(change); }
+    } else history.push({ targetId, context: scope.context, changes, order: ++order, gesture });
+    publish({ error: null }); onChange(); return true;
   };
   return {
-    inspect,
+    inspect, applyBatch,
+    apply(targetId: string, property: Property, value: string, gesture?: string) { return applyBatch(targetId, { [property]: value }, gesture); },
+    setContext(context: EditContext) {
+      if (destroyed || !state.design || !pseudos.includes(context.pseudo)) return;
+      if (context.media.length && !state.mediaContexts.some(item => JSON.stringify(item.queries) === JSON.stringify(context.media))) return;
+      publish({ context: { media: [...context.media], pseudo: context.pseudo }, error: null }); onChange();
+    },
     getSnapshot: () => state,
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
-    apply(targetId: string, property: Property, input: string, gesture?: string) {
-      const target = targets.get(targetId);
-      const fail = (error: string) => { publish({ error }); return false; };
-      if (destroyed || !target || state.design?.targetId !== targetId || !safe(target)) return fail('The selected element is no longer available. Pick it again.');
-      if (target.element.hasAttribute(target.attribute) && target.element.getAttribute(target.attribute) !== target.id) return fail('The page changed the edit marker. Reset session edits before continuing.');
-      const value = normalizeValue(property, input);
-      if (!validateValue(property, value, win.CSS.supports.bind(win.CSS))) return fail(`Enter a valid ${property} value.`);
-      if (target.element.style.getPropertyPriority(property) === 'important') return fail('An inline !important declaration prevents this override. Original page styles are preserved.');
-      if ((property === 'width' || property === 'height') && !state.design.canSize) return fail('This display mode does not provide an editable size box.');
-      const previous = target.overrides[property];
-      if (previous === value) { publish({ error: null }); return true; }
-      try { write(target, property, value); } catch { return fail('This page blocked the CSSForge style layer. No edit was applied.'); }
-      const last = history.at(-1);
-      if (gesture && last?.gesture === gesture && last.targetId === targetId && last.property === property) last.value = value;
-      else history.push({ targetId, property, previous, value, order: ++order, gesture });
-      publish({ error: null }); onChange(); return true;
-    },
     undo() {
       if (destroyed) return;
       const transaction = history.pop(); if (!transaction) return;
       const target = targets.get(transaction.targetId)!;
-      if (!safe(target)) { release(target); target.overrides = {}; }
+      const key = contextKey(transaction.context), scope = target.scopes.get(key) ?? { context: transaction.context, values: {} };
+      target.scopes.set(key, scope);
+      if (!safe(target)) { release(target); target.scopes.clear(); }
       else {
-        try { write(target, transaction.property, transaction.previous); }
-        catch { history.push(transaction); publish({ error: 'The page blocked undo. Reset session edits to remove the CSSForge layer.' }); return; }
+        const previousValues = { ...scope.values };
+        for (const change of transaction.changes) { if (change.previous === undefined) delete scope.values[change.property]; else scope.values[change.property] = change.previous; }
+        try { render(target); } catch { scope.values = previousValues; history.push(transaction); publish({ error: 'The page blocked undo. Reset session edits to remove the CSSForge layer.' }); return; }
       }
       publish({ error: null }); onChange();
     },
     reset() {
       if (destroyed) return;
-      for (const target of targets.values()) { release(target); target.overrides = {}; }
-      targets.clear(); byElement = new WeakMap();
-      history.length = 0; publish({ error: null }); onChange();
+      for (const target of targets.values()) release(target);
+      targets.clear(); byElement = new WeakMap(); history.length = 0;
+      publish({ error: null, context: baseContext() }); onChange();
     },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
+      if (destroyed) return; destroyed = true;
       for (const target of targets.values()) release(target);
-      targets.clear(); history.length = 0; listeners.clear(); state = { design: null, undoCount: 0, editedCount: 0, error: null };
+      targets.clear(); history.length = 0; listeners.clear(); state = emptyEditState();
     },
   };
 }

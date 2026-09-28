@@ -4,6 +4,7 @@ export const properties = [
   'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
   'font-family', 'font-weight', 'font-size', 'line-height', 'color', 'text-align', 'letter-spacing',
   'background-color', 'display', 'border-width', 'border-style', 'border-color', 'border-radius', 'position',
+  'background-image', 'background-position', 'background-size', 'background-repeat', 'box-shadow', 'text-shadow', 'filter',
 ] as const;
 export type Property = typeof properties[number];
 const lengths = new Set<Property>(['width', 'height', 'font-size', 'letter-spacing', 'border-width', 'border-radius', ...properties.filter(p => p.startsWith('margin-') || p.startsWith('padding-'))]);
@@ -13,7 +14,7 @@ export function normalizeValue(property: Property, input: string) {
   return lengths.has(property) && /^[-+]?(?:\d+\.?\d*|\.\d+)$/.test(value) ? `${value}px` : value;
 }
 export function validateValue(property: string, value: string, supports: (property: string, value: string) => boolean) {
-  return properties.includes(property as Property) && value.length > 0 && value.length <= 1000
+  return properties.includes(property as Property) && value.length > 0 && value.length <= 8000
     && !/[;{}\u0000-\u001f]/.test(value) && !/!\s*important/i.test(value) && supports(property, value);
 }
 export function editorValue(property: Property, computed: string, inline: string, override?: string) {

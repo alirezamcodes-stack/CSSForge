@@ -11,7 +11,7 @@ export default defineConfig({
   },
   manifest: {
     name: 'CSSForge',
-    description: 'Inspect page elements and edit core Design properties with reversible, local session overrides.',
+    description: 'Inspect and edit Design properties, backgrounds and effects with reversible, local session overrides.',
     permissions: ['activeTab', 'scripting'],
     action: { default_title: 'Toggle CSSForge' },
   },

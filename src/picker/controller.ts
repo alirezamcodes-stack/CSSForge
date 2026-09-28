@@ -77,7 +77,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     if (destroyed || !valid(element)) return;
     selected = element; hovered = null;
     const computed = win.getComputedStyle(element);
-    editor.inspect(element, computed);
+    editor.inspect(element, computed, true);
     publish({ active: false, selection: {
       identity: identityOf(element), tag: element.localName, id: element.id,
       classes: Array.from(element.classList), rect: rectOf(element.getBoundingClientRect()),

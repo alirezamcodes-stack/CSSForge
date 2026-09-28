@@ -1,12 +1,12 @@
 import { createContext, useContext, useSyncExternalStore } from 'react';
 import type { Picker, PickerState } from './controller';
-import type { EditState } from '../editing/session';
+import { emptyEditState } from '../editing/session';
 
 export const InspectionContext = createContext<{ preview: boolean; picker?: Picker; deactivate?: () => void }>({ preview: false });
 const empty: PickerState = { active: false, selection: null };
 const subscribe = () => () => {};
 const getEmpty = () => empty;
-const emptyEdits: EditState = { design: null, undoCount: 0, editedCount: 0, error: null };
+const emptyEdits = emptyEditState();
 const getEmptyEdits = () => emptyEdits;
 export function useEditing() {
   const { picker } = useContext(InspectionContext);
