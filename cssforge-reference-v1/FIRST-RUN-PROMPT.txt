@@ -1,0 +1,23 @@
+Create a NEW project named CSSForge.
+
+Use the attached CSSForge reference package as the design authority.
+
+Read only:
+- 00-START-HERE.md
+- PRODUCT-BRIEF.md
+- TECH-STACK.md
+- UI-FOUNDATION.md
+- AGENT-RULES.md
+- phases/01-visual-foundation.md
+
+Then open only the reference images listed by Phase 01.
+
+Do not review every contact sheet, keyframe, or future phase.
+
+Implement Phase 01 only.
+
+The priority is visual/UI foundation first, using fixture data where necessary.
+Do not build the CSS analysis engine yet.
+Do not start Phase 02 automatically.
+
+At the end, run focused checks and provide the 5 screenshots required by Phase 01 plus a short visual-gap summary.

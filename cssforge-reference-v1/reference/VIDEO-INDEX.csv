@@ -1,0 +1,15 @@
+evidence,interaction,phase
+toggle_pseudos-standard,Pseudo-state activation/toggle,Phase 05
+media_and_pseudo_picker-standard,Media + pseudo dropdowns,Phase 02/05
+move_elements-standard,Canvas move/reorder,Future contextual editing
+add_new_elements-standard,Canvas insertion,Future contextual editing
+test_new_texts-standard,Direct text edit,Future contextual editing
+perfect_font-standard,Font picker/live typography,Phase 04
+background_shorter-standard,Layered background/gradient workflow,Phase 05
+short_clip-standard,General shell + dock,Phase 01/02
+apply_undo_changes-standard,Apply/undo and Changes relationship,Phase 07
+fix_css_errors-standard,Inline Code error UX,Phase 06
+remove_elements-standard(1),Contextual remove,Future contextual editing
+responsive-standard(1),Responsive workspace,Phase 07
+inspect_parent-standard(1),Parent navigation,Phase 03/06
+code_editor-standard(1),Direct line Code editing,Phase 06

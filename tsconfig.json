@@ -1,0 +1,5 @@
+{
+  "extends": "./.wxt/tsconfig.json",
+  "compilerOptions": { "strict": true, "jsx": "react-jsx", "types": ["vite/client", "node"] },
+  "include": ["src", "entrypoints", "tests", "*.ts", ".wxt/wxt.d.ts"]
+}
