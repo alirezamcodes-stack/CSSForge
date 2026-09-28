@@ -13,8 +13,10 @@ export function Value({ label, initial, unit = '' }: { label: string; initial: s
   const [value, setValue] = useState(String(initial));
   return <label className={s.value}><span className={s.srOnly}>{label}</span><input aria-label={label} value={value} onChange={event => setValue(event.target.value)} spellCheck={false}/>{unit && <span>{unit}</span>}</label>;
 }
-export function Select({ label, options, initial, className = '' }: { label: string; options: string[]; initial?: string; className?: string }) {
-  const [value, setValue] = useState(initial ?? options[0]);
+export function Select({ label, options, initial, className = '', selected, onSelect }: { label: string; options: string[]; initial?: string; className?: string; selected?: string; onSelect?: (value: string) => void }) {
+  const [local, setLocal] = useState(initial ?? options[0]);
+  const value = selected ?? local;
+  const setValue = onSelect ?? setLocal;
   return <Popover id={label} label={value} className={className}><div className={s.menuCaption}>{label}</div><Options values={options} value={value} onChange={setValue} /></Popover>;
 }
 export function Color({ label = 'Text color', initial = '#ffffff' }: { label?: string; initial?: string }) {

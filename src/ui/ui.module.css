@@ -36,6 +36,20 @@
   -webkit-font-smoothing: antialiased;
 }
 .app *, .app *::before, .app *::after { box-sizing: border-box; }
+.baseUI { display: contents; }
+.liveIdentity { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.liveFont { min-width: 0; }.liveFont u { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.liveContent { padding: 18px 19px; }.liveContent p { margin: 0 0 16px; }
+.targetNavigation { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.selectionFacts { display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 12px 8px; margin: 24px 0; font-size: 12px; }
+.selectionFacts dt { color: var(--text-muted); }.selectionFacts dd { margin: 0; overflow-wrap: anywhere; }
+.triggerLabel { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.headerActions .popoverTrigger .triggerLabel>svg { width: 14px; color: var(--text-secondary); }
+.tooltip { position: fixed; pointer-events: none; z-index: 50; padding: 5px 8px; background: #303136; color: var(--text); border: 1px solid #ffffff28; border-radius: 5px; box-shadow: 0 3px 12px #0004; font-size: 11px; line-height: 1.4; overflow: hidden; }
+.inspectorHeader { cursor: grab; touch-action: none; user-select: none; }
+.inspectorHeader button { cursor: pointer; }
+.inspector[data-dragging] .inspectorHeader { cursor: grabbing; }
+.dockCapsule>.popoverTrigger[data-active=true] { background: #4a4c50; }
 .app button, .app input { font: inherit; color: inherit; }
 .app button { border: 0; background: none; cursor: pointer; padding: 0; }
 .app button:disabled { cursor: default; opacity: .4; }

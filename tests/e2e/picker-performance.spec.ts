@@ -1,0 +1,45 @@
+import { test, expect } from '@playwright/test';
+
+test('raw hover bursts do no computed inspection, publish no UI state, and stop completely on teardown', async ({ page }) => {
+  await page.route('**/picker-performance.html', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><div id="target" style="width:200px;height:100px">Target</div><div id="other">Other</div><cssforge-ui></cssforge-ui>' }));
+  await page.goto('/picker-performance.html');
+  const result = await page.evaluate(async () => {
+    const modulePath = '/src/picker/controller.ts';
+    const { createPicker } = await import(modulePath);
+    const target = document.querySelector('#target')!;
+    const host = document.querySelector<HTMLElement>('cssforge-ui')!;
+    let styles = 0, geometry = 0, publications = 0, clicks = 0;
+    const originalStyle = window.getComputedStyle;
+    const originalRect = target.getBoundingClientRect.bind(target);
+    window.getComputedStyle = (...args) => { styles++; return originalStyle(...args); };
+    target.getBoundingClientRect = () => { geometry++; return originalRect(); };
+    const picker = createPicker(document, host, () => {});
+    picker.subscribe(() => publications++);
+    picker.start(); publications = 0;
+    const tick = () => new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
+    const move = (node: Element) => node.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, composed: true }));
+    for (let i = 0; i < 1000; i++) move(target);
+    const raw = { styles, geometry, publications };
+    await tick();
+    const first = { styles, geometry, publications };
+    for (let i = 0; i < 1000; i++) move(target);
+    await tick();
+    const same = { styles, geometry, publications };
+    target.addEventListener('click', () => clicks++);
+    target.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true, cancelable: true }));
+    const selected = { styles, publications, clicks };
+    // Queue a frame immediately before teardown, then check it never writes an overlay.
+    picker.start(); move(document.querySelector('#other')!); picker.destroy(); picker.destroy();
+    for (let i = 0; i < 1000; i++) move(target);
+    await tick();
+    target.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true, cancelable: true }));
+    const cleanup = { styles, clicks, overlays: document.querySelectorAll('cssforge-overlay').length };
+    window.getComputedStyle = originalStyle;
+    return { raw, first, same, selected, cleanup };
+  });
+  expect(result.raw).toEqual({ styles: 0, geometry: 0, publications: 0 });
+  expect(result.first).toEqual({ styles: 0, geometry: 1, publications: 0 });
+  expect(result.same).toEqual(result.first);
+  expect(result.selected).toEqual({ styles: 1, publications: 1, clicks: 0 });
+  expect(result.cleanup).toEqual({ styles: 1, clicks: 1, overlays: 0 });
+});

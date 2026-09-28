@@ -11,7 +11,8 @@ function TreeNode({ node, depth, selected, onSelect }: { node: FixtureNode; dept
   </div>{open && <>{node.text && <div className={s.treeText} style={{ paddingLeft: depth * 13 + 30 }}>"{node.text}"</div>}{node.children?.map(child => <TreeNode key={child.id} node={child} depth={depth + 1} {...{ selected, onSelect }} />)}{node.children && <div className={s.treeClosing} style={{ paddingLeft: depth * 13 + 28 }}>&lt;/{node.tag}&gt;</div>}</>}</div>;
 }
 export function DOMTree() {
-  const [selected, setSelected] = useState('card');
+  const selected = useUI(state => state.selectedFixtureNode);
+  const setSelected = useUI(state => state.selectNode);
   return <div className={s.tree} aria-label="Fixture element hierarchy"><TreeNode node={dom} depth={0} selected={selected} onSelect={setSelected} /></div>;
 }
 export function HTMLView() {

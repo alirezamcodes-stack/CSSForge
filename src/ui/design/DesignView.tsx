@@ -6,11 +6,15 @@ import { SpacingEditor } from './SpacingEditor';
 import { TypographyEditor } from './TypographyEditor';
 import { ShadowSection, FilterSection } from './Effects';
 import s from '../ui.module.css';
+import { useUI } from '../../state/ui';
+import { fixtureMedia, fixturePseudo } from '../../fixtures/options';
 
 function ContextControls() {
-  const [media, setMedia] = useState('Auto · None');
-  const [pseudo, setPseudo] = useState('None');
-  return <><Popover id="Media" label={<span><span className={s.contextLabel}><Icon name="screen" />Media</span><strong>{media}</strong></span>} className={s.media}><div className={s.menuCaption}>Preview context · fixture</div><Options values={['Auto · None', 'Desktop · ≥ 1024px', 'Tablet · ≥ 768px', 'Mobile · < 768px']} value={media} onChange={setMedia}/></Popover><Popover id="State or pseudo" label={<span className={s.inline}><Icon name="target" />State or pseudo <strong>{pseudo}</strong></span>} className={s.pseudo}><div className={s.menuCaption}>State preview · fixture</div><Options values={['None', ':hover', ':focus', ':active', '::before', '::after']} value={pseudo} onChange={setPseudo}/></Popover><div className={s.geometry}><span><i>X</i>36</span><span><i>Y</i>627</span><span><i>∟</i>0°</span><span><i>W</i>100 %</span><span><i>H</i>auto</span><span><i>▢</i>16 px</span></div></>;
+  const media = useUI(state => state.selectedFixtureMedia);
+  const setMedia = (value: string) => useUI.getState().selectFixture('Media', value);
+  const pseudo = useUI(state => state.selectedFixturePseudo);
+  const setPseudo = (value: string) => useUI.getState().selectFixture('Pseudo', value);
+  return <><Popover id="Media" label={<span><span className={s.contextLabel}><Icon name="screen" />Media</span><strong>{media}</strong></span>} className={s.media}><div className={s.menuCaption}>Preview context · fixture</div><Options values={fixtureMedia} value={media} onChange={setMedia}/></Popover><Popover id="State or pseudo" label={<span className={s.inline}><Icon name="target" />State or pseudo <strong>{pseudo}</strong></span>} className={s.pseudo}><div className={s.menuCaption}>State preview · fixture</div><Options values={fixturePseudo} value={pseudo} onChange={setPseudo}/></Popover><div className={s.geometry}><span><i>X</i>36</span><span><i>Y</i>627</span><span><i>∟</i>0°</span><span><i>W</i>100 %</span><span><i>H</i>auto</span><span><i>▢</i>16 px</span></div></>;
 }
 function BackgroundSection() {
   const [layers, setLayers] = useState(1);

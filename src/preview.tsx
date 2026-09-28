@@ -15,4 +15,4 @@ const style = document.createElement('style');
 style.textContent = tokenCss + uiCss;
 const container = document.createElement('div');
 shadow.append(style, container);
-createRoot(container).render(<App />);
+createRoot(container).render(<App preview />);

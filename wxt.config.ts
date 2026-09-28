@@ -10,9 +10,9 @@ export default defineConfig({
     },
   },
   manifest: {
-    name: 'CSSForge — UI Foundation',
-    description: 'Phase 01 visual playground. Fixture controls do not edit the inspected page.',
+    name: 'CSSForge',
+    description: 'Inspect page elements, dimensions and computed fonts. Local, read-only element inspection.',
     permissions: ['activeTab', 'scripting'],
-    action: { default_title: 'Toggle CSSForge fixture inspector' },
+    action: { default_title: 'Toggle CSSForge' },
   },
 });

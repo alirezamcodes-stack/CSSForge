@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react';
 import s from '../ui.module.css';
+import { Tooltip } from '../interactions/Tooltip';
 
 const paths = {
   chevron: 'm5 8 5 5 5-5', close: 'm5 5 10 10M15 5 5 15', more: 'M4 10h.01M10 10h.01M16 10h.01',
@@ -30,5 +31,5 @@ export function Icon({ name }: { name: IconName }) {
   return <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{name === 'more' ? [4, 10, 16].map(cx => <circle key={cx} cx={cx} cy="10" r="1.25" fill="currentColor" stroke="none" />) : <path d={paths[name]} />}</svg>;
 }
 export function IconButton({ icon, label, active, ...props }: { icon: IconName; label: string; active?: boolean } & ButtonHTMLAttributes<HTMLButtonElement>) {
-  return <button type="button" className={`${s.iconButton} ${active ? s.active : ''}`} aria-label={label} title={label} {...(active !== undefined ? { 'aria-pressed': active } : {})} {...props}><Icon name={icon} /></button>;
+  return <Tooltip label={label}><button type="button" className={`${s.iconButton} ${active ? s.active : ''}`} aria-label={label} {...(active !== undefined ? { 'aria-pressed': active } : {})} {...props}><Icon name={icon} /></button></Tooltip>;
 }

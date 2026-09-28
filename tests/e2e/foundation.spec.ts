@@ -95,24 +95,24 @@ for (const viewport of [{ width: 375, height: 667 }, { width: 1440, height: 450 
   });
 }
 
-test('capture final Phase 01 refinement evidence without runtime errors', async ({ page }) => {
+test('capture Phase 02 regression evidence without runtime errors', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  await mkdir('artifacts/screenshots/final-pass', { recursive: true });
+  await mkdir('artifacts/screenshots/phase-02', { recursive: true });
   await page.setViewportSize({ width: 1440, height: 1800 });
-  await page.screenshot({ path: 'artifacts/screenshots/final-pass/01-design-full.png' });
+  await page.screenshot({ path: 'artifacts/screenshots/phase-02/01-design-full.png' });
   await page.setViewportSize({ width: 1440, height: 1100 });
   await page.getByRole('tab', { name: 'Code', exact: true }).click();
-  await page.screenshot({ path: 'artifacts/screenshots/final-pass/02-code.png' });
-  await page.getByRole('navigation', { name: 'CSSForge tools' }).screenshot({ path: 'artifacts/screenshots/final-pass/03-bottom-dock.png' });
+  await page.screenshot({ path: 'artifacts/screenshots/phase-02/02-code.png' });
+  await page.getByRole('navigation', { name: 'CSSForge tools' }).screenshot({ path: 'artifacts/screenshots/phase-02/03-bottom-dock.png' });
   await page.getByRole('button', { name: 'Open Changes', exact: true }).click();
-  await page.screenshot({ path: 'artifacts/screenshots/final-pass/04-changes.png' });
+  await page.screenshot({ path: 'artifacts/screenshots/phase-02/04-changes.png' });
   await page.keyboard.press('Escape');
   await page.getByRole('navigation', { name: 'CSSForge tools' }).getByRole('button', { name: 'Open Navigator', exact: true }).click();
-  await page.screenshot({ path: 'artifacts/screenshots/final-pass/05-navigator.png' });
+  await page.screenshot({ path: 'artifacts/screenshots/phase-02/05-navigator.png' });
   await page.keyboard.press('Escape');
   await page.getByRole('tab', { name: 'Design', exact: true }).click();
   await page.setViewportSize({ width: 375, height: 667 });
-  await page.screenshot({ path: 'artifacts/screenshots/final-pass/06-narrow.png' });
+  await page.screenshot({ path: 'artifacts/screenshots/phase-02/06-narrow.png' });
   expect(errors).toEqual([]);
 });
