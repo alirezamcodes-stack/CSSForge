@@ -1,6 +1,7 @@
 import { frameGate } from './frame';
 import { identityOf, rectOf, type TargetRect } from './identity';
 import { createOverlay } from './overlay';
+import { createEditSession } from '../editing/session';
 
 export type Selection = {
   identity: string; tag: string; id: string; classes: string[];
@@ -29,6 +30,14 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     return root instanceof win.ShadowRoot ? owns(root.host) : false;
   };
   const valid = (element: Element | null): element is Element => !!element && element.isConnected && !owns(element) && !element.hasAttribute('hidden') && !nonTargets.has(element.localName);
+  const editor = createEditSession(doc, owns, () => {
+    if (selected && valid(selected)) {
+      const computed = win.getComputedStyle(selected);
+      editor.inspect(selected, computed);
+      if (state.selection) publish({ ...state, selection: { ...state.selection, rect: rectOf(selected.getBoundingClientRect()), fontFamily: computed.fontFamily, fontSize: computed.fontSize } });
+    } else editor.inspect(null);
+    frame.schedule();
+  });
   const parentOf = (element: Element) => {
     const root = element.getRootNode();
     const parent = element.parentElement ?? (root instanceof win.ShadowRoot && root.mode === 'open' ? root.host : null);
@@ -49,6 +58,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     if (destroyed) return;
     if (selected && !valid(selected)) {
       selected = null; observer?.disconnect();
+      editor.inspect(null);
       publish({ ...state, selection: null });
     }
     const target = state.active && valid(hovered) ? hovered : selected;
@@ -67,6 +77,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     if (destroyed || !valid(element)) return;
     selected = element; hovered = null;
     const computed = win.getComputedStyle(element);
+    editor.inspect(element, computed);
     publish({ active: false, selection: {
       identity: identityOf(element), tag: element.localName, id: element.id,
       classes: Array.from(element.classList), rect: rectOf(element.getBoundingClientRect()),
@@ -102,6 +113,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   win.visualViewport?.addEventListener('resize', refresh);
   win.visualViewport?.addEventListener('scroll', refresh);
   return {
+    editor,
     subscribe(notify: () => void) { subscribers.add(notify); return () => { subscribers.delete(notify); }; },
     getSnapshot: () => state,
     start() { if (destroyed || state.active) return; hovered = null; publish({ ...state, active: true }); frame.schedule(); },
@@ -113,6 +125,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     destroy() {
       if (destroyed) return;
       destroyed = true; frame.cancel(); observer?.disconnect();
+      editor.destroy();
       win.removeEventListener('pointermove', move, true);
       doc.removeEventListener('pointerleave', leave); win.removeEventListener('blur', leave);
       for (const type of clickEvents) win.removeEventListener(type, intercept, true);

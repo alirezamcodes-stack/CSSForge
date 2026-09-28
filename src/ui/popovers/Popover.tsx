@@ -23,6 +23,7 @@ export function Popover({ id, label, children, className = '', iconOnly = false 
       if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); setPopover(id); }
     }}><span className={s.triggerLabel}>{label}</span>{!iconOnly && <Icon name="chevron" />}</button></Tooltip>
     {open && <FloatingFocusManager context={context} modal={false} returnFocus><div ref={refs.setFloating} style={floatingStyles} className={s.popover} {...interactions.getFloatingProps()} aria-label={id} onKeyDown={event => {
+      if (event.target instanceof HTMLInputElement) return;
       if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
       const buttons = Array.from(content.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)') ?? []);
       if (!buttons.length) return;

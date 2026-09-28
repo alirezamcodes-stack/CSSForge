@@ -37,6 +37,12 @@
 }
 .app *, .app *::before, .app *::after { box-sizing: border-box; }
 .baseUI { display: contents; }
+.editGeometry>span { min-width: 0; gap: 5px; align-items: center; }.editGeometry .value input { width: 42px; }
+.editValue input[aria-invalid=true] { outline: 1px solid #f28f9d; }.editValue input[data-override=true] { color: var(--accent); }
+.boxModel .editValue input { width: 33px; font-size: 10px; }.boxModel .editValue { gap: 0; font-size: 9px; }
+.editColor { min-width: 0; padding-left: 0; width: 100%; }.editColor input:not([type=color]) { width: 100%; min-width: 0; height: 28px; border: 0; background: transparent; font: inherit; text-overflow: ellipsis; cursor: text; border-radius: 0; }
+.editColor input[type=color] { flex: 0 0 16px; }
+.sessionActions { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }.editError { font-size: 11px; color: #f6aab4; line-height: 1.5; }
 .liveIdentity { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .liveFont { min-width: 0; }.liveFont u { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .liveContent { padding: 18px 19px; }.liveContent p { margin: 0 0 16px; }

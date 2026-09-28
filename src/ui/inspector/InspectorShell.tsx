@@ -10,6 +10,7 @@ import s from '../ui.module.css';
 import { useInspectorDrag } from '../interactions/useInspectorDrag';
 import { useInspection } from '../../picker/context';
 import { LiveHeader, LiveTask } from './LiveInspection';
+import { LiveDesignView } from '../design/LiveDesignView';
 function InspectorHeader({ handleProps }: { handleProps: ReturnType<typeof useInspectorDrag>["handleProps"] }) {
   return <header className={s.inspectorHeader} {...handleProps}><div className={s.identityRow}><strong>{selected.selector}</strong><div className={s.headerActions}><IconButton icon="layers" label="Open Navigator" onClick={() => useUI.getState().setSurface('navigator')} /><Popover id="Inspector menu" iconOnly label={<Icon name="more" />}><div className={s.menuCaption}>CSSForge · Phase 01</div><button className={s.menuOption} onClick={() => useUI.getState().setSurface('changes')}>Review fixture changes<Icon name="changes" /></button><button className={s.menuOption} onClick={() => useUI.getState().setInspector(false)}>Hide inspector<Icon name="close" /></button><p className={s.menuNote}>Visual foundation. Controls do not edit this webpage.</p></Popover><IconButton icon="close" label="Hide inspector" onClick={() => useUI.getState().setInspector(false)} /></div></div><div className={s.metadata}><span><Icon name="ruler" />{selected.dimensions}</span><span><Icon name="font" /><u>{selected.font}</u> {selected.size}px</span></div></header>;
 }
@@ -25,9 +26,9 @@ function TaskTabs() {
   }}>{task}</button>)}</div>;
 }
 export function InspectorShell() {
-  const { preview } = useInspection();
+  const { preview, selection } = useInspection();
   const active = useUI(state => state.activeTask);
   const open = useUI(state => state.inspectorOpen);
   const { panel, handleProps } = useInspectorDrag(open);
-  return <aside ref={panel} hidden={!open} className={s.inspector} aria-label="Selected element inspector">{preview ? <InspectorHeader handleProps={handleProps} /> : <LiveHeader handleProps={handleProps} />}<TaskTabs />{(['Design', 'Code', 'HTML'] as Task[]).map(task => <div key={task} hidden={active !== task} id={`panel-${task}`} role="tabpanel" aria-labelledby={`tab-${task}`} className={s.inspectorScroll} tabIndex={0}>{!preview ? <LiveTask task={task} /> : task === 'Design' ? <DesignView /> : task === 'Code' ? <CodeView /> : <HTMLView />}</div>)}</aside>;
+  return <aside ref={panel} hidden={!open} className={s.inspector} aria-label="Selected element inspector">{preview ? <InspectorHeader handleProps={handleProps} /> : <LiveHeader handleProps={handleProps} />}<TaskTabs />{(['Design', 'Code', 'HTML'] as Task[]).map(task => <div key={task} hidden={active !== task} id={`panel-${task}`} role="tabpanel" aria-labelledby={`tab-${task}`} className={s.inspectorScroll} tabIndex={0}>{!preview ? task === 'Design' && selection ? <LiveDesignView /> : <LiveTask task={task} /> : task === 'Design' ? <DesignView /> : task === 'Code' ? <CodeView /> : <HTMLView />}</div>)}</aside>;
 }

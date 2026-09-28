@@ -20,5 +20,5 @@ function AppShell() {
   useLayoutEffect(() => { registerUIRoot(ref.current); return () => registerUIRoot(null); }, []);
   useLayoutEffect(() => { picker?.setSuspended(!!surface); }, [surface, picker]);
   useEscapePolicy(ref);
-  return <div ref={ref} className={s.app} data-cssforge={preview ? 'preview' : 'phase-03'} onKeyDown={event => event.stopPropagation()} onKeyUp={event => event.stopPropagation()} onClick={event => event.stopPropagation()} onPointerDown={event => event.stopPropagation()} onPointerUp={event => event.stopPropagation()}><div className={s.baseUI} inert={surface !== null}><InspectorShell /><BottomDock /></div>{preview ? <>{surface === 'navigator' && <Navigator />}{surface === 'changes' && <ChangesSurface />}</> : surface && <LiveSurface surface={surface} />}</div>;
+  return <div ref={ref} className={s.app} data-cssforge={preview ? 'preview' : 'phase-04'} onKeyDown={event => event.stopPropagation()} onKeyUp={event => event.stopPropagation()} onClick={event => event.stopPropagation()} onPointerDown={event => event.stopPropagation()} onPointerUp={event => event.stopPropagation()}><div className={s.baseUI} inert={surface !== null}><InspectorShell /><BottomDock /></div>{preview ? <>{surface === 'navigator' && <Navigator />}{surface === 'changes' && <ChangesSurface />}</> : surface && <LiveSurface surface={surface} />}</div>;
 }

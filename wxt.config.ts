@@ -11,7 +11,7 @@ export default defineConfig({
   },
   manifest: {
     name: 'CSSForge',
-    description: 'Inspect page elements, dimensions and computed fonts. Local, read-only element inspection.',
+    description: 'Inspect page elements and edit core Design properties with reversible, local session overrides.',
     permissions: ['activeTab', 'scripting'],
     action: { default_title: 'Toggle CSSForge' },
   },
