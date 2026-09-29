@@ -210,7 +210,7 @@
 
 /* Shared professional editing geometry; dock and inspector placement stay intact. */
 .app{font:var(--weight-normal) var(--font-size-base)/var(--line-body) var(--font-ui)}
-.app button,.app input,.app select{font-family:var(--font-ui)}
+.app :where(button,input,select,textarea){font-family:inherit}
 .app button{font-weight:var(--weight-control)}
 .app svg{stroke-width:1.75}.dock svg{width:18px;height:18px;stroke-width:1.75}
 .iconButton{width:var(--icon-button-size);height:var(--icon-button-size)}
@@ -270,3 +270,51 @@
 .proFilter>div{margin:0;gap:10px;grid-template-columns:1fr 82px}
 .proFilter input[type=range]{display:block;margin:5px 0 4px}
 @media(forced-colors:active){.design .sectionTitle[aria-expanded=true],.design .chosenLayer{outline:1px solid Highlight;outline-offset:-1px}.backgroundLayers+.richDetails{border-color:CanvasText}}
+
+/* Product chrome: the locked property-editor layouts remain independent. */
+.app :where(code,pre,kbd,samp){font-family:var(--font-code)}
+.app :where(button,input,select,textarea){letter-spacing:0}
+.app button:disabled:hover{background-color:transparent}
+.app button:active:not(:disabled){transition-duration:0s}
+.app *{scrollbar-color:var(--scrollbar) transparent}
+.app *::-webkit-scrollbar-thumb{border:1px solid transparent;background-clip:padding-box}
+.inspectorHeader{padding-bottom:12px}
+.identityRow strong{font-size:var(--font-size-title);font-weight:var(--weight-heading);line-height:20px;letter-spacing:-.2px}
+.headerActions{gap:0;margin-right:-3px}
+.headerActions>.iconButton:last-child{margin-left:0}
+.headerActions .iconButton,.headerActions .popoverTrigger{width:30px;height:30px;min-height:30px;border-radius:6px;color:var(--text-secondary)}
+.metadata{gap:2px;margin-top:5px;font-size:11px;line-height:17px;font-variant-numeric:tabular-nums}
+.metadata>span{gap:6px;min-width:0}
+.metadata svg{width:14px;height:14px;color:var(--text-muted)}
+.liveFont u{text-decoration:none;color:var(--text-secondary)}
+.tabs{gap:4px;box-shadow:0 1px 2px #0002}
+.tabs button{font-size:12px;font-weight:500;padding:0 12px;line-height:1;transition:color var(--motion),background-color var(--motion)}
+.tabs button:hover:not(:disabled){color:var(--text);background:var(--group-surface)}
+.tabs button[aria-selected=true]::after{left:10px;right:10px;bottom:0;border-radius:2px 2px 0 0}
+.tabs button:focus-visible{outline-offset:-4px;border-radius:4px}
+.headerActions button:active:not(:disabled),.menuOption:active:not(:disabled){background:var(--pressed-surface)}
+.outlineButton{font-weight:500;line-height:16px}
+.outlineButton:active:not(:disabled){background:var(--pressed-surface)!important;border-color:#97dfb660!important}
+.outlineButton:disabled:hover{background:#ffffff07!important}
+.outlineButton svg,.menuOption svg{width:14px;height:14px}
+.popover{border-color:var(--chrome-border);box-shadow:var(--floating-shadow);font:12px/1.5 var(--font-ui);overscroll-behavior:contain}
+.menuCaption{font-size:11px;font-weight:500;line-height:16px;color:var(--text-secondary);padding:7px 9px 9px}
+.menuOption{font-size:12px!important;line-height:18px;font-weight:400!important}
+.menuOption[aria-pressed=true]{background:var(--pressed-surface)}
+.menuOption:focus-visible{outline-offset:-2px}
+.tooltip{font:400 11px/1.4 var(--font-ui);border-color:var(--chrome-border);box-shadow:0 4px 14px #0004;padding:5px 8px;overflow-wrap:anywhere;animation:popoverIn var(--motion)}
+.dockCapsule,.dockCircle{background:var(--surface);border-color:var(--chrome-border);box-shadow:0 4px 12px #0003,inset 0 1px #ffffff06}
+.dock .triggerLabel{display:flex;align-items:center;justify-content:center;overflow:visible}
+.dock svg{width:18px;height:18px;stroke-width:1.75}
+.dock button{color:var(--text-secondary)}
+.dock button:hover:not(:disabled){color:var(--text);background:var(--control-hover)}
+.dock .active,.dockCapsule>.popoverTrigger[data-active=true]{color:var(--accent);background:var(--pressed-surface)!important}
+.dock button:active:not(:disabled){background:#97dfb62b!important}
+.dock button:focus-visible{outline-offset:2px}
+.surface{border-color:var(--chrome-border)}
+.surfaceHeader h2{font-weight:500}.surfaceHeader p{line-height:1.5;overflow-wrap:anywhere}
+.surfaceHeader>.iconButton svg,.wideSurface .surfaceHeader>.iconButton svg{width:16px;height:16px}
+.surfaceFooter>.outlineButton svg{width:16px;height:16px}
+.navigatorTree{overscroll-behavior:contain}
+@media(max-height:520px){.inspectorHeader{padding-bottom:5px}.metadata{margin-top:2px}}
+@media(forced-colors:active){.tabs button[aria-selected=true]::after{background:Highlight}.dock .active,.dockCapsule>.popoverTrigger[data-active=true],.menuOption[aria-pressed=true]{outline:1px solid Highlight;outline-offset:-2px}}

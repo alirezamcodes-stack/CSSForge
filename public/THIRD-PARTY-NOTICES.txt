@@ -1,5 +1,8 @@
 CSSForge bundled UI dependencies
-Fonts are not bundled or downloaded. The UI uses a local/system fallback stack.
+Geist Sans and Geist Mono variable fonts are bundled for offline UI use.
+Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font).
+SIL Open Font License 1.1; full license: Geist-OFL.txt.
+Source revision: 10dc7658f13c38a474cde201bb09a4617267545b.
 
 lucide-react
 ISC License

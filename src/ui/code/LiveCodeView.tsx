@@ -9,6 +9,7 @@ import { baseContext, contextKey, type EditContext } from '../../editing/context
 import { properties, type Property } from '../../editing/properties';
 import type { Declaration, SourceSnapshot } from '../../editing/readable';
 import { SessionActions } from '../design/EditControls';
+import { Icon } from '../shared/Icon';
 import s from './liveCode.module.css';
 
 function ValueEditor({ value, label, commit }: { value: string; label: string; commit: (value: string) => void }) {
@@ -55,7 +56,7 @@ function DeclarationRow({ declaration, context, editable, owned = false, enabled
 function AddDeclaration() {
   const { editor, design, context } = useEditing();
   const [open, setOpen] = useState(false), [property, setProperty] = useState(''), [value, setValue] = useState(''), [error, setError] = useState('');
-  if (!open) return <button className={s.add} onClick={() => setOpen(true)}>+ Add session declaration</button>;
+  if (!open) return <button className={s.add} onClick={() => setOpen(true)}><Icon name="plus" />Add session declaration</button>;
   return <form className={s.addForm} onSubmit={event => { event.preventDefault(); const success = editor!.applyBatch(design!.targetId, { [property.trim()]: value }, undefined, contextKey(context)); setError(success ? '' : editor!.getSnapshot().error ?? 'Invalid declaration.'); if (success) { setOpen(false); setProperty(''); setValue(''); } }}>
     <small>New override · {context.media.join(' → ') || 'Base'} {context.pseudo}</small>
     <div><input aria-label="CSS property" placeholder="property" value={property} onChange={event => setProperty(event.target.value)} /><span>:</span><input aria-label="New CSS value" placeholder="value" value={value} onChange={event => setValue(event.target.value)} /><button type="submit">Apply</button></div>

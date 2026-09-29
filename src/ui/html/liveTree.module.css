@@ -5,3 +5,8 @@
 .tree .node{font:12px/1.8 var(--font-code);text-align:left;min-width:0;border:0;background:none;padding:5px 6px 5px 0;cursor:pointer;flex:1}.tag{display:block;color:#5ed5ec;overflow-wrap:anywhere}.node small{display:block;font:10px/1.7 var(--font-ui);color:var(--accent)}.text{display:block;color:var(--text-secondary);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.note{padding:0 16px;margin:0 0 15px;color:var(--text-muted);font:10px/1.7 var(--font-ui)}
 .attribute{color:#d4a381}:global([role=dialog]) .tree .node{font-size:14px}:global([role=dialog]) .text{font-size:12px}
 .navigation.navigation button{display:flex;gap:5px;align-items:center;min-height:32px}.navigation svg{width:14px;height:14px}.tree .expand{width:26px;height:30px;flex-basis:26px;display:grid;place-items:center}.expand svg{width:12px;height:12px}.row:hover:not(.selected){background:#ffffff05}.selected{background:var(--selected-surface)}
+.navigation.navigation button:hover:not(:disabled){background:var(--control-hover);border-color:#ffffff38}
+.navigation.navigation button:active:not(:disabled){background:var(--pressed-surface)}
+.toolbar.toolbar button{min-height:28px;padding:0 6px;border-radius:5px}
+.toolbar.toolbar button:hover{background:var(--control-hover)}
+.tree .node{font-weight:400}.expand svg{width:14px;height:14px}

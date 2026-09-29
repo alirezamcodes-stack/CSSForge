@@ -10,10 +10,12 @@ import { registerUIRoot } from './interactions/focus';
 import { InspectionContext, useInspection } from '../picker/context';
 import type { Picker } from '../picker/controller';
 import { LiveSurface } from './inspector/LiveInspection';
+import { useUIFonts } from './shared/useUIFonts';
 export function App({ preview = false, picker, deactivate }: { preview?: boolean; picker?: Picker; deactivate?: () => void }) {
   return <InspectionContext.Provider value={{ preview, picker, deactivate }}><AppShell /></InspectionContext.Provider>;
 }
 function AppShell() {
+  useUIFonts();
   const { preview, picker } = useInspection();
   const surface = useUI(state => state.surface);
   const ref = useRef<HTMLDivElement>(null);
