@@ -2,6 +2,7 @@ import { editorValue, normalizeValue, properties, validateValue, type Property }
 import { baseContext, contextKey, discoverMedia, pseudos, type EditContext, type MediaContext } from './contexts';
 import { readConversionContext } from './conversionContext';
 import type { ValueProperty, ConversionContext, ValueReference } from './values';
+import type { SourceIndex } from '../engine/sources';
 
 export type FieldValue = { computed: string; presented: string; authored?: string; override?: string };
 export type DesignSnapshot = { targetId: string; values: Record<Property, FieldValue>; canSize: boolean };
@@ -14,7 +15,7 @@ export type Transaction = { targetId: string; context: EditContext; changes: { p
 export const emptyEditState = (): EditState => ({ design: null, overrides: [], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false });
 
 /** One session controller for core and rich editing. No author declarations are rewritten. */
-export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: () => void) {
+export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: () => void, sources: SourceIndex) {
   const win = doc.defaultView!;
   const prefix = `data-cssforge-target-${crypto.randomUUID().replaceAll('-', '')}`;
   const targets = new Map<string, Target>(); let byElement = new WeakMap<Element, Target>();
@@ -45,7 +46,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     if (!safe(target)) { publish({ design: null, error: 'This element moved to another document tree. Reset session edits before inspecting it again.' }); return; }
     const changed = state.design?.targetId !== target.id;
     if (changed) state = { ...state, context: baseContext() };
-    if (discover || changed) target.media = discoverMedia(element);
+    if (discover || changed) target.media = discoverMedia(sources.read(element));
     const context = state.context, pseudoElement = context.pseudo.startsWith('::');
     const css = pseudoElement ? win.getComputedStyle(element, context.pseudo) : computed ?? win.getComputedStyle(element);
     const scope = target.scopes.get(contextKey(context));

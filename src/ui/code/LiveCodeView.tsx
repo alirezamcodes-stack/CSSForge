@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { EditorState } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
 import { css } from '@codemirror/lang-css';
@@ -71,6 +71,7 @@ export function LiveCodeView() {
 function CodeTarget() {
   const { picker } = useInspection(), { design, overrides, undoCount, editedCount } = useEditing();
   const [source, setSource] = useState<SourceSnapshot | null>(null);
+  const overrideRules = useMemo(() => picker?.sourceOverrides(overrides) ?? [], [picker, overrides]);
   useEffect(() => { setSource(picker!.source(true)); }, [picker, design?.targetId]);
   if (!design || !source) return null;
   return <div className={s.code} data-testid="live-code">
@@ -78,12 +79,12 @@ function CodeTarget() {
     <p className={s.note}>Authored CSS via CSSOM, not cascade winners. Edits create session overrides.</p>
     <section aria-label="CSSForge overrides" className={s.group}><h3>CSSForge overrides <small>current session</small></h3>
       {!overrides.length && <p className={s.note}>No overrides for this element.</p>}
-      {overrides.map(group => <div key={contextKey(group.context)}><div className={s.selector}>{group.context.media.map(query => `@media ${query}`).join(' → ') || 'Base'} {group.context.pseudo || 'element'} {'{'}</div>{group.declarations.map(declaration => <DeclarationRow key={declaration.property} context={group.context} declaration={{ ...declaration, priority: 'important' }} editable owned enabled={declaration.enabled} />)}<div className={s.brace}>{'}'}</div></div>)}
+      {overrideRules.map(rule => <div key={rule.id}><div className={s.selector}>{rule.editContext!.media.map(query => `@media ${query}`).join(' → ') || 'Base'} {rule.editContext!.pseudo || 'element'} {'{'}</div>{rule.declarations.map(declaration => <DeclarationRow key={declaration.id} context={rule.editContext!} declaration={declaration} editable owned enabled={declaration.enabled} />)}<div className={s.brace}>{'}'}</div></div>)}
       <AddDeclaration />{(undoCount > 0 || editedCount > 0) && <div className={s.actions}><SessionActions /></div>}
     </section>
     <section aria-label="Inline authored CSS" className={s.group}><h3>Inline authored <small>style attribute</small></h3><div className={s.selector}>element.style {'{'}</div>{source.inline.map(declaration => <DeclarationRow key={declaration.property} declaration={declaration} context={baseContext()} editable />)}{!source.inline.length && <p className={s.note}>No inline declarations.</p>}<div className={s.brace}>{'}'}</div></section>
     <section aria-label="Readable matching CSS" className={s.group}><h3>Readable matching rules</h3>{!source.rules.length && <p className={s.note}>No matching rules found in the readable subset.</p>}{source.rules.map((group, index) => <div className={s.rule} key={`${index}-${group.selector}`}><small className={s.source} title={group.label}>{group.label}</small>{group.conditions.map((condition, i) => <div className={s.context} key={i}>{condition} {'{'}</div>)}<div className={s.selector}>{group.selector} {'{'}{group.context.pseudo && <small> {group.context.pseudo} context</small>}</div>{group.declarations.map(declaration => <DeclarationRow key={declaration.property} declaration={declaration} context={group.context} editable={group.editable} />)}<div className={s.brace}>{'}'.repeat(1 + group.conditions.length)}</div></div>)}</section>
     {source.keyframes.length > 0 && <section className={s.group} aria-label="Readable keyframes"><h3>Referenced keyframes <small>read-only · no winner inference</small></h3>{source.keyframes.map((frame, i) => <pre className={s.keyframes} key={i}>{frame.css}</pre>)}</section>}
-    <aside className={s.notices}><p>Bounded CSSOM snapshot. Inheritance, imported/unsupported groups and shadow-host styles may be incomplete. Refresh after page CSS changes.</p>{source.notices.map(notice => <p key={notice}>{notice}</p>)}</aside>
+    <aside className={s.notices}><p>Bounded CSSOM snapshot. Inheritance, imports, relative selectors and shadow-host styles are not resolved. Refresh after page CSS or media changes.</p>{source.notices.map(notice => <p key={notice}>{notice}</p>)}</aside>
   </div>;
 }
