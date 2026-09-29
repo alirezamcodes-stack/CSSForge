@@ -231,3 +231,42 @@
 @keyframes popoverIn{from{opacity:0}to{opacity:1}}
 @media(forced-colors:active){.app button,.app input{border:1px solid ButtonText}.dirtyDot{background:Highlight}.app :focus-visible{outline-color:Highlight}}
 .section{padding-bottom:0}.fieldLabel .popoverTrigger{color:var(--text-secondary);font-weight:400}.filters:has(.proFilter){gap:4px}.proFilter{padding:2px 0 8px}.curatedShadows{padding:10px}.curatedShadows button{height:60px}.presetGroup{margin:10px 0}.presetGroup h4{margin-bottom:6px}
+
+/* Shell, section, nested editor, control: four restrained visual levels. */
+.inspector{border-color:#ffffff26;box-shadow:0 10px 28px #0003,0 2px 5px #0004,inset 0 1px #ffffff05}
+.inspectorHeader,.tabs{background:var(--surface)}
+.tabs{border-bottom-color:var(--section-divider);box-shadow:0 2px 3px #0002;z-index:1}
+.inspectorScroll{scrollbar-color:var(--scrollbar) transparent}
+.design .section{border-top-color:var(--section-divider)}
+.design .sectionTitle{padding:0 6px!important;border-radius:0;white-space:nowrap}
+.design .sectionTitle[aria-expanded=true]{background:var(--section-open);box-shadow:inset 2px 0 #97dfb666;color:var(--accent-bright)!important}
+.design .sectionTitle:hover{background:var(--control-hover)!important}
+.design .sectionTitle:focus-visible{outline-offset:-2px}
+.sectionIndicators{height:100%;gap:9px}.sectionIndicators>span{display:grid;place-items:center}
+.dirtyDot{width:5px;height:5px;box-shadow:0 0 0 2px #97dfb612}
+.design .section>div:not([hidden]){padding:10px 0 20px}
+.design .section:last-of-type{border-bottom:1px solid var(--section-divider)}
+.typography{gap:8px}
+.typography>.twoColumns{padding-top:10px;border-top:1px solid var(--divider)}
+.typography>.segmented{padding-bottom:2px}
+.fieldLabel{gap:5px}
+.design .backgroundLayers:not(:empty){margin:8px 0 10px;padding:4px 0;border-block:1px solid var(--divider)}
+.design .layer{background:transparent;border-radius:4px;margin:2px 0}
+.design .chosenLayer{background:var(--layer-selected);outline:0;box-shadow:inset 2px 0 var(--accent)}
+.chosenLayer .layerSelect{color:var(--text)}
+.backgroundLayers+.richDetails{background:var(--group-surface);border-left:1px solid var(--section-divider);border-radius:0 5px 5px 0;padding:10px 8px;margin:0 0 12px;gap:10px}
+.richDetails .presetHeading{margin:0 0 2px;font-size:11px;font-weight:500;color:var(--text-secondary)}
+.richDetails>.inline:last-child{padding-top:6px;border-top:1px solid var(--divider)}
+.section[data-section=Background] .richDetails>.twoColumns{padding-top:12px;border-top:1px solid var(--divider)}
+.richInput input{height:var(--input-height);padding:4px 7px;border-color:var(--input-edge)}
+.richInput input:focus-visible{border-color:var(--accent)}
+.design .presetDisclosure{border-top:1px solid var(--divider);padding-top:4px;margin:10px 0 0}
+.design .presetDisclosure summary{padding:0 6px;border-radius:4px}
+.design .presetDisclosure summary:hover,.design .presetDisclosure[open] summary{background:var(--group-surface)}
+.section>div>.sessionActions:first-child{margin:0 0 8px}
+.filters:has(.proFilter){gap:2px;padding:0 2px 10px}
+.proFilter{display:grid;gap:6px;padding:6px 2px 8px;border-radius:4px}
+.proFilter:hover,.proFilter:focus-within{background:var(--group-surface)}
+.proFilter>div{margin:0;gap:10px;grid-template-columns:1fr 82px}
+.proFilter input[type=range]{display:block;margin:5px 0 4px}
+@media(forced-colors:active){.design .sectionTitle[aria-expanded=true],.design .chosenLayer{outline:1px solid Highlight;outline-offset:-1px}.backgroundLayers+.richDetails{border-color:CanvasText}}

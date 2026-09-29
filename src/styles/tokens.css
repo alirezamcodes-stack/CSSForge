@@ -10,6 +10,8 @@
   --inspector-width: 350px; --surface: #1b1c1f; --surface-deep: #17181b;
   --raised: #292b30; --control-hover: #34363c; --selected-surface: #363b42; --popover-surface: #24262b;
   --divider: #ffffff16; --control-border: #484b52;
+  --section-divider: #ffffff25; --group-surface: #222428; --input-edge: #ffffff12;
+  --section-open: #97dfb60b; --layer-selected: #2b3732;
   --text: #f1f1f3; --text-secondary: #c5c8ce; --text-muted: #979ca6; --text-disabled: #666c76;
   --accent: #97dfb6; --accent-bright: #52edaa; --success: #97dfb6; --warning: #e7be7c; --error: #f6aab4;
   --section-height: 42px; --control-height: 32px; --input-height: 30px; --button-height: 32px;
