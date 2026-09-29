@@ -1,3 +1,4 @@
+import { numericToken, validNumeric } from './values';
 /** Split CSS lists without damaging commas/spaces inside functions or quoted URLs. */
 export function splitCSS(value: string, separator = ',') {
   const result: string[] = []; let start = 0, depth = 0, quote = '', escaped = false;
@@ -31,7 +32,7 @@ export function parseShadow(value: string, text = false): Shadow | null {
   const tokens = splitCSS(value, ' '); const lengths: string[] = []; const colors: string[] = []; let inset = false;
   for (const token of tokens) {
     if (token === 'inset') inset = true;
-    else if (/^[-+]?(?:\d*\.)?\d+(?:px|em|rem)?$/.test(token)) lengths.push(token);
+    else if (numericToken(token) && validNumeric('shadow-length',numericToken(token)!)) lengths.push(token);
     else colors.push(token);
   }
   if (lengths.length < 2 || lengths.length > (text ? 3 : 4) || colors.length > 1) return null;

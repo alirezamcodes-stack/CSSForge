@@ -2,8 +2,8 @@ import { describe, it, expect, vi } from 'vitest';
 import { editorValue, normalizeValue, validateValue } from '../src/editing/properties';
 
 describe('Design value boundary', () => {
-  it('adds px only to bare lengths, including zero and negative margins', () => {
-    expect(normalizeValue('padding-left', ' 0 ')).toBe('0px');
+  it('adds px to nonzero bare lengths and preserves unitless zero', () => {
+    expect(normalizeValue('padding-left', ' 0 ')).toBe('0');
     expect(normalizeValue('margin-top', '-12.5')).toBe('-12.5px');
     expect(normalizeValue('width', '.5')).toBe('.5px');
   });
@@ -16,7 +16,7 @@ describe('Design value boundary', () => {
     expect(editorValue('padding-left', '32px', '2em')).toBe('2em');
     expect(editorValue('padding-left', '32px', '2em', '3rem')).toBe('3rem');
     expect(editorValue('padding-left', '32px', '')).toBe('32px');
-    expect(editorValue('color', 'rgb(0, 0, 0)', 'var(--text)')).toBe('rgb(0, 0, 0)');
+    expect(editorValue('color', 'rgb(0, 0, 0)', 'var(--text)')).toBe('var(--text)');
   });
   it('rejects property and declaration injection before asking CSS.supports', () => {
     const supports = vi.fn(() => true);

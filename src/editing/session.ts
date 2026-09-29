@@ -1,7 +1,9 @@
 import { editorValue, normalizeValue, properties, validateValue, type Property } from './properties';
 import { baseContext, contextKey, discoverMedia, pseudos, type EditContext, type MediaContext } from './contexts';
+import { readConversionContext } from './conversionContext';
+import type { ValueProperty, ConversionContext, ValueReference } from './values';
 
-export type FieldValue = { computed: string; presented: string; override?: string };
+export type FieldValue = { computed: string; presented: string; authored?: string; override?: string };
 export type DesignSnapshot = { targetId: string; values: Record<Property, FieldValue>; canSize: boolean };
 export type OverrideGroup = { context: EditContext; declarations: { property: Property; value: string; enabled: boolean }[] };
 export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean };
@@ -50,7 +52,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     const values = Object.fromEntries(properties.map(property => {
       const browserValue = css.getPropertyValue(property), override = scope?.values[property];
       const inline = !context.media.length && !context.pseudo ? element.style.getPropertyValue(property) : '';
-      return [property, { computed: browserValue, presented: editorValue(property, browserValue, inline, override), override }];
+      return [property, { computed: browserValue, presented: editorValue(property, browserValue, inline, override), authored: inline || undefined, override }];
     })) as Record<Property, FieldValue>;
     const mediaContexts = [...target.media.contexts];
     for (const scope of target.scopes.values()) if (scope.context.media.length && !mediaContexts.some(item => JSON.stringify(item.queries) === JSON.stringify(scope.context.media))) mediaContexts.push({ queries: scope.context.media, source: 'session override' });
@@ -106,6 +108,11 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   };
   return {
     inspect, applyBatch,
+    conversionContext(targetId: string, property: ValueProperty, reference?: ValueReference): ConversionContext {
+      const target = targets.get(targetId);
+      if (destroyed || !target || state.design?.targetId !== targetId || !safe(target) || state.context.pseudo || state.context.media.length) return {};
+      return readConversionContext(target.element, property, reference);
+    },
     toggle(targetId: string, context: EditContext, property: Property) {
       const target = targets.get(targetId), scope = target?.scopes.get(contextKey(context));
       if (destroyed || !target || !scope || state.design?.targetId !== targetId || !safe(target)) return false;

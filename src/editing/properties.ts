@@ -12,7 +12,7 @@ const lengths = new Set<Property>(['width', 'height', 'font-size', 'letter-spaci
 export function normalizeValue(property: Property, input: string) {
   const value = input.trim();
   // Bare lengths are px. Preserve explicitly supplied units/keywords/functions.
-  return lengths.has(property) && /^[-+]?(?:\d+\.?\d*|\.\d+)$/.test(value) ? `${value}px` : value;
+  return lengths.has(property) && /^[-+]?(?:\d+\.?\d*|\.\d+)$/.test(value) && Number(value) !== 0 ? `${value}px` : value;
 }
 export function validateValue(property: string, value: string, supports: (property: string, value: string) => boolean) {
   return properties.includes(property as Property) && value.length > 0 && value.length <= 8000
@@ -20,5 +20,5 @@ export function validateValue(property: string, value: string, supports: (proper
 }
 export function editorValue(property: Property, computed: string, inline: string, override?: string) {
   // Inline tokens are known browser declarations; never claim to recover stylesheet source.
-  return override ?? (inline && !inline.includes('var(') ? inline : computed);
+  return override ?? (inline || computed);
 }

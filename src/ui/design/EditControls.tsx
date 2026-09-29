@@ -14,9 +14,10 @@ export function EditField({ property, label, disabled = false, color = false, co
   if (color) return <ColorControl label={label} value={field.presented} onChange={apply} title={title} overridden={!!field.override} />;
   if (property === 'font-family') return <TokenInput label={label} value={field.presented} onChange={apply} />;
   const unitless = ['z-index', 'font-weight', 'line-height'].includes(property);
-  const spacing = compact || property.startsWith('padding-') || property.startsWith('margin-');
-  const value = property === 'opacity' ? field.presented.endsWith('%') ? field.presented.slice(0, -1) : Number.isFinite(Number(field.presented)) ? String(Number((Number(field.presented) * 100).toFixed(3))) : field.presented : field.presented;
-  return <NumericScrubber label={label} value={value} onChange={apply} stripPx={property !== 'line-height'} unitlessInput={unitless} defaultUnit={property === 'opacity' ? '%' : unitless ? '' : 'px'} units={property === 'opacity' ? ['%'] : spacing || property === 'z-index' || property === 'font-weight' ? [] : property === 'line-height' ? ['', 'px', '%', 'em', 'rem'] : undefined} min={property.startsWith('padding') || ['width', 'height', 'font-size', 'border-width', 'border-radius', 'opacity'].includes(property) ? 0 : -Infinity} max={property === 'opacity' ? 100 : Infinity} disabled={disabled} title={title} overridden={!!field.override} />;
+  // Keep the established percentage presentation for computed opacity, but retain
+  // explicit authored/session unitless values once the user supplies them.
+  const value = property === 'opacity' && !field.authored && !field.override && Number.isFinite(Number(field.presented)) ? `${Number((Number(field.presented) * 100).toFixed(3))}%` : field.presented;
+  return <NumericScrubber property={property} label={label} value={value} onChange={apply} defaultUnit={property === 'opacity' ? '%' : unitless ? '' : 'px'} min={property.startsWith('padding') || ['width', 'height', 'font-size', 'line-height', 'border-width', 'border-radius', 'opacity'].includes(property) ? 0 : -Infinity} max={property === 'opacity' ? value.endsWith('%') ? 100 : 1 : Infinity} disabled={disabled} title={title} overridden={!!field.override} />;
 }
 export function EditSelect({ property, label, options }: { property: Property; label: string; options: string[] }) {
   const { editor, design } = useEditing(); const value = design!.values[property].presented;
