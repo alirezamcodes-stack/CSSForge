@@ -4,5 +4,26 @@
 .colorClosed{border:1px solid transparent;border-radius:5px}
 .colorClosed:hover{background:var(--group-surface)}
 .colorClosed:focus-within{background:var(--raised);border-color:var(--accent)}
+
+/* Typography-only polish keeps the locked effect editors unchanged. */
+:global([data-section="Typography"]) .colorClosed{gap:3px;min-height:32px;padding-right:5px;background:var(--group-surface);border-color:var(--input-edge)}
+:global([data-section="Typography"]) .colorClosed:focus-within{border-color:var(--accent);background:var(--raised)}
+:global([data-section="Typography"]) .colorClosed>input{height:30px;padding:4px 5px;font:12px/1.4 var(--font-code);font-weight:400}
+:global([data-section="Typography"]) .colorSwatch{width:18px;height:18px;border-radius:4px;border-color:#ffffff59}
+:global([data-section="Typography"]) .colorClosed .colorTrigger{padding:7px!important}
+:global([data-section="Typography"]) .colorPanel{width:244px;padding:2px;gap:10px}
+:global([data-section="Typography"]) .colorPanel>.caption:first-child{font-size:12px;font-weight:600;color:var(--text);padding:0 0 8px;border-bottom:1px solid var(--divider)}
+:global([data-section="Typography"]) .colorPanel :global(.react-colorful){height:170px;gap:12px;margin:1px 0 2px}
+:global([data-section="Typography"]) .colorPanel :global(.react-colorful__saturation){border-radius:5px;box-shadow:inset 0 0 0 1px #ffffff16}
+:global([data-section="Typography"]) .colorPanel :global(.react-colorful__hue),:global([data-section="Typography"]) .colorPanel :global(.react-colorful__alpha){height:12px;flex-basis:12px;border-radius:6px}
+:global([data-section="Typography"]) .colorPanel :global(.react-colorful__pointer){width:15px;height:15px;box-shadow:0 1px 3px #0006}
+:global([data-section="Typography"]) .formatTabs{gap:2px;padding:0;background:none;border-radius:0;border-bottom:1px solid var(--divider)}
+:global([data-section="Typography"]) .formatTabs button{min-height:30px;color:var(--text-muted);font-weight:500;border-radius:4px 4px 0 0}
+:global([data-section="Typography"]) .formatTabs button[aria-pressed=true]{color:var(--accent);background:#97dfb60b;box-shadow:inset 0 -2px var(--accent)}
+:global([data-section="Typography"]) .colorPanel>input{height:32px;border-color:var(--input-edge);font:12px/1.4 var(--font-code)}
+:global([data-section="Typography"]) .colorPanel>input:focus-visible{outline-offset:1px;border-color:var(--accent)}
+:global([data-section="Typography"]) .alpha{grid-template-columns:1fr 82px;gap:8px}
+:global([data-section="Typography"]) .recent{gap:7px}
+:global([data-section="Typography"]) .recent button{width:26px;height:26px;border-radius:4px}
 .numeric:focus-within{border-color:var(--accent)}.numeric input{width:100%;min-width:0;height:100%;padding:4px 7px!important;background:none;border:0;font:inherit;tab-size:2}.numeric[data-scrubbing=true],.numeric[data-scrubbing=true] input{cursor:ew-resize}.numeric input[aria-invalid=true]{outline:1px solid var(--error)!important}.numeric .unit{width:auto;min-width:25px;height:24px;padding:0 5px!important;color:var(--text-muted);font-size:10px;flex:none;border-radius:3px}.numeric .unit svg{display:none}.overridden{box-shadow:inset 2px 0 var(--accent)}
 .colorControl{min-width:0;width:100%}.colorClosed{display:flex;align-items:center;gap:6px;min-height:32px}.colorClosed>input{min-width:0;width:100%;border:0;background:none;font:var(--font-size-sm)/1.4 var(--font-ui);height:30px;padding:4px}.colorClosed>input[aria-invalid=true]{outline:1px solid var(--error)}.colorClosed .colorTrigger{width:32px;height:32px;min-width:32px;padding:6px!important;border-radius:6px;background:none}.colorSwatch{display:block;width:20px;height:20px;border-radius:50%;border:1px solid #ffffff50;box-shadow:0 0 0 1px #0003}.colorPanel{width:248px;max-width:100%;display:grid;gap:12px;padding:5px}.caption{font:500 11px/1.5 var(--font-ui);color:var(--text-secondary)}.colorPanel :global(.react-colorful){width:100%;height:180px;gap:10px}.colorPanel :global(.react-colorful__saturation){border-radius:6px;border-bottom:0}.colorPanel :global(.react-colorful__hue),.colorPanel :global(.react-colorful__alpha){height:10px;flex-basis:10px;border-radius:8px}.colorPanel :global(.react-colorful__pointer){width:16px;height:16px;border-width:2px}.colorPanel>input{width:100%;height:32px;background:var(--raised);border:1px solid var(--control-border);border-radius:5px;padding:5px 8px;font:12px var(--font-code)}.formatTabs{display:flex;gap:4px;background:var(--surface-deep);border-radius:6px;padding:3px}.formatTabs button{flex:1;min-height:28px;font-size:11px;border-radius:4px}.formatTabs button[aria-pressed=true]{background:var(--selected-surface);color:var(--accent)}.alpha{display:grid;grid-template-columns:1fr 90px;align-items:center;color:var(--text-muted);font-size:11px}.recent{display:flex;gap:6px;flex-wrap:wrap}.recent button{width:25px;height:25px;border-radius:5px;border:1px solid #ffffff30}.help{font-size:11px;color:var(--text-muted)}.error{display:block;color:var(--error);font:11px/1.5 var(--font-ui);margin:4px 0}

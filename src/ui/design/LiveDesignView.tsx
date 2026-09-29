@@ -5,6 +5,7 @@ import { EditField, EditSelect, SessionActions } from './EditControls';
 import { Icon, IconButton, type IconName } from '../shared/Icon';
 import { TargetNavigation } from '../inspector/LiveInspection';
 import s from '../ui.module.css';
+import t from './typography.module.css';
 import { RichContextControls, contextKey } from './RichControls';
 import { RichBackground } from './RichBackground';
 import { RichShadow, RichFilters } from './RichEffects';
@@ -17,14 +18,18 @@ export function LiveDesignView() {
     <RichContextControls />
     <div className={`${s.geometry} ${s.editGeometry}`}><span><i>X</i>{Math.round(selection.rect.x)}</span><span><i>Y</i>{Math.round(selection.rect.y)}</span><span title="Border radius"><Icon name="radius" /><EditField compact property="border-radius" label="Geometry radius" /></span><span><i>W</i><EditField compact property="width" label="Width" disabled={!design.canSize} /></span><span><i>H</i><EditField compact property="height" label="Height" disabled={!design.canSize} /></span><span className={s.muted}>Computed</span></div>
     <LiveSpacingEditor />
-    <Section name="Typography"><div className={s.typography}>
-      <EditSelect property="font-family" label="Font family" options={['Arial', 'Georgia', 'Verdana', 'system-ui', 'serif', 'sans-serif', 'monospace']} />
-      <label className={s.fieldLabel}><span>Weight</span><EditSelect property="font-weight" label="Font weight" options={['100', '200', '300', '400', '500', '600', '700', '800', '900', 'normal', 'bold']} /></label>
-      <div className={s.twoColumns}><label className={s.fieldLabel}><span>Size</span><EditField property="font-size" label="Font size" /></label><label className={s.fieldLabel}><span>Line height</span><EditField property="line-height" label="Line height" /></label></div>
-      <EditField color property="color" label="Text color" />
-      <div className={s.segmented}>{['left', 'center', 'right', 'justify'].map(align => <IconButton key={align} icon={`align${align[0].toUpperCase()}${align.slice(1)}` as IconName} label={`Align ${align}`} active={design.values['text-align'].computed === align} onClick={() => editor!.apply(design.targetId, 'text-align', align)} />)}</div>
-      <div className={s.twoColumns}><label className={s.fieldLabel}><span>Letter spacing</span><EditField property="letter-spacing" label="Letter spacing" /></label><label className={s.fieldLabel}><span>Decoration</span><EditSelect property="text-decoration-line" label="Text decoration" options={['none', 'underline', 'line-through', 'overline']} /></label></div>
-      <label className={s.fieldLabel}><span>Text transform</span><EditSelect property="text-transform" label="Text transform" options={['none', 'uppercase', 'lowercase', 'capitalize']} /></label>
+    <Section name="Typography"><div className={t.typography}>
+      <div className={t.fontGroup}>
+        <div className={t.family}><Icon name="font" /><EditSelect property="font-family" label="Font family" options={['Arial', 'Georgia', 'Verdana', 'system-ui', 'serif', 'sans-serif', 'monospace']} /></div>
+        <div className={t.inlineChoice}><span>Weight</span><EditSelect property="font-weight" label="Font weight" options={['100', '200', '300', '400', '500', '600', '700', '800', '900', 'normal', 'bold']} /></div>
+      </div>
+      <div className={t.metrics}><label className={s.fieldLabel}><span>Size</span><EditField property="font-size" label="Font size" /></label><label className={s.fieldLabel}><span>Line height</span><EditField property="line-height" label="Line height" /></label></div>
+      <div className={t.appearance}>
+        <EditField color property="color" label="Text color" />
+        <div className={t.alignmentRow}><span>Alignment</span><div className={t.alignment} role="group" aria-label="Text alignment">{['left', 'center', 'right', 'justify'].map(align => <IconButton key={align} icon={`align${align[0].toUpperCase()}${align.slice(1)}` as IconName} label={`Align ${align}`} active={design.values['text-align'].computed === align} onClick={() => editor!.apply(design.targetId, 'text-align', align)} />)}</div></div>
+      </div>
+      <div className={t.details}><label className={s.fieldLabel}><span>Letter spacing</span><EditField property="letter-spacing" label="Letter spacing" /></label><label className={s.fieldLabel}><span>Decoration</span><EditSelect property="text-decoration-line" label="Text decoration" options={['none', 'underline', 'line-through', 'overline']} /></label></div>
+      <div className={t.inlineChoice}><span>Text transform</span><EditSelect property="text-transform" label="Text transform" options={['none', 'uppercase', 'lowercase', 'capitalize']} /></div>
     </div></Section>
     <RichBackground />
     <Section name="Display"><div className={s.twoColumns}><EditSelect property="display" label="Display mode" options={['block', 'inline', 'inline-block', 'flex', 'inline-flex', 'grid', 'inline-grid', 'flow-root', 'contents', 'none']} /><div className={s.inline}><Icon name="eye" /><EditField property="opacity" label="Opacity" /></div></div></Section>
