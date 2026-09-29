@@ -1,0 +1,21 @@
+.filters{display:grid;gap:2px;padding:0 3px 6px}
+.row{--filter-fill:#767d88;--filter-thumb:#b0b6bf;display:grid;gap:0;padding:2px 2px;min-width:0}
+.heading{display:grid;grid-template-columns:minmax(0,1fr) 78px;gap:10px;align-items:center}
+.heading>span:first-child{font-size:12px;line-height:18px;color:var(--text-secondary);white-space:nowrap;padding-left:2px}
+.heading>[data-scrubbing]{height:28px;border-radius:5px;background:var(--group-surface)}
+.heading input{font-size:12px;font-variant-numeric:tabular-nums;text-align:right}
+.row[data-active=true]{--filter-fill:var(--accent);--filter-thumb:var(--accent)}
+.row[data-active=true] .heading>[data-scrubbing]{border-color:#97dfb636;background:#97dfb609;color:var(--accent)}
+.row[data-disabled=true]{opacity:.5}
+.row input[type=range]{appearance:none;display:block;width:100%;min-width:0;height:24px;margin:0;padding:0;background:transparent;border:0;cursor:pointer;outline-offset:0}
+.row input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:linear-gradient(to right,var(--filter-fill) var(--filter-progress),var(--control-border) var(--filter-progress))}
+.row input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;margin-top:-5.5px;border-radius:50%;border:2px solid var(--surface);background:var(--filter-thumb);box-shadow:0 0 0 1px #0003}
+.row input[type=range]:hover:not(:disabled)::-webkit-slider-thumb{box-shadow:0 0 0 3px #97dfb61c}
+.row input[type=range]:active:not(:disabled)::-webkit-slider-thumb{background:var(--accent-bright);box-shadow:0 0 0 3px #97dfb633;cursor:ew-resize}
+.row input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-radius:4px}
+.heading>[data-scrubbing]:focus-within{border-color:var(--accent)}
+.row input[type=range]:disabled{cursor:default;opacity:.55}
+.row input[type=range]:disabled::-webkit-slider-thumb{background:var(--text-muted);box-shadow:none}
+.footer{padding:8px 2px 0;border-top:1px solid var(--divider)}
+.reset.reset{min-height:32px;font-size:11px;gap:6px}
+@media(forced-colors:active){.row{--filter-fill:Highlight;--filter-thumb:ButtonText}.row input[type=range]::-webkit-slider-runnable-track{background:ButtonText}.row input[type=range]::-webkit-slider-thumb{background:Highlight;border-color:Canvas}.row[data-active=true] .heading>[data-scrubbing]{border-color:Highlight}}

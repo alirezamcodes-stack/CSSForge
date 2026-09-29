@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useEditing } from '../../picker/context';
 import { filterSpecs, parseShadow, readFilter, serializeShadow, splitCSS, updateFilter, hiddenShadow, originalShadow } from '../../editing/rich';
 import { boxPresets, textPresets } from '../../editing/presets';
@@ -9,6 +9,7 @@ import { NumericScrubber } from '../shared/NumericScrubber';
 import { ColorControl } from '../shared/ColorControl';
 import s from '../ui.module.css';
 import h from './shadows.module.css';
+import f from './filters.module.css';
 
 export function RichShadow({ text = false }: { text?: boolean }) {
   const { editor, design } = useEditing(); const [selected, setSelected] = useState(0);
@@ -27,7 +28,7 @@ export function RichShadow({ text = false }: { text?: boolean }) {
     {!shadow && list.length > 0 && <p className={s.fixtureNote}>This shadow syntax is preserved. Choose a preset to replace it, or add a supported shadow.</p>}
   </Section>;
 }
-export function RichFilters() { const { editor, design } = useEditing(); return <Section name="Filters"><div className={s.filters}>{filterSpecs.map(spec => <FilterSlider key={spec.name} {...spec} />)}</div><button className={s.outlineButton} onClick={() => editor!.apply(design!.targetId, 'filter', 'none')}><Icon name="reset" />Reset filters</button></Section>; }
+export function RichFilters() { const { editor, design } = useEditing(); const canReset = !!design!.values.filter.presented.trim() && design!.values.filter.presented !== 'none'; return <Section name="Filters"><div className={f.filters}>{filterSpecs.map(spec => <FilterSlider key={spec.name} {...spec} />)}</div><div className={f.footer}><button className={`${s.outlineButton} ${f.reset}`} disabled={!canReset} onClick={() => editor!.apply(design!.targetId, 'filter', 'none')}><Icon name="reset" />Reset filters</button></div></Section>; }
 function FilterSlider({ name, label, initial, unit, max }: typeof filterSpecs[number]) {
   const { editor, design, context } = useEditing();
   const current = readFilter(design!.values.filter.presented, name, initial, unit);
@@ -37,5 +38,7 @@ function FilterSlider({ name, label, initial, unit, max }: typeof filterSpecs[nu
   useEffect(() => () => { cancelAnimationFrame(frame.current); pending.current = null; }, [targetId, scope]);
   const apply = (amount: number, id?: string) => { const snapshot = editor!.getSnapshot(); if (snapshot.design?.targetId !== targetId || contextKey(snapshot.context) !== scope || !Number.isFinite(amount)) return false; return editor!.applyBatch(targetId, { filter: updateFilter(snapshot.design.values.filter.presented, name, amount, unit) }, id, scope); };
   const flush = () => { cancelAnimationFrame(frame.current); frame.current = 0; const amount = pending.current; pending.current = null; if (amount !== null) { setValue(amount); apply(amount, gesture.current); } };
-  return <div className={s.proFilter}><div><span>{label}</span><NumericScrubber label={`${label} value`} value={`${value}${unit}`} units={[]} min={name === 'hue-rotate' ? -360 : 0} disabled={!current.editable} onChange={(next, id) => { if (!new RegExp(`^-?\\d*\\.?\\d+${unit}$`).test(next)) return false; return apply(parseFloat(next), id); }} /></div><input aria-label={label} title={current.editable ? `${label} filter` : 'Existing complex or repeated function preserved; slider unavailable.'} type="range" disabled={!current.editable} min={name === 'hue-rotate' ? Math.min(0, current.value) : 0} max={Math.max(max, current.value)} step={name === 'blur' ? 0.1 : 1} value={value} style={{ background: `linear-gradient(to right, var(--accent) ${value / Math.max(max, current.value) * 100}%, var(--control-border) ${value / Math.max(max, current.value) * 100}%)` }} onFocus={() => { gesture.current = crypto.randomUUID(); }} onPointerDown={() => { gesture.current = crypto.randomUUID(); }} onChange={event => { const next = Number(event.target.value); pending.current = next; if (!frame.current) frame.current = requestAnimationFrame(flush); }} onPointerUp={flush} onBlur={flush} /></div>;
+  const minimum = name === 'hue-rotate' ? Math.min(0, current.value) : 0, maximum = Math.max(max, current.value);
+  const progress = Math.max(0, Math.min(100, (value - minimum) / (maximum - minimum) * 100));
+  return <div className={f.row} data-filter={name} data-active={current.editable && value !== initial} data-disabled={!current.editable} style={{ '--filter-progress': `${progress}%` } as CSSProperties}><div className={f.heading}><span>{label}</span><NumericScrubber label={`${label} value`} value={`${value}${unit}`} units={[]} min={name === 'hue-rotate' ? -360 : 0} disabled={!current.editable} onChange={(next, id) => { if (!new RegExp(`^-?\\d*\\.?\\d+${unit}$`).test(next)) return false; return apply(parseFloat(next), id); }} /></div><input aria-label={label} title={current.editable ? `${label} filter` : 'Existing complex or repeated function preserved; slider unavailable.'} type="range" disabled={!current.editable} min={minimum} max={maximum} step={name === 'blur' ? 0.1 : 1} value={value} onFocus={() => { gesture.current = crypto.randomUUID(); }} onPointerDown={() => { gesture.current = crypto.randomUUID(); }} onChange={event => { const next = Number(event.target.value); pending.current = next; if (!frame.current) frame.current = requestAnimationFrame(flush); }} onPointerUp={flush} onBlur={flush} /></div>;
 }
