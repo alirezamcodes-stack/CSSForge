@@ -106,7 +106,8 @@ test('selection isolation, explicit units, author styles, stale DOM and full tea
     await pick(page, '#checkout');
     await expect(page.getByRole('textbox', { name: 'Padding left', exact: true })).toHaveValue('2em');
     await expect(page.getByRole('textbox', { name: 'Margin left', exact: true })).toHaveValue('5%');
-    await expect(page.getByRole('textbox', { name: 'Line height', exact: true })).toHaveValue('24px');
+    await expect(page.getByRole('textbox', { name: 'Line height', exact: true })).toHaveValue('24');
+    await expect(page.getByRole('button', { name: 'Line height unit', exact: true })).toHaveText('px');
     await input(page, 'Line height', '28px'); await expect(page.locator('#checkout')).toHaveCSS('line-height', '28px');
     await input(page, 'Padding left', '3em'); await expect(page.locator('#checkout')).toHaveCSS('padding-left', '54px');
     await pick(page, '#headline'); await input(page, 'Font size', '36');

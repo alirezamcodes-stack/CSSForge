@@ -3,11 +3,15 @@ import { useUI } from '../../state/ui';
 import { Icon } from '../shared/Icon';
 import { Popover, Options } from '../popovers/Popover';
 import s from '../ui.module.css';
+import { useEditing } from '../../picker/context';
 
 export function Section({ name, children }: { name: string; children: ReactNode }) {
   const open = useUI(state => !state.collapsed.includes(name));
   const id = useId();
-  return <section className={s.section} data-section={name}><button className={s.sectionTitle} type="button" aria-expanded={open} aria-controls={id} onClick={() => useUI.getState().toggleSection(name)}>{name}<span className={!open ? s.rotated : ''}><Icon name="chevron" /></span></button><div id={id} hidden={!open}>{children}</div></section>;
+  const { overrides } = useEditing();
+  const prefixes: Record<string, string[]> = { Spacing: ['margin', 'padding'], Typography: ['font', 'line-height', 'color', 'text-align', 'letter-spacing', 'text-decoration', 'text-transform'], Background: ['background'], Display: ['display', 'opacity'], Border: ['border'], Positioning: ['position', 'top', 'left', 'right', 'bottom', 'z-index'], 'Box shadow': ['box-shadow'], 'Text shadow': ['text-shadow'], Filters: ['filter'] };
+  const dirty = overrides.some(group => group.declarations.some(item => item.enabled && prefixes[name]?.some(prefix => item.property === prefix || item.property.startsWith(prefix + '-'))));
+  return <section className={s.section} data-section={name}><button className={s.sectionTitle} type="button" aria-expanded={open} aria-controls={id} title={dirty ? 'Contains CSSForge session overrides' : undefined} onClick={() => useUI.getState().toggleSection(name)}><span>{name}</span><span className={s.sectionIndicators}>{dirty && <i className={s.dirtyDot} aria-hidden="true" />}<span className={!open ? s.rotated : ''}><Icon name="chevron" /></span></span></button><div id={id} hidden={!open}>{children}</div></section>;
 }
 export function Value({ label, initial, unit = '' }: { label: string; initial: string | number; unit?: string }) {
   const [value, setValue] = useState(String(initial));

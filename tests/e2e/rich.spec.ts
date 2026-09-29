@@ -29,6 +29,7 @@ async function slider(page: Page, label: string, value: string) {
   await control.blur();
 }
 async function capture(page: Page, name: string, section?: string) {
+  if (process.env.CSSFORGE_CAPTURE_PHASE !== '05') return;
   if (section) await page.locator(`[data-section="${section}"]`).scrollIntoViewIfNeeded();
   await page.screenshot({ path: `artifacts/screenshots/phase-05/${name}.png` });
 }
@@ -119,20 +120,24 @@ test('shadow presets and multiple shadows share undo and isolate targets', async
   try {
     await page.setViewportSize({ width: 1440, height: 1100 });
     await pick(page, '#checkout'); const target = page.locator('#checkout');
-    await page.getByRole('button', { name: 'Box shadow preset 1', exact: true }).click(); await expect(target).toHaveCSS('box-shadow', /12px 22px/);
+    await page.locator('[data-section="Box shadow"] summary').click();
+    await page.getByRole('button', { name: 'Box shadow preset Elevated', exact: true }).click(); await expect(target).toHaveCSS('box-shadow', /12px 22px/);
+    await page.locator('[data-section="Box shadow"] summary').click();
     await input(page, 'Box shadow x', '8'); await input(page, 'Box shadow spread', '3'); await input(page, 'Box shadow color', '#143322');
     await page.getByRole('checkbox', { name: 'Inset shadow' }).check(); await expect(target).toHaveCSS('box-shadow', /8px 12px 22px 3px inset/);
     await capture(page, '04-box-shadow', 'Box shadow');
     await page.getByRole('button', { name: 'Add box shadow', exact: true }).click();
     await expect(page.getByRole('button', { name: 'Remove box shadow 2', exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Remove box shadow 2', exact: true }).click();
-    await page.getByRole('button', { name: 'Text shadow preset 2', exact: true }).click();
+    await page.locator('[data-section="Text shadow"] summary').click();
+    await page.getByRole('button', { name: 'Text shadow preset Soft', exact: true }).click();
+    await page.locator('[data-section="Text shadow"] summary').click();
     await input(page, 'Text shadow y', '2'); await input(page, 'Text shadow color', '#ff0000'); await expect(target).toHaveCSS('text-shadow', 'rgb(255, 0, 0) 0px 2px 3px');
     await capture(page, '05-text-shadow', 'Text shadow');
     await page.getByRole('button', { name: 'Add text shadow', exact: true }).click();
     await page.getByRole('button', { name: 'Remove text shadow 2', exact: true }).click();
     await pick(page, '#headline'); await input(page, 'Background color', '#eeeeee'); await expect(page.locator('#headline')).toHaveCSS('box-shadow', 'none');
-    await pick(page, '#checkout'); await expect(page.getByRole('textbox', { name: 'Box shadow x', exact: true })).toHaveValue('8px');
+    await pick(page, '#checkout'); await expect(page.getByRole('textbox', { name: 'Box shadow x', exact: true })).toHaveValue('8');
     await expect(target).toHaveCSS('text-shadow', 'rgb(255, 0, 0) 0px 2px 3px');
     await action(page, 'Reset session edits'); await expect(target).toHaveCSS('box-shadow', 'none'); await expect(target).toHaveCSS('text-shadow', 'none');
     expect(errors).toEqual([]);

@@ -13,13 +13,22 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@codemirror/lang-css": "^6.3.1",
+    "@codemirror/language": "^6.12.4",
+    "@codemirror/state": "^6.7.6",
+    "@codemirror/view": "^6.43.13",
     "@floating-ui/react": "^0.27.16",
+    "@lezer/highlight": "^1.2.4",
+    "culori": "^4.0.2",
+    "lucide-react": "^1.48.0",
     "react": "^19.1.1",
+    "react-colorful": "^5.8.1",
     "react-dom": "^19.1.1",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
+    "@types/culori": "^4.0.1",
     "@types/node": "^24.3.0",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",

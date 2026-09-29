@@ -44,6 +44,7 @@ export const filterSpecs = [
   { name: 'contrast', label: 'Contrast', unit: '%', initial: 100, max: 200 },
   { name: 'brightness', label: 'Brightness', unit: '%', initial: 100, max: 200 },
   { name: 'saturate', label: 'Saturate', unit: '%', initial: 100, max: 200 },
+  { name: 'hue-rotate', label: 'Hue rotate', unit: 'deg', initial: 0, max: 360 },
   { name: 'invert', label: 'Invert', unit: '%', initial: 0, max: 100 },
   { name: 'grayscale', label: 'Grayscale', unit: '%', initial: 0, max: 100 },
   { name: 'sepia', label: 'Sepia', unit: '%', initial: 0, max: 100 },
@@ -52,7 +53,7 @@ export function readFilter(value: string, name: string, initial: number, unit: s
   const tokens = splitCSS(value, ' ').filter(token => token.startsWith(`${name}(`));
   if (!tokens.length) return { value: initial, editable: true };
   const arg = tokens[0].slice(name.length + 1, -1);
-  if (tokens.length !== 1 || !/^\d*\.?\d+(?:%|px)?$/.test(arg)) return { value: initial, editable: false };
+  if (tokens.length !== 1 || !/^-?\d*\.?\d+(?:%|px|deg)?$/.test(arg)) return { value: initial, editable: false };
   return { value: parseFloat(arg) * (unit === '%' && !arg.endsWith('%') ? 100 : 1), editable: true };
 }
 export function updateFilter(value: string, name: string, amount: number, unit: string) {
@@ -75,3 +76,5 @@ export function backgroundLayers(values: { image: string; position: string; size
 // original is recoverable from the override token, so hide/show participates in undo.
 export function hiddenImage(image: string) { return `linear-gradient(transparent, transparent) /*cssforge-hidden:${encodeURIComponent(image)}*/`; }
 export function originalImage(image: string) { const match = image.match(/\/\*cssforge-hidden:([^*]+)\*\//); try { return match ? decodeURIComponent(match[1]) : null; } catch { return null; } }
+export function hiddenShadow(value: string) { return `0px 0px 0px transparent /*cssforge-shadow:${encodeURIComponent(value)}*/`; }
+export function originalShadow(value: string) { const match = value.match(/\/\*cssforge-shadow:([^*]+)\*\//); try { return match ? decodeURIComponent(match[1]) : null; } catch { return null; } }

@@ -7,6 +7,7 @@ import { Surface } from '../shared/Surface';
 import type { useInspectorDrag } from '../interactions/useInspectorDrag';
 import s from '../ui.module.css';
 import { SessionActions } from '../design/EditControls';
+import { LiveNavigator } from '../html/LiveHTMLView';
 
 export function TargetNavigation() {
   const { picker, selection } = useInspection();
@@ -29,5 +30,5 @@ export function LiveSurface({ surface }: { surface: 'navigator' | 'changes' }) {
   const { selection } = useInspection();
   const { editedCount } = useEditing();
   if (surface === 'changes') return <Surface title="Changes" subtitle={`${editedCount} edited elements · current session`} wide><SessionActions /><p className={s.fixtureNote}>Core Design edits are active for this session. Detailed change review and export are not connected yet.</p></Surface>;
-  return <Surface title="Navigator" subtitle="Element navigation"><div className={s.navigatorTree}><div className={s.liveContent}><p className={s.liveIdentity}>{selection?.identity ?? 'No element selected'}</p><TargetNavigation /><p className={s.fixtureNote}>Parent and child selection are available. The full document tree is not connected yet.</p></div></div><footer className={s.surfaceFooter}><button className={s.outlineButton} onClick={() => useUI.getState().setSurface(null)}><Icon name="back" />Back to canvas</button><div className={s.navigatorContext}><Icon name="target" /><span>Page selection</span></div></footer></Surface>;
+  return <LiveNavigator />;
 }

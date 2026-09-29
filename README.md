@@ -1,6 +1,18 @@
-# CSSForge — Phase 05
+# CSSForge — Phase 06.5
 
-WXT + React + TypeScript, Manifest V3. Real element picking and reversible core/rich Design editing in the accepted Shadow Root inspector and dock. The independent preview retains the locked Phase 01/02 fixture UI. No authored declaration extraction, stylesheet index, or cascade engine is included.
+WXT + React + TypeScript, Manifest V3. Real element picking, reversible Design/Code editing, bounded authored CSS inspection, and lazy HTML/Navigator traversal in the accepted Shadow Root inspector and dock. The independent preview retains the locked Phase 01/02 fixture UI. No complete stylesheet index or cascade engine is included.
+
+Phase 06.5 unifies the existing editors with shared numeric/color controls, centralized visual tokens, Lucide icons and curated background/shadow presets. Phase 07 has not started. See [the Phase 06.5 report](artifacts/phase-06.5.md) for verification and the 13 focused screenshots.
+
+## Professional property controls
+
+`src/styles/tokens.css` supplies the UI/code font stacks, weights, spacing, surfaces, interaction geometry and motion. Geist Sans/Mono are preferred local fonts, followed by system fallbacks; no font files or runtime font requests are added. Lucide React supplies the shared SVG icon family. Required dependency notices ship in `public/THIRD-PARTY-NOTICES.txt`.
+
+`NumericScrubber` supports direct CSS values, horizontal drag, arrow steps, Shift ×10, Alt ×0.1, Enter and Escape. Scrubbing applies once per animation frame and groups edits through the existing session transactions; Escape cancels the current gesture through the same undo controller. Numeric fields separate units where space permits; compact geometry and box-model fields retain non-pixel units in the value. Keyword/complex values remain directly editable without an inoperative unit picker.
+
+`ColorControl` adds a shared spectrum, hue, alpha, HEX/RGB/HSL text entry, validation and recent colors through the existing popover lifecycle. Backgrounds retain real layer operations and gain a selectable gradient-stop track, shared stop controls, distribute/reverse actions and 28 named presets. Box shadows gain visibility/reordering and 15 grouped named presets; text shadows share those layer controls and eight named presets. Filter rows pair direct numeric editing with frame-coalesced sliders, add hue rotation and provide reset while preserving combined functions.
+
+Typography and Border use the same controls. Text decoration/transform and contextual position offsets/z-index use the existing property allowlist and controller. Code and Navigator share the typography/icon/surface system without changing their source or DOM semantics. Flex/grid sub-editors, conic gradients, canvas gradient handles and per-side border expansion remain deferred.
 
 ## Run
 
@@ -31,13 +43,13 @@ pnpm exec playwright install chromium
 pnpm test:e2e
 ```
 
-For Phase 05 checks without recapturing historical evidence:
+For Phase 06 checks without recapturing historical evidence:
 
 ```sh
 pnpm test:e2e --grep-invert "capture Phase 02|captures five Phase 03"
 ```
 
-Phase 04's functional tests still run; their screenshot writes are opt-in with `CSSFORGE_CAPTURE_PHASE=04`. Phase 05 writes only its seven requested evidence images.
+Phase 04/05 functional tests still run; their screenshot writes are opt-in with `CSSFORGE_CAPTURE_PHASE=04` or `05`. Phase 06 writes only its seven requested evidence images.
 
 The browser suite covers the existing interaction shell plus real picker activation, hover, owned-UI exclusion, selection, link/button/checkbox/form interception, identity/dimensions/fonts, Escape priority, parent/child navigation, open shadow roots, scroll/resize, target removal, lifecycle cleanup, narrow viewports, and actual 200% Chrome zoom. The packaged-extension tests need a current installed Chrome with the CDP Extensions API and use fresh disposable profiles with the original minimal-permission manifest. Listener cleanup is checked directly in the extension's isolated execution context. The performance test dispatches 2,000 pointer events: one hover geometry read, zero computed-style reads, and zero UI publications; selection then performs one computed-style read. Set `CSSFORGE_BROWSER_CHANNEL=chromium` to use a compatible Playwright Chrome for Testing runtime instead. Installed Chrome 154 passed here.
 
@@ -85,7 +97,19 @@ The same session controller now keys overrides by target plus media conditions p
 
 Rich CSS parsing lives in `src/editing/rich.ts`; bounded context discovery is in `src/editing/contexts.ts`; presentation uses `RichContextControls`, `RichBackground`, `RichShadow`, and `RichFilters` within the existing Design sections. Hover still performs zero computed-style reads and no rich parsing.
 
-Seven Phase 05 screenshots: `artifacts/screenshots/phase-05/01-media.png`, `02-state.png`, `03-background-gradient.png`, `04-box-shadow.png`, `05-text-shadow.png`, `06-filters.png`, and `07-narrow.png`. Phase 06 has not started.
+Seven Phase 05 screenshots remain in `artifacts/screenshots/phase-05/` and are not recaptured by Phase 06 checks.
+
+## Real Code and HTML
+
+Code separates inline authored declarations, readable matching stylesheet rules, and owned session overrides. The shared `src/editing/readable.ts` walker supplies both Phase 05 media discovery and Code sources. Matching terminal `:hover`, `:focus`, `:active`, `::before`, and `::after` contexts stay conditional; ancestor/complex pseudo logic is read-only. `@media` and active `@supports` groups retain their labels. Readable keyframes referenced by authored animation names are shown read-only, without claiming which definition wins. CSSOM serialization normalizes tokens and retains compact shorthands; this is not original file text or computed-style dumping.
+
+The source reader caps traversal at 50 stylesheets, 2,000 rules and six group levels; presentation caps 80 matching groups, 500 declarations, 8,000 characters per value, and bounded keyframe blocks. Cross-origin access failures and unsupported groups are displayed as limitations. Inheritance, imports, containers/layers/scopes, nesting, shadow-host rules and full cascade resolution remain incomplete. Sources refresh on selection/Code activation or explicit **Refresh sources**, never on pointer movement. Owned overrides come directly from the existing session snapshot and do not trigger another source scan.
+
+Click a supported value to edit it in a compact CodeMirror 6 field; Enter applies through `createEditSession`, while an invalid draft stays editable with a nearby error and preserves the previous valid page state. Add session declarations validates both property and value. Simple opaque RGB/hex colors also expose a swatch. Unsupported properties, complex contexts and keyframes are read-only. Author toggles are unavailable because safely suppressing original source requires cascade knowledge. Owned toggles remove/reapply only the owned declaration; disabled values remain in the session and participate in undo/reset. Inline author attributes and author sheets are never rewritten.
+
+HTML and Navigator share `src/picker/tree.ts`: ancestor paths, a window of nearby siblings, direct text previews and lazily expanded children, capped at 180 visible nodes, 32 children per branch and bounded depth. Element handles stay in the picker service, never React/Zustand state. Row selection and Parent/Child/Previous sibling/Next sibling use the real picker. Open shadow boundaries are labeled; closed shadow roots and frame contents are unavailable. CSSForge UI and metadata/script nodes are excluded. Refresh tree reads the current branch after page DOM changes; no document-wide serialization, HTML reconstruction or mutation observer is installed. Back to canvas and Pick element preserve the established modal/picker lifecycle.
+
+Phase 06 evidence: `artifacts/screenshots/phase-06/01-real-code.png`, `02-media-pseudo-code.png`, `03-real-inline-edit.png`, `04-invalid-css.png`, `05-real-html-navigator.png`, `06-dom-navigation-selection.png`, `07-narrow-viewport.png`. Phase 07 has not started.
 
 ## Picker architecture
 
@@ -101,7 +125,7 @@ Deactivation cancels pending animation work, disconnects the target observer, re
 - Identity is a bounded display label, not a unique CSS selector. Font data is the browser-computed family stack and size, not per-glyph font resolution or font discovery. Fonts are sampled on selection.
 - Overlay geometry follows scroll, resize and selected size changes; it does not continuously track animations or unrelated layout shifts. Detached selections are cleared on the next geometry update. Non-rendered children marked `hidden` and metadata/script nodes are skipped; this is basic element navigation, not a full visibility/tree engine.
 - CSSForge cannot undo a host listener that ran earlier at window-capture phase, or draw above browser top-layer/fullscreen UI. It does not inspect closed shadows or frame contents by pretending they are ordinary document nodes.
-- No cascade engine, authored Code editor, real document tree, or full Changes/history/export system. Phase 05 extends the same session editing model described above.
+- No cascade engine or full Changes/history/export system. Phase 06 Code editing and DOM navigation extend the same controllers described above.
 
 Phase 03 evidence is limited to `artifacts/screenshots/phase-03/01-hover.png`, `02-selected-inspector.png`, `03-parent-child.png`, `04-after-scroll.png`, and `05-narrow.png`.
 

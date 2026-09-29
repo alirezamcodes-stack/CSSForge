@@ -2,11 +2,13 @@ import { frameGate } from './frame';
 import { identityOf, rectOf, type TargetRect } from './identity';
 import { createOverlay } from './overlay';
 import { createEditSession } from '../editing/session';
+import { readSource, type SourceSnapshot } from '../editing/readable';
+import { createTree } from './tree';
 
 export type Selection = {
   identity: string; tag: string; id: string; classes: string[];
   rect: TargetRect; fontFamily: string; fontSize: string;
-  hasParent: boolean; hasChild: boolean;
+  hasParent: boolean; hasChild: boolean; hasPrevious: boolean; hasNext: boolean;
 };
 export type PickerState = { active: boolean; selection: Selection | null };
 const nonTargets = new Set(['script', 'style', 'link', 'meta', 'head', 'title', 'template', 'noscript']);
@@ -20,6 +22,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   let state: PickerState = { active: false, selection: null };
   let hovered: Element | null = null;
   let selected: Element | null = null;
+  let source: SourceSnapshot | null = null;
   let destroyed = false;
   let suspended = false;
   const publish = (next: PickerState) => { state = next; subscribers.forEach(notify => notify()); };
@@ -45,7 +48,12 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   };
   const childOf = (element: Element) => {
     const children = element.shadowRoot?.children ?? element.children;
-    for (const child of children) if (valid(child)) return child;
+    for (let i = 0; i < Math.min(children.length, 100); i++) if (valid(children[i])) return children[i];
+    return null;
+  };
+  const siblingOf = (element: Element, direction: 'previousElementSibling' | 'nextElementSibling') => {
+    let node = element[direction], count = 0;
+    while (node && count++ < 100) { if (valid(node)) return node; node = node[direction]; }
     return null;
   };
   const candidate = (event: Event): Element | null => {
@@ -75,7 +83,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(() => frame.schedule());
   const select = (element: Element | null) => {
     if (destroyed || !valid(element)) return;
-    selected = element; hovered = null;
+    selected = element; hovered = null; source = null;
     const computed = win.getComputedStyle(element);
     editor.inspect(element, computed, true);
     publish({ active: false, selection: {
@@ -83,10 +91,12 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
       classes: Array.from(element.classList), rect: rectOf(element.getBoundingClientRect()),
       fontFamily: computed.fontFamily, fontSize: computed.fontSize,
       hasParent: !!parentOf(element), hasChild: !!childOf(element),
+      hasPrevious: !!siblingOf(element, 'previousElementSibling'), hasNext: !!siblingOf(element, 'nextElementSibling'),
     } });
     observer?.disconnect(); observer?.observe(element);
     onSelection(); frame.schedule();
   };
+  const tree = createTree(valid, parentOf, select);
   const move = (event: Event) => {
     if (!state.active || suspended) return;
     const next = candidate(event);
@@ -114,6 +124,10 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   win.visualViewport?.addEventListener('scroll', refresh);
   return {
     editor,
+    source(force = false) { if (!valid(selected)) return null; if (!source || force) { source = readSource(selected); editor.inspect(selected, undefined, true); } return source; },
+    tree() { return tree.read(selected); },
+    toggleNode(id: string) { tree.toggle(id); },
+    selectNode(id: string) { tree.select(id); },
     subscribe(notify: () => void) { subscribers.add(notify); return () => { subscribers.delete(notify); }; },
     getSnapshot: () => state,
     start() { if (destroyed || state.active) return; hovered = null; publish({ ...state, active: true }); frame.schedule(); },
@@ -121,11 +135,13 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     setSuspended(value: boolean) { suspended = value; if (value) leave(); },
     parent() { if (selected) select(parentOf(selected)); },
     child() { if (selected) select(childOf(selected)); },
+    previous() { if (selected) select(siblingOf(selected, 'previousElementSibling')); },
+    next() { if (selected) select(siblingOf(selected, 'nextElementSibling')); },
     refresh,
     destroy() {
       if (destroyed) return;
       destroyed = true; frame.cancel(); observer?.disconnect();
-      editor.destroy();
+      editor.destroy(); tree.destroy(); source = null;
       win.removeEventListener('pointermove', move, true);
       doc.removeEventListener('pointerleave', leave); win.removeEventListener('blur', leave);
       for (const type of clickEvents) win.removeEventListener(type, intercept, true);

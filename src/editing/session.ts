@@ -3,12 +3,13 @@ import { baseContext, contextKey, discoverMedia, pseudos, type EditContext, type
 
 export type FieldValue = { computed: string; presented: string; override?: string };
 export type DesignSnapshot = { targetId: string; values: Record<Property, FieldValue>; canSize: boolean };
-export type EditState = { design: DesignSnapshot | null; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean };
+export type OverrideGroup = { context: EditContext; declarations: { property: Property; value: string; enabled: boolean }[] };
+export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean };
 type Values = Partial<Record<Property, string>>;
-type Scope = { context: EditContext; values: Values };
+type Scope = { context: EditContext; values: Values; disabled?: Values };
 type Target = { id: string; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; scopes: Map<string, Scope>; layer?: HTMLStyleElement; media: ReturnType<typeof discoverMedia> };
-export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; value: string }[]; order: number; gesture?: string };
-export const emptyEditState = (): EditState => ({ design: null, undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false });
+export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string }[]; order: number; gesture?: string };
+export const emptyEditState = (): EditState => ({ design: null, overrides: [], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false });
 
 /** One session controller for core and rich editing. No author declarations are rewritten. */
 export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: () => void) {
@@ -17,9 +18,14 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   const targets = new Map<string, Target>(); let byElement = new WeakMap<Element, Target>();
   const listeners = new Set<() => void>(), history: Transaction[] = [];
   let sequence = 0, order = 0, destroyed = false, state = emptyEditState();
-  const edited = (target: Target) => [...target.scopes.values()].some(scope => Object.keys(scope.values).length);
+  const edited = (target: Target) => [...target.scopes.values()].some(scope => Object.keys(scope.values).length || Object.keys(scope.disabled ?? {}).length);
   const publish = (patch: Partial<EditState> = {}) => {
     state = { ...state, undoCount: history.length, editedCount: [...targets.values()].filter(edited).length, ...patch };
+    const target = state.design && targets.get(state.design.targetId);
+    state.overrides = target ? [...target.scopes.values()].map(scope => ({ context: scope.context, declarations: [
+      ...Object.entries(scope.values).map(([property, value]) => ({ property: property as Property, value, enabled: true })),
+      ...Object.entries(scope.disabled ?? {}).map(([property, value]) => ({ property: property as Property, value, enabled: false })),
+    ] })).filter(group => group.declarations.length) : [];
     listeners.forEach(listener => listener());
   };
   const safe = (target: Target) => target.element.isConnected && target.element.ownerDocument === doc && target.element.getRootNode() === target.root && !owns(target.element);
@@ -57,7 +63,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     for (const copy of target.root.querySelectorAll(`[${target.attribute}="${target.id}"]`)) copy.removeAttribute(target.attribute);
   };
   const render = (target: Target) => {
-    if (!edited(target)) { release(target); return; }
+    if (![...target.scopes.values()].some(scope => Object.keys(scope.values).length)) { release(target); return; }
     const layer = doc.createElement('style'); layer.dataset.cssforgeEditLayer = target.id;
     (target.root === doc ? doc.head ?? doc.documentElement : target.root).appendChild(layer);
     try {
@@ -86,12 +92,12 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       if (!validateValue(property, value, win.CSS.supports.bind(win.CSS))) return fail(`Enter a valid ${property} value.`);
       if (!state.context.pseudo.startsWith('::') && target.element.style.getPropertyPriority(property) === 'important') return fail('An inline !important declaration prevents this override. Original page styles are preserved.');
       if ((property === 'width' || property === 'height') && !state.design!.canSize) return fail('This display mode does not provide an editable size box.');
-      if (scope.values[property] !== value) changes.push({ property, previous: scope.values[property], value });
+      if (scope.values[property] !== value) changes.push({ property, previous: scope.values[property], previousDisabled: scope.disabled?.[property], value });
     }
     if (!changes.length) { publish({ error: null }); return true; }
-    const previousValues = { ...scope.values };
-    changes.forEach(change => { scope.values[change.property] = change.value; }); target.scopes.set(key, scope);
-    try { render(target); } catch { scope.values = previousValues; return fail('This page blocked the CSSForge style layer. No edit was applied.'); }
+    const previousValues = { ...scope.values }, previousDisabled = { ...scope.disabled };
+    changes.forEach(change => { scope.values[change.property] = change.value; if (scope.disabled) delete scope.disabled[change.property]; }); target.scopes.set(key, scope);
+    try { render(target); } catch { scope.values = previousValues; scope.disabled = previousDisabled; return fail('This page blocked the CSSForge style layer. No edit was applied.'); }
     const last = history.at(-1);
     if (gesture && last?.gesture === gesture && last.targetId === targetId && contextKey(last.context) === key) {
       for (const change of changes) { const existing = last.changes.find(item => item.property === change.property); if (existing) existing.value = change.value; else last.changes.push(change); }
@@ -100,6 +106,20 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   };
   return {
     inspect, applyBatch,
+    toggle(targetId: string, context: EditContext, property: Property) {
+      const target = targets.get(targetId), scope = target?.scopes.get(contextKey(context));
+      if (destroyed || !target || !scope || state.design?.targetId !== targetId || !safe(target)) return false;
+      if (target.element.hasAttribute(target.attribute) && target.element.getAttribute(target.attribute) !== target.id) { publish({ error: 'The page changed the edit marker. Reset session edits before continuing.' }); return false; }
+      const previous = scope.values[property], previousDisabled = scope.disabled?.[property];
+      if (previous === undefined && previousDisabled === undefined) return false;
+      const oldValues = { ...scope.values }, oldDisabled = { ...scope.disabled };
+      scope.disabled ??= {};
+      if (previous !== undefined) { scope.disabled[property] = previous; delete scope.values[property]; }
+      else { scope.values[property] = previousDisabled; delete scope.disabled[property]; }
+      try { render(target); } catch { scope.values = oldValues; scope.disabled = oldDisabled; publish({ error: 'The page blocked this toggle.' }); return false; }
+      history.push({ targetId, context: scope.context, changes: [{ property, previous, previousDisabled, value: scope.values[property] }], order: ++order });
+      publish({ error: null }); onChange(); return true;
+    },
     apply(targetId: string, property: Property, value: string, gesture?: string) { return applyBatch(targetId, { [property]: value }, gesture); },
     setContext(context: EditContext) {
       if (destroyed || !state.design || !pseudos.includes(context.pseudo)) return;
@@ -107,6 +127,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       publish({ context: { media: [...context.media], pseudo: context.pseudo }, error: null }); onChange();
     },
     getSnapshot: () => state,
+    cancelGesture(gesture: string) { if (gesture && history.at(-1)?.gesture === gesture) { this.undo(); return true; } return false; },
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
     undo() {
       if (destroyed) return;
@@ -116,9 +137,13 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       target.scopes.set(key, scope);
       if (!safe(target)) { release(target); target.scopes.clear(); }
       else {
-        const previousValues = { ...scope.values };
-        for (const change of transaction.changes) { if (change.previous === undefined) delete scope.values[change.property]; else scope.values[change.property] = change.previous; }
-        try { render(target); } catch { scope.values = previousValues; history.push(transaction); publish({ error: 'The page blocked undo. Reset session edits to remove the CSSForge layer.' }); return; }
+        const previousValues = { ...scope.values }, previousDisabled = { ...scope.disabled };
+        scope.disabled ??= {};
+        for (const change of transaction.changes) {
+          if (change.previous === undefined) delete scope.values[change.property]; else scope.values[change.property] = change.previous;
+          if (change.previousDisabled === undefined) delete scope.disabled[change.property]; else scope.disabled[change.property] = change.previousDisabled;
+        }
+        try { render(target); } catch { scope.values = previousValues; scope.disabled = previousDisabled; history.push(transaction); publish({ error: 'The page blocked undo. Reset session edits to remove the CSSForge layer.' }); return; }
       }
       publish({ error: null }); onChange();
     },
