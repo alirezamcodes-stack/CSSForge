@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { EditorState } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
 import { css } from '@codemirror/lang-css';
@@ -11,6 +11,10 @@ import type { Declaration, SourceSnapshot } from '../../editing/readable';
 import { SessionActions } from '../design/EditControls';
 import { Icon } from '../shared/Icon';
 import s from './liveCode.module.css';
+import type { CascadeResult } from '../../engine/cascade/model';
+import { declarationStatus } from '../../engine/cascade/status';
+
+const CascadeContext = createContext<CascadeResult | null>(null);
 
 function ValueEditor({ value, label, commit }: { value: string; label: string; commit: (value: string) => void }) {
   const mount = useRef<HTMLSpanElement>(null), callback = useRef(commit); callback.current = commit;
@@ -28,8 +32,9 @@ function ValueEditor({ value, label, commit }: { value: string; label: string; c
   return <span className={s.editor} ref={mount} />;
 }
 
-function DeclarationRow({ declaration, context, editable, owned = false, enabled = true }: { declaration: Declaration; context: EditContext; editable: boolean; owned?: boolean; enabled?: boolean }) {
+function DeclarationRow({ declaration, context, editable, owned = false, enabled = true }: { declaration: Declaration & { id?: string }; context: EditContext; editable: boolean; owned?: boolean; enabled?: boolean }) {
   const { editor, design } = useEditing();
+  const status = declarationStatus(useContext(CascadeContext), declaration.id);
   const [editing, setEditing] = useState(false), [error, setError] = useState('');
   const supported = properties.includes(declaration.property as Property) && editable;
   const rgb = declaration.value.match(/^rgb\(\s*(\d+)\s*[, ]\s*(\d+)\s*[, ]\s*(\d+)\s*\)$/);
@@ -40,7 +45,7 @@ function DeclarationRow({ declaration, context, editable, owned = false, enabled
     setError(success ? '' : editor!.getSnapshot().error ?? 'This value cannot be applied.');
     if (success) setEditing(false);
   };
-  return <div className={s.declaration} data-property={declaration.property} data-owned={owned}>
+  return <div className={s.declaration} data-property={declaration.property} data-owned={owned} data-cascade-status={status} title={status ? `Readable author cascade: ${status}` : undefined}>
     <div className={`${s.line} ${!enabled ? s.disabled : ''}`}>
       <input type="checkbox" aria-label={`${owned ? 'Toggle override' : 'Authored declaration'} ${declaration.property}`} checked={enabled} disabled={!owned} title={owned ? 'Remove or restore this CSSForge override; authored styles remain intact.' : 'Disabling authored CSS requires cascade knowledge and is unavailable.'} onChange={() => { const ok = editor!.toggle(design!.targetId, context, declaration.property as Property); setError(ok ? '' : editor!.getSnapshot().error ?? 'This declaration cannot be toggled.'); }} />
       <span className={s.property}>{declaration.property}</span><span>:</span>
@@ -69,14 +74,16 @@ export function LiveCodeView() {
   return design ? <CodeTarget key={design.targetId} /> : null;
 }
 function CodeTarget() {
-  const { picker } = useInspection(), { design, overrides, undoCount, editedCount } = useEditing();
+  const { picker } = useInspection(), { design, overrides, context, undoCount, editedCount } = useEditing();
   const [source, setSource] = useState<SourceSnapshot | null>(null);
   const overrideRules = useMemo(() => picker?.sourceOverrides(overrides) ?? [], [picker, overrides]);
+  const cascade = useMemo(() => source ? picker?.cascade() : null, [picker, source, overrides, context]);
   useEffect(() => { setSource(picker!.source(true)); }, [picker, design?.targetId]);
   if (!design || !source) return null;
-  return <div className={s.code} data-testid="live-code">
+  return <CascadeContext.Provider value={cascade ?? null}><div className={s.code} data-testid="live-code">
     <header className={s.caption}><span>Selected element CSS</span><button onClick={() => setSource(picker!.source(true))}>Refresh sources</button></header>
-    <p className={s.note}>Authored CSS via CSSOM, not cascade winners. Edits create session overrides.</p>
+    <p className={s.note}>Authored CSS via CSSOM. Edits create session overrides.</p>
+    {cascade && <p className={s.note} data-testid="cascade-summary">Readable author cascade · {context.pseudo || 'Base'}{context.media.length ? ` · ${context.media.join(' → ')}` : ''}. {Object.values(cascade.properties).filter(property => property.winner).length} resolved declarations. {Object.values(cascade.properties).some(property => property.confidence !== 'resolved') ? 'Incomplete or unsupported cases remain unresolved.' : 'Resolved within supported author sources.'} Browser/user origins and computed-value substitution are outside this result.{cascade.issues.includes('inaccessible-source') && ' Inaccessible sources prevent a certain winner.'}</p>}
     <section aria-label="CSSForge overrides" className={s.group}><h3>CSSForge overrides <small>current session</small></h3>
       {!overrides.length && <p className={s.note}>No overrides for this element.</p>}
       {overrideRules.map(rule => <div key={rule.id}><div className={s.selector}>{rule.editContext!.media.map(query => `@media ${query}`).join(' → ') || 'Base'} {rule.editContext!.pseudo || 'element'} {'{'}</div>{rule.declarations.map(declaration => <DeclarationRow key={declaration.id} context={rule.editContext!} declaration={declaration} editable owned enabled={declaration.enabled} />)}<div className={s.brace}>{'}'}</div></div>)}
@@ -85,6 +92,6 @@ function CodeTarget() {
     <section aria-label="Inline authored CSS" className={s.group}><h3>Inline authored <small>style attribute</small></h3><div className={s.selector}>element.style {'{'}</div>{source.inline.map(declaration => <DeclarationRow key={declaration.property} declaration={declaration} context={baseContext()} editable />)}{!source.inline.length && <p className={s.note}>No inline declarations.</p>}<div className={s.brace}>{'}'}</div></section>
     <section aria-label="Readable matching CSS" className={s.group}><h3>Readable matching rules</h3>{!source.rules.length && <p className={s.note}>No matching rules found in the readable subset.</p>}{source.rules.map((group, index) => <div className={s.rule} key={`${index}-${group.selector}`}><small className={s.source} title={group.label}>{group.label}</small>{group.conditions.map((condition, i) => <div className={s.context} key={i}>{condition} {'{'}</div>)}<div className={s.selector}>{group.selector} {'{'}{group.context.pseudo && <small> {group.context.pseudo} context</small>}</div>{group.declarations.map(declaration => <DeclarationRow key={declaration.property} declaration={declaration} context={group.context} editable={group.editable} />)}<div className={s.brace}>{'}'.repeat(1 + group.conditions.length)}</div></div>)}</section>
     {source.keyframes.length > 0 && <section className={s.group} aria-label="Readable keyframes"><h3>Referenced keyframes <small>read-only · no winner inference</small></h3>{source.keyframes.map((frame, i) => <pre className={s.keyframes} key={i}>{frame.css}</pre>)}</section>}
-    <aside className={s.notices}><p>Bounded CSSOM snapshot. Inheritance, imports, relative selectors and shadow-host styles are not resolved. Refresh after page CSS or media changes.</p>{source.notices.map(notice => <p key={notice}>{notice}</p>)}</aside>
-  </div>;
+    <aside className={s.notices}><p>Bounded CSSOM snapshot. Imports, relative selectors and shadow-host styles are not resolved. Refresh after page CSS or media changes.</p>{source.notices.map(notice => <p key={notice}>{notice}</p>)}</aside>
+  </div></CascadeContext.Provider>;
 }

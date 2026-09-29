@@ -19,12 +19,12 @@ test('raw hover bursts do no computed inspection, publish no UI state, and stop 
     const tick = () => new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
     const move = (node: Element) => node.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, composed: true }));
     for (let i = 0; i < 1000; i++) move(target);
-    const raw = { styles, geometry, publications, scans: picker.sourceStats().scopeScans };
+    const raw = { styles, geometry, publications, scans: picker.sourceStats().scopeScans, cascade: picker.cascadeStats().resolutions };
     await tick();
-    const first = { styles, geometry, publications, scans: picker.sourceStats().scopeScans };
+    const first = { styles, geometry, publications, scans: picker.sourceStats().scopeScans, cascade: picker.cascadeStats().resolutions };
     for (let i = 0; i < 1000; i++) move(target);
     await tick();
-    const same = { styles, geometry, publications, scans: picker.sourceStats().scopeScans };
+    const same = { styles, geometry, publications, scans: picker.sourceStats().scopeScans, cascade: picker.cascadeStats().resolutions };
     target.addEventListener('click', () => clicks++);
     target.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true, cancelable: true }));
     const selected = { styles, publications, clicks, scans: picker.sourceStats().scopeScans };
@@ -32,6 +32,13 @@ test('raw hover bursts do no computed inspection, publish no UI state, and stop 
     const reused = picker.source() === firstSource;
     const cachedScans = picker.sourceStats().scopeScans;
     const stylesAfterCode = styles;
+    const firstCascade = picker.cascade(), cascadeStats = picker.cascadeStats();
+    const cachedCascade = picker.cascade() === firstCascade;
+    const cascadeStyles = styles - stylesAfterCode;
+    picker.start(); publications = 0;
+    for (let i = 0; i < 1000; i++) move(target);
+    await tick();
+    const hoverCascade = picker.cascadeStats();
     // Queue a frame immediately before teardown, then check it never writes an overlay.
     picker.start(); move(document.querySelector('#other')!); picker.destroy(); picker.destroy();
     for (let i = 0; i < 1000; i++) move(target);
@@ -39,12 +46,13 @@ test('raw hover bursts do no computed inspection, publish no UI state, and stop 
     target.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true, cancelable: true }));
     const cleanup = { styles, clicks, overlays: document.querySelectorAll('cssforge-overlay').length };
     window.getComputedStyle = originalStyle;
-    return { raw, first, same, selected, cleanup, reused, cachedScans, stylesAfterCode };
+    return { raw, first, same, selected, cleanup, reused, cachedScans, stylesAfterCode, cachedCascade, cascadeStats, cascadeStyles, hoverCascade };
   });
-  expect(result.raw).toEqual({ styles: 0, geometry: 0, publications: 0, scans: 0 });
-  expect(result.first).toEqual({ styles: 0, geometry: 1, publications: 0, scans: 0 });
+  expect(result.raw).toEqual({ styles: 0, geometry: 0, publications: 0, scans: 0, cascade: 0 });
+  expect(result.first).toEqual({ styles: 0, geometry: 1, publications: 0, scans: 0, cascade: 0 });
   expect(result.same).toEqual(result.first);
   expect(result.selected).toEqual({ styles: 1, publications: 1, clicks: 0, scans: 1 });
   expect(result.reused).toBe(true); expect(result.cachedScans).toBe(1);
+  expect(result.cachedCascade).toBe(true); expect(result.cascadeStyles).toBe(0); expect(result.hoverCascade).toEqual(result.cascadeStats);
   expect(result.cleanup).toEqual({ styles: result.stylesAfterCode, clicks: 1, overlays: 0 });
 });

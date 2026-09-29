@@ -5,6 +5,7 @@ import { createEditSession } from '../editing/session';
 import { presentSource, type SourceSnapshot } from '../editing/readable';
 import { createSourceIndex } from '../engine/sources';
 import type { SessionGroup } from '../engine/sources/model';
+import { createCascade } from '../engine/cascade';
 import { createTree } from './tree';
 
 export type Selection = {
@@ -37,6 +38,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   const valid = (element: Element | null): element is Element => !!element && element.isConnected && !owns(element) && !element.hasAttribute('hidden') && !nonTargets.has(element.localName);
   const sources = createSourceIndex(doc, owns);
   const editor = createEditSession(doc, owns, () => {
+    cascade.invalidate();
     if (selected && valid(selected)) {
       const computed = win.getComputedStyle(selected);
       editor.inspect(selected, computed);
@@ -44,6 +46,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     } else editor.inspect(null);
     frame.schedule();
   }, sources);
+  const cascade = createCascade(doc, sources, element => editor.sourceGroups(element), undefined, element => editor.sourcePosition(element));
   const parentOf = (element: Element) => {
     const root = element.getRootNode();
     const parent = element.parentElement ?? (root instanceof win.ShadowRoot && root.mode === 'open' ? root.host : null);
@@ -86,7 +89,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(() => frame.schedule());
   const select = (element: Element | null) => {
     if (destroyed || !valid(element)) return;
-    selected = element; hovered = null; source = null; sources.invalidate();
+    selected = element; hovered = null; source = null; sources.invalidate(); cascade.invalidate();
     const computed = win.getComputedStyle(element);
     editor.inspect(element, computed, true);
     publish({ active: false, selection: {
@@ -127,7 +130,9 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   win.visualViewport?.addEventListener('scroll', refresh);
   return {
     editor,
-    source(force = false) { if (!valid(selected)) return null; if (!source || force) { if (force) sources.invalidate(); source = presentSource(sources.read(selected)); editor.inspect(selected, undefined, true); } return source; },
+    source(force = false) { if (!valid(selected)) return null; if (!source || force) { if (force) { sources.invalidate(); cascade.invalidate(); } source = presentSource(sources.read(selected)); editor.inspect(selected, undefined, true); } return source; },
+    cascade() { return valid(selected) ? cascade.read(selected, editor.getSnapshot().context) : null; },
+    cascadeStats: cascade.getStats,
     sourceOverrides(groups: SessionGroup[]) { return valid(selected) ? sources.overrides(selected, groups).rules : []; },
     sourceStats: sources.getStats,
     tree() { return tree.read(selected); },
@@ -146,7 +151,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     destroy() {
       if (destroyed) return;
       destroyed = true; frame.cancel(); observer?.disconnect();
-      editor.destroy(); tree.destroy(); sources.destroy(); source = null;
+      editor.destroy(); tree.destroy(); sources.destroy(); cascade.destroy(); source = null;
       win.removeEventListener('pointermove', move, true);
       doc.removeEventListener('pointerleave', leave); win.removeEventListener('blur', leave);
       for (const type of clickEvents) win.removeEventListener(type, intercept, true);

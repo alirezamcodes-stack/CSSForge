@@ -109,6 +109,26 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   };
   return {
     inspect, applyBatch,
+    sourcePosition(element: Element): number | undefined {
+      const target = byElement.get(element);
+      if (!target?.layer?.sheet || !safe(target)) return undefined;
+      // Read only sheet ordering, never contents. Count the same author sheets retained by the index.
+      const sheets = target.root === doc ? [...doc.styleSheets] : [...target.root.querySelectorAll('style,link')].map(node => (node as HTMLStyleElement).sheet).filter((sheet): sheet is CSSStyleSheet => !!sheet);
+      let authorsBefore = 0;
+      for (const sheet of sheets) {
+        if (sheet === target.layer.sheet) return authorsBefore - 0.5;
+        const owner = sheet.ownerNode as Element | null;
+        if (!owner || (!owns(owner) && !owner.hasAttribute?.('data-cssforge-edit-layer'))) authorsBefore++;
+      }
+      return undefined;
+    },
+    sourceGroups(element: Element): OverrideGroup[] {
+      const target = byElement.get(element);
+      return target && safe(target) ? [...target.scopes.values()].map(scope => ({ context: scope.context, declarations: [
+        ...Object.entries(scope.values).map(([property, value]) => ({ property: property as Property, value, enabled: true })),
+        ...Object.entries(scope.disabled ?? {}).map(([property, value]) => ({ property: property as Property, value, enabled: false })),
+      ] })).filter(group => group.declarations.length) : [];
+    },
     conversionContext(targetId: string, property: ValueProperty, reference?: ValueReference): ConversionContext {
       const target = targets.get(targetId);
       if (destroyed || !target || state.design?.targetId !== targetId || !safe(target) || state.context.pseudo || state.context.media.length) return {};
