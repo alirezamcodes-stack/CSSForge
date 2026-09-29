@@ -1,0 +1,44 @@
+.layers.layers{margin:6px 0 10px;padding:3px 0}
+.layers .layer{height:42px;gap:2px;padding:3px 4px}
+.layer>button{width:30px;height:32px;flex-shrink:0}
+.layer .layerPreview{width:25px;height:27px;border-radius:4px;background-color:var(--raised)}
+.layerName{min-width:0;line-height:15px;font-size:11px;color:var(--text-secondary)}
+.layerName small{display:block;font-size:10px;font-weight:400;color:var(--text-muted);text-transform:capitalize}
+.layer[data-hidden=true] .layerPreview{opacity:.4}.layer[data-hidden=true] .layerName{color:var(--text-muted)}
+.editor.editor{gap:8px;padding:8px;margin-bottom:10px}
+.editorHeader,.repeat{display:grid;grid-template-columns:1fr minmax(0,1.3fr);align-items:center;gap:8px;font-size:11px;color:var(--text-muted)}
+.editorHeader>span{font-weight:500;color:var(--text-secondary)}
+.editorHeader>button,.repeat>button{font-size:12px;font-weight:400;min-height:30px}
+.trackArea{padding:8px 15px 0}
+.track{position:relative;height:34px;border-radius:4px;border:1px solid #ffffff26;background-color:var(--surface-deep);box-shadow:inset 0 0 0 1px #0002;margin-bottom:26px}
+.track>button{position:absolute;top:21px;width:30px;height:35px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1px;border-radius:4px;touch-action:none}
+.track>button[data-draggable=true]{cursor:ew-resize}
+.track>button:hover{background:none}
+.handle{width:16px;height:19px;border:2px solid #dedfe3;border-radius:3px;box-shadow:0 1px 3px #0009;position:relative}
+.handle:before{content:'';position:absolute;top:-5px;left:4px;width:4px;height:4px;transform:rotate(45deg);background:#dedfe3}
+.track>button[aria-pressed=true] .handle{outline:2px solid var(--accent);outline-offset:2px}
+.handleNumber{font-size:9px;line-height:12px;color:var(--text-muted)}
+.track>button[aria-pressed=true] .handleNumber{color:var(--accent)}
+.trackScale{display:flex;justify-content:space-between;font-size:9px;line-height:12px;color:var(--text-muted);margin-top:4px}
+.stopLabels{display:grid;grid-template-columns:minmax(0,1fr) 66px 30px;gap:4px;font-size:10px;color:var(--text-muted);padding:0 3px}
+.stops.stops{gap:3px}
+.stops .stopRow{grid-template-columns:12px minmax(0,1fr) 66px 30px;align-items:center;gap:3px;padding:2px 3px;border-radius:4px;min-width:0}
+.stops .stopRow[data-selected=true]{background:#97dfb610;box-shadow:inset 2px 0 var(--accent)}
+.stopNumber{font-size:9px;color:var(--text-muted);text-align:center}
+.stopRow[data-selected=true] .stopNumber{color:var(--accent)}
+.stopRow input{font-size:11px}
+.commands.commands{gap:4px;flex-wrap:nowrap}
+.commands button{display:flex;align-items:center;justify-content:center;gap:5px;flex:1;white-space:nowrap;padding:4px!important;border-color:transparent;color:var(--text-muted);font-weight:400}
+.commands svg{width:12px;height:12px}
+.placement{display:grid;gap:5px;padding-top:10px;border-top:1px solid var(--divider);margin-top:2px}
+.placement label>span{font-size:10px}
+.presets summary small{font-size:10px;font-weight:400;color:var(--text-muted);margin-left:auto}
+.presets summary>svg:last-child{margin-left:0}
+.presetBrowser{max-height:270px;overflow:auto;overscroll-behavior:contain;padding:0 3px 8px;scrollbar-gutter:stable}
+.presetGroup{margin:10px 0 0}.presetGroup h4{font-size:10px;line-height:15px;font-weight:500;color:var(--text-muted);margin:0 0 5px}
+.presetGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.presetGrid button{min-width:0;border-radius:5px;padding:3px!important;text-align:left;border:1px solid transparent}
+.presetGrid button[aria-pressed=true]{border-color:var(--accent);background:#97dfb60c}
+.presetPreview{display:block;height:29px;border:1px solid #ffffff15;border-radius:3px;background-color:var(--raised)}
+.presetName{display:block;font-size:9px;line-height:15px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
+@media(max-width:360px){.stops .stopRow{grid-template-columns:10px minmax(0,1fr) 58px 30px;gap:2px}.layer .layerPreview{width:21px}.commands button{font-size:9px}.stopLabels{grid-template-columns:minmax(0,1fr) 58px 30px}}
