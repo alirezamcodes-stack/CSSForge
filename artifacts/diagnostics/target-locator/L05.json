@@ -1,0 +1,16 @@
+{
+  "state": "ambiguous",
+  "id": null,
+  "key": null,
+  "card": null,
+  "count": 3,
+  "confidence": "insufficient",
+  "evidence": [
+    "weak tag/classes/attributes"
+  ],
+  "reason": "Multiple plausible compatible replacements.",
+  "rejected": [],
+  "selection": null,
+  "design": null,
+  "boundaries": 0
+}

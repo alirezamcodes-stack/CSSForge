@@ -1,0 +1,20 @@
+{
+  "state": "unsafe",
+  "id": null,
+  "key": null,
+  "card": null,
+  "count": 1,
+  "confidence": "insufficient",
+  "evidence": [
+    "unique ID"
+  ],
+  "reason": "Candidates failed compatibility checks.",
+  "rejected": [
+    [
+      "tag changed"
+    ]
+  ],
+  "selection": null,
+  "design": null,
+  "boundaries": 0
+}

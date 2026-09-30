@@ -1,0 +1,30 @@
+{
+  "captured": {
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "tag": "button",
+    "attributes": [],
+    "classes": [
+      "primary"
+    ],
+    "sibling": {
+      "index": 0,
+      "truncated": false
+    }
+  },
+  "result": {
+    "state": "unsafe",
+    "id": null,
+    "key": null,
+    "card": null,
+    "count": 1,
+    "confidence": "insufficient",
+    "evidence": [
+      "weak tag/classes/attributes"
+    ],
+    "reason": "Evidence was weak or not unique at capture.",
+    "rejected": [],
+    "selection": null,
+    "design": null,
+    "boundaries": 0
+  }
+}

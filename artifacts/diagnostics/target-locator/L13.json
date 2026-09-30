@@ -1,0 +1,16 @@
+{
+  "state": "resolved-unique",
+  "id": "same",
+  "key": null,
+  "card": null,
+  "count": 1,
+  "confidence": "strong",
+  "evidence": [
+    "unique ID"
+  ],
+  "reason": "Strong captured evidence proves one compatible same-root replacement.",
+  "rejected": [],
+  "selection": null,
+  "design": null,
+  "boundaries": 2
+}

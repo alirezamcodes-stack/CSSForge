@@ -1,0 +1,14 @@
+{
+  "state": "root-mismatch",
+  "id": null,
+  "key": null,
+  "card": null,
+  "count": 0,
+  "confidence": "none",
+  "evidence": [],
+  "reason": "Target or proposed candidate moved to another root.",
+  "rejected": [],
+  "selection": null,
+  "design": null,
+  "boundaries": 0
+}

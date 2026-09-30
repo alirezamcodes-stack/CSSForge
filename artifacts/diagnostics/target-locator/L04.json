@@ -1,0 +1,16 @@
+{
+  "state": "ambiguous",
+  "id": null,
+  "key": null,
+  "card": null,
+  "count": 2,
+  "confidence": "insufficient",
+  "evidence": [
+    "stable data-product-id"
+  ],
+  "reason": "Multiple plausible compatible replacements.",
+  "rejected": [],
+  "selection": null,
+  "design": null,
+  "boundaries": 0
+}

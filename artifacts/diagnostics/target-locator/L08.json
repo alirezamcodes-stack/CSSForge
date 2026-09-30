@@ -1,0 +1,16 @@
+{
+  "state": "missing",
+  "id": null,
+  "key": null,
+  "card": null,
+  "count": 0,
+  "confidence": "none",
+  "evidence": [
+    "weak tag/classes/attributes"
+  ],
+  "reason": "No same-root candidate.",
+  "rejected": [],
+  "selection": null,
+  "design": null,
+  "boundaries": 0
+}

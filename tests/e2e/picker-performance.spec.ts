@@ -20,6 +20,7 @@ test('raw hover bursts do no computed inspection, publish no UI state, and stop 
     const move = (node: Element) => node.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, composed: true }));
     for (let i = 0; i < 1000; i++) move(target);
     const raw = { styles, geometry, publications, scans: picker.sourceStats().scopeScans, cascade: picker.cascadeStats().resolutions };
+    const rawLocator = picker.locatorStats();
     await tick();
     const first = { styles, geometry, publications, scans: picker.sourceStats().scopeScans, cascade: picker.cascadeStats().resolutions };
     for (let i = 0; i < 1000; i++) move(target);
@@ -28,6 +29,7 @@ test('raw hover bursts do no computed inspection, publish no UI state, and stop 
     target.addEventListener('click', () => clicks++);
     target.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true, cancelable: true }));
     const selected = { styles, publications, clicks, scans: picker.sourceStats().scopeScans };
+    const selectedLocator = picker.locatorStats();
     const firstSource = picker.source();
     const reused = picker.source() === firstSource;
     const cachedScans = picker.sourceStats().scopeScans;
@@ -39,6 +41,7 @@ test('raw hover bursts do no computed inspection, publish no UI state, and stop 
     for (let i = 0; i < 1000; i++) move(target);
     await tick();
     const hoverCascade = picker.cascadeStats();
+    const hoverLocator = picker.locatorStats();
     // Queue a frame immediately before teardown, then check it never writes an overlay.
     picker.start(); move(document.querySelector('#other')!); picker.destroy(); picker.destroy();
     for (let i = 0; i < 1000; i++) move(target);
@@ -46,9 +49,11 @@ test('raw hover bursts do no computed inspection, publish no UI state, and stop 
     target.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true, cancelable: true }));
     const cleanup = { styles, clicks, overlays: document.querySelectorAll('cssforge-overlay').length };
     window.getComputedStyle = originalStyle;
-    return { raw, first, same, selected, cleanup, reused, cachedScans, stylesAfterCode, cachedCascade, cascadeStats, cascadeStyles, hoverCascade };
+    return { raw, first, same, selected, cleanup, reused, cachedScans, stylesAfterCode, cachedCascade, cascadeStats, cascadeStyles, hoverCascade, rawLocator, selectedLocator, hoverLocator };
   });
   expect(result.raw).toEqual({ styles: 0, geometry: 0, publications: 0, scans: 0, cascade: 0 });
+  expect(result.rawLocator).toEqual({ captures: 0, requests: 0, searches: 0, queries: 0, candidates: 0 });
+  expect(result.selectedLocator.captures).toBe(1); expect(result.selectedLocator.requests).toBe(0); expect(result.hoverLocator).toEqual(result.selectedLocator);
   expect(result.first).toEqual({ styles: 0, geometry: 1, publications: 0, scans: 0, cascade: 0 });
   expect(result.same).toEqual(result.first);
   expect(result.selected).toEqual({ styles: 1, publications: 1, clicks: 0, scans: 1 });

@@ -1,0 +1,17 @@
+{
+  "state": "resolved-unique",
+  "id": null,
+  "key": null,
+  "card": "2",
+  "count": 1,
+  "confidence": "strong",
+  "evidence": [
+    "stable ancestor data-id",
+    "target attributes/classes"
+  ],
+  "reason": "Strong captured evidence proves one compatible same-root replacement.",
+  "rejected": [],
+  "selection": null,
+  "design": null,
+  "boundaries": 0
+}

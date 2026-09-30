@@ -11,6 +11,7 @@ import { createTargetLifecycle, type TargetIdentity } from './targetLifecycle';
 import { observeTarget } from './invalidation';
 import { navigationChildren } from './navigation';
 import { collectCandidates, type TargetCandidate } from './candidates';
+import { createTargetLocator, type TargetLocator, type LocatorResolution, type ResolveRequest } from '../engine/locator';
 
 export type Selection = {
   identity: string; tag: string; id: string; classes: string[];
@@ -43,6 +44,8 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     return root instanceof win.ShadowRoot ? owns(root.host) : false;
   };
   const lifecycle = createTargetLifecycle(doc, owns);
+  const locators = createTargetLocator(doc, lifecycle);
+  let locator: TargetLocator | null = null, locatorResult: LocatorResolution | null = null;
   const valid = lifecycle.valid;
   const sources = createSourceIndex(doc, owns, lifecycle);
   const editor = createEditSession(doc, owns, () => {
@@ -96,12 +99,14 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     selected = null; selectedIdentity = null; hovered = null; source = null; candidates = [];
     unobserve(); unobserve = () => {}; observer?.disconnect();
     editor.quarantine(); sources.invalidate(); cascade.invalidate(); overlay.hide();
+    if (locator) locatorResult = locators.resolve(locator);
     publish({ ...state, selection: null });
   }
   const select = (element: Element | null) => {
     clearLostTarget();
     if (destroyed || !lifecycle.admissible(element)) return;
     editor.quarantine(); selectedIdentity = lifecycle.bind(element);
+    locator = locators.capture(selectedIdentity, true); locatorResult = null;
     selected = element; hovered = null; source = null; sources.invalidate(); cascade.invalidate();
     const computed = win.getComputedStyle(element);
     editor.inspect(element, computed, true);
@@ -158,6 +163,10 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   win.visualViewport?.addEventListener('scroll', refresh);
   return {
     editor,
+    targetLocator: () => locator,
+    locatorResult: () => locatorResult,
+    locatorStats: locators.getStats,
+    resolveTarget(request: ResolveRequest = {}) { clearLostTarget(); return locator ? (locatorResult = locators.resolve(locator, request)) : null; },
     candidates: () => candidates.filter(item => lifecycle.admissible(item.element)),
     source(force = false) { clearLostTarget(); if (!valid(selected)) return null; if (!source || force) { if (force) { sources.invalidate(); cascade.invalidate(); } source = presentSource(sources.read(selected)); editor.inspect(selected, undefined, true); } return source; },
     cascade() { clearLostTarget(); return valid(selected) ? cascade.read(selected, editor.getSnapshot().context) : null; },
@@ -186,7 +195,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
       for (const type of clickEvents) win.removeEventListener(type, intercept, true);
       win.removeEventListener('scroll', refresh, true); win.removeEventListener('resize', refresh);
       win.visualViewport?.removeEventListener('resize', refresh); win.visualViewport?.removeEventListener('scroll', refresh);
-      hovered = selected = null; selectedIdentity = null; candidates = []; lifecycle.destroy(); subscribers.clear(); state = { active: false, selection: null }; overlay.destroy();
+      hovered = selected = null; selectedIdentity = null; candidates = []; locator = locatorResult = null; locators.destroy(); lifecycle.destroy(); subscribers.clear(); state = { active: false, selection: null }; overlay.destroy();
     },
   };
 }

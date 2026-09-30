@@ -1,0 +1,16 @@
+{
+  "state": "truncated",
+  "id": null,
+  "key": null,
+  "card": null,
+  "count": 70,
+  "confidence": "none",
+  "evidence": [
+    "weak tag/classes/attributes"
+  ],
+  "reason": "Candidate/query cap exceeded; uniqueness cannot be established.",
+  "rejected": [],
+  "selection": null,
+  "design": null,
+  "boundaries": 0
+}
