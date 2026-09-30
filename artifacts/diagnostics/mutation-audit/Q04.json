@@ -1,0 +1,25 @@
+{
+  "case": "Q04 refreshed authored value keeps stale CSSForge mutation attribution",
+  "outcomes": [
+    "B",
+    "G"
+  ],
+  "defect": true,
+  "expectedPolicy": "Current external declaration value must be distinguished from the retained historical CSSForge transaction.",
+  "actual": {
+    "declaration": {
+      "id": "rule-9:declaration:font-size",
+      "sourceId": "sheet-8",
+      "ruleId": "rule-9",
+      "contexts": [],
+      "property": "font-size",
+      "value": "21px",
+      "priority": "",
+      "important": false,
+      "order": 0,
+      "enabled": true,
+      "mutationState": "cssforge-mutated-author"
+    },
+    "winner": "21px"
+  }
+}

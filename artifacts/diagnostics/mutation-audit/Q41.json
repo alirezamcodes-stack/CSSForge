@@ -1,0 +1,46 @@
+{
+  "case": "Q41 native replacement during author write restores the detached original without blind transfer",
+  "outcomes": [
+    "A"
+  ],
+  "defect": false,
+  "expectedPolicy": "A synchronous replacement invalidates author authorization; restore the exact original object and never copy inline edits to the replacement.",
+  "actual": {
+    "undo": 0,
+    "error": "The editing target or context changed. Pick it again.",
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "state": "fallback",
+    "reason": "CSSOM mutation could not be verified.",
+    "scope": {
+      "kind": "target-specific",
+      "matchedCount": 1,
+      "bounded": true,
+      "risk": "local"
+    },
+    "sourceId": "element-2:inline",
+    "ruleId": "element-2:inline:rule",
+    "declarationId": "element-2:inline:rule:declaration:font-size",
+    "active": [],
+    "overrides": [],
+    "reconciliation": "retired",
+    "reconciliationStats": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "mutation": {
+      "analyses": 2,
+      "capabilityChecks": 1,
+      "writes": 0,
+      "rollbacks": 0,
+      "rejections": 1
+    }
+  }
+}

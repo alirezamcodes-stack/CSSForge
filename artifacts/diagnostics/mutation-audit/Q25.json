@@ -1,0 +1,17 @@
+{
+  "case": "Q25 stylesheet node reorder records whether the native sheet identity survives",
+  "outcomes": [
+    "B"
+  ],
+  "defect": false,
+  "expectedPolicy": "DOM reorder must follow actual CSSOM object identity, never assumed persistence.",
+  "actual": {
+    "sameNativeSheet": false,
+    "result": {
+      "state": "fallback",
+      "reason": "Source identity or declaration changed before mutation.",
+      "sourceId": "sheet-8",
+      "ruleId": "rule-9"
+    }
+  }
+}

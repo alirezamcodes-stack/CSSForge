@@ -1,0 +1,53 @@
+{
+  "case": "Q36 supported or intentionally unresolved grouping context stays in place",
+  "outcomes": [
+    "A",
+    "B"
+  ],
+  "defect": false,
+  "expectedPolicy": "Preserve supported pseudo/layer/support context; keep container and unresolved layer contexts in fallback.",
+  "actual": {
+    "target": "1",
+    "undo": 1,
+    "error": null,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "state": "fallback",
+    "reason": "Author cascade is incomplete, inherited or uncertain.",
+    "active": [],
+    "overrides": [
+      {
+        "context": {
+          "media": [],
+          "pseudo": ""
+        },
+        "declarations": [
+          {
+            "property": "font-size",
+            "value": "24px",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "reconciliation": "active-original",
+    "reconciliationStats": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "mutation": {
+      "analyses": 1,
+      "capabilityChecks": 0,
+      "writes": 0,
+      "rollbacks": 0,
+      "rejections": 1
+    }
+  }
+}

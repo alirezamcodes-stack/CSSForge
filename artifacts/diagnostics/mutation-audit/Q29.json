@@ -1,0 +1,43 @@
+{
+  "case": "Q29 authored background shorthand safely falls back for background-color",
+  "outcomes": [
+    "A"
+  ],
+  "defect": false,
+  "expectedPolicy": "No destructive authored shorthand rewrite; keep fallback in the session layer.",
+  "actual": {
+    "before": [
+      "#target { background: red; color: green; }"
+    ],
+    "result": {
+      "target": "1",
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "state": "fallback",
+      "reason": "The authored winner is a shorthand; use a session override.",
+      "active": [],
+      "overrides": [],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 1,
+        "capabilityChecks": 0,
+        "writes": 0,
+        "rollbacks": 0,
+        "rejections": 1
+      }
+    }
+  }
+}

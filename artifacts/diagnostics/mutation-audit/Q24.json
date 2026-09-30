@@ -1,0 +1,23 @@
+{
+  "case": "Q24 insertRule reorders the original native object without fabricating a new identity",
+  "outcomes": [
+    "A"
+  ],
+  "defect": false,
+  "expectedPolicy": "A path/order change is supported only for the same native rule and fresh certain provenance.",
+  "actual": {
+    "captured": {
+      "sourceId": "sheet-8",
+      "ruleId": "rule-9"
+    },
+    "result": {
+      "state": "mutated",
+      "sourceId": "sheet-8",
+      "ruleId": "rule-9"
+    },
+    "after": [
+      ".unrelated { font-size: 55px; }",
+      "#target { font-size: 18px; color: purple; }"
+    ]
+  }
+}

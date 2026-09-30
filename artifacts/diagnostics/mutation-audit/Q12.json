@@ -1,0 +1,118 @@
+{
+  "case": "Q12 direct shared scope 1 matches agrees with native selector count",
+  "outcomes": [
+    "A"
+  ],
+  "defect": false,
+  "expectedPolicy": "Default policy requires explicit shared authorization; exact direct scope and Undo must agree with native CSSOM.",
+  "actual": {
+    "result": {
+      "target": "1",
+      "undo": 1,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "state": "mutated",
+      "scope": {
+        "kind": "target-specific",
+        "matchedCount": 1,
+        "bounded": true,
+        "risk": "local"
+      },
+      "sourceId": "sheet-8",
+      "ruleId": "rule-9",
+      "declarationId": "rule-9:declaration:font-size",
+      "active": [
+        {
+          "sourceId": "sheet-8",
+          "ruleId": "rule-9",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "18px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          }
+        }
+      ],
+      "overrides": [],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 2,
+        "capabilityChecks": 1,
+        "writes": 1,
+        "rollbacks": 0,
+        "rejections": 0
+      }
+    },
+    "authorized": {
+      "target": "2",
+      "undo": 1,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "state": "mutated",
+      "scope": {
+        "kind": "target-specific",
+        "matchedCount": 1,
+        "bounded": true,
+        "risk": "local"
+      },
+      "sourceId": "sheet-8",
+      "ruleId": "rule-9",
+      "declarationId": "rule-9:declaration:font-size",
+      "active": [
+        {
+          "sourceId": "sheet-8",
+          "ruleId": "rule-9",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "18px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "28px",
+            "priority": ""
+          }
+        }
+      ],
+      "overrides": [],
+      "reconciliation": "retired",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 4,
+        "capabilityChecks": 2,
+        "writes": 2,
+        "rollbacks": 1,
+        "rejections": 0
+      }
+    }
+  }
+}

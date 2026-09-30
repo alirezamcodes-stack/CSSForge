@@ -1,0 +1,39 @@
+{
+  "case": "Q32 inherited token mutation is unsupported while direct var use remains a separate source",
+  "outcomes": [
+    "A",
+    "B"
+  ],
+  "defect": false,
+  "expectedPolicy": "Inherited custom sources are intentionally unsupported; editing a direct var use does not rewrite its ancestor token.",
+  "actual": {
+    "target": "1",
+    "undo": 0,
+    "error": "Author cascade is incomplete, inherited or uncertain.",
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "state": "fallback",
+    "reason": "Author cascade is incomplete, inherited or uncertain.",
+    "active": [],
+    "overrides": [],
+    "reconciliation": "active-original",
+    "reconciliationStats": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "mutation": {
+      "analyses": 1,
+      "capabilityChecks": 0,
+      "writes": 0,
+      "rollbacks": 0,
+      "rejections": 1
+    }
+  }
+}

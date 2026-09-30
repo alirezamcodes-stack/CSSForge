@@ -1,0 +1,83 @@
+{
+  "case": "Q18 reset partial conflict clears session layers restores independent author edits and permits retry",
+  "outcomes": [
+    "A",
+    "B"
+  ],
+  "defect": false,
+  "expectedPolicy": "Only blocked author history survives partial Reset; session edits and independent author edits must be removed.",
+  "actual": {
+    "conflict": {
+      "target": "3",
+      "undo": 1,
+      "error": "Author source changed or blocked reset. Pending author rollback retained; page changes were preserved.",
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [
+        {
+          "sourceId": "sheet-8",
+          "ruleId": "rule-10",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "20px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "28px",
+            "priority": ""
+          }
+        }
+      ],
+      "overrides": [],
+      "reconciliation": "retired",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 4,
+        "capabilityChecks": 2,
+        "writes": 2,
+        "rollbacks": 1,
+        "rejections": 0
+      }
+    },
+    "afterRetry": {
+      "target": "4",
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [],
+      "overrides": [],
+      "reconciliation": "retired",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 4,
+        "capabilityChecks": 2,
+        "writes": 2,
+        "rollbacks": 2,
+        "rejections": 0
+      }
+    }
+  }
+}

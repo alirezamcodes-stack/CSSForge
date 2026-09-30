@@ -1,0 +1,52 @@
+{
+  "case": "Q47 source deletion after author write blocks rollback without recreating the rule",
+  "outcomes": [
+    "B"
+  ],
+  "defect": false,
+  "expectedPolicy": "Disappeared source must not be recreated or replaced by a selector search.",
+  "actual": {
+    "target": "2",
+    "undo": 1,
+    "error": "Author source changed or blocked reset. Pending author rollback retained; page changes were preserved.",
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "active": [
+      {
+        "sourceId": "sheet-8",
+        "ruleId": "rule-9",
+        "property": "font-size",
+        "before": {
+          "exists": true,
+          "value": "18px",
+          "priority": ""
+        },
+        "after": {
+          "exists": true,
+          "value": "24px",
+          "priority": ""
+        }
+      }
+    ],
+    "overrides": [],
+    "reconciliation": "retired",
+    "reconciliationStats": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "mutation": {
+      "analyses": 2,
+      "capabilityChecks": 1,
+      "writes": 1,
+      "rollbacks": 0,
+      "rejections": 0
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "case": "Q02 native author callback leaves an untracked partial write after rejection",
+  "outcomes": [
+    "D",
+    "H"
+  ],
+  "defect": true,
+  "expectedPolicy": "A rejected partial author write must retain a recoverable ownership/conflict record without overwriting the page callback.",
+  "actual": {
+    "rejected": {
+      "target": "1",
+      "undo": 0,
+      "error": "CSSOM mutation could not be verified.",
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "state": "rejected",
+      "reason": "CSSOM mutation could not be verified.",
+      "scope": {
+        "kind": "target-specific",
+        "matchedCount": 1,
+        "bounded": true,
+        "risk": "local"
+      },
+      "sourceId": "element-2:inline",
+      "ruleId": "element-2:inline:rule",
+      "declarationId": "element-2:inline:rule:declaration:font-size",
+      "active": [],
+      "overrides": [],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 2,
+        "capabilityChecks": 1,
+        "writes": 0,
+        "rollbacks": 0,
+        "rejections": 1
+      }
+    },
+    "changed": "font-size: 24px; color: green;",
+    "afterReset": {
+      "target": "2",
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [],
+      "overrides": [],
+      "reconciliation": "retired",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 2,
+        "capabilityChecks": 1,
+        "writes": 0,
+        "rollbacks": 0,
+        "rejections": 1
+      }
+    }
+  }
+}
