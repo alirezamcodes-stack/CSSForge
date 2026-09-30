@@ -1,0 +1,156 @@
+{
+  "case": "T27 shared source remains shared across two logical targets and replacement",
+  "actual": {
+    "shared": {
+      "target": "2",
+      "undo": 3,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "state": "mutated",
+      "scope": {
+        "kind": "shared-rule",
+        "matchedCount": 2,
+        "bounded": true,
+        "risk": "shared"
+      },
+      "sourceId": "sheet-8",
+      "ruleId": "rule-9",
+      "declarationId": "rule-9:declaration:font-size",
+      "active": [
+        {
+          "kind": "applied",
+          "state": "applied",
+          "sourceId": "sheet-8",
+          "ruleId": "rule-9",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "18px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "attempted": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "current": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "generation": 0
+        },
+        {
+          "kind": "applied",
+          "state": "applied",
+          "sourceId": "sheet-8",
+          "ruleId": "rule-9",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "30px",
+            "priority": ""
+          },
+          "attempted": {
+            "exists": true,
+            "value": "30px",
+            "priority": ""
+          },
+          "current": {
+            "exists": true,
+            "value": "30px",
+            "priority": ""
+          },
+          "generation": 0
+        },
+        {
+          "kind": "applied",
+          "state": "applied",
+          "sourceId": "sheet-8",
+          "ruleId": "rule-9",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "30px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "36px",
+            "priority": ""
+          },
+          "attempted": {
+            "exists": true,
+            "value": "36px",
+            "priority": ""
+          },
+          "current": {
+            "exists": true,
+            "value": "36px",
+            "priority": ""
+          },
+          "generation": 0
+        }
+      ],
+      "overrides": [],
+      "reconciliation": "migrated",
+      "reconciliationStats": {
+        "starts": 1,
+        "resolutions": 1,
+        "retries": 0,
+        "migrations": 1,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 6,
+        "capabilityChecks": 3,
+        "writes": 3,
+        "rollbacks": 0,
+        "rejections": 0
+      }
+    },
+    "restored": {
+      "target": "4",
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [],
+      "overrides": [],
+      "reconciliation": "retired",
+      "reconciliationStats": {
+        "starts": 1,
+        "resolutions": 1,
+        "retries": 0,
+        "migrations": 1,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 6,
+        "capabilityChecks": 3,
+        "writes": 3,
+        "rollbacks": 3,
+        "rejections": 0
+      }
+    }
+  }
+}

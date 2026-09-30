@@ -1,0 +1,14 @@
+{
+  "case": "Q21 stale native rule/sheet identities refuse similar replacements",
+  "outcomes": [
+    "B"
+  ],
+  "defect": false,
+  "expectedPolicy": "Captured object identity cannot be replaced by a similar selector/rule.",
+  "actual": {
+    "state": "fallback",
+    "reason": "Source identity or declaration changed before mutation.",
+    "sourceId": "sheet-8",
+    "ruleId": "rule-9"
+  }
+}

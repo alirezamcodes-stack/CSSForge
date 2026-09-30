@@ -54,9 +54,9 @@ for (const example of [
   try {
     await pick(r.page, '#target'); if (example.context) await r.read(`__p.editor.setContext(${JSON.stringify(example.context)});true`);
     const original = await ruleCSS(r.page), sourceText = await r.page.locator('#author').textContent();
-    expect(await r.author('font-size', '32px')).toBe(true); const changed = await r.status(); expect(changed.state).toBe('mutated'); expect(changed.sourceKind).toBe('style'); expect(await ruleCSS(r.page)).toContain('32px'); expect(await ruleCSS(r.page)).toContain('purple'); expect(await r.page.locator('#author').textContent()).toBe(sourceText);
+    expect(await r.author('font-size', '32px', {allowShared:!!example.context?.pseudo})).toBe(true); const changed = await r.status(); expect(changed.state).toBe('mutated'); expect(changed.sourceKind).toBe('style'); expect(await ruleCSS(r.page)).toContain('32px'); expect(await ruleCSS(r.page)).toContain('purple'); expect(await r.page.locator('#author').textContent()).toBe(sourceText);
     await r.read('__p.editor.undo();true'); expect(await ruleCSS(r.page)).toBe(original);
-    await r.author('font-size', '28px'); await r.read('__p.editor.reset();true'); expect(await ruleCSS(r.page)).toBe(original); await evidence(info, { original, changed, restored: await r.status() }); expect(r.errors).toEqual([]);
+    await r.author('font-size', '28px', {allowShared:!!example.context?.pseudo}); await r.read('__p.editor.reset();true'); expect(await ruleCSS(r.page)).toBe(original); await evidence(info, { original, changed, restored: await r.status() }); expect(r.errors).toEqual([]);
   } finally { await r.context.close(); }
 });
 

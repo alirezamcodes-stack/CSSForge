@@ -1,0 +1,73 @@
+{
+  "case": "T05 direct engine writes exclude reentry during native capability verification",
+  "actual": {
+    "result": {
+      "state": "mutated",
+      "sourceId": "element-2:inline",
+      "ruleId": "element-2:inline:rule"
+    },
+    "status": {
+      "target": "1",
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [
+        {
+          "kind": "applied",
+          "state": "applied",
+          "sourceId": "element-2:inline",
+          "ruleId": "element-2:inline:rule",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "18px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "attempted": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "current": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "generation": 0
+        }
+      ],
+      "overrides": [],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 3,
+        "capabilityChecks": 1,
+        "writes": 1,
+        "rollbacks": 0,
+        "rejections": 1
+      }
+    },
+    "nested": [
+      {
+        "state": "rejected",
+        "safeFallback": false
+      }
+    ]
+  }
+}

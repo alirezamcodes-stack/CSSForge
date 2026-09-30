@@ -1,0 +1,35 @@
+{
+  "case": "T13 the 256 record bound holds when the final write synchronously attempts another edit",
+  "actual": {
+    "recordBound": 256,
+    "historyAtFallback": 257,
+    "restored": {
+      "target": "2",
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [],
+      "overrides": [],
+      "reconciliation": "retired",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 514,
+        "capabilityChecks": 256,
+        "writes": 256,
+        "rollbacks": 256,
+        "rejections": 1
+      }
+    }
+  }
+}

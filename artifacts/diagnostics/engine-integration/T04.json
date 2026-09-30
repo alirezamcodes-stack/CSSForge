@@ -1,0 +1,39 @@
+{
+  "case": "T04 Reset excludes nested Reset while reversing a mixed history",
+  "actual": {
+    "result": {
+      "ok": true
+    },
+    "status": {
+      "target": "2",
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [],
+      "overrides": [],
+      "reconciliation": "retired",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 4,
+        "capabilityChecks": 2,
+        "writes": 2,
+        "rollbacks": 2,
+        "rejections": 0
+      }
+    },
+    "nested": [
+      true
+    ]
+  }
+}

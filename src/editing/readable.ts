@@ -7,11 +7,11 @@ export type SourceGroup = { label: string; selector: string; context: EditContex
 export type SourceSnapshot = { inline: Declaration[]; rules: SourceGroup[]; keyframes: { name: string; css: string }[]; notices: string[] };
 
 /** Bounded presentation adapter only. All source discovery lives in the engine. */
-export function presentSource(source: SelectedSources, mutationState: (id?: string) => 'authored' | 'cssforge-mutated-author' = () => 'authored'): SourceSnapshot {
+export function presentSource(source: SelectedSources, mutationState: (id?: string, declaration?: Declaration) => 'authored' | 'cssforge-mutated-author' = () => 'authored'): SourceSnapshot {
   let remaining = 500, limited = source.matches.length > 80;
   const declarations = (items: Declaration[]) => items.filter(item => {
     if (remaining-- <= 0 || item.value.length > 8000) { limited = true; return false; } return true;
-  }).map(item => ({ ...item, mutationState: mutationState(item.id) }));
+  }).map(item => ({ ...item, mutationState: mutationState(item.id, item) }));
   const inline = declarations(source.inline.rules.flatMap(rule => rule.declarations));
   const rules = source.matches.slice(0, 80).map(match => ({
     label: match.source.label + (match.source.disabled ? ' (disabled)' : ''), selector: match.rule.selectorText!, context: match.context, editable: match.editable,

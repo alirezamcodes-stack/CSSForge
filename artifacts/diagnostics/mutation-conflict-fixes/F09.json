@@ -1,0 +1,78 @@
+{
+  "case": "F09 partial write with unproven ownership retains one blocked record and never overwrites the page",
+  "outcomes": [
+    "A",
+    "B"
+  ],
+  "defect": false,
+  "expectedPolicy": "A newer intended-property value is blocked until exact ownership is restored.",
+  "actual": {
+    "target": "1",
+    "undo": 1,
+    "error": "CSSOM mutation could not be verified. Pending author recovery retained.",
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "state": "rejected",
+    "reason": "CSSOM mutation could not be verified. Pending author recovery retained.",
+    "scope": {
+      "kind": "target-specific",
+      "matchedCount": 1,
+      "bounded": true,
+      "risk": "local"
+    },
+    "sourceId": "element-2:inline",
+    "ruleId": "element-2:inline:rule",
+    "declarationId": "element-2:inline:rule:declaration:font-size",
+    "active": [
+      {
+        "kind": "partial",
+        "state": "blocked",
+        "reason": "CSSOM mutation could not be verified.",
+        "sourceId": "element-2:inline",
+        "ruleId": "element-2:inline:rule",
+        "property": "font-size",
+        "before": {
+          "exists": true,
+          "value": "18px",
+          "priority": ""
+        },
+        "after": {
+          "exists": true,
+          "value": "24px",
+          "priority": ""
+        },
+        "attempted": {
+          "exists": true,
+          "value": "24px",
+          "priority": ""
+        },
+        "current": {
+          "exists": true,
+          "value": "21px",
+          "priority": ""
+        },
+        "generation": 0
+      }
+    ],
+    "overrides": [],
+    "reconciliation": "active-original",
+    "reconciliationStats": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "mutation": {
+      "analyses": 2,
+      "capabilityChecks": 1,
+      "writes": 0,
+      "rollbacks": 0,
+      "rejections": 1
+    }
+  }
+}

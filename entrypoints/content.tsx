@@ -3,12 +3,14 @@ import { App } from '../src/ui/App';
 import '../src/styles/tokens.css';
 import { createPicker, type Picker } from '../src/picker/controller';
 import { useUI } from '../src/state/ui';
+import { createAuthorLedger } from '../src/engine/mutation';
 
 export default defineContentScript({
   matches: ['http://*/*', 'https://*/*'],
   registration: 'runtime',
   cssInjectionMode: 'ui',
   async main(ctx) {
+    const authorLedger = createAuthorLedger(document);
     let picker: Picker | undefined;
     let mounted = false;
     let unsubscribe: (() => void) | undefined;
@@ -23,7 +25,7 @@ export default defineContentScript({
         const host = (container.getRootNode() as ShadowRoot).host as HTMLElement;
         // Keep the ownership host out of flex/grid/inline layout on arbitrary pages.
         for (const [property, value] of Object.entries({ position: 'fixed', top: '0', left: '0', width: '0', height: '0', 'pointer-events': 'none', 'z-index': '2147483646' })) host.style.setProperty(property, value, 'important');
-        picker = createPicker(document, host, () => useUI.getState().setInspector(true));
+        picker = createPicker(document, host, () => useUI.getState().setInspector(true), authorLedger);
         // UI flags stay in Zustand; target Elements remain owned by the controller.
         useUI.setState({ activePopover: null, surface: null, activeTooltip: null, activeDockTool: null, inspectorOpen: true });
         unsubscribe = useUI.subscribe((next, previous) => {
@@ -44,6 +46,8 @@ export default defineContentScript({
       if (mounted) deactivate(); else { ui.mount(); mounted = true; }
     };
     browser.runtime.onMessage.addListener(listener);
-    ctx.onInvalidated(() => { browser.runtime.onMessage.removeListener(listener); deactivate(); });
+    const pageLost = () => { deactivate(); authorLedger.retire('Document navigation or replacement.'); };
+    window.addEventListener('pagehide', pageLost);
+    ctx.onInvalidated(() => { browser.runtime.onMessage.removeListener(listener); window.removeEventListener('pagehide', pageLost); pageLost(); });
   },
 });

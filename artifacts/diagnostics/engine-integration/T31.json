@@ -1,0 +1,30 @@
+{
+  "case": "T31 loss then Reset prevents a delayed replacement from reviving mixed author session ownership",
+  "actual": {
+    "undo": 0,
+    "error": null,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "active": [],
+    "overrides": [],
+    "reconciliation": "retired",
+    "reconciliationStats": {
+      "starts": 1,
+      "resolutions": 1,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "mutation": {
+      "analyses": 2,
+      "capabilityChecks": 1,
+      "writes": 1,
+      "rollbacks": 1,
+      "rejections": 0
+    }
+  }
+}

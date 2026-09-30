@@ -1,0 +1,31 @@
+{
+  "case": "T28 partial conflict survives repeated toggles repick and detached-target recovery",
+  "actual": {
+    "target": "2",
+    "undo": 0,
+    "error": null,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "active": [],
+    "overrides": [],
+    "reconciliation": "active-original",
+    "reconciliationStats": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "mutation": {
+      "analyses": 0,
+      "capabilityChecks": 0,
+      "writes": 0,
+      "rollbacks": 1,
+      "rejections": 0
+    }
+  }
+}

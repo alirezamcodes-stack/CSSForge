@@ -1,0 +1,131 @@
+{
+  "case": "Q01 whole mixed-state selector scope requires explicit authorization",
+  "outcomes": [
+    "A"
+  ],
+  "defect": false,
+  "expectedPolicy": "Every potential selector-list branch is conservatively authorized.",
+  "actual": {
+    "result": {
+      "target": "1",
+      "undo": 1,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "state": "fallback",
+      "reason": "Shared or unknown rule scope requires explicit authorization.",
+      "scope": {
+        "kind": "unknown",
+        "matchedCount": 6,
+        "bounded": true,
+        "risk": "unknown"
+      },
+      "active": [],
+      "overrides": [
+        {
+          "context": {
+            "media": [],
+            "pseudo": ""
+          },
+          "declarations": [
+            {
+              "property": "font-size",
+              "value": "24px",
+              "enabled": true
+            }
+          ]
+        }
+      ],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 1,
+        "capabilityChecks": 0,
+        "writes": 0,
+        "rollbacks": 0,
+        "rejections": 1
+      }
+    },
+    "authorized": {
+      "target": "1",
+      "undo": 1,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "state": "mutated",
+      "scope": {
+        "kind": "unknown",
+        "matchedCount": 6,
+        "bounded": true,
+        "risk": "unknown"
+      },
+      "sourceId": "sheet-8",
+      "ruleId": "rule-9",
+      "declarationId": "rule-9:declaration:font-size",
+      "active": [
+        {
+          "kind": "applied",
+          "state": "applied",
+          "sourceId": "sheet-8",
+          "ruleId": "rule-9",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "18px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "attempted": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "current": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "generation": 0
+        }
+      ],
+      "overrides": [],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 3,
+        "capabilityChecks": 1,
+        "writes": 1,
+        "rollbacks": 0,
+        "rejections": 1
+      }
+    },
+    "actual": {
+      "potential": 6,
+      "hovered": "24px"
+    }
+  }
+}

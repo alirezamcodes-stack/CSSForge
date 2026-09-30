@@ -1,0 +1,145 @@
+{
+  "phase": "ENGINE 07.4B",
+  "status": "COMPLETE",
+  "verifiedAt": "2026-09-30T18:14:09.411Z",
+  "typecheck": "passed",
+  "unit": {
+    "files": 17,
+    "passed": 251
+  },
+  "build": {
+    "result": "passed",
+    "permissions": [
+      "activeTab",
+      "scripting"
+    ],
+    "hostPermissions": [],
+    "contentSHA256": "01c0fc85d0ccc1bbce7689258b5c7a0ccc5705f91441f0778e23c3bb134c58d5"
+  },
+  "chrome": {
+    "passed": 199,
+    "failed": 0,
+    "retries": 0,
+    "duration": "5.3m"
+  },
+  "fixed": [
+    "Q01",
+    "Q02",
+    "Q03",
+    "Q04"
+  ],
+  "deferred": [
+    "Q05"
+  ],
+  "evidence": [
+    "F01.json",
+    "F02.json",
+    "F03.json",
+    "F04.json",
+    "F05.json",
+    "F06.json",
+    "F07.json",
+    "F08.json",
+    "F09.json",
+    "F10.json",
+    "F11.json",
+    "F12.json",
+    "F13.json",
+    "F14.json",
+    "F15.json",
+    "F16.json",
+    "F17.json",
+    "F18.json",
+    "F19.json",
+    "F20.json",
+    "F21.json",
+    "F22.json",
+    "F23.json",
+    "F24.json",
+    "Q01.json",
+    "Q02.json",
+    "Q03.json",
+    "Q04.json",
+    "Q05.json",
+    "Q06.json",
+    "Q07.json",
+    "Q08.json",
+    "Q09.json",
+    "Q10.json",
+    "Q11.json",
+    "Q12.json",
+    "Q13.json",
+    "Q14.json",
+    "Q15.json",
+    "Q16.json",
+    "Q17.json",
+    "Q18.json",
+    "Q19.json",
+    "Q20.json",
+    "Q21.json",
+    "Q22.json",
+    "Q23.json",
+    "Q24.json",
+    "Q25.json",
+    "Q26.json",
+    "Q27.json",
+    "Q28.json",
+    "Q29.json",
+    "Q30.json",
+    "Q31.json",
+    "Q32.json",
+    "Q33.json",
+    "Q34.json",
+    "Q35.json",
+    "Q36.json",
+    "Q37.json",
+    "Q38.json",
+    "Q39.json",
+    "Q40.json",
+    "Q41.json",
+    "Q42.json",
+    "Q43.json",
+    "Q44.json",
+    "Q45.json",
+    "Q46.json",
+    "Q47.json",
+    "Q48.json"
+  ],
+  "performance": {
+    "mutation": {
+      "analyses": 0,
+      "capabilityChecks": 0,
+      "writes": 0,
+      "rollbacks": 0,
+      "rejections": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    },
+    "reconciliation": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 0
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "locator": {
+      "captures": 0,
+      "requests": 0,
+      "searches": 0,
+      "queries": 0,
+      "candidates": 0
+    }
+  }
+}

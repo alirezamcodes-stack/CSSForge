@@ -1,0 +1,58 @@
+{
+  "case": "F01 normal selector-list union requires authorization for all recipients",
+  "outcomes": [
+    "A"
+  ],
+  "defect": false,
+  "expectedPolicy": "Normal selector lists union all recipients.",
+  "actual": {
+    "target": "1",
+    "undo": 1,
+    "error": null,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "state": "fallback",
+    "reason": "Shared or unknown rule scope requires explicit authorization.",
+    "scope": {
+      "kind": "shared-rule",
+      "matchedCount": 2,
+      "bounded": true,
+      "risk": "shared"
+    },
+    "active": [],
+    "overrides": [
+      {
+        "context": {
+          "media": [],
+          "pseudo": ""
+        },
+        "declarations": [
+          {
+            "property": "font-size",
+            "value": "24px",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "reconciliation": "active-original",
+    "reconciliationStats": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "mutation": {
+      "analyses": 1,
+      "capabilityChecks": 0,
+      "writes": 0,
+      "rollbacks": 0,
+      "rejections": 1
+    }
+  }
+}

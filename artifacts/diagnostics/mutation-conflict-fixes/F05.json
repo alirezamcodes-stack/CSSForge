@@ -1,0 +1,58 @@
+{
+  "case": "F05 unsupported state branch cannot turn uncertain cascade into local authorization",
+  "outcomes": [
+    "B"
+  ],
+  "defect": false,
+  "expectedPolicy": "Shared authorization does not bypass an unresolved cascade.",
+  "actual": {
+    "target": "1",
+    "undo": 1,
+    "error": null,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "state": "fallback",
+    "reason": "Author cascade is incomplete, inherited or uncertain.",
+    "scope": {
+      "kind": "unknown",
+      "matchedCount": 0,
+      "bounded": false,
+      "risk": "unknown"
+    },
+    "active": [],
+    "overrides": [
+      {
+        "context": {
+          "media": [],
+          "pseudo": ""
+        },
+        "declarations": [
+          {
+            "property": "font-size",
+            "value": "24px",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "reconciliation": "active-original",
+    "reconciliationStats": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "mutation": {
+      "analyses": 1,
+      "capabilityChecks": 0,
+      "writes": 0,
+      "rollbacks": 0,
+      "rejections": 1
+    }
+  }
+}

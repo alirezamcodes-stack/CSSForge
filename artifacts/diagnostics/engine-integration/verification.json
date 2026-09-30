@@ -1,0 +1,114 @@
+{
+  "phase": "ENGINE 07.4C",
+  "status": "COMPLETE",
+  "readyToFreeze": true,
+  "scope": "Current conservative engine foundation",
+  "productionFilesChanged": [
+    "src/editing/session.ts",
+    "src/engine/mutation/index.ts"
+  ],
+  "confirmedPreFixFailures": [
+    "T01",
+    "T02",
+    "T04",
+    "T05"
+  ],
+  "resolvedGuardRegression": "T08",
+  "typecheck": "pass",
+  "unit": {
+    "command": "pnpm test",
+    "files": 17,
+    "passed": 251,
+    "failed": 0
+  },
+  "build": {
+    "command": "pnpm build",
+    "state": "pass",
+    "target": "chrome-mv3",
+    "contentSHA256": "9850f20ed7b837e849b2bbcdf707ad1286a98cde960e80d1ac72cf62af962c99",
+    "permissions": [
+      "activeTab",
+      "scripting"
+    ],
+    "hostPermissions": []
+  },
+  "chrome": {
+    "channel": "chrome",
+    "installedVersion": "154.0.8037.92",
+    "builtExtension": true,
+    "command": "pnpm test:e2e tests/e2e/engine-integration.spec.ts tests/e2e/mutation-conflicts.spec.ts tests/e2e/mutation-audit.spec.ts tests/e2e/author-mutation.spec.ts tests/e2e/reconciliation.spec.ts tests/e2e/source-index.spec.ts tests/e2e/cascade.spec.ts tests/e2e/selectors.spec.ts tests/e2e/target-locator.spec.ts tests/e2e/targeting-hardening.spec.ts tests/e2e/editing.spec.ts tests/e2e/code-html.spec.ts tests/e2e/extension.spec.ts tests/e2e/picker-performance.spec.ts",
+    "passed": 237,
+    "failed": 0,
+    "retries": 0,
+    "reportedDuration": "6.5m",
+    "existingFocusedCases": 199,
+    "newTortureCases": 38,
+    "actual200PercentTabZoom": "pass"
+  },
+  "lockedArtifacts": {
+    "snapshotted": 365,
+    "restored": 365,
+    "byteVerified": 365
+  },
+  "performance": {
+    "pointerEvents": 1000,
+    "mutationAnalyses": 0,
+    "reconciliationWork": 0,
+    "selectorGenerations": 0,
+    "sourceScans": 0,
+    "cascadeResolutions": 0,
+    "locatorWork": 0,
+    "initialCase": "Q42 (full run)",
+    "afterRecoveryCase": "T32",
+    "permanentPollingAdded": false,
+    "ownershipObserversAdded": false,
+    "permanentFrameLoopAdded": false
+  },
+  "remainingLimits": [
+    "Q05 dependent-impact traversal deferred; direct scope only",
+    "Exact native identity required; unavailable-source records retained/retired",
+    "256 unresolved author records; bounded scope scans",
+    "Nested synchronous edits excluded, not replayed"
+  ],
+  "cases": [
+    "T01.json",
+    "T02.json",
+    "T03.json",
+    "T04.json",
+    "T05.json",
+    "T06.json",
+    "T07.json",
+    "T08.json",
+    "T09.json",
+    "T10.json",
+    "T11.json",
+    "T12.json",
+    "T13.json",
+    "T14.json",
+    "T15.json",
+    "T16.json",
+    "T17.json",
+    "T18.json",
+    "T19.json",
+    "T20.json",
+    "T21.json",
+    "T22.json",
+    "T23.json",
+    "T24.json",
+    "T25.json",
+    "T26.json",
+    "T27.json",
+    "T28.json",
+    "T29.json",
+    "T30.json",
+    "T31.json",
+    "T32.json",
+    "T33.json",
+    "T34.json",
+    "T35.json",
+    "T36.json",
+    "T37.json",
+    "T38.json"
+  ],
+  "typecheckCommand": "pnpm typecheck"
+}

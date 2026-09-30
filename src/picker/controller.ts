@@ -14,6 +14,7 @@ import { collectCandidates, type TargetCandidate } from './candidates';
 import { createTargetLocator, type TargetLocator, type LocatorResolution, type ResolveRequest } from '../engine/locator';
 import { createSelectorEngine, type SelectorRequest } from '../engine/selectors';
 import { createReconciliation, reconciliationLimits } from '../engine/reconciliation';
+import type { AuthorLedger } from '../engine/mutation';
 
 export type Selection = {
   identity: string; tag: string; id: string; classes: string[];
@@ -24,7 +25,7 @@ export type Selection = {
 export type PickerState = { active: boolean; selection: Selection | null };
 
 /** DOM references and transient pointer state live here, never in UI/persisted state. */
-export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: () => void) {
+export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: () => void, authorLedger?: AuthorLedger) {
   const win = doc.defaultView!;
   const overlay = createOverlay(doc);
   const owned = new Set<Element>([uiHost, overlay.host]);
@@ -62,7 +63,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
       if (state.selection) publish({ ...state, selection: { ...state.selection, rect: rectOf(selected.getBoundingClientRect()), fontFamily: computed.fontFamily, fontSize: computed.fontSize } });
     } else clearLostTarget();
     frame.schedule();
-  }, sources, lifecycle);
+  }, sources, lifecycle, authorLedger);
   const cascade = createCascade(doc, sources, element => editor.sourceGroups(element), undefined, element => editor.sourcePosition(element));
   const reconciliation = createReconciliation<MigrationTicket>(doc, lifecycle, {
     owns,
@@ -217,7 +218,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     invalidateSelector() { if (selectedIdentity) selectors.invalidate(selectedIdentity); },
     resolveTarget(request: ResolveRequest = {}) { clearLostTarget(); return locator ? (locatorResult = locators.resolve(locator, request)) : null; },
     candidates: () => candidates.filter(item => lifecycle.admissible(item.element)),
-    source(force = false) { clearLostTarget(); if (!valid(selected)) return null; if (!source || force) { if (force) { sources.invalidate(selected); cascade.invalidate(selected); } source = presentSource(sources.read(selected), editor.authorMutation.declarationState); editor.inspect(selected, undefined, true); } return source; },
+    source(force = false) { clearLostTarget(); if (!valid(selected)) return null; if (!source || force) { if (force) { sources.invalidate(selected); cascade.invalidate(selected); } source = presentSource(sources.read(selected), (id, declaration) => editor.authorMutation.declarationState(id, declaration, selected!)); editor.inspect(selected, undefined, true); } return source; },
     cascade() { clearLostTarget(); return valid(selected) ? cascade.read(selected, editor.getSnapshot().context) : null; },
     cascadeStats: cascade.getStats,
     sourceOverrides(groups: SessionGroup[]) { return valid(selected) ? sources.overrides(selected, groups).rules : []; },

@@ -1,0 +1,71 @@
+{
+  "case": "T37 owner-replace during reset verifies exact native identity",
+  "actual": {
+    "source": {
+      "winner": "31px",
+      "attribution": "authored"
+    },
+    "before": {
+      "font": "31px",
+      "color": "rgb(0, 128, 0)"
+    },
+    "status": {
+      "target": "3",
+      "undo": 1,
+      "error": "Author source changed or blocked reset. Pending author rollback retained; page changes were preserved.",
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [
+        {
+          "kind": "applied",
+          "state": "retired",
+          "reason": "Exact native source identity is unavailable.",
+          "sourceId": "sheet-8",
+          "ruleId": "rule-9",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "18px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "attempted": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "current": {
+            "exists": true,
+            "value": "18px",
+            "priority": ""
+          },
+          "generation": 0
+        }
+      ],
+      "overrides": [],
+      "reconciliation": "retired",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 2,
+        "capabilityChecks": 1,
+        "writes": 1,
+        "rollbacks": 0,
+        "rejections": 0
+      }
+    }
+  }
+}

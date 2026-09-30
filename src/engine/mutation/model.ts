@@ -15,6 +15,16 @@ export type MutationTarget = Readonly<{
   cssText: string; selector: string | null; generation: number;
 }>;
 export type MutationRequest = { element: Element; property: string; value: string; context: EditContext; allowShared?: boolean; priority?: '' | 'important'; sourceId?: string; ruleId?: string; declarationId?: string; inline?: boolean };
-export type AuthorChange = { target: MutationTarget; before: DeclarationSnapshot; after: DeclarationSnapshot; beforeCSS: string; afterCSS: string; generation: number; strategy: MutationTarget['strategy'] };
-export type MutationResult = { state: 'mutated'; change: AuthorChange; target: MutationTarget } | { state: 'unchanged'; target: MutationTarget } | { state: 'fallback' | 'rejected'; reason: string; safeFallback: boolean; target?: MutationTarget; scope?: MutationScope };
-export const mutationLimits = { scopeElements: 512 } as const;
+export type AuthorRecordState = 'applied' | 'partial-write' | 'blocked' | 'resolved' | 'retired';
+type AuthorRecord = {
+  readonly target: MutationTarget; readonly before: DeclarationSnapshot; readonly after: DeclarationSnapshot;
+  readonly attempted: DeclarationSnapshot; current: DeclarationSnapshot;
+  readonly beforeCSS: string; readonly afterCSS: string; readonly generation: number;
+  readonly session: object; readonly strategy: MutationTarget['strategy']; state: AuthorRecordState; reason?: string;
+  owner?: { session: object; targetId: string };
+};
+export type AppliedAuthorChange = AuthorRecord & { readonly kind: 'applied' };
+export type PartialAuthorChange = AuthorRecord & { readonly kind: 'partial' };
+export type AuthorChange = AppliedAuthorChange | PartialAuthorChange;
+export type MutationResult = { state: 'mutated'; change: AppliedAuthorChange; target: MutationTarget } | { state: 'unchanged'; target: MutationTarget } | { state: 'fallback' | 'rejected'; reason: string; safeFallback: boolean; target?: MutationTarget; scope?: MutationScope; change?: PartialAuthorChange };
+export const mutationLimits = { scopeElements: 512, scopeBranches: 80, scopeSelectorLength: 8000, authorRecords: 256 } as const;

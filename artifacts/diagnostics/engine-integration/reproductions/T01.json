@@ -1,0 +1,106 @@
+{
+  "case": "T01 author apply excludes synchronous nested apply",
+  "actual": {
+    "ok": false,
+    "status": {
+      "target": "1",
+      "undo": 2,
+      "error": "CSSOM mutation could not be verified. Pending author recovery retained.",
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "state": "rejected",
+      "reason": "CSSOM mutation could not be verified. Pending author recovery retained.",
+      "scope": {
+        "kind": "target-specific",
+        "matchedCount": 1,
+        "bounded": true,
+        "risk": "local"
+      },
+      "sourceId": "element-2:inline",
+      "ruleId": "element-2:inline:rule",
+      "declarationId": "element-2:inline:rule:declaration:font-size",
+      "active": [
+        {
+          "kind": "applied",
+          "state": "applied",
+          "sourceId": "element-2:inline",
+          "ruleId": "element-2:inline:rule",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "30px",
+            "priority": ""
+          },
+          "attempted": {
+            "exists": true,
+            "value": "30px",
+            "priority": ""
+          },
+          "current": {
+            "exists": true,
+            "value": "30px",
+            "priority": ""
+          },
+          "generation": 0
+        },
+        {
+          "kind": "partial",
+          "state": "blocked",
+          "reason": "CSSOM mutation could not be verified.",
+          "sourceId": "element-2:inline",
+          "ruleId": "element-2:inline:rule",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "18px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "attempted": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "current": {
+            "exists": true,
+            "value": "30px",
+            "priority": ""
+          },
+          "generation": 0
+        }
+      ],
+      "overrides": [],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 4,
+        "capabilityChecks": 2,
+        "writes": 1,
+        "rollbacks": 0,
+        "rejections": 1
+      }
+    },
+    "nested": [
+      true
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "case": "T24 delete-only during apply verifies exact native identity",
+  "actual": {
+    "source": {},
+    "before": {
+      "font": "13.3333px",
+      "color": "rgb(0, 0, 0)"
+    },
+    "status": {
+      "target": "2",
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [
+        {
+          "kind": "partial",
+          "state": "retired",
+          "reason": "Exact native source identity is unavailable.",
+          "sourceId": "sheet-8",
+          "ruleId": "rule-9",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "18px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "attempted": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "current": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "generation": 0
+        }
+      ],
+      "overrides": [],
+      "reconciliation": "retired",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 2,
+        "capabilityChecks": 1,
+        "writes": 0,
+        "rollbacks": 0,
+        "rejections": 1
+      }
+    }
+  }
+}

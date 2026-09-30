@@ -1,0 +1,60 @@
+{
+  "case": "T12 deferred teardown drains native author ownership after the current callback unwinds",
+  "actual": {
+    "destroyed": {
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [],
+      "overrides": [],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 2,
+        "capabilityChecks": 1,
+        "writes": 1,
+        "rollbacks": 1,
+        "rejections": 0
+      }
+    },
+    "reactivated": {
+      "target": "1",
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [],
+      "overrides": [],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 0,
+        "capabilityChecks": 0,
+        "writes": 0,
+        "rollbacks": 0,
+        "rejections": 0
+      }
+    }
+  }
+}

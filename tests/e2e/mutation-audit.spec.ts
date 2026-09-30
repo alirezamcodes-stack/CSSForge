@@ -1,82 +1,57 @@
-import { test, expect, type TestInfo } from '@playwright/test';
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
-import { setup, pick, dock, inspector } from './extensionHarness';
+import { test, expect } from '@playwright/test';
+import { pick, dock, inspector } from './extensionHarness';
+import { html, launch, evidence, nativeCallback } from './mutationHarness';
 
-const template = await readFile('tests/e2e/fixtures/mutation-audit.html', 'utf8');
-const html = (css = '#target{font-size:18px;color:purple}', scene = '<button id="target">Target</button>', extra = '') => template.replace('/* audit css */', css).replace('<!-- scene -->', scene).replace('<!-- extra -->', extra);
-async function launch(info: TestInfo, fixture = html()) {
-  const runtime = await setup(info, fixture), cdp = await runtime.context.newCDPSession(runtime.page);
-  const worlds: { id: number; origin: string }[] = [];
-  cdp.on('Runtime.executionContextCreated', ({ context }) => worlds.push(context)); await cdp.send('Runtime.enable');
-  let world = worlds.find(item => item.origin.startsWith('chrome-extension://'))!;
-  const read = async <T = any>(expression: string): Promise<T> => {
-    const result = await cdp.send('Runtime.evaluate', { contextId: world.id, expression, returnByValue: true, awaitPromise: true });
-    if (result.exceptionDetails) throw Error(JSON.stringify(result.exceptionDetails)); return result.result.value;
-  };
-  const bind = async () => {
-    world = worlds.filter(item => item.origin.startsWith('chrome-extension://')).at(-1)!;
-    await read(`globalThis.__p=(()=>{const n=document.querySelector('cssforge-ui').shadowRoot.querySelector('[data-cssforge]');let f=n[Object.getOwnPropertyNames(n).find(k=>k.startsWith('__reactFiber$'))];for(let d=0;f&&d<32;d++,f=f.return){if(f.memoizedProps?.picker)return f.memoizedProps.picker;if(f.memoizedProps?.value?.picker)return f.memoizedProps.value.picker;}throw Error('Built picker missing');})();true`);
-  };
-  await bind();
-  const status = () => read(`(()=>{const e=__p.editor,s=e.getSnapshot(),r=s.lastMutation,t=r?.target;return {target:s.design?.targetId,undo:s.undoCount,error:s.error,context:s.context,state:r?.state,reason:r?.reason,scope:r?.scope??t?.scope,sourceId:t?.sourceId,ruleId:t?.ruleId,declarationId:t?.declarationId,active:e.authorMutation.active().map(c=>({sourceId:c.target.sourceId,ruleId:c.target.ruleId,property:c.target.property,before:c.before,after:c.after})),overrides:s.overrides,reconciliation:__p.reconciliation().state,reconciliationStats:__p.reconciliationStats(),mutation:e.authorMutation.getStats()};})()`);
-  const author = (property: string, value: string, options = {}) => read(`__p.editor.applyAuthor(__p.editor.getSnapshot().design.targetId,${JSON.stringify(property)},${JSON.stringify(value)},${JSON.stringify(options)})`);
-  const css = () => runtime.page.locator('#author').evaluate(node => [...(node as HTMLStyleElement).sheet!.cssRules].map(rule => rule.cssText));
-  const prepare = (property = 'font-size', options = {}) => read(`globalThis.__plan=__p.editor.authorMutation.prepare({element:__p.targetLocator().identity.element,property:${JSON.stringify(property)},value:'24px',context:__p.editor.getSnapshot().context,...${JSON.stringify(options)}});!('state' in __plan)`);
-  const applyPlan = () => read(`(()=>{const r=__p.editor.authorMutation.apply(__plan,'24px');globalThis.__planResult=r;return {state:r.state,reason:r.reason,sourceId:r.target?.sourceId,ruleId:r.target?.ruleId};})()`);
-  return { ...runtime, read, bind, status, author, css, prepare, applyPlan };
-}
-type Outcome = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H';
-async function evidence(info: TestInfo, outcomes: Outcome[], actual: unknown, expectedPolicy: string, defect = false) {
-  const directory = 'artifacts/diagnostics/mutation-audit'; await mkdir(directory, { recursive: true });
-  const file = `${directory}/${info.title.split(' ')[0]}.json`;
-  await writeFile(file, JSON.stringify({ case: info.title, outcomes, defect, expectedPolicy, actual }, null, 2)); await info.attach('conflict-audit', { path: file, contentType: 'application/json' });
-}
-
-// Characterization assertions deliberately preserve current defects. This audit does not implement 07.4B policy.
-test('Q01 mixed-state selector branches are undercounted as target-specific', async ({}, info) => {
+// Q01–Q04 are corrected 07.4B regressions; Q05 remains deferred.
+test('Q01 whole mixed-state selector scope requires explicit authorization', async ({}, info) => {
   const r = await launch(info, html('#target, .other:hover{font-size:18px;color:purple}', '<button id="target">Target</button>'+Array.from({length:5},(_,i)=>`<button id="other-${i}" class="other">Other ${i}</button>`).join('')));
   try {
     await pick(r.page,'#target'); await r.author('font-size','24px'); const result = await r.status();
-    expect(result.state).toBe('mutated'); expect(result.scope).toMatchObject({kind:'target-specific',matchedCount:1,risk:'local'});
+    expect(result.state).toBe('fallback'); expect(result.scope).toMatchObject({kind:'unknown',matchedCount:6,risk:'unknown'});
+    await r.page.locator('#other-0').hover(); await expect(r.page.locator('#other-0')).toHaveCSS('font-size','18px');
+    await r.read('__p.editor.undo();true'); await r.author('font-size','24px',{allowShared:true}); const authorized=await r.status(); expect(authorized.state).toBe('mutated'); expect(authorized.scope).toMatchObject({kind:'unknown',matchedCount:6});
     await r.page.locator('#other-0').hover(); await expect(r.page.locator('#other-0')).toHaveCSS('font-size','24px');
     const actual = await r.page.evaluate(() => ({ potential: document.querySelectorAll('#target, .other').length, hovered: getComputedStyle(document.querySelector('#other-0')!).fontSize }));
     await r.read('__p.editor.undo();true'); await expect(r.page.locator('#other-0')).toHaveCSS('font-size','18px');
-    await evidence(info,['F'],{result,actual},'All potentially affected authored selector branches require shared/unknown scope and explicit authorization.',true); expect(r.errors).toEqual([]);
+    await evidence(info,['A'],{result,authorized,actual},'Every potential selector-list branch is conservatively authorized.'); expect(r.errors).toEqual([]);
   } finally {await r.context.close();}
 });
 
-const nativeCallback = (replace = false, sideEffect = true) => `<script>customElements.define('audit-button',class extends HTMLButtonElement{static get observedAttributes(){return ['style']}attributeChangedCallback(){if(this.style.fontSize!=='24px'||this.once)return;this.once=true;${sideEffect ? "this.style.color='green';" : ''}${replace ? "window.retired=this;this.outerHTML='<button id=target style=font-size:21px>Replacement</button>';" : ''}}},{extends:'button'});</script>`;
-test('Q02 native author callback leaves an untracked partial write after rejection', async ({}, info) => {
+
+test('Q02 native partial write retains recovery and Undo preserves the page callback', async ({}, info) => {
   const r = await launch(info, html('', '<button is="audit-button" id="target" style="font-size:18px;color:purple">Target</button>', nativeCallback()));
   try {
     await pick(r.page,'#target'); expect(await r.author('font-size','24px')).toBe(false); const rejected = await r.status();
-    expect(rejected.state).toBe('rejected'); expect(rejected.undo).toBe(0); expect(rejected.active).toEqual([]);
+    expect(rejected.state).toBe('rejected'); expect(rejected.undo).toBe(1); expect(rejected.active).toHaveLength(1); expect(rejected.active[0]).toMatchObject({kind:'partial',state:'partial-write',before:{value:'18px'},attempted:{value:'24px'},current:{value:'24px'}});
     const changed = await r.page.locator('#target').evaluate(node => (node as HTMLElement).style.cssText); expect(changed).toContain('24px'); expect(changed).toContain('green');
-    await r.read('__p.editor.undo();__p.editor.reset();true'); await expect(r.page.locator('#target')).toHaveCSS('font-size','24px');
-    await evidence(info,['D','H'],{rejected,changed,afterReset:await r.status()},'A rejected partial author write must retain a recoverable ownership/conflict record without overwriting the page callback.',true); expect(r.errors).toEqual([]);
+    await r.read('__p.editor.undo();true'); await expect(r.page.locator('#target')).toHaveCSS('font-size','18px'); await expect(r.page.locator('#target')).toHaveCSS('color','rgb(0, 128, 0)'); expect((await r.status()).undo).toBe(0); expect((await r.status()).active).toEqual([]);
+    await r.read('__p.editor.reset();true'); await expect(r.page.locator('#target')).toHaveCSS('color','rgb(0, 128, 0)');
+    await evidence(info,['A'],{rejected,changed,afterReset:await r.status()},'Rejected partial native writes remain recoverable without overwriting unrelated page changes.'); expect(r.errors).toEqual([]);
   } finally {await r.context.close();}
 });
 
-test('Q03 deactivation destroys blocked author rollback history', async ({}, info) => {
+test('Q03 deactivation retains blocked author history until exact safe retry', async ({}, info) => {
   const r = await launch(info);
   try {
     await pick(r.page,'#target'); await r.author('font-size','24px'); await r.page.locator('#author').evaluate(node => ((node as HTMLStyleElement).sheet!.cssRules[0] as CSSStyleRule).style.color='green');
     await r.read('__p.editor.undo();true'); const conflict = await r.status(); expect(conflict.undo).toBe(1);
     await r.action(); await expect(r.page.locator('cssforge-ui')).toHaveCount(0); expect((await r.css())[0]).toContain('24px'); expect((await r.css())[0]).toContain('green');
-    await r.action(); await expect(inspector(r.page)).toBeVisible(); await r.bind(); await pick(r.page,'#target'); const restarted = await r.status(); expect(restarted.undo).toBe(0); expect(restarted.active).toEqual([]);
+    await r.action(); await expect(inspector(r.page)).toBeVisible(); await r.bind(); await pick(r.page,'#target'); const restarted = await r.status(); expect(restarted.undo).toBe(1); expect(restarted.active).toHaveLength(1); expect(restarted.active[0].state).toBe('blocked');
     await r.read('__p.editor.reset();true'); expect((await r.css())[0]).toContain('24px');
-    await evidence(info,['B','D','H'],{conflict,restarted,liveCSS:await r.css()},'Blocked reversible author history must remain explicitly recoverable or be deliberately discarded across deactivation.',true); expect(r.errors).toEqual([]);
+    expect((await r.status()).undo).toBe(1); await r.page.locator('#author').evaluate(node=>((node as HTMLStyleElement).sheet!.cssRules[0] as CSSStyleRule).style.color='purple'); await r.read('__p.editor.undo();true'); await expect(r.page.locator('#target')).toHaveCSS('font-size','18px'); expect((await r.status()).undo).toBe(0);
+    await evidence(info,['A','B'],{conflict,restarted,liveCSS:await r.css()},'Blocked author history survives UI teardown and retries only against the exact safe native state.'); expect(r.errors).toEqual([]);
   } finally {await r.context.close();}
 });
 
-test('Q04 refreshed authored value keeps stale CSSForge mutation attribution', async ({}, info) => {
+test('Q04 current attribution changes independently of retained historical ownership', async ({}, info) => {
   const r=await launch(info);
   try {
     await pick(r.page,'#target'); await r.author('font-size','24px'); await r.page.locator('#author').evaluate(node=>((node as HTMLStyleElement).sheet!.cssRules[0] as CSSStyleRule).style.fontSize='21px');
     const refreshed=await r.read(`(()=>{const s=__p.source(true),c=__p.cascade();return {declaration:s.rules.flatMap(r=>r.declarations).find(d=>d.property==='font-size'),winner:c.properties['font-size'].winner.declaration.value};})()`);
-    expect(refreshed.declaration.value).toBe('21px'); expect(refreshed.winner).toBe('21px'); expect(refreshed.declaration.mutationState).toBe('cssforge-mutated-author');
+    expect(refreshed.declaration.value).toBe('21px'); expect(refreshed.winner).toBe('21px'); expect(refreshed.declaration.mutationState).toBe('authored');
     await r.read('__p.editor.undo();true'); expect((await r.status()).undo).toBe(1);
-    await evidence(info,['B','G'],refreshed,'Current external declaration value must be distinguished from the retained historical CSSForge transaction.',true); expect(r.errors).toEqual([]);
+    await r.page.locator('#author').evaluate(node=>((node as HTMLStyleElement).sheet!.cssRules[0] as CSSStyleRule).style.fontSize='24px'); expect(await r.read(`__p.source(true).rules.flatMap(r=>r.declarations).find(d=>d.property==='font-size').mutationState`)).toBe('cssforge-mutated-author'); expect((await r.status()).undo).toBe(1); await r.read('__p.editor.undo();true');
+    await evidence(info,['A','B'],refreshed,'Current live attribution is separate from retained historical ownership.'); expect(r.errors).toEqual([]);
   } finally {await r.context.close();}
 });
 
@@ -176,7 +151,7 @@ for(const [id,css,context,supported]of[
   ['Q37','@layer {#target{font-size:18px}}',{media:[],pseudo:''},false],
 ] as const)test(`${id} supported or intentionally unresolved grouping context stays in place`,async({},info)=>{
   const r=await launch(info,html(css));
-  try {await pick(r.page,'#target');const before=await r.css();await r.read(`__p.editor.setContext(${JSON.stringify(context)});true`);await r.author('font-size','24px');const result=await r.status();expect(result.state).toBe(supported?'mutated':'fallback');if(!supported)expect(await r.css()).toEqual(before);await r.read('__p.editor.reset();true');expect(await r.css()).toEqual(before);await evidence(info,['A',...(!supported?['B' as const]:[])],result,'Preserve supported pseudo/layer/support context; keep container and unresolved layer contexts in fallback.');expect(r.errors).toEqual([]);}finally{await r.context.close();}
+  try {await pick(r.page,'#target');const before=await r.css();await r.read(`__p.editor.setContext(${JSON.stringify(context)});true`);await r.author('font-size','24px',{allowShared:!!context.pseudo});const result=await r.status();expect(result.state).toBe(supported?'mutated':'fallback');if(!supported)expect(await r.css()).toEqual(before);await r.read('__p.editor.reset();true');expect(await r.css()).toEqual(before);await evidence(info,['A',...(!supported?['B' as const]:[])],result,'Explicitly authorized pseudo scope and supported grouping remain in place; container/unresolved layer contexts stay in fallback.');expect(r.errors).toEqual([]);}finally{await r.context.close();}
 });
 
 test('Q38 reconciliation refreshes a different replacement winner before further mutation and Undo',async({},info)=>{

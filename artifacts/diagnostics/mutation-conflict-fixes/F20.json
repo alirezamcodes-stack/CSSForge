@@ -1,0 +1,15 @@
+{
+  "case": "F20 author recovery capacity is reserved before writes and never evicts unresolved ownership",
+  "outcomes": [
+    "A"
+  ],
+  "defect": false,
+  "expectedPolicy": "Recovery capacity is bounded before touching native state, without silent eviction.",
+  "actual": {
+    "filled": {
+      "active": 256,
+      "undo": 256
+    },
+    "reason": "Author recovery history limit reached."
+  }
+}

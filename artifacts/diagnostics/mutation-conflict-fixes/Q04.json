@@ -1,0 +1,25 @@
+{
+  "case": "Q04 current attribution changes independently of retained historical ownership",
+  "outcomes": [
+    "A",
+    "B"
+  ],
+  "defect": false,
+  "expectedPolicy": "Current live attribution is separate from retained historical ownership.",
+  "actual": {
+    "declaration": {
+      "id": "rule-9:declaration:font-size",
+      "sourceId": "sheet-8",
+      "ruleId": "rule-9",
+      "contexts": [],
+      "property": "font-size",
+      "value": "21px",
+      "priority": "",
+      "important": false,
+      "order": 0,
+      "enabled": true,
+      "mutationState": "authored"
+    },
+    "winner": "21px"
+  }
+}

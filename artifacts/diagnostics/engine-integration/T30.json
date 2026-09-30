@@ -1,0 +1,156 @@
+{
+  "case": "T30 native state pseudo and media switches preserve independent source history",
+  "actual": {
+    "target": "1",
+    "undo": 4,
+    "error": null,
+    "context": {
+      "media": [
+        "(min-width: 800px)"
+      ],
+      "pseudo": ""
+    },
+    "state": "mutated",
+    "scope": {
+      "kind": "target-specific",
+      "matchedCount": 1,
+      "bounded": true,
+      "risk": "local"
+    },
+    "sourceId": "sheet-8",
+    "ruleId": "rule-14",
+    "declarationId": "rule-14:declaration:letter-spacing",
+    "active": [
+      {
+        "kind": "applied",
+        "state": "applied",
+        "sourceId": "sheet-8",
+        "ruleId": "rule-10",
+        "property": "font-size",
+        "before": {
+          "exists": true,
+          "value": "20px",
+          "priority": ""
+        },
+        "after": {
+          "exists": true,
+          "value": "24px",
+          "priority": ""
+        },
+        "attempted": {
+          "exists": true,
+          "value": "24px",
+          "priority": ""
+        },
+        "current": {
+          "exists": true,
+          "value": "24px",
+          "priority": ""
+        },
+        "generation": 0
+      },
+      {
+        "kind": "applied",
+        "state": "applied",
+        "sourceId": "sheet-8",
+        "ruleId": "rule-11",
+        "property": "color",
+        "before": {
+          "exists": true,
+          "value": "green",
+          "priority": ""
+        },
+        "after": {
+          "exists": true,
+          "value": "blue",
+          "priority": ""
+        },
+        "attempted": {
+          "exists": true,
+          "value": "blue",
+          "priority": ""
+        },
+        "current": {
+          "exists": true,
+          "value": "blue",
+          "priority": ""
+        },
+        "generation": 0
+      },
+      {
+        "kind": "applied",
+        "state": "applied",
+        "sourceId": "sheet-8",
+        "ruleId": "rule-12",
+        "property": "font-size",
+        "before": {
+          "exists": true,
+          "value": "12px",
+          "priority": ""
+        },
+        "after": {
+          "exists": true,
+          "value": "16px",
+          "priority": ""
+        },
+        "attempted": {
+          "exists": true,
+          "value": "16px",
+          "priority": ""
+        },
+        "current": {
+          "exists": true,
+          "value": "16px",
+          "priority": ""
+        },
+        "generation": 0
+      },
+      {
+        "kind": "applied",
+        "state": "applied",
+        "sourceId": "sheet-8",
+        "ruleId": "rule-14",
+        "property": "letter-spacing",
+        "before": {
+          "exists": true,
+          "value": "1px",
+          "priority": ""
+        },
+        "after": {
+          "exists": true,
+          "value": "2px",
+          "priority": ""
+        },
+        "attempted": {
+          "exists": true,
+          "value": "2px",
+          "priority": ""
+        },
+        "current": {
+          "exists": true,
+          "value": "2px",
+          "priority": ""
+        },
+        "generation": 0
+      }
+    ],
+    "overrides": [],
+    "reconciliation": "active-original",
+    "reconciliationStats": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "mutation": {
+      "analyses": 8,
+      "capabilityChecks": 4,
+      "writes": 4,
+      "rollbacks": 0,
+      "rejections": 0
+    }
+  }
+}

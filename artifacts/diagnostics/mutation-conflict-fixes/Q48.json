@@ -1,0 +1,109 @@
+{
+  "case": "Q48 applied native rule survives insertRule reordering and rolls back the exact object",
+  "outcomes": [
+    "A"
+  ],
+  "defect": false,
+  "expectedPolicy": "Undo follows the unchanged native object after index shifts and preserves the inserted rule.",
+  "actual": {
+    "applied": {
+      "target": "1",
+      "undo": 1,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "state": "mutated",
+      "scope": {
+        "kind": "target-specific",
+        "matchedCount": 1,
+        "bounded": true,
+        "risk": "local"
+      },
+      "sourceId": "sheet-8",
+      "ruleId": "rule-9",
+      "declarationId": "rule-9:declaration:font-size",
+      "active": [
+        {
+          "kind": "applied",
+          "state": "applied",
+          "sourceId": "sheet-8",
+          "ruleId": "rule-9",
+          "property": "font-size",
+          "before": {
+            "exists": true,
+            "value": "18px",
+            "priority": ""
+          },
+          "after": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "attempted": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "current": {
+            "exists": true,
+            "value": "24px",
+            "priority": ""
+          },
+          "generation": 0
+        }
+      ],
+      "overrides": [],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 2,
+        "capabilityChecks": 1,
+        "writes": 1,
+        "rollbacks": 0,
+        "rejections": 0
+      }
+    },
+    "restored": {
+      "target": "1",
+      "undo": 0,
+      "error": null,
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "active": [],
+      "overrides": [],
+      "reconciliation": "active-original",
+      "reconciliationStats": {
+        "starts": 0,
+        "resolutions": 0,
+        "retries": 0,
+        "migrations": 0,
+        "deliveries": 0,
+        "records": 0,
+        "candidateNodes": 0
+      },
+      "mutation": {
+        "analyses": 2,
+        "capabilityChecks": 1,
+        "writes": 1,
+        "rollbacks": 1,
+        "rejections": 0
+      }
+    },
+    "nativeCSS": [
+      ".unrelated { font-size: 55px; }",
+      "#target { font-size: 18px; color: purple; }"
+    ]
+  }
+}
