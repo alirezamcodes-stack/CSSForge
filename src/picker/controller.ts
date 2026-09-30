@@ -54,6 +54,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   const valid = lifecycle.valid;
   const sources = createSourceIndex(doc, owns, lifecycle);
   const editor = createEditSession(doc, owns, () => {
+    source = null;
     cascade.invalidate();
     if (selected && selectedIdentity && lifecycle.safe(selectedIdentity)) {
       const computed = win.getComputedStyle(selected);
@@ -216,7 +217,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     invalidateSelector() { if (selectedIdentity) selectors.invalidate(selectedIdentity); },
     resolveTarget(request: ResolveRequest = {}) { clearLostTarget(); return locator ? (locatorResult = locators.resolve(locator, request)) : null; },
     candidates: () => candidates.filter(item => lifecycle.admissible(item.element)),
-    source(force = false) { clearLostTarget(); if (!valid(selected)) return null; if (!source || force) { if (force) { sources.invalidate(selected); cascade.invalidate(selected); } source = presentSource(sources.read(selected)); editor.inspect(selected, undefined, true); } return source; },
+    source(force = false) { clearLostTarget(); if (!valid(selected)) return null; if (!source || force) { if (force) { sources.invalidate(selected); cascade.invalidate(selected); } source = presentSource(sources.read(selected), editor.authorMutation.declarationState); editor.inspect(selected, undefined, true); } return source; },
     cascade() { clearLostTarget(); return valid(selected) ? cascade.read(selected, editor.getSnapshot().context) : null; },
     cascadeStats: cascade.getStats,
     sourceOverrides(groups: SessionGroup[]) { return valid(selected) ? sources.overrides(selected, groups).rules : []; },

@@ -33,27 +33,30 @@ function ValueEditor({ value, label, commit }: { value: string; label: string; c
 }
 
 function DeclarationRow({ declaration, context, editable, owned = false, enabled = true }: { declaration: Declaration & { id?: string }; context: EditContext; editable: boolean; owned?: boolean; enabled?: boolean }) {
-  const { editor, design } = useEditing();
+  const { editor, design, mutationPolicy } = useEditing();
   const status = declarationStatus(useContext(CascadeContext), declaration.id);
   const [editing, setEditing] = useState(false), [error, setError] = useState('');
-  const supported = properties.includes(declaration.property as Property) && editable;
+  const supported = (properties.includes(declaration.property as Property) || (!owned && mutationPolicy.mode === 'SAFE_AUTHOR_MUTATION' && declaration.property.startsWith('--'))) && (editable || (!owned && mutationPolicy.mode === 'SAFE_AUTHOR_MUTATION'));
+  const authorMode = !owned && mutationPolicy.mode === 'SAFE_AUTHOR_MUTATION';
   const rgb = declaration.value.match(/^rgb\(\s*(\d+)\s*[, ]\s*(\d+)\s*[, ]\s*(\d+)\s*\)$/);
   const swatch = /^#[0-9a-f]{6}$/i.test(declaration.value) ? declaration.value : /^#[0-9a-f]{3}$/i.test(declaration.value) ? '#' + declaration.value.slice(1).split('').map(char => char + char).join('') : rgb ? '#' + rgb.slice(1).map(channel => Math.min(255, Number(channel)).toString(16).padStart(2, '0')).join('') : null;
   const commit = (value: string) => {
     editor!.setContext(context);
-    const success = editor!.applyBatch(design!.targetId, { [declaration.property]: value }, undefined, contextKey(context));
+    const success = !owned && mutationPolicy.mode === 'SAFE_AUTHOR_MUTATION'
+      ? editor!.applyAuthor(design!.targetId, declaration.property, value, { sourceId: declaration.sourceId, ruleId: declaration.ruleId, declarationId: declaration.id, allowShared: mutationPolicy.allowShared }, contextKey(context))
+      : editor!.applyBatch(design!.targetId, { [declaration.property]: value }, undefined, contextKey(context));
     setError(success ? '' : editor!.getSnapshot().error ?? 'This value cannot be applied.');
     if (success) setEditing(false);
   };
-  return <div className={s.declaration} data-property={declaration.property} data-owned={owned} data-cascade-status={status} title={status ? `Readable author cascade: ${status}` : undefined}>
+  return <div className={s.declaration} data-property={declaration.property} data-owned={owned} data-source-state={owned ? 'session-override' : declaration.mutationState ?? 'authored'} data-cascade-status={status} title={`${status ? `Readable author cascade: ${status}. ` : ''}${declaration.mutationState === 'cssforge-mutated-author' ? 'CSSForge-mutated authored declaration.' : owned ? 'CSSForge session override.' : 'Authored declaration.'}`}>
     <div className={`${s.line} ${!enabled ? s.disabled : ''}`}>
       <input type="checkbox" aria-label={`${owned ? 'Toggle override' : 'Authored declaration'} ${declaration.property}`} checked={enabled} disabled={!owned} title={owned ? 'Remove or restore this CSSForge override; authored styles remain intact.' : 'Disabling authored CSS requires cascade knowledge and is unavailable.'} onChange={() => { const ok = editor!.toggle(design!.targetId, context, declaration.property as Property); setError(ok ? '' : editor!.getSnapshot().error ?? 'This declaration cannot be toggled.'); }} />
       <span className={s.property}>{declaration.property}</span><span>:</span>
-      {editing ? <ValueEditor value={declaration.value} label={`CSS value ${declaration.property}`} commit={commit} /> : <button className={s.value} disabled={!supported} title={supported ? 'Edit as a CSSForge override · Enter to apply' : 'Read-only declaration or unsupported selector context'} onClick={() => setEditing(true)} aria-label={`Edit ${declaration.property}`}>{declaration.value}</button>}
+      {editing ? <ValueEditor value={declaration.value} label={`CSS value ${declaration.property}`} commit={commit} /> : <button className={s.value} disabled={!supported} title={supported ? authorMode ? 'Edit authored declaration when safe · Enter to apply' : 'Edit as a CSSForge override · Enter to apply' : 'Read-only declaration or unsupported selector context'} onClick={() => setEditing(true)} aria-label={`Edit ${declaration.property}`}>{declaration.value}</button>}
       {declaration.priority && <span className={s.priority}>!{declaration.priority}</span>}<span>;</span>
-      {supported && swatch && /^(color|background-color|border-color)$/.test(declaration.property) && <input type="color" className={s.swatch} aria-label={`Code color ${declaration.property}`} value={swatch} onChange={event => commit(event.target.value)} title="Apply a color override" />}
+      {supported && swatch && /^(color|background-color|border-color)$/.test(declaration.property) && <input type="color" className={s.swatch} aria-label={`Code color ${declaration.property}`} value={swatch} onChange={event => commit(event.target.value)} title={authorMode ? 'Apply color with safe author policy' : 'Apply a color override'} />}
     </div>
-    {editing && <small className={s.hint}>Enter to apply as an override <button onClick={() => { setEditing(false); setError(''); }}>Cancel</button></small>}
+    {editing && <small className={s.hint}>{authorMode ? 'Enter to apply safely; uncertain sources use overrides' : 'Enter to apply as an override'} <button onClick={() => { setEditing(false); setError(''); }}>Cancel</button></small>}
     {error && <p className={s.error} role="alert">{error}</p>}
   </div>;
 }
@@ -74,15 +77,15 @@ export function LiveCodeView() {
   return design ? <CodeTarget key={`${design.targetId}:${design.bindingGeneration}`} /> : null;
 }
 function CodeTarget() {
-  const { picker } = useInspection(), { design, overrides, context, undoCount, editedCount } = useEditing();
+  const { picker } = useInspection(), { design, overrides, context, undoCount, editedCount, authorRevision, mutationPolicy } = useEditing();
   const [source, setSource] = useState<SourceSnapshot | null>(null);
   const overrideRules = useMemo(() => picker?.sourceOverrides(overrides) ?? [], [picker, overrides]);
   const cascade = useMemo(() => source ? picker?.cascade() : null, [picker, source, overrides, context]);
-  useEffect(() => { setSource(picker!.source(true)); }, [picker, design?.targetId]);
+  useEffect(() => { setSource(picker!.source(true)); }, [picker, design?.targetId, authorRevision]);
   if (!design || !source) return null;
   return <CascadeContext.Provider value={cascade ?? null}><div className={s.code} data-testid="live-code">
     <header className={s.caption}><span>Selected element CSS</span><button onClick={() => setSource(picker!.source(true))}>Refresh sources</button></header>
-    <p className={s.note}>Authored CSS via CSSOM. Edits create session overrides.</p>
+    <p className={s.note}>Authored CSS via CSSOM. {mutationPolicy.mode === 'SAFE_AUTHOR_MUTATION' ? 'Safe author mutation enabled; uncertain edits use session overrides.' : 'Edits create session overrides.'}</p>
     {cascade && <p className={s.note} data-testid="cascade-summary">Readable author cascade · {context.pseudo || 'Base'}{context.media.length ? ` · ${context.media.join(' → ')}` : ''}. {Object.values(cascade.properties).filter(property => property.winner).length} resolved declarations. {Object.values(cascade.properties).some(property => property.confidence !== 'resolved') ? 'Incomplete or unsupported cases remain unresolved.' : 'Resolved within supported author sources.'} Browser/user origins and computed-value substitution are outside this result.{cascade.issues.includes('inaccessible-source') && ' Inaccessible sources prevent a certain winner.'}</p>}
     <section aria-label="CSSForge overrides" className={s.group}><h3>CSSForge overrides <small>current session</small></h3>
       {!overrides.length && <p className={s.note}>No overrides for this element.</p>}

@@ -1,0 +1,30 @@
+{
+  "before": "font-size: 18px; color: purple;",
+  "changed": {
+    "mode": "SESSION_OVERRIDE",
+    "state": "mutated",
+    "scope": {
+      "kind": "unknown",
+      "matchedCount": 1,
+      "bounded": false,
+      "risk": "unknown"
+    },
+    "sourceKind": "adopted",
+    "priority": "",
+    "strategy": "cssom-declaration",
+    "writable": "accepted",
+    "undo": 1,
+    "edited": 1,
+    "error": null,
+    "target": "1",
+    "reconciliation": "active-original",
+    "overrides": [],
+    "stats": {
+      "analyses": 2,
+      "capabilityChecks": 1,
+      "writes": 1,
+      "rollbacks": 0,
+      "rejections": 0
+    }
+  }
+}

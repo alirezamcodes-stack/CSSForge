@@ -1,0 +1,67 @@
+{
+  "fallback": {
+    "mode": "SESSION_OVERRIDE",
+    "state": "fallback",
+    "reason": "Shared or unknown rule scope requires explicit authorization.",
+    "scope": {
+      "kind": "shared-rule",
+      "matchedCount": 40,
+      "bounded": true,
+      "risk": "shared"
+    },
+    "undo": 1,
+    "edited": 1,
+    "error": null,
+    "target": "1",
+    "reconciliation": "active-original",
+    "overrides": [
+      {
+        "context": {
+          "media": [],
+          "pseudo": ""
+        },
+        "declarations": [
+          {
+            "property": "font-size",
+            "value": "32px",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "stats": {
+      "analyses": 1,
+      "capabilityChecks": 0,
+      "writes": 0,
+      "rollbacks": 0,
+      "rejections": 1
+    }
+  },
+  "shared": {
+    "mode": "SESSION_OVERRIDE",
+    "state": "mutated",
+    "scope": {
+      "kind": "shared-rule",
+      "matchedCount": 40,
+      "bounded": true,
+      "risk": "shared"
+    },
+    "sourceKind": "style",
+    "priority": "",
+    "strategy": "cssom-declaration",
+    "writable": "accepted",
+    "undo": 1,
+    "edited": 1,
+    "error": null,
+    "target": "2",
+    "reconciliation": "retired",
+    "overrides": [],
+    "stats": {
+      "analyses": 3,
+      "capabilityChecks": 1,
+      "writes": 1,
+      "rollbacks": 0,
+      "rejections": 1
+    }
+  }
+}

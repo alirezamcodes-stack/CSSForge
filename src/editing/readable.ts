@@ -2,16 +2,16 @@ import type { EditContext } from './contexts';
 import type { SelectedSources } from '../engine/sources/model';
 export { matchingContexts } from '../engine/sources/matching';
 
-export type Declaration = { property: string; value: string; priority: string };
+export type Declaration = { id?: string; sourceId?: string; ruleId?: string; property: string; value: string; priority: string; mutationState?: 'authored' | 'cssforge-mutated-author' };
 export type SourceGroup = { label: string; selector: string; context: EditContext; editable: boolean; conditions: string[]; declarations: Declaration[] };
 export type SourceSnapshot = { inline: Declaration[]; rules: SourceGroup[]; keyframes: { name: string; css: string }[]; notices: string[] };
 
 /** Bounded presentation adapter only. All source discovery lives in the engine. */
-export function presentSource(source: SelectedSources): SourceSnapshot {
+export function presentSource(source: SelectedSources, mutationState: (id?: string) => 'authored' | 'cssforge-mutated-author' = () => 'authored'): SourceSnapshot {
   let remaining = 500, limited = source.matches.length > 80;
   const declarations = (items: Declaration[]) => items.filter(item => {
     if (remaining-- <= 0 || item.value.length > 8000) { limited = true; return false; } return true;
-  });
+  }).map(item => ({ ...item, mutationState: mutationState(item.id) }));
   const inline = declarations(source.inline.rules.flatMap(rule => rule.declarations));
   const rules = source.matches.slice(0, 80).map(match => ({
     label: match.source.label + (match.source.disabled ? ' (disabled)' : ''), selector: match.rule.selectorText!, context: match.context, editable: match.editable,

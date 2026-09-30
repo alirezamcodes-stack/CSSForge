@@ -1,0 +1,16 @@
+{
+  "mode": "SESSION_OVERRIDE",
+  "undo": 0,
+  "edited": 0,
+  "error": null,
+  "target": "2",
+  "reconciliation": "retired",
+  "overrides": [],
+  "stats": {
+    "analyses": 4,
+    "capabilityChecks": 2,
+    "writes": 2,
+    "rollbacks": 2,
+    "rejections": 0
+  }
+}

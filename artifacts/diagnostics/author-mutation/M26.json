@@ -1,0 +1,46 @@
+{
+  "old": {
+    "mode": "SESSION_OVERRIDE",
+    "state": "mutated",
+    "scope": {
+      "kind": "target-specific",
+      "matchedCount": 1,
+      "bounded": true,
+      "risk": "local"
+    },
+    "sourceKind": "style",
+    "priority": "",
+    "strategy": "cssom-declaration",
+    "writable": "accepted",
+    "undo": 1,
+    "edited": 1,
+    "error": null,
+    "target": "1",
+    "reconciliation": "active-original",
+    "overrides": [],
+    "stats": {
+      "analyses": 2,
+      "capabilityChecks": 1,
+      "writes": 1,
+      "rollbacks": 0,
+      "rejections": 0
+    }
+  },
+  "refreshed": ".changed { font-size: 29px !important; }",
+  "result": {
+    "mode": "SESSION_OVERRIDE",
+    "undo": 0,
+    "edited": 0,
+    "error": null,
+    "target": "1",
+    "reconciliation": "migrated",
+    "overrides": [],
+    "stats": {
+      "analyses": 4,
+      "capabilityChecks": 2,
+      "writes": 2,
+      "rollbacks": 2,
+      "rejections": 0
+    }
+  }
+}

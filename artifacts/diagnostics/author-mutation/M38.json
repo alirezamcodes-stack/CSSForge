@@ -1,0 +1,4 @@
+{
+  "before": "#target { font-size: 18px; color: purple; }",
+  "after": "#target { font-size: 18px; color: purple; }"
+}

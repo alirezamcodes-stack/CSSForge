@@ -9,21 +9,22 @@ import { supportsSize } from './capabilities';
 import { createMarkerContainment } from './markerContainment';
 import type { LocatorResolution } from '../engine/locator';
 import { reconciliationLimits } from '../engine/reconciliation/model';
+import { createAuthorMutation, type AuthorChange, type MutationPolicy, type MutationRequest, type MutationResult } from '../engine/mutation';
 
 export type FieldValue = { computed: string; presented: string; authored?: string; override?: string };
 export type DesignSnapshot = { targetId: string; bindingGeneration: number; values: Record<Property, FieldValue>; canSize: boolean };
 export type OverrideGroup = { context: EditContext; declarations: { property: Property; value: string; enabled: boolean }[] };
-export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean };
+export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean; authorRevision: number; mutationPolicy: MutationPolicy; lastMutation: MutationResult | null };
 type Values = Partial<Record<Property, string>>;
 type Scope = { context: EditContext; values: Values; disabled?: Values };
 export type MigrationTicket = Readonly<{ targetId: string; identity: TargetIdentity; session: object; generation: number }>;
 type Target = { id: string; bindingGeneration: number; identity: TargetIdentity; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; retiredAttributes: string[]; scopes: Map<string, Scope>; layer?: HTMLStyleElement; stop?: () => void; guard?: () => void; retired?: boolean; staging?: boolean; pending?: MigrationTicket; media: ReturnType<typeof discoverMedia> };
 // Editing ownership only, never replacement identity evidence. Shared factory instances cannot claim one node twice.
 const editOwners = new WeakMap<Element, Target>();
-export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string }[]; order: number; gesture?: string };
-export const emptyEditState = (): EditState => ({ design: null, overrides: [], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false });
+export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string }[]; order: number; gesture?: string; author?: AuthorChange };
+export const emptyEditState = (): EditState => ({ design: null, overrides: [], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false, authorRevision: 0, mutationPolicy: { mode: 'SESSION_OVERRIDE' }, lastMutation: null });
 
-/** One session controller for core and rich editing. No author declarations are rewritten. */
+/** One transaction controller. Session overrides remain default; author mutation requires explicit policy. */
 export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: () => void, sources: SourceIndex, lifecycle = createTargetLifecycle(doc, owns)) {
   const win = doc.defaultView!;
   const prefix = `data-cssforge-target-${crypto.randomUUID().replaceAll('-', '')}`;
@@ -34,7 +35,11 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   const listeners = new Set<() => void>(), history: Transaction[] = [];
   let sequence = 0, order = 0, destroyed = false, state = emptyEditState();
   const containment = createMarkerContainment(doc, owns);
-  const edited = (target: Target) => [...target.scopes.values()].some(scope => Object.keys(scope.values).length || Object.keys(scope.disabled ?? {}).length);
+  const authorMutation = createAuthorMutation(doc, sources, lifecycle, () => {}, request => {
+    const target = state.design && targets.get(state.design.targetId);
+    return !!target && safe(target) && target.element === request.element && contextKey(state.context) === contextKey(request.context);
+  });
+  const edited = (target: Target) => history.some(transaction => transaction.targetId === target.id && transaction.author) || [...target.scopes.values()].some(scope => Object.keys(scope.values).length || Object.keys(scope.disabled ?? {}).length);
   const publish = (patch: Partial<EditState> = {}) => {
     state = { ...state, undoCount: history.length, editedCount: [...targets.values()].filter(edited).length, ...patch };
     const target = state.design && targets.get(state.design.targetId);
@@ -127,7 +132,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       lifecycle.forget(target.identity); quarantine(target); if (targets.get(target.id) === target) onChange();
     } });
   };
-  const applyBatch = (targetId: string, inputs: Values, gesture?: string, expectedContext = contextKey(state.context)) => {
+  const applySession = (targetId: string, inputs: Values, gesture?: string, expectedContext = contextKey(state.context)) => {
     quarantine();
     const target = targets.get(targetId); const fail = (error: string) => { publish({ error }); return false; };
     if (destroyed || !target || state.design?.targetId !== targetId || !safe(target) || expectedContext !== contextKey(state.context)) return fail('The editing target or context changed. Pick it again.');
@@ -151,8 +156,32 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     } else history.push({ targetId, context: scope.context, changes, order: ++order, gesture });
     publish({ error: null }); onChange(); return true;
   };
+  const applyAuthor = (targetId: string, property: string, input: string, options: Partial<Omit<MutationRequest, 'element' | 'property' | 'value' | 'context'>> = {}, expectedContext = contextKey(state.context)) => {
+    quarantine(); const target = targets.get(targetId);
+    if (destroyed || !target || state.design?.targetId !== targetId || !safe(target) || expectedContext !== contextKey(state.context)) { publish({ error: 'The editing target or context changed. Pick it again.' }); return false; }
+    const value = properties.includes(property as Property) ? normalizeValue(property as Property, input) : input.trim();
+    const scope = target.scopes.get(expectedContext);
+    const result: MutationResult = scope?.values[property as Property] !== undefined || scope?.disabled?.[property as Property] !== undefined
+      ? { state: 'fallback', safeFallback: true, reason: 'An existing session declaration owns this property.' }
+      : authorMutation.mutate({ ...options, element: target.element, property, value, context: state.context });
+    if (result.state === 'mutated') {
+      history.push({ targetId, context: { ...state.context, media: [...state.context.media] }, changes: [], order: ++order, author: result.change });
+      publish({ error: null, lastMutation: result, authorRevision: state.authorRevision + 1 }); onChange(); return true;
+    }
+    if (result.state === 'unchanged') { publish({ error: null, lastMutation: result }); return true; }
+    publish({ lastMutation: result });
+    if (result.safeFallback && properties.includes(property as Property)) return applySession(targetId, { [property]: value }, undefined, expectedContext);
+    publish({ error: result.reason }); return false;
+  };
+  const applyBatch = (targetId: string, inputs: Values, gesture?: string, expectedContext = contextKey(state.context)) => {
+    const entries = Object.entries(inputs);
+    return state.mutationPolicy.mode === 'SAFE_AUTHOR_MUTATION' && entries.length === 1
+      ? applyAuthor(targetId, entries[0][0], entries[0][1], { allowShared: state.mutationPolicy.allowShared }, expectedContext)
+      : applySession(targetId, inputs, gesture, expectedContext);
+  };
   return {
-    inspect, applyBatch, quarantine,
+    inspect, applyBatch, applyAuthor, quarantine, authorMutation,
+    setMutationPolicy(policy: MutationPolicy) { if (!destroyed) publish({ mutationPolicy: { mode: policy.mode, allowShared: policy.allowShared }, error: null }); },
     setReconciliationHooks(lost: (identity: TargetIdentity) => boolean, cancel: () => void) { lossHandler = lost; cancelReconciliation = cancel; },
     prepareMigration(identity: TargetIdentity): MigrationTicket | null { const target = byBinding.get(identity); if (destroyed || !target) return null; quarantine(target); return targets.get(target.id) === target ? target.pending ?? null : null; },
     retireMigration(ticket: MigrationTicket) {
@@ -228,6 +257,11 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
     undo() {
       if (destroyed) return;
+      if (history.at(-1)?.author) {
+        const transaction = history.at(-1)!;
+        if (!authorMutation.rollback(transaction.author!)) { publish({ error: 'Author source changed or blocked rollback. Undo retained; page changes were preserved.' }); return; }
+        history.pop(); publish({ error: null, authorRevision: state.authorRevision + 1, lastMutation: null }); onChange(); return;
+      }
       if (history.at(-1) && targets.get(history.at(-1)!.targetId)?.pending) { publish({ error: 'The editing target is waiting for a proven replacement.' }); return; }
       const transaction = history.pop(); if (!transaction) return;
       const target = targets.get(transaction.targetId)!;
@@ -248,13 +282,28 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     reset() {
       if (destroyed) return;
       cancelReconciliation?.();
+      authorMutation.resetGeneration();
+      // Restore author changes in reverse history order. Conflicts remain recoverable and are never overwritten.
+      let conflict = false;
+      for (let index = history.length - 1; index >= 0; index--) {
+        const transaction = history[index];
+        if (!transaction.author) { history.splice(index, 1); continue; }
+        if (!authorMutation.rollback(transaction.author)) { conflict = true; continue; }
+        history.splice(index, 1);
+      }
+      for (let index = history.length - 1; index >= 0; index--) if (!history[index].author) history.splice(index, 1);
       for (const target of targets.values()) { release(target); if (editOwners.get(target.element) === target) editOwners.delete(target.element); }
       containment.destroy();
-      targets.clear(); byElement = new WeakMap(); byBinding = new WeakMap(); history.length = 0;
-      publish({ error: null, context: baseContext() }); onChange();
+      for (const target of targets.values()) target.scopes.clear();
+      targets.clear(); byElement = new WeakMap(); byBinding = new WeakMap();
+      if (!conflict) history.length = 0;
+      const resetError = conflict ? 'Author source changed or blocked reset. Pending author rollback retained; page changes were preserved.' : null;
+      publish({ error: resetError, context: baseContext(), authorRevision: state.authorRevision + 1, lastMutation: null, mutationPolicy: { mode: 'SESSION_OVERRIDE' } }); onChange();
+      if (conflict) publish({ error: resetError });
     },
     destroy() {
       if (destroyed) return; destroyed = true;
+      authorMutation.destroy();
       for (const target of targets.values()) { release(target); if (editOwners.get(target.element) === target) editOwners.delete(target.element); }
       containment.destroy();
       targets.clear(); byElement = new WeakMap(); byBinding = new WeakMap(); history.length = 0; listeners.clear(); lossHandler = cancelReconciliation = undefined; state = emptyEditState();

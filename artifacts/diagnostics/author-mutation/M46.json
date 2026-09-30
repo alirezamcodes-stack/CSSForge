@@ -1,0 +1,32 @@
+{
+  "mode": "SESSION_OVERRIDE",
+  "state": "fallback",
+  "reason": "Cross-origin author sheets are not writable in this phase.",
+  "undo": 1,
+  "edited": 1,
+  "error": null,
+  "target": "1",
+  "reconciliation": "active-original",
+  "overrides": [
+    {
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "32px",
+          "enabled": true
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "analyses": 1,
+    "capabilityChecks": 0,
+    "writes": 0,
+    "rollbacks": 0,
+    "rejections": 1
+  }
+}

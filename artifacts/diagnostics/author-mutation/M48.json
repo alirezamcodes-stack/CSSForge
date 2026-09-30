@@ -1,0 +1,26 @@
+{
+  "mode": "SESSION_OVERRIDE",
+  "state": "mutated",
+  "scope": {
+    "kind": "target-specific",
+    "matchedCount": 1,
+    "bounded": true,
+    "risk": "local"
+  },
+  "sourceKind": "inline",
+  "priority": "",
+  "strategy": "inline-declaration",
+  "writable": "accepted",
+  "undo": 1,
+  "edited": 1,
+  "error": "Author source changed or blocked rollback. Undo retained; page changes were preserved.",
+  "reconciliation": "root-mismatch",
+  "overrides": [],
+  "stats": {
+    "analyses": 2,
+    "capabilityChecks": 1,
+    "writes": 1,
+    "rollbacks": 0,
+    "rejections": 0
+  }
+}

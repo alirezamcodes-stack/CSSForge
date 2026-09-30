@@ -122,6 +122,27 @@ export function createSourceIndex(doc: Document, owns: (element: Element) => boo
   }
   return {
     read, overrides,
+    /** Exact native binding for a known indexed identity; never a selector search. */
+    binding(element: Element, sourceId: string, ruleId: string) {
+      const snapshot = read(element), root = element.getRootNode() as Scope;
+      if (snapshot.inline.id === sourceId && snapshot.inline.rules[0]?.id === ruleId) {
+        return { root, element, style: (element as HTMLElement | SVGElement).style, sheet: null, rule: null, ancestry: [] as CSSRule[] };
+      }
+      const source = snapshot.sheets.find(item => item.id === sourceId && item.scopeId === snapshot.scopeId && item.accessibility.readable);
+      if (!source) return null;
+      const find = (rules: SourceRule[]): SourceRule | undefined => { for (const rule of rules) { if (rule.id === ruleId) return rule; const child = find(rule.children); if (child) return child; } };
+      const indexed = find(source.rules); if (!indexed || indexed.kind !== 'style') return null;
+      const regular = root === doc ? [...doc.styleSheets] : [...root.querySelectorAll('style,link')].map(node => (node as HTMLStyleElement).sheet).filter((sheet): sheet is CSSStyleSheet => !!sheet);
+      const sheet = [...regular, ...(root.adoptedStyleSheets ?? [])].find(item => identities.get(item) === sourceId);
+      if (!sheet) return null;
+      try {
+        let list = sheet.cssRules; const ancestry: CSSRule[] = [];
+        for (const position of indexed.path) { const native = list[position]; if (!native) return null; ancestry.push(native); list = (native as CSSGroupingRule).cssRules; }
+        const rule = ancestry.pop() as CSSStyleRule;
+        if (identities.get(rule) !== ruleId || rule.type !== 1 || rule.selectorText !== indexed.selectorText) return null;
+        return { root, element: null, style: rule.style, sheet, rule, ancestry };
+      } catch { return null; }
+    },
     /** Selection / Code activation / explicit Refresh. CSSOM insertRule is not observable reliably. */
     invalidate(element?: Element) {
       if (!element) { scopes = new WeakMap(); selected = new WeakMap(); return; }

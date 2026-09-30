@@ -117,4 +117,29 @@ describe('central CSS source index', () => {
     expect(index.read(element).sheets[0].rules).toHaveLength(2000);
     expect(index.read(element).notices.join()).toContain('Rule inspection limit');
   });
+  it('binds author source/rule identities to exact native objects and never a similar selector', () => {
+    const original = rule('.card', { color: 'red' }), other = rule('.card', { color: 'blue' });
+    const native = sheet([original, other]), { index, element } = fixture([native]);
+    const match = index.read(element).matches[0];
+    expect(index.binding(element, match.source.id, match.rule.id)).toMatchObject({ sheet: native, rule: original, style: original.style, ancestry: [] });
+    expect(index.binding(element, match.source.id, 'unknown-rule')).toBeNull();
+    (native.cssRules as unknown as CSSRule[]).splice(0, 1, rule('.card', { color: 'red' }));
+    expect(index.binding(element, match.source.id, match.rule.id)).toBeNull();
+    index.invalidate(); expect(index.binding(element, match.source.id, match.rule.id)).toBeNull();
+  });
+  it('binds inline identity separately and rejects authored selector changes in cached paths', () => {
+    const native = rule('.card', { color: 'red' }), { index, element } = fixture([sheet([native])]);
+    const first = index.read(element), match = first.matches[0];
+    expect(index.binding(element, first.inline.id, first.inline.rules[0].id)).toMatchObject({ element, style: (element as HTMLElement).style, sheet: null, rule: null });
+    Object.assign(native, { selectorText: '.changed' });
+    expect(index.binding(element, match.source.id, match.rule.id)).toBeNull();
+  });
+  it('retains exact native grouping ancestry and refuses removed sheet identities', () => {
+    const child = rule('.card', { color: 'red' }), parent = group('@media screen', [child], 'screen');
+    const native = sheet([parent]), { doc, index, element } = fixture([native]);
+    const match = index.read(element).matches[0];
+    expect(index.binding(element, match.source.id, match.rule.id)).toMatchObject({ rule: child, ancestry: [parent] });
+    Object.assign(doc, { styleSheets: [sheet([group('@media screen', [rule('.card', { color: 'red' })], 'screen')])] });
+    expect(index.binding(element, match.source.id, match.rule.id)).toBeNull();
+  });
 });

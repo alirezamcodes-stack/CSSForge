@@ -1,0 +1,20 @@
+{
+  "before": "#target { font-size: 18px; color: purple; }",
+  "conflict": "#other { font-size: 28px; color: red; }",
+  "result": {
+    "mode": "SESSION_OVERRIDE",
+    "undo": 0,
+    "edited": 0,
+    "error": null,
+    "target": "4",
+    "reconciliation": "retired",
+    "overrides": [],
+    "stats": {
+      "analyses": 4,
+      "capabilityChecks": 2,
+      "writes": 2,
+      "rollbacks": 2,
+      "rejections": 0
+    }
+  }
+}
