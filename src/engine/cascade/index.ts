@@ -140,6 +140,10 @@ export function createCascade(doc: Document, sources: Pick<SourceIndex, 'read' |
     }
     const entries = cache.get(element) ?? new Map(); entries.set(key, { source: snapshot, result }); cache.set(element, entries); return result;
   }
-  return { read, invalidate() { cache = new WeakMap(); }, getStats: () => ({ resolutions }), destroy() { cache = new WeakMap(); } };
+  return { read, invalidate(element?: Element) {
+    if (!element) { cache = new WeakMap(); return; }
+    let node: Element | null = element;
+    for (let depth = 0; node && depth < 64; depth++) { cache.delete(node); const root = node.getRootNode(); node = node.parentElement ?? ('host' in root ? (root as ShadowRoot).host : null); }
+  }, getStats: () => ({ resolutions }), destroy() { cache = new WeakMap(); } };
 }
 export type Cascade = ReturnType<typeof createCascade>;

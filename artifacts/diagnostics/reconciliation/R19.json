@@ -1,0 +1,49 @@
+{
+  "state": "active-original",
+  "generation": 7,
+  "attempts": 0,
+  "reason": "Original target active.",
+  "selection": "other",
+  "targetId": "2",
+  "undo": 1,
+  "context": {
+    "media": [],
+    "pseudo": ""
+  },
+  "overrides": [],
+  "locator": {
+    "captures": 2,
+    "requests": 1,
+    "searches": 1,
+    "queries": 4,
+    "candidates": 2
+  },
+  "reconciliation": {
+    "starts": 1,
+    "resolutions": 1,
+    "retries": 0,
+    "migrations": 0,
+    "deliveries": 0,
+    "records": 0,
+    "candidateNodes": 0
+  },
+  "source": {
+    "scopeScans": 2
+  },
+  "cascade": {
+    "resolutions": 0
+  },
+  "selectors": {
+    "requests": 0,
+    "generations": 0,
+    "validations": 0,
+    "cacheHits": 0
+  },
+  "markers": [],
+  "retired": [
+    {
+      "connected": false,
+      "markers": []
+    }
+  ]
+}

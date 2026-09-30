@@ -22,6 +22,7 @@ test('raw hover bursts do no computed inspection, publish no UI state, and stop 
     const raw = { styles, geometry, publications, scans: picker.sourceStats().scopeScans, cascade: picker.cascadeStats().resolutions };
     const rawLocator = picker.locatorStats();
     const rawSelectors = picker.selectorStats();
+    const rawReconciliation = picker.reconciliationStats();
     await tick();
     const first = { styles, geometry, publications, scans: picker.sourceStats().scopeScans, cascade: picker.cascadeStats().resolutions };
     for (let i = 0; i < 1000; i++) move(target);
@@ -44,6 +45,7 @@ test('raw hover bursts do no computed inspection, publish no UI state, and stop 
     const hoverCascade = picker.cascadeStats();
     const hoverLocator = picker.locatorStats();
     const hoverSelectors = picker.selectorStats();
+    const hoverReconciliation = picker.reconciliationStats();
     // Queue a frame immediately before teardown, then check it never writes an overlay.
     picker.start(); move(document.querySelector('#other')!); picker.destroy(); picker.destroy();
     for (let i = 0; i < 1000; i++) move(target);
@@ -51,11 +53,12 @@ test('raw hover bursts do no computed inspection, publish no UI state, and stop 
     target.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true, cancelable: true }));
     const cleanup = { styles, clicks, overlays: document.querySelectorAll('cssforge-overlay').length };
     window.getComputedStyle = originalStyle;
-    return { raw, first, same, selected, cleanup, reused, cachedScans, stylesAfterCode, cachedCascade, cascadeStats, cascadeStyles, hoverCascade, rawLocator, selectedLocator, hoverLocator, rawSelectors, hoverSelectors };
+    return { raw, first, same, selected, cleanup, reused, cachedScans, stylesAfterCode, cachedCascade, cascadeStats, cascadeStyles, hoverCascade, rawLocator, selectedLocator, hoverLocator, rawSelectors, hoverSelectors, rawReconciliation, hoverReconciliation };
   });
   expect(result.raw).toEqual({ styles: 0, geometry: 0, publications: 0, scans: 0, cascade: 0 });
   expect(result.rawLocator).toEqual({ captures: 0, requests: 0, searches: 0, queries: 0, candidates: 0 });
   expect(result.rawSelectors).toEqual({ requests: 0, generations: 0, validations: 0, cacheHits: 0 }); expect(result.hoverSelectors).toEqual(result.rawSelectors);
+  expect(result.rawReconciliation).toEqual({ starts: 0, resolutions: 0, retries: 0, migrations: 0, deliveries: 0, records: 0, candidateNodes: 0 }); expect(result.hoverReconciliation).toEqual(result.rawReconciliation);
   expect(result.selectedLocator.captures).toBe(1); expect(result.selectedLocator.requests).toBe(0); expect(result.hoverLocator).toEqual(result.selectedLocator);
   expect(result.first).toEqual({ styles: 0, geometry: 1, publications: 0, scans: 0, cascade: 0 });
   expect(result.same).toEqual(result.first);

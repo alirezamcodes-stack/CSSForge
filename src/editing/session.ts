@@ -7,14 +7,19 @@ import { createTargetLifecycle, type TargetIdentity } from '../picker/targetLife
 import { observeTarget } from '../picker/invalidation';
 import { supportsSize } from './capabilities';
 import { createMarkerContainment } from './markerContainment';
+import type { LocatorResolution } from '../engine/locator';
+import { reconciliationLimits } from '../engine/reconciliation/model';
 
 export type FieldValue = { computed: string; presented: string; authored?: string; override?: string };
-export type DesignSnapshot = { targetId: string; values: Record<Property, FieldValue>; canSize: boolean };
+export type DesignSnapshot = { targetId: string; bindingGeneration: number; values: Record<Property, FieldValue>; canSize: boolean };
 export type OverrideGroup = { context: EditContext; declarations: { property: Property; value: string; enabled: boolean }[] };
 export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean };
 type Values = Partial<Record<Property, string>>;
 type Scope = { context: EditContext; values: Values; disabled?: Values };
-type Target = { id: string; identity: TargetIdentity; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; scopes: Map<string, Scope>; layer?: HTMLStyleElement; stop?: () => void; guard?: () => void; retired?: boolean; media: ReturnType<typeof discoverMedia> };
+export type MigrationTicket = Readonly<{ targetId: string; identity: TargetIdentity; session: object; generation: number }>;
+type Target = { id: string; bindingGeneration: number; identity: TargetIdentity; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; retiredAttributes: string[]; scopes: Map<string, Scope>; layer?: HTMLStyleElement; stop?: () => void; guard?: () => void; retired?: boolean; staging?: boolean; pending?: MigrationTicket; media: ReturnType<typeof discoverMedia> };
+// Editing ownership only, never replacement identity evidence. Shared factory instances cannot claim one node twice.
+const editOwners = new WeakMap<Element, Target>();
 export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string }[]; order: number; gesture?: string };
 export const emptyEditState = (): EditState => ({ design: null, overrides: [], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false });
 
@@ -23,6 +28,9 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   const win = doc.defaultView!;
   const prefix = `data-cssforge-target-${crypto.randomUUID().replaceAll('-', '')}`;
   const targets = new Map<string, Target>(); let byElement = new WeakMap<Element, Target>();
+  let byBinding = new WeakMap<TargetIdentity, Target>();
+  const sessionToken = {}; let migrationGeneration = 0;
+  let lossHandler: ((identity: TargetIdentity) => boolean) | undefined, cancelReconciliation: (() => void) | undefined;
   const listeners = new Set<() => void>(), history: Transaction[] = [];
   let sequence = 0, order = 0, destroyed = false, state = emptyEditState();
   const containment = createMarkerContainment(doc, owns);
@@ -36,10 +44,14 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     ] })).filter(group => group.declarations.length) : [];
     listeners.forEach(listener => listener());
   };
-  const safe = (target: Target) => lifecycle.safe(target.identity);
+  const safe = (target: Target) => !target.retired && lifecycle.safe(target.identity);
   const quarantine = (target = state.design ? targets.get(state.design.targetId) : undefined) => {
-    if (target && !target.retired && !safe(target)) {
-      target.retired = true; release(target, false); target.scopes.clear();
+    if (target && targets.get(target.id) === target && !target.retired && !safe(target)) {
+      const retain = state.design?.targetId === target.id && edited(target) && target.retiredAttributes.length < reconciliationLimits.migrationsPerTarget && lossHandler?.(target.identity) === true;
+      target.retired = true; release(target, false);
+      if (retain) target.pending = Object.freeze({ targetId: target.id, identity: target.identity, session: sessionToken, generation: ++migrationGeneration });
+      else target.scopes.clear();
+      if (editOwners.get(target.element) === target) editOwners.delete(target.element);
       if (byElement.get(target.element) === target) byElement.delete(target.element);
       publish(state.design?.targetId === target.id ? { design: null, error: 'The editing target changed. Pick it again.' } : {});
     }
@@ -53,9 +65,10 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     quarantine(byElement.get(element));
     let target = byElement.get(element);
     if (!target) {
+      if (editOwners.has(element)) { publish({ design: null, error: 'Another CSSForge session owns this editing target.' }); return; }
       const id = String(++sequence); let attribute = prefix; while (element.hasAttribute(attribute)) attribute += '-x';
-      target = { id, identity: lifecycle.bind(element), element, root: root as Document | ShadowRoot, attribute, scopes: new Map(), media: { contexts: [], limited: false } };
-      targets.set(id, target); byElement.set(element, target);
+      target = { id, bindingGeneration: 0, identity: lifecycle.bind(element), element, root: root as Document | ShadowRoot, attribute, retiredAttributes: [], scopes: new Map(), media: { contexts: [], limited: false } };
+      targets.set(id, target); byElement.set(element, target); byBinding.set(target.identity, target); editOwners.set(element, target);
     }
     if (!safe(target)) { publish({ design: null, error: 'This element moved to another document tree. Reset session edits before inspecting it again.' }); return; }
     const changed = state.design?.targetId !== target.id;
@@ -71,13 +84,13 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     })) as Record<Property, FieldValue>;
     const mediaContexts = [...target.media.contexts];
     for (const scope of target.scopes.values()) if (scope.context.media.length && !mediaContexts.some(item => JSON.stringify(item.queries) === JSON.stringify(scope.context.media))) mediaContexts.push({ queries: scope.context.media, source: 'session override' });
-    publish({ design: { targetId: target.id, values, canSize: supportsSize(element, css.display) }, mediaContexts, mediaLimited: target.media.limited, error: changed ? null : state.error });
+    publish({ design: { targetId: target.id, bindingGeneration: target.bindingGeneration, values, canSize: supportsSize(element, css.display) }, mediaContexts, mediaLimited: target.media.limited, error: changed ? null : state.error });
   }
   const release = (target: Target, cleanCopies = true) => {
     target.stop?.(); target.stop = undefined; target.guard?.(); target.guard = undefined;
     target.layer?.remove(); target.layer = undefined;
     if (target.element.getAttribute(target.attribute) === target.id) target.element.removeAttribute(target.attribute);
-    if (cleanCopies) for (const copy of target.root.querySelectorAll(`[${target.attribute}="${target.id}"]`)) copy.removeAttribute(target.attribute);
+    if (cleanCopies) for (const attribute of [target.attribute, ...target.retiredAttributes]) for (const copy of target.root.querySelectorAll(`[${attribute}="${target.id}"]`)) copy.removeAttribute(attribute);
   };
   const render = (target: Target) => {
     if (![...target.scopes.values()].some(scope => Object.keys(scope.values).length)) { release(target); return; }
@@ -101,7 +114,8 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       const watch = () => {
         target.stop?.();
         const observation = observeTarget(target.element, () => {
-          if (!safe(target)) { quarantine(target); onChange(); }
+          if (targets.get(target.id) !== target || target.retired) return;
+          if (!safe(target)) { quarantine(target); if (targets.get(target.id) === target) onChange(); }
           else if (observation.moved()) watch();
         }, owns);
         target.stop = observation.stop;
@@ -109,7 +123,8 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       watch();
     }
     if (!target.guard) target.guard = containment.add(target.root, { element: target.element, attribute: target.attribute, id: target.id, quarantine: () => {
-      lifecycle.forget(target.identity); quarantine(target); onChange();
+      if (target.retired || targets.get(target.id) !== target) { if (target.staging) throw new Error('Staged marker ownership was rejected.'); return; }
+      lifecycle.forget(target.identity); quarantine(target); if (targets.get(target.id) === target) onChange();
     } });
   };
   const applyBatch = (targetId: string, inputs: Values, gesture?: string, expectedContext = contextKey(state.context)) => {
@@ -138,6 +153,31 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   };
   return {
     inspect, applyBatch, quarantine,
+    setReconciliationHooks(lost: (identity: TargetIdentity) => boolean, cancel: () => void) { lossHandler = lost; cancelReconciliation = cancel; },
+    prepareMigration(identity: TargetIdentity): MigrationTicket | null { const target = byBinding.get(identity); if (destroyed || !target) return null; quarantine(target); return targets.get(target.id) === target ? target.pending ?? null : null; },
+    retireMigration(ticket: MigrationTicket) {
+      const target = targets.get(ticket.targetId);
+      if (target?.pending !== ticket || ticket.session !== sessionToken) return;
+      target.pending = undefined; release(target); target.scopes.clear();
+      publish();
+    },
+    migrate(ticket: MigrationTicket, resolution: LocatorResolution, authorize: () => boolean): TargetIdentity | null {
+      const target = targets.get(ticket.targetId), replacement = resolution.element;
+      if (destroyed || ticket.session !== sessionToken || !target || target.pending !== ticket || target.identity !== ticket.identity || !target.retired || resolution.state !== 'resolved-unique' || resolution.confidence !== 'strong' || resolution.candidateCount !== 1 || !replacement || !lifecycle.admissible(replacement) || replacement.ownerDocument !== doc || replacement.getRootNode() !== target.root || replacement.namespaceURI !== target.element.namespaceURI || replacement.localName !== target.element.localName || editOwners.has(replacement) || byElement.has(replacement) || !(replacement instanceof win.HTMLElement || replacement instanceof win.SVGElement)) return null;
+      const identity = lifecycle.bind(replacement);
+      let attribute = `${prefix}-m${ticket.generation}`; while (replacement.hasAttribute(attribute)) attribute += '-x';
+      const next: Target = { ...target, bindingGeneration: ticket.generation, element: replacement, identity, attribute, retiredAttributes: [...target.retiredAttributes, target.attribute], retired: false, staging: true, pending: undefined, layer: undefined, stop: undefined, guard: undefined };
+      // Old layer/marker/guards are already quarantined. Stage one fresh layer before publishing the new owner.
+      release(target);
+      try { render(next); } catch { next.staging = false; release(next); lifecycle.forget(identity); return null; }
+      if (!lifecycle.safe(identity) || (next.layer && replacement.getAttribute(attribute) !== target.id) || editOwners.has(replacement) || !authorize()) { next.staging = false; release(next); lifecycle.forget(identity); return null; }
+      next.staging = false;
+      lifecycle.forget(target.identity); byBinding.delete(target.identity); target.pending = undefined;
+      targets.set(target.id, next); byElement.set(replacement, next); byBinding.set(identity, next); editOwners.set(replacement, next);
+      // Retain logical targetId and context, so history addresses the replacement without synthetic edits.
+      state = { ...state, design: { targetId: next.id, bindingGeneration: next.bindingGeneration, values: {} as Record<Property, FieldValue>, canSize: false }, error: null };
+      return identity;
+    },
     sourcePosition(element: Element): number | undefined {
       const target = byElement.get(element);
       if (!target?.layer?.sheet || !safe(target)) return undefined;
@@ -188,6 +228,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
     undo() {
       if (destroyed) return;
+      if (history.at(-1) && targets.get(history.at(-1)!.targetId)?.pending) { publish({ error: 'The editing target is waiting for a proven replacement.' }); return; }
       const transaction = history.pop(); if (!transaction) return;
       const target = targets.get(transaction.targetId)!;
       const key = contextKey(transaction.context), scope = target.scopes.get(key) ?? { context: transaction.context, values: {} };
@@ -206,16 +247,17 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     },
     reset() {
       if (destroyed) return;
-      for (const target of targets.values()) release(target);
+      cancelReconciliation?.();
+      for (const target of targets.values()) { release(target); if (editOwners.get(target.element) === target) editOwners.delete(target.element); }
       containment.destroy();
-      targets.clear(); byElement = new WeakMap(); history.length = 0;
+      targets.clear(); byElement = new WeakMap(); byBinding = new WeakMap(); history.length = 0;
       publish({ error: null, context: baseContext() }); onChange();
     },
     destroy() {
       if (destroyed) return; destroyed = true;
-      for (const target of targets.values()) release(target);
+      for (const target of targets.values()) { release(target); if (editOwners.get(target.element) === target) editOwners.delete(target.element); }
       containment.destroy();
-      targets.clear(); history.length = 0; listeners.clear(); state = emptyEditState();
+      targets.clear(); byElement = new WeakMap(); byBinding = new WeakMap(); history.length = 0; listeners.clear(); lossHandler = cancelReconciliation = undefined; state = emptyEditState();
     },
   };
 }

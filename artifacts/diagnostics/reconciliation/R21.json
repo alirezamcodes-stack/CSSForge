@@ -1,0 +1,78 @@
+{
+  "raw": {
+    "locator": {
+      "captures": 0,
+      "requests": 0,
+      "searches": 0,
+      "queries": 0,
+      "candidates": 0
+    },
+    "reconciliation": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 0
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    }
+  },
+  "result": {
+    "state": "migration-rejected",
+    "generation": 4,
+    "attempts": 1,
+    "reason": "Mutation record budget exceeded.",
+    "resolution": "missing",
+    "confidence": "none",
+    "selection": null,
+    "targetId": null,
+    "undo": 1,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "overrides": [],
+    "locator": {
+      "captures": 1,
+      "requests": 1,
+      "searches": 1,
+      "queries": 3,
+      "candidates": 1
+    },
+    "reconciliation": {
+      "starts": 1,
+      "resolutions": 1,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 1,
+      "records": 70,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 1
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    },
+    "markers": [],
+    "retired": []
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "state": "retired",
+  "generation": 5,
+  "attempts": 1,
+  "reason": "Session reset.",
+  "resolution": "resolved-unique",
+  "confidence": "strong",
+  "selection": "save",
+  "targetId": "2",
+  "undo": 0,
+  "context": {
+    "media": [],
+    "pseudo": ""
+  },
+  "overrides": [],
+  "locator": {
+    "captures": 2,
+    "requests": 2,
+    "searches": 2,
+    "queries": 4,
+    "candidates": 4
+  },
+  "reconciliation": {
+    "starts": 1,
+    "resolutions": 1,
+    "retries": 0,
+    "migrations": 1,
+    "deliveries": 0,
+    "records": 0,
+    "candidateNodes": 0
+  },
+  "source": {
+    "scopeScans": 2
+  },
+  "cascade": {
+    "resolutions": 0
+  },
+  "selectors": {
+    "requests": 0,
+    "generations": 0,
+    "validations": 0,
+    "cacheHits": 0
+  },
+  "markers": [],
+  "retired": []
+}

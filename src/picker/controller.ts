@@ -1,7 +1,7 @@
 import { frameGate } from './frame';
 import { identityOf, rectOf, type TargetRect } from './identity';
 import { createOverlay } from './overlay';
-import { createEditSession } from '../editing/session';
+import { createEditSession, type MigrationTicket } from '../editing/session';
 import { presentSource, type SourceSnapshot } from '../editing/readable';
 import { createSourceIndex } from '../engine/sources';
 import type { SessionGroup } from '../engine/sources/model';
@@ -13,6 +13,7 @@ import { navigationChildren } from './navigation';
 import { collectCandidates, type TargetCandidate } from './candidates';
 import { createTargetLocator, type TargetLocator, type LocatorResolution, type ResolveRequest } from '../engine/locator';
 import { createSelectorEngine, type SelectorRequest } from '../engine/selectors';
+import { createReconciliation, reconciliationLimits } from '../engine/reconciliation';
 
 export type Selection = {
   identity: string; tag: string; id: string; classes: string[];
@@ -37,6 +38,8 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   let source: SourceSnapshot | null = null;
   let destroyed = false;
   let suspended = false;
+  let handlingLoss = false, suppressMigration = false, selectionGeneration = 0;
+  let regions: Element[] = [];
   const publish = (next: PickerState) => { state = next; subscribers.forEach(notify => notify()); };
   const owns = (node: EventTarget | null): boolean => {
     if (!(node instanceof win.Node)) return false;
@@ -60,6 +63,29 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     frame.schedule();
   }, sources, lifecycle);
   const cascade = createCascade(doc, sources, element => editor.sourceGroups(element), undefined, element => editor.sourcePosition(element));
+  const reconciliation = createReconciliation<MigrationTicket>(doc, lifecycle, {
+    owns,
+    resolve(captured) { return locatorResult = locators.resolve(captured); },
+    reject: editor.retireMigration,
+    migrate(ticket, resolution, token) {
+      if (destroyed || !reconciliation.isCurrent(token) || selected || locator?.identity !== ticket.identity) return false;
+      const captured = locator;
+      const identity = editor.migrate(ticket, resolution, () => {
+        if (!reconciliation.isCurrent(token) || locator !== captured) return false;
+        const proof = locatorResult = locators.resolve(captured, { candidate: resolution.element! });
+        return reconciliation.isCurrent(token) && proof.state === 'resolved-unique' && proof.confidence === 'strong' && proof.element === resolution.element;
+      });
+      if (!identity) return false;
+      selectors.invalidate(ticket.identity); sources.invalidate(identity.element); cascade.invalidate(identity.element);
+      activateSelection(identity.element, identity, true);
+      return true;
+    },
+  });
+  editor.setReconciliationHooks(identity => {
+    if (destroyed || suppressMigration || selectedIdentity !== identity || !locator) return false;
+    win.queueMicrotask(() => { if (!destroyed && selectedIdentity === identity) clearLostTarget(); });
+    return true;
+  }, () => reconciliation.cancel('Session reset.'));
   const parentOf = (element: Element) => {
     const root = element.getRootNode();
     const parent = element.parentElement ?? (root instanceof win.ShadowRoot && root.mode === 'open' ? root.host : null);
@@ -97,20 +123,32 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   const frame = frameGate(paint, win.requestAnimationFrame.bind(win), win.cancelAnimationFrame.bind(win));
   const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(() => frame.schedule());
   function clearLostTarget() {
-    if (!selected || (selectedIdentity && lifecycle.safe(selectedIdentity))) return;
-    if (selectedIdentity) selectors.invalidate(selectedIdentity);
+    if (handlingLoss || !selected || (selectedIdentity && lifecycle.safe(selectedIdentity))) return;
+    handlingLoss = true;
+    const old = selected, identity = selectedIdentity, captured = locator, watchedRegions = regions;
+    const ticket = identity ? editor.prepareMigration(identity) : null;
+    if (identity) selectors.invalidate(identity);
     selected = null; selectedIdentity = null; hovered = null; source = null; candidates = [];
+    selectionGeneration++;
     unobserve(); unobserve = () => {}; observer?.disconnect();
-    editor.quarantine(); sources.invalidate(); cascade.invalidate(); overlay.hide();
-    if (locator) locatorResult = locators.resolve(locator);
+    editor.quarantine(); sources.invalidate(old); cascade.invalidate(old); overlay.hide();
     publish({ ...state, selection: null });
+    handlingLoss = false;
+    if (ticket && captured && !suppressMigration) reconciliation.start(captured, ticket, watchedRegions);
+    else { if (ticket) editor.retireMigration(ticket); reconciliation.cancel('No active edited session to migrate.'); if (captured) locatorResult = locators.resolve(captured); }
   }
   const select = (element: Element | null) => {
-    clearLostTarget();
     if (destroyed || !lifecycle.admissible(element)) return;
-    editor.quarantine(); selectedIdentity = lifecycle.bind(element);
-    locator = locators.capture(selectedIdentity, true); locatorResult = null;
-    selected = element; hovered = null; source = null; sources.invalidate(); cascade.invalidate();
+    reconciliation.cancel('Explicit selection/repick.'); suppressMigration = true; clearLostTarget(); editor.quarantine(); suppressMigration = false;
+    activateSelection(element, lifecycle.bind(element));
+  };
+  function activateSelection(element: Element, identity: TargetIdentity, migrated = false) {
+    selectedIdentity = identity;
+    locator = locators.capture(identity, true); if (!migrated) { locatorResult = null; reconciliation.arm(locator); }
+    selected = element; hovered = null; source = null; sources.invalidate(element); cascade.invalidate(element);
+    const generation = ++selectionGeneration;
+    regions = []; let parent = element.parentElement;
+    for (let depth = 0; parent && depth < reconciliationLimits.regionAncestors; depth++, parent = parent.parentElement) regions.push(parent);
     const computed = win.getComputedStyle(element);
     editor.inspect(element, computed, true);
     publish({ active: false, selection: {
@@ -125,6 +163,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     function watchSelection() {
       unobserve();
       const observation = observeTarget(element!, () => {
+        if (destroyed || generation !== selectionGeneration || selected !== element || selectedIdentity !== identity) return;
         clearLostTarget();
         if (selected === element && observation.moved()) watchSelection();
         frame.schedule();
@@ -133,7 +172,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     }
     watchSelection();
     onSelection(); frame.schedule();
-  };
+  }
   const tree = createTree(valid, parentOf, select);
   const move = (event: Event) => {
     if (!state.active || suspended) return;
@@ -166,6 +205,8 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   win.visualViewport?.addEventListener('scroll', refresh);
   return {
     editor,
+    reconciliation: reconciliation.getSnapshot,
+    reconciliationStats: reconciliation.getStats,
     targetLocator: () => locator,
     locatorResult: () => locatorResult,
     locatorStats: locators.getStats,
@@ -175,7 +216,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     invalidateSelector() { if (selectedIdentity) selectors.invalidate(selectedIdentity); },
     resolveTarget(request: ResolveRequest = {}) { clearLostTarget(); return locator ? (locatorResult = locators.resolve(locator, request)) : null; },
     candidates: () => candidates.filter(item => lifecycle.admissible(item.element)),
-    source(force = false) { clearLostTarget(); if (!valid(selected)) return null; if (!source || force) { if (force) { sources.invalidate(); cascade.invalidate(); } source = presentSource(sources.read(selected)); editor.inspect(selected, undefined, true); } return source; },
+    source(force = false) { clearLostTarget(); if (!valid(selected)) return null; if (!source || force) { if (force) { sources.invalidate(selected); cascade.invalidate(selected); } source = presentSource(sources.read(selected)); editor.inspect(selected, undefined, true); } return source; },
     cascade() { clearLostTarget(); return valid(selected) ? cascade.read(selected, editor.getSnapshot().context) : null; },
     cascadeStats: cascade.getStats,
     sourceOverrides(groups: SessionGroup[]) { return valid(selected) ? sources.overrides(selected, groups).rules : []; },
@@ -185,7 +226,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     selectNode(id: string) { tree.select(id); },
     subscribe(notify: () => void) { subscribers.add(notify); return () => { subscribers.delete(notify); }; },
     getSnapshot: () => { clearLostTarget(); return state; },
-    start() { if (destroyed || state.active) return; hovered = null; publish({ ...state, active: true }); frame.schedule(); },
+    start() { if (destroyed || state.active) return; reconciliation.cancel('Explicit repick started.'); hovered = null; publish({ ...state, active: true }); frame.schedule(); },
     cancel() { if (!state.active) return false; hovered = null; publish({ ...state, active: false }); frame.schedule(); return true; },
     setSuspended(value: boolean) { suspended = value; if (value) leave(); },
     parent() { if (selected) select(parentOf(selected)); },
@@ -196,6 +237,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     destroy() {
       if (destroyed) return;
       destroyed = true; frame.cancel(); observer?.disconnect(); unobserve();
+      reconciliation.destroy();
       editor.destroy(); tree.destroy(); sources.destroy(); cascade.destroy(); source = null;
       win.removeEventListener('pointermove', move, true);
       doc.removeEventListener('pointerleave', leave); win.removeEventListener('blur', leave);

@@ -71,7 +71,7 @@ function AddDeclaration() {
 
 export function LiveCodeView() {
   const { design } = useEditing();
-  return design ? <CodeTarget key={design.targetId} /> : null;
+  return design ? <CodeTarget key={`${design.targetId}:${design.bindingGeneration}`} /> : null;
 }
 function CodeTarget() {
   const { picker } = useInspection(), { design, overrides, context, undoCount, editedCount } = useEditing();

@@ -1,0 +1,697 @@
+{
+  "before": {
+    "state": "active-original",
+    "generation": 3,
+    "attempts": 0,
+    "reason": "Original target active.",
+    "selection": null,
+    "targetId": "1",
+    "undo": 1,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "overrides": [
+      {
+        "context": {
+          "media": [],
+          "pseudo": ""
+        },
+        "declarations": [
+          {
+            "property": "font-size",
+            "value": "32px",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "locator": {
+      "captures": 1,
+      "requests": 0,
+      "searches": 0,
+      "queries": 2,
+      "candidates": 2
+    },
+    "reconciliation": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 1
+    },
+    "cascade": {
+      "resolutions": 5
+    },
+    "selectors": {
+      "requests": 1,
+      "generations": 1,
+      "validations": 3,
+      "cacheHits": 0
+    },
+    "markers": [
+      "data-cssforge-target-b2c2b4d497ff48e6be1c1e4ac0461004"
+    ],
+    "retired": []
+  },
+  "cache": {
+    "source": [
+      "button",
+      "article:first-child button"
+    ],
+    "cascade": {
+      "property": "color",
+      "confidence": "resolved",
+      "readableWinner": {
+        "declaration": {
+          "id": "rule-10:declaration:color",
+          "sourceId": "sheet-9",
+          "ruleId": "rule-10",
+          "contexts": [],
+          "property": "color",
+          "value": "green",
+          "priority": "",
+          "important": false,
+          "order": 0,
+          "enabled": true
+        },
+        "rule": {
+          "id": "rule-10",
+          "sourceId": "sheet-9",
+          "path": [
+            0
+          ],
+          "order": 5,
+          "kind": "style",
+          "selectorText": "article:first-child button",
+          "cssText": "article:first-child button { color: green; }",
+          "contexts": [],
+          "declarations": [
+            {
+              "id": "rule-10:declaration:color",
+              "sourceId": "sheet-9",
+              "ruleId": "rule-10",
+              "contexts": [],
+              "property": "color",
+              "value": "green",
+              "priority": "",
+              "important": false,
+              "order": 0,
+              "enabled": true
+            }
+          ],
+          "children": [],
+          "animationNames": [],
+          "accessibility": {
+            "readable": true
+          }
+        },
+        "source": {
+          "id": "sheet-9",
+          "scopeId": "scope-1",
+          "kind": "style",
+          "label": "<style>",
+          "url": null,
+          "order": 1,
+          "disabled": false,
+          "accessibility": {
+            "readable": true
+          },
+          "rules": [
+            {
+              "id": "rule-10",
+              "sourceId": "sheet-9",
+              "path": [
+                0
+              ],
+              "order": 5,
+              "kind": "style",
+              "selectorText": "article:first-child button",
+              "cssText": "article:first-child button { color: green; }",
+              "contexts": [],
+              "declarations": [
+                {
+                  "id": "rule-10:declaration:color",
+                  "sourceId": "sheet-9",
+                  "ruleId": "rule-10",
+                  "contexts": [],
+                  "property": "color",
+                  "value": "green",
+                  "priority": "",
+                  "important": false,
+                  "order": 0,
+                  "enabled": true
+                }
+              ],
+              "children": [],
+              "animationNames": [],
+              "accessibility": {
+                "readable": true
+              }
+            },
+            {
+              "id": "rule-11",
+              "sourceId": "sheet-9",
+              "path": [
+                1
+              ],
+              "order": 6,
+              "kind": "style",
+              "selectorText": "article:last-child button",
+              "cssText": "article:last-child button { color: purple; }",
+              "contexts": [],
+              "declarations": [
+                {
+                  "id": "rule-11:declaration:color",
+                  "sourceId": "sheet-9",
+                  "ruleId": "rule-11",
+                  "contexts": [],
+                  "property": "color",
+                  "value": "purple",
+                  "priority": "",
+                  "important": false,
+                  "order": 0,
+                  "enabled": true
+                }
+              ],
+              "children": [],
+              "animationNames": [],
+              "accessibility": {
+                "readable": true
+              }
+            }
+          ]
+        },
+        "property": "color",
+        "value": "green",
+        "selector": "article:first-child button",
+        "specificity": [
+          0,
+          1,
+          2
+        ],
+        "order": [
+          1,
+          5,
+          0
+        ],
+        "layer": null,
+        "state": "matched",
+        "issues": []
+      },
+      "winner": {
+        "declaration": {
+          "id": "rule-10:declaration:color",
+          "sourceId": "sheet-9",
+          "ruleId": "rule-10",
+          "contexts": [],
+          "property": "color",
+          "value": "green",
+          "priority": "",
+          "important": false,
+          "order": 0,
+          "enabled": true
+        },
+        "rule": {
+          "id": "rule-10",
+          "sourceId": "sheet-9",
+          "path": [
+            0
+          ],
+          "order": 5,
+          "kind": "style",
+          "selectorText": "article:first-child button",
+          "cssText": "article:first-child button { color: green; }",
+          "contexts": [],
+          "declarations": [
+            {
+              "id": "rule-10:declaration:color",
+              "sourceId": "sheet-9",
+              "ruleId": "rule-10",
+              "contexts": [],
+              "property": "color",
+              "value": "green",
+              "priority": "",
+              "important": false,
+              "order": 0,
+              "enabled": true
+            }
+          ],
+          "children": [],
+          "animationNames": [],
+          "accessibility": {
+            "readable": true
+          }
+        },
+        "source": {
+          "id": "sheet-9",
+          "scopeId": "scope-1",
+          "kind": "style",
+          "label": "<style>",
+          "url": null,
+          "order": 1,
+          "disabled": false,
+          "accessibility": {
+            "readable": true
+          },
+          "rules": [
+            {
+              "id": "rule-10",
+              "sourceId": "sheet-9",
+              "path": [
+                0
+              ],
+              "order": 5,
+              "kind": "style",
+              "selectorText": "article:first-child button",
+              "cssText": "article:first-child button { color: green; }",
+              "contexts": [],
+              "declarations": [
+                {
+                  "id": "rule-10:declaration:color",
+                  "sourceId": "sheet-9",
+                  "ruleId": "rule-10",
+                  "contexts": [],
+                  "property": "color",
+                  "value": "green",
+                  "priority": "",
+                  "important": false,
+                  "order": 0,
+                  "enabled": true
+                }
+              ],
+              "children": [],
+              "animationNames": [],
+              "accessibility": {
+                "readable": true
+              }
+            },
+            {
+              "id": "rule-11",
+              "sourceId": "sheet-9",
+              "path": [
+                1
+              ],
+              "order": 6,
+              "kind": "style",
+              "selectorText": "article:last-child button",
+              "cssText": "article:last-child button { color: purple; }",
+              "contexts": [],
+              "declarations": [
+                {
+                  "id": "rule-11:declaration:color",
+                  "sourceId": "sheet-9",
+                  "ruleId": "rule-11",
+                  "contexts": [],
+                  "property": "color",
+                  "value": "purple",
+                  "priority": "",
+                  "important": false,
+                  "order": 0,
+                  "enabled": true
+                }
+              ],
+              "children": [],
+              "animationNames": [],
+              "accessibility": {
+                "readable": true
+              }
+            }
+          ]
+        },
+        "property": "color",
+        "value": "green",
+        "selector": "article:first-child button",
+        "specificity": [
+          0,
+          1,
+          2
+        ],
+        "order": [
+          1,
+          5,
+          0
+        ],
+        "layer": null,
+        "state": "matched",
+        "issues": []
+      },
+      "matched": [
+        {
+          "declaration": {
+            "id": "rule-10:declaration:color",
+            "sourceId": "sheet-9",
+            "ruleId": "rule-10",
+            "contexts": [],
+            "property": "color",
+            "value": "green",
+            "priority": "",
+            "important": false,
+            "order": 0,
+            "enabled": true
+          },
+          "rule": {
+            "id": "rule-10",
+            "sourceId": "sheet-9",
+            "path": [
+              0
+            ],
+            "order": 5,
+            "kind": "style",
+            "selectorText": "article:first-child button",
+            "cssText": "article:first-child button { color: green; }",
+            "contexts": [],
+            "declarations": [
+              {
+                "id": "rule-10:declaration:color",
+                "sourceId": "sheet-9",
+                "ruleId": "rule-10",
+                "contexts": [],
+                "property": "color",
+                "value": "green",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              }
+            ],
+            "children": [],
+            "animationNames": [],
+            "accessibility": {
+              "readable": true
+            }
+          },
+          "source": {
+            "id": "sheet-9",
+            "scopeId": "scope-1",
+            "kind": "style",
+            "label": "<style>",
+            "url": null,
+            "order": 1,
+            "disabled": false,
+            "accessibility": {
+              "readable": true
+            },
+            "rules": [
+              {
+                "id": "rule-10",
+                "sourceId": "sheet-9",
+                "path": [
+                  0
+                ],
+                "order": 5,
+                "kind": "style",
+                "selectorText": "article:first-child button",
+                "cssText": "article:first-child button { color: green; }",
+                "contexts": [],
+                "declarations": [
+                  {
+                    "id": "rule-10:declaration:color",
+                    "sourceId": "sheet-9",
+                    "ruleId": "rule-10",
+                    "contexts": [],
+                    "property": "color",
+                    "value": "green",
+                    "priority": "",
+                    "important": false,
+                    "order": 0,
+                    "enabled": true
+                  }
+                ],
+                "children": [],
+                "animationNames": [],
+                "accessibility": {
+                  "readable": true
+                }
+              },
+              {
+                "id": "rule-11",
+                "sourceId": "sheet-9",
+                "path": [
+                  1
+                ],
+                "order": 6,
+                "kind": "style",
+                "selectorText": "article:last-child button",
+                "cssText": "article:last-child button { color: purple; }",
+                "contexts": [],
+                "declarations": [
+                  {
+                    "id": "rule-11:declaration:color",
+                    "sourceId": "sheet-9",
+                    "ruleId": "rule-11",
+                    "contexts": [],
+                    "property": "color",
+                    "value": "purple",
+                    "priority": "",
+                    "important": false,
+                    "order": 0,
+                    "enabled": true
+                  }
+                ],
+                "children": [],
+                "animationNames": [],
+                "accessibility": {
+                  "readable": true
+                }
+              }
+            ]
+          },
+          "property": "color",
+          "value": "green",
+          "selector": "article:first-child button",
+          "specificity": [
+            0,
+            1,
+            2
+          ],
+          "order": [
+            1,
+            5,
+            0
+          ],
+          "layer": null,
+          "state": "matched",
+          "issues": []
+        }
+      ],
+      "inactive": [
+        {
+          "declaration": {
+            "id": "rule-11:declaration:color",
+            "sourceId": "sheet-9",
+            "ruleId": "rule-11",
+            "contexts": [],
+            "property": "color",
+            "value": "purple",
+            "priority": "",
+            "important": false,
+            "order": 0,
+            "enabled": true
+          },
+          "rule": {
+            "id": "rule-11",
+            "sourceId": "sheet-9",
+            "path": [
+              1
+            ],
+            "order": 6,
+            "kind": "style",
+            "selectorText": "article:last-child button",
+            "cssText": "article:last-child button { color: purple; }",
+            "contexts": [],
+            "declarations": [
+              {
+                "id": "rule-11:declaration:color",
+                "sourceId": "sheet-9",
+                "ruleId": "rule-11",
+                "contexts": [],
+                "property": "color",
+                "value": "purple",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              }
+            ],
+            "children": [],
+            "animationNames": [],
+            "accessibility": {
+              "readable": true
+            }
+          },
+          "source": {
+            "id": "sheet-9",
+            "scopeId": "scope-1",
+            "kind": "style",
+            "label": "<style>",
+            "url": null,
+            "order": 1,
+            "disabled": false,
+            "accessibility": {
+              "readable": true
+            },
+            "rules": [
+              {
+                "id": "rule-10",
+                "sourceId": "sheet-9",
+                "path": [
+                  0
+                ],
+                "order": 5,
+                "kind": "style",
+                "selectorText": "article:first-child button",
+                "cssText": "article:first-child button { color: green; }",
+                "contexts": [],
+                "declarations": [
+                  {
+                    "id": "rule-10:declaration:color",
+                    "sourceId": "sheet-9",
+                    "ruleId": "rule-10",
+                    "contexts": [],
+                    "property": "color",
+                    "value": "green",
+                    "priority": "",
+                    "important": false,
+                    "order": 0,
+                    "enabled": true
+                  }
+                ],
+                "children": [],
+                "animationNames": [],
+                "accessibility": {
+                  "readable": true
+                }
+              },
+              {
+                "id": "rule-11",
+                "sourceId": "sheet-9",
+                "path": [
+                  1
+                ],
+                "order": 6,
+                "kind": "style",
+                "selectorText": "article:last-child button",
+                "cssText": "article:last-child button { color: purple; }",
+                "contexts": [],
+                "declarations": [
+                  {
+                    "id": "rule-11:declaration:color",
+                    "sourceId": "sheet-9",
+                    "ruleId": "rule-11",
+                    "contexts": [],
+                    "property": "color",
+                    "value": "purple",
+                    "priority": "",
+                    "important": false,
+                    "order": 0,
+                    "enabled": true
+                  }
+                ],
+                "children": [],
+                "animationNames": [],
+                "accessibility": {
+                  "readable": true
+                }
+              }
+            ]
+          },
+          "property": "color",
+          "value": "purple",
+          "specificity": [
+            0,
+            0,
+            0
+          ],
+          "order": [
+            1,
+            6,
+            0
+          ],
+          "layer": null,
+          "state": "inactive",
+          "inactiveReason": "selector",
+          "issues": []
+        }
+      ],
+      "unresolved": [],
+      "overridden": [],
+      "importantAffected": false,
+      "cssforge": [],
+      "issues": []
+    },
+    "selector": "[data-id=\"42\"] .buy"
+  },
+  "result": {
+    "state": "migrated",
+    "generation": 4,
+    "attempts": 1,
+    "reason": "Strong same-root replacement migrated.",
+    "resolution": "resolved-unique",
+    "confidence": "strong",
+    "selection": null,
+    "targetId": "1",
+    "undo": 1,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "overrides": [
+      {
+        "context": {
+          "media": [],
+          "pseudo": ""
+        },
+        "declarations": [
+          {
+            "property": "font-size",
+            "value": "32px",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "locator": {
+      "captures": 2,
+      "requests": 2,
+      "searches": 2,
+      "queries": 8,
+      "candidates": 8
+    },
+    "reconciliation": {
+      "starts": 1,
+      "resolutions": 1,
+      "retries": 0,
+      "migrations": 1,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 2
+    },
+    "cascade": {
+      "resolutions": 10
+    },
+    "selectors": {
+      "requests": 2,
+      "generations": 2,
+      "validations": 6,
+      "cacheHits": 0
+    },
+    "markers": [
+      "data-cssforge-target-b2c2b4d497ff48e6be1c1e4ac0461004-m1"
+    ],
+    "retired": [
+      {
+        "connected": false,
+        "markers": []
+      }
+    ]
+  }
+}

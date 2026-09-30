@@ -25,11 +25,11 @@ async function evaluate<T>(cdp: CDPSession, contextId: number, expression: strin
 }
 async function lost(page: Page) { await expect(identity(page)).toHaveText('No element selected'); await expect(page.getByTestId('live-design')).toHaveCount(0); await expect(page.getByTestId('live-code')).toHaveCount(0); }
 async function evidence(info: TestInfo, result: unknown) {
-  const directory = 'artifacts/diagnostics/target-locator'; await mkdir(directory, { recursive: true });
+  const directory = info.title.startsWith('L01 ') ? 'artifacts/diagnostics/reconciliation' : 'artifacts/diagnostics/target-locator'; await mkdir(directory, { recursive: true });
   const file = `${directory}/${info.title.split(' ')[0]}.json`; await writeFile(file, JSON.stringify(result, null, 2)); await info.attach('locator-outcome', { path: file, contentType: 'application/json' });
 }
 
-test('L01 built original authority hover performance and unique ID rerender without edit migration', async ({}, info) => {
+test('L01 built original authority hover performance and strong unique ID reconciliation', async ({}, info) => {
   const { page, context, read, outcome, errors } = await launch(info, '<button id="save" type="button">Save</button><button id="other">Other</button>');
   try {
     const before = await read('__locatorPicker.locatorStats()');
@@ -43,9 +43,12 @@ test('L01 built original authority hover performance and unique ID rerender with
     await page.waitForTimeout(100); expect((await read('__locatorPicker.locatorStats()')).captures).toBe(1);
     const input = page.getByRole('textbox', { name: 'Font size', exact: true }); await input.fill('31'); await input.press('Enter'); await expect(page.locator('#save')).toHaveCSS('font-size', '31px');
     await page.getByRole('tab', { name: 'Code', exact: true }).click();
-    await page.locator('#save').evaluate(node => node.replaceWith(node.cloneNode(true))); await lost(page);
-    const result = await outcome(); expect(result).toMatchObject({ state: 'resolved-unique', id: 'save', confidence: 'strong', selection: null, design: null });
-    await expect(page.locator('#save')).toHaveCSS('font-size', '16px'); expect(await page.locator('style[data-cssforge-edit-layer]').count()).toBe(0);
+    const logicalTarget = await read('__locatorPicker.editor.getSnapshot().design.targetId');
+    await page.locator('#save').evaluate(node => node.replaceWith(node.cloneNode(true)));
+    await expect.poll(() => read('__locatorPicker.reconciliation().state')).toBe('migrated');
+    const result = await outcome(); expect(result).toMatchObject({ state: 'resolved-unique', id: 'save', confidence: 'strong', selection: { id: 'save' }, design: logicalTarget });
+    await expect(page.locator('#save')).toHaveCSS('font-size', '31px'); expect(await page.locator('style[data-cssforge-edit-layer]').count()).toBe(1);
+    expect(await read('__locatorPicker.editor.getSnapshot().undoCount')).toBe(1); await expect(page.getByTestId('live-code')).toBeVisible();
     expect(errors).toEqual([]); await evidence(info, { before, raw, captured, valid, result });
   } finally { await context.close(); }
 });

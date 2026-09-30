@@ -1,0 +1,44 @@
+{
+  "state": "retired",
+  "generation": 11,
+  "attempts": 0,
+  "reason": "No active edited session to migrate.",
+  "selection": null,
+  "targetId": null,
+  "undo": 0,
+  "context": {
+    "media": [],
+    "pseudo": ""
+  },
+  "overrides": [],
+  "locator": {
+    "captures": 3,
+    "requests": 1,
+    "searches": 0,
+    "queries": 3,
+    "candidates": 3
+  },
+  "reconciliation": {
+    "starts": 0,
+    "resolutions": 0,
+    "retries": 0,
+    "migrations": 0,
+    "deliveries": 0,
+    "records": 0,
+    "candidateNodes": 0
+  },
+  "source": {
+    "scopeScans": 3
+  },
+  "cascade": {
+    "resolutions": 0
+  },
+  "selectors": {
+    "requests": 0,
+    "generations": 0,
+    "validations": 0,
+    "cacheHits": 0
+  },
+  "markers": [],
+  "retired": []
+}

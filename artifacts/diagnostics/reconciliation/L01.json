@@ -1,0 +1,73 @@
+{
+  "before": {
+    "captures": 0,
+    "requests": 0,
+    "searches": 0,
+    "queries": 0,
+    "candidates": 0
+  },
+  "raw": {
+    "locator": {
+      "captures": 0,
+      "requests": 0,
+      "searches": 0,
+      "queries": 0,
+      "candidates": 0
+    },
+    "geometry": 0,
+    "source": {
+      "scopeScans": 0
+    },
+    "cascade": {
+      "resolutions": 0
+    }
+  },
+  "captured": {
+    "captures": 1,
+    "requests": 0,
+    "searches": 0,
+    "queries": 1,
+    "candidates": 1
+  },
+  "valid": {
+    "captures": 1,
+    "requests": 1,
+    "searches": 0,
+    "queries": 1,
+    "candidates": 1
+  },
+  "result": {
+    "state": "resolved-unique",
+    "id": "save",
+    "key": null,
+    "card": null,
+    "count": 1,
+    "confidence": "strong",
+    "evidence": [
+      "unique ID"
+    ],
+    "reason": "Strong captured evidence proves one compatible same-root replacement.",
+    "rejected": [],
+    "selection": {
+      "identity": "button#save",
+      "tag": "button",
+      "id": "save",
+      "classes": [],
+      "rect": {
+        "x": 88,
+        "y": 58,
+        "width": 98.671875,
+        "height": 64
+      },
+      "fontFamily": "Arial",
+      "fontSize": "31px",
+      "hasParent": true,
+      "hasChild": false,
+      "hasPrevious": false,
+      "hasNext": true,
+      "boundary": null
+    },
+    "design": "1",
+    "boundaries": 0
+  }
+}

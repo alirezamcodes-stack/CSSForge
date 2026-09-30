@@ -98,7 +98,7 @@ test('geometry, display, opacity, positioning and prior-override undo use real C
   } finally { await context.close(); }
 });
 
-test('selection isolation, explicit units, author styles, stale DOM and full teardown', async ({}, info) => {
+test('selection isolation, explicit units, author styles, strong replacement migration and full teardown', async ({}, info) => {
   const { context, page, action, errors } = await setup(info);
   try {
     await page.locator('#checkout').evaluate(el => el.setAttribute('style', 'padding-left: 2em; margin-left: 5%; line-height: 24px; --original: untouched;'));
@@ -126,7 +126,8 @@ test('selection isolation, explicit units, author styles, stale DOM and full tea
     expect(await page.locator('#checkout').getAttribute('style')).toBe(original);
     await page.locator('#checkout').evaluate(el => { const replacement = document.createElement('button'); replacement.id = 'checkout'; replacement.className = 'primary'; replacement.textContent = 'Replacement'; el.replaceWith(replacement); });
     await page.evaluate(() => dispatchEvent(new Event('resize')));
-    await expect(identity(page)).toHaveText('No element selected'); await expect(page.locator('#checkout')).toHaveCSS('padding-left', '24px');
+    await expect(identity(page)).toHaveText('button#checkout.primary'); await expect(page.locator('#checkout')).toHaveCSS('padding-left', '54px');
+    expect(await page.locator('#checkout').getAttribute('style')).toBeNull();
     await pick(page, '#checkout'); await input(page, 'Text color', 'rebeccapurple');
     await expect(page.locator('#checkout')).toHaveCSS('color', 'rgb(102, 51, 153)');
     await action(); await expect(inspector(page)).toBeHidden(); await clean(page);

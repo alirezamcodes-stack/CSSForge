@@ -123,7 +123,16 @@ export function createSourceIndex(doc: Document, owns: (element: Element) => boo
   return {
     read, overrides,
     /** Selection / Code activation / explicit Refresh. CSSOM insertRule is not observable reliably. */
-    invalidate() { scopes = new WeakMap(); selected = new WeakMap(); },
+    invalidate(element?: Element) {
+      if (!element) { scopes = new WeakMap(); selected = new WeakMap(); return; }
+      // Only this target's match/inline caches, inherited chain and associated roots need refreshing.
+      let node: Element | null = element;
+      for (let depth = 0; node && depth < 64; depth++) {
+        selected.delete(node); const root = node.getRootNode();
+        if (root === doc || ('host' in root && (root as ShadowRoot).mode === 'open')) scopes.delete(root as Scope);
+        node = node.parentElement ?? ('host' in root ? (root as ShadowRoot).host : null);
+      }
+    },
     getStats: () => ({ scopeScans: scans }),
     destroy() { scopes = new WeakMap(); selected = new WeakMap(); identities = new WeakMap(); },
   };

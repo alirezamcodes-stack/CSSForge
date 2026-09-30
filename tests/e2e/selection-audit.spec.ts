@@ -28,8 +28,9 @@ async function launch(page: Page) {
   });
 }
 async function evidence(info: TestInfo, data: unknown) {
-  await mkdir('artifacts/diagnostics/selection-hardening', { recursive: true });
-  const file = path.resolve(`artifacts/diagnostics/selection-hardening/${info.title.split(' ')[0]}.json`);
+  const prefix = info.title.split(' ')[0], directory = ['A08', 'A13'].includes(prefix) ? 'artifacts/diagnostics/reconciliation' : 'artifacts/diagnostics/selection-hardening';
+  await mkdir(directory, { recursive: true });
+  const file = path.resolve(`${directory}/${prefix}.json`);
   await writeFile(file, JSON.stringify(data, null, 2)); await info.attach('diagnostic-evidence', { path: file, contentType: 'application/json' });
 }
 const selection = (page: Page) => page.evaluate(() => window.selectionAudit.picker.getSnapshot().selection);
@@ -191,7 +192,7 @@ test('A07 open nested shadow roots slots and closed hosts retain truthful scope 
   await evidence(info, { cases, slotNavigation: slot, closedBoundary: await selection(page) });
 });
 
-test('A08 copied markers are contained before paint and replacement quarantines the old session layer', async ({ page }, info) => {
+test('A08 copied markers are contained before paint and strong replacement retires the old marker', async ({ page }, info) => {
   await launch(page); await clickCenter(page, '#dynamic');
   const result = await page.evaluate(async () => {
     const picker = window.selectionAudit.picker, old = document.querySelector<HTMLElement>('#dynamic')!;
@@ -206,14 +207,14 @@ test('A08 copied markers are contained before paint and replacement quarantines 
     const replacement = old.cloneNode(true) as HTMLElement; old.replaceWith(replacement);
     const immediate = { disconnected: !old.isConnected, replacementFont: getComputedStyle(replacement).fontSize, marker: replacement.getAttribute(marker), pickerSelection: picker.getSnapshot().selection, designTarget: picker.editor.getSnapshot().design?.targetId, source: picker.source() };
     await new Promise<void>(resolve => setTimeout(resolve, 150));
-    const settled = { selection: picker.getSnapshot().selection, design: picker.editor.getSnapshot().design, layerCount: document.querySelectorAll('style[data-cssforge-edit-layer]').length, replacementFont: getComputedStyle(replacement).fontSize };
+    const settled = { selection: picker.getSnapshot().selection, design: picker.editor.getSnapshot().design, layerCount: document.querySelectorAll('style[data-cssforge-edit-layer]').length, replacementFont: getComputedStyle(replacement).fontSize, reconciliation: picker.reconciliation().state, oldMarker: replacement.getAttribute(marker), markerCount: replacement.getAttributeNames().filter(name => name.startsWith('data-cssforge-target')).length };
     const edit = picker.editor.apply(targetId, 'font-size', '40px'); const error = picker.editor.getSnapshot().error;
     picker.editor.reset();
     return { synchronousClone, duplicated, immediate, settled, edit, error, afterReset: { font: getComputedStyle(replacement).fontSize, marker: replacement.getAttribute(marker), layers: document.querySelectorAll('style[data-cssforge-edit-layer]').length } };
   });
   expect(result.duplicated).toEqual({ original: '31px', clone: '18px', copiedMarker: null }); expect(result.immediate.disconnected).toBe(true);
-  expect(result.settled.replacementFont).toBe('18px'); expect(result.settled.selection).toBeNull(); expect(result.settled.design).toBeNull();
-  expect(result.settled.layerCount).toBe(0); expect(result.edit).toBe(false); expect(result.error).toContain('target or context changed');
+  expect(result.settled.replacementFont).toBe('31px'); expect(result.settled.selection?.id).toBe('dynamic'); expect(result.settled.design).not.toBeNull();
+  expect(result.settled).toMatchObject({ layerCount: 1, reconciliation: 'migrated', oldMarker: null, markerCount: 1 }); expect(result.edit).toBe(true); expect(result.error).toBeNull();
   expect(result.afterReset).toEqual({ font: '18px', marker: null, layers: 0 });
   await evidence(info, result);
 });
@@ -319,7 +320,7 @@ test('A12 raw hover remains bounded and teardown removes markers layers overlays
   await evidence(info, result);
 });
 
-test('A13 built zoom Code editing and DOM replacement preserve geometry and quarantine lost target styling', async ({}, info) => {
+test('A13 built zoom Code editing and strong DOM replacement preserve geometry and session styling', async ({}, info) => {
   const { page, context, worker, tabId, errors, action } = await setup(info, extensionFixture.replace('id="checkout"', 'id="checkout" style="font-size:18px"'));
   try {
     await extensionPick(page, '#checkout');
@@ -333,11 +334,11 @@ test('A13 built zoom Code editing and DOM replacement preserve geometry and quar
     const input = inline.getByRole('textbox', { name: 'CSS value font-size', exact: true }); await input.fill('31px'); await input.press('Enter');
     await expect(page.locator('#checkout')).toHaveCSS('font-size', '31px');
     await page.evaluate(() => { const old = document.querySelector('#checkout')!; old.replaceWith(old.cloneNode(true)); });
-    await expect(identity(page)).toHaveText('No element selected'); await expect(page.getByTestId('live-code')).toHaveCount(0);
-    await expect(page.locator('#checkout')).toHaveCSS('font-size', '18px');
-    expect(await page.locator('style[data-cssforge-edit-layer]').count()).toBe(0);
+    await expect(identity(page)).toHaveText('button#checkout.primary'); await expect(page.getByTestId('live-code')).toBeVisible();
+    await expect(page.locator('#checkout')).toHaveCSS('font-size', '31px');
+    expect(await page.locator('style[data-cssforge-edit-layer]').count()).toBe(1);
     await action(); await expect(page.locator('cssforge-ui')).toHaveCount(0); await expect(page.locator('#checkout')).toHaveCSS('font-size', '18px');
-    expect(errors).toEqual([]); await evidence(info, { zoom, replacement: 'Code edited the original; replacement invalidates selection and Code, and removes unsafe session CSS before repaint.' });
+    expect(errors).toEqual([]); await evidence(info, { zoom, replacement: 'Strong unique same-root replacement receives a fresh marker and preserved Code editing state; deactivation removes all session styling.' });
   } finally { await context.close(); }
 });
 

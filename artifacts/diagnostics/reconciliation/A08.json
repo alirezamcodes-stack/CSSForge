@@ -1,0 +1,411 @@
+{
+  "synchronousClone": "31px",
+  "duplicated": {
+    "original": "31px",
+    "clone": "18px",
+    "copiedMarker": null
+  },
+  "immediate": {
+    "disconnected": true,
+    "replacementFont": "31px",
+    "marker": "1",
+    "pickerSelection": {
+      "identity": "div#dynamic.box",
+      "tag": "div",
+      "id": "dynamic",
+      "classes": [
+        "box"
+      ],
+      "rect": {
+        "x": 40,
+        "y": 1030,
+        "width": 140,
+        "height": 50
+      },
+      "fontFamily": "Arial",
+      "fontSize": "31px",
+      "hasParent": true,
+      "hasChild": false,
+      "hasPrevious": true,
+      "hasNext": true,
+      "boundary": null
+    },
+    "designTarget": "1",
+    "source": {
+      "inline": [
+        {
+          "id": "element-50:inline:rule:declaration:font-size",
+          "sourceId": "element-50:inline",
+          "ruleId": "element-50:inline:rule",
+          "contexts": [],
+          "property": "font-size",
+          "value": "18px",
+          "priority": "",
+          "important": false,
+          "order": 0,
+          "enabled": true
+        }
+      ],
+      "rules": [
+        {
+          "label": "<style>",
+          "selector": "*",
+          "context": {
+            "media": [],
+            "pseudo": ""
+          },
+          "editable": true,
+          "conditions": [],
+          "declarations": [
+            {
+              "id": "rule-4:declaration:box-sizing",
+              "sourceId": "sheet-3",
+              "ruleId": "rule-4",
+              "contexts": [],
+              "property": "box-sizing",
+              "value": "border-box",
+              "priority": "",
+              "important": false,
+              "order": 0,
+              "enabled": true
+            }
+          ]
+        },
+        {
+          "label": "<style>",
+          "selector": ".box",
+          "context": {
+            "media": [],
+            "pseudo": ""
+          },
+          "editable": true,
+          "conditions": [],
+          "declarations": [
+            {
+              "id": "rule-8:declaration:position",
+              "sourceId": "sheet-3",
+              "ruleId": "rule-8",
+              "contexts": [],
+              "property": "position",
+              "value": "absolute",
+              "priority": "",
+              "important": false,
+              "order": 0,
+              "enabled": true
+            },
+            {
+              "id": "rule-8:declaration:background",
+              "sourceId": "sheet-3",
+              "ruleId": "rule-8",
+              "contexts": [],
+              "property": "background",
+              "value": "rgb(215, 233, 223)",
+              "priority": "",
+              "important": false,
+              "order": 1,
+              "enabled": true
+            },
+            {
+              "id": "rule-8:declaration:width",
+              "sourceId": "sheet-3",
+              "ruleId": "rule-8",
+              "contexts": [],
+              "property": "width",
+              "value": "150px",
+              "priority": "",
+              "important": false,
+              "order": 2,
+              "enabled": true
+            },
+            {
+              "id": "rule-8:declaration:height",
+              "sourceId": "sheet-3",
+              "ruleId": "rule-8",
+              "contexts": [],
+              "property": "height",
+              "value": "60px",
+              "priority": "",
+              "important": false,
+              "order": 3,
+              "enabled": true
+            },
+            {
+              "id": "rule-8:declaration:padding",
+              "sourceId": "sheet-3",
+              "ruleId": "rule-8",
+              "contexts": [],
+              "property": "padding",
+              "value": "8px",
+              "priority": "",
+              "important": false,
+              "order": 4,
+              "enabled": true
+            }
+          ]
+        },
+        {
+          "label": "<style>",
+          "selector": "#dynamic",
+          "context": {
+            "media": [],
+            "pseudo": ""
+          },
+          "editable": true,
+          "conditions": [],
+          "declarations": [
+            {
+              "id": "rule-47:declaration:left",
+              "sourceId": "sheet-3",
+              "ruleId": "rule-47",
+              "contexts": [],
+              "property": "left",
+              "value": "40px",
+              "priority": "",
+              "important": false,
+              "order": 0,
+              "enabled": true
+            },
+            {
+              "id": "rule-47:declaration:top",
+              "sourceId": "sheet-3",
+              "ruleId": "rule-47",
+              "contexts": [],
+              "property": "top",
+              "value": "1030px",
+              "priority": "",
+              "important": false,
+              "order": 1,
+              "enabled": true
+            },
+            {
+              "id": "rule-47:declaration:width",
+              "sourceId": "sheet-3",
+              "ruleId": "rule-47",
+              "contexts": [],
+              "property": "width",
+              "value": "140px",
+              "priority": "",
+              "important": false,
+              "order": 2,
+              "enabled": true
+            },
+            {
+              "id": "rule-47:declaration:height",
+              "sourceId": "sheet-3",
+              "ruleId": "rule-47",
+              "contexts": [],
+              "property": "height",
+              "value": "50px",
+              "priority": "",
+              "important": false,
+              "order": 3,
+              "enabled": true
+            }
+          ]
+        }
+      ],
+      "keyframes": [],
+      "notices": []
+    }
+  },
+  "settled": {
+    "selection": {
+      "identity": "div#dynamic.box",
+      "tag": "div",
+      "id": "dynamic",
+      "classes": [
+        "box"
+      ],
+      "rect": {
+        "x": 40,
+        "y": 1030,
+        "width": 140,
+        "height": 50
+      },
+      "fontFamily": "Arial",
+      "fontSize": "31px",
+      "hasParent": true,
+      "hasChild": false,
+      "hasPrevious": true,
+      "hasNext": true,
+      "boundary": null
+    },
+    "design": {
+      "targetId": "1",
+      "bindingGeneration": 1,
+      "values": {
+        "width": {
+          "computed": "140px",
+          "presented": "140px"
+        },
+        "height": {
+          "computed": "50px",
+          "presented": "50px"
+        },
+        "opacity": {
+          "computed": "1",
+          "presented": "1"
+        },
+        "margin-top": {
+          "computed": "0px",
+          "presented": "0px"
+        },
+        "margin-right": {
+          "computed": "0px",
+          "presented": "0px"
+        },
+        "margin-bottom": {
+          "computed": "0px",
+          "presented": "0px"
+        },
+        "margin-left": {
+          "computed": "0px",
+          "presented": "0px"
+        },
+        "padding-top": {
+          "computed": "8px",
+          "presented": "8px"
+        },
+        "padding-right": {
+          "computed": "8px",
+          "presented": "8px"
+        },
+        "padding-bottom": {
+          "computed": "8px",
+          "presented": "8px"
+        },
+        "padding-left": {
+          "computed": "8px",
+          "presented": "8px"
+        },
+        "font-family": {
+          "computed": "Arial",
+          "presented": "Arial"
+        },
+        "font-weight": {
+          "computed": "400",
+          "presented": "400"
+        },
+        "font-size": {
+          "computed": "31px",
+          "presented": "31px",
+          "authored": "18px",
+          "override": "31px"
+        },
+        "line-height": {
+          "computed": "normal",
+          "presented": "normal"
+        },
+        "color": {
+          "computed": "rgb(0, 0, 0)",
+          "presented": "rgb(0, 0, 0)"
+        },
+        "text-align": {
+          "computed": "start",
+          "presented": "start"
+        },
+        "letter-spacing": {
+          "computed": "normal",
+          "presented": "normal"
+        },
+        "background-color": {
+          "computed": "rgb(215, 233, 223)",
+          "presented": "rgb(215, 233, 223)"
+        },
+        "display": {
+          "computed": "block",
+          "presented": "block"
+        },
+        "border-width": {
+          "computed": "0px",
+          "presented": "0px"
+        },
+        "border-style": {
+          "computed": "none",
+          "presented": "none"
+        },
+        "border-color": {
+          "computed": "rgb(0, 0, 0)",
+          "presented": "rgb(0, 0, 0)"
+        },
+        "border-radius": {
+          "computed": "0px",
+          "presented": "0px"
+        },
+        "position": {
+          "computed": "absolute",
+          "presented": "absolute"
+        },
+        "background-image": {
+          "computed": "none",
+          "presented": "none"
+        },
+        "background-position": {
+          "computed": "0% 0%",
+          "presented": "0% 0%"
+        },
+        "background-size": {
+          "computed": "auto",
+          "presented": "auto"
+        },
+        "background-repeat": {
+          "computed": "repeat",
+          "presented": "repeat"
+        },
+        "box-shadow": {
+          "computed": "none",
+          "presented": "none"
+        },
+        "text-shadow": {
+          "computed": "none",
+          "presented": "none"
+        },
+        "filter": {
+          "computed": "none",
+          "presented": "none"
+        },
+        "top": {
+          "computed": "1030px",
+          "presented": "1030px"
+        },
+        "right": {
+          "computed": "670px",
+          "presented": "670px"
+        },
+        "bottom": {
+          "computed": "70px",
+          "presented": "70px"
+        },
+        "left": {
+          "computed": "40px",
+          "presented": "40px"
+        },
+        "z-index": {
+          "computed": "auto",
+          "presented": "auto"
+        },
+        "text-decoration-line": {
+          "computed": "none",
+          "presented": "none"
+        },
+        "text-transform": {
+          "computed": "none",
+          "presented": "none"
+        }
+      },
+      "canSize": true
+    },
+    "layerCount": 1,
+    "replacementFont": "31px",
+    "reconciliation": "migrated",
+    "oldMarker": null,
+    "markerCount": 1
+  },
+  "edit": true,
+  "error": null,
+  "afterReset": {
+    "font": "18px",
+    "marker": null,
+    "layers": 0
+  }
+}

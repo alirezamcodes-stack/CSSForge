@@ -1,0 +1,51 @@
+{
+  "state": "root-mismatch",
+  "generation": 8,
+  "attempts": 1,
+  "reason": "Target or proposed candidate moved to another root.",
+  "resolution": "root-mismatch",
+  "confidence": "none",
+  "selection": null,
+  "targetId": null,
+  "undo": 2,
+  "context": {
+    "media": [],
+    "pseudo": ""
+  },
+  "overrides": [],
+  "locator": {
+    "captures": 2,
+    "requests": 2,
+    "searches": 0,
+    "queries": 2,
+    "candidates": 2
+  },
+  "reconciliation": {
+    "starts": 2,
+    "resolutions": 2,
+    "retries": 0,
+    "migrations": 0,
+    "deliveries": 0,
+    "records": 0,
+    "candidateNodes": 0
+  },
+  "source": {
+    "scopeScans": 3
+  },
+  "cascade": {
+    "resolutions": 0
+  },
+  "selectors": {
+    "requests": 0,
+    "generations": 0,
+    "validations": 0,
+    "cacheHits": 0
+  },
+  "markers": [],
+  "retired": [
+    {
+      "connected": false,
+      "markers": []
+    }
+  ]
+}

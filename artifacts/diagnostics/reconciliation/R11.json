@@ -1,0 +1,155 @@
+{
+  "waiting": {
+    "state": "waiting-for-replacement",
+    "generation": 4,
+    "attempts": 1,
+    "reason": "No same-root candidate.",
+    "resolution": "missing",
+    "confidence": "none",
+    "selection": null,
+    "targetId": null,
+    "undo": 1,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "overrides": [],
+    "locator": {
+      "captures": 1,
+      "requests": 1,
+      "searches": 1,
+      "queries": 3,
+      "candidates": 1
+    },
+    "reconciliation": {
+      "starts": 1,
+      "resolutions": 1,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 1
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    },
+    "markers": [],
+    "retired": [
+      {
+        "connected": false,
+        "markers": []
+      }
+    ]
+  },
+  "expired": {
+    "state": "missing",
+    "generation": 4,
+    "attempts": 1,
+    "reason": "Reconciliation window expired.",
+    "resolution": "missing",
+    "confidence": "none",
+    "selection": null,
+    "targetId": null,
+    "undo": 1,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "overrides": [],
+    "locator": {
+      "captures": 1,
+      "requests": 1,
+      "searches": 1,
+      "queries": 3,
+      "candidates": 1
+    },
+    "reconciliation": {
+      "starts": 1,
+      "resolutions": 1,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 1,
+      "records": 5,
+      "candidateNodes": 5
+    },
+    "source": {
+      "scopeScans": 1
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    },
+    "markers": [],
+    "retired": [
+      {
+        "connected": false,
+        "markers": []
+      }
+    ]
+  },
+  "result": {
+    "state": "missing",
+    "generation": 4,
+    "attempts": 1,
+    "reason": "Reconciliation window expired.",
+    "resolution": "missing",
+    "confidence": "none",
+    "selection": null,
+    "targetId": null,
+    "undo": 1,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "overrides": [],
+    "locator": {
+      "captures": 1,
+      "requests": 1,
+      "searches": 1,
+      "queries": 3,
+      "candidates": 1
+    },
+    "reconciliation": {
+      "starts": 1,
+      "resolutions": 1,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 1,
+      "records": 5,
+      "candidateNodes": 5
+    },
+    "source": {
+      "scopeScans": 1
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    },
+    "markers": [],
+    "retired": [
+      {
+        "connected": false,
+        "markers": []
+      }
+    ]
+  }
+}
