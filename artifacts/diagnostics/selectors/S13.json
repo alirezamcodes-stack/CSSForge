@@ -1,0 +1,76 @@
+{
+  "source": [
+    {
+      "selector": "button",
+      "conditions": []
+    },
+    {
+      "selector": ".buy:hover",
+      "conditions": [
+        "@media (min-width: 800px)",
+        "@supports (display:grid)",
+        "@layer theme"
+      ]
+    },
+    {
+      "selector": ".buy",
+      "conditions": []
+    }
+  ],
+  "authored": {
+    "selector": " .buy ",
+    "state": "non-unique",
+    "origin": "authored",
+    "count": 2
+  },
+  "invalid": "invalid",
+  "pseudoElement": "non-unique",
+  "result": {
+    "selector": "[data-key=\"order\"]",
+    "state": "unique",
+    "strategy": "stable-attribute",
+    "origin": "generated",
+    "stability": "high",
+    "risks": [],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "document",
+    "path": [
+      {
+        "selector": "[data-key=\"order\"]",
+        "scope": "document",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {
+      "pseudo": "::before",
+      "media": [
+        "(min-width:800px)"
+      ],
+      "groups": [
+        {
+          "id": "author-layer",
+          "kind": "layer",
+          "text": "@layer theme",
+          "name": "theme",
+          "matches": null
+        }
+      ]
+    },
+    "limitations": [
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 4,
+      "generations": 1,
+      "validations": 4,
+      "cacheHits": 0
+    }
+  }
+}

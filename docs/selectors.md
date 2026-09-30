@@ -1,0 +1,37 @@
+# Engine 07.2B — CSS selector generation and validation
+
+The centralized engine is `src/engine/selectors`. It describes the currently bound real Element for future selector consumers. It does not authorize identity, reconcile replacements, bind targets, move transactions, mutate stylesheets, or affect React presentation. The existing 07.2A locator remains independent and authoritative for internal identity evidence.
+
+## API and model
+
+`createSelectorEngine(document, lifecycle)` exposes `generate(identity, request?)`, `validateAuthored(identity, selectorText, request?)`, `invalidate(identity?)`, `getStats()`, and `destroy()`. The picker exposes only explicit consumer methods: `generateSelector`, `validateAuthoredSelector`, `invalidateSelector`, and `selectorStats`. No UI invokes them.
+
+Results contain selector text, origin, strategy, actual Document/ShadowRoot and scope, state and validation count/exact-target check, high/medium/low stability, risk strings, limitations, immutable context, and a future frame-path placeholder. States are `unique`, `non-unique`, `invalid`, `unsupported`, and `truncated`. DOM references remain engine data; they are not serialized into React or persisted state.
+
+Generated text never includes editing pseudos or at-rules. Optional `context` holds pseudo, media queries, and authored media/supports/layer/container/group records separately. The source index continues preserving original `selectorText`. `validateAuthored` retains its input byte-for-byte and validates it independently in the target's root. Authored lists, dynamic pseudo selectors, and pseudo-element selectors are not rewritten into element identity; many/zero/wrong-object matches are non-unique. Authored stability is explicitly unassessed.
+
+## Generation and proof
+
+Generation tries escaped ID, conservative stable application/semantic attributes (then pairs), meaningful class singles/pairs/bounded triples, a unique stable ancestor with a compact target suffix, then tag/structural fallback. ID punctuation, whitespace, leading digits, Unicode, quotes, and backslashes use native `CSS.escape`. Quoted attribute values use separate CSS string serialization. The CSSOM-compatible identifier fallback serves node tests. Known generated IDs use the ordinary `id` strategy with low stability, never the `stable-id` category; CSSForge ID/class prefixes and all CSSForge marker attributes are excluded. Stable attribute and meaningful class policy reuse 07.2A evidence helpers without changing locator behavior.
+
+Every successful candidate must pass native `root.querySelectorAll(selector)`, have exactly one match, and match the exact original target object. Duplicate IDs/attributes never receive an inferred uniqueness claim; another validated strategy may succeed. Classes have medium stability even when unique. Structural selectors have low stability and position-dependent risk. Ancestor-assisted selectors inherit the conservative quality of their evidence.
+
+For open/nested Shadow DOM the `path` starts in Document. Each segment identifies a host in its parent root and declares an `open-shadow` boundary; the final segment identifies the target within its actual root. The leaf `selector` is root-local, never a fabricated cross-shadow CSS string. Every host and leaf segment receives independent uniqueness validation. A failure to generate any host segment makes the complete result unsuccessful. Slotted light DOM uses its actual Document root. SVG internals retain the selected SVG Element. Outer iframe Elements are ordinary targets; interior requests return unsupported with an explicit frame placeholder.
+
+## Bounds and caching
+
+Bounds per request: 8 ancestor levels, 8 shadow boundaries, 6 meaningful classes, 6 useful attributes, 24 class combination attempts (pairs/triples), up to 15 attribute pairs, 96 generation attempts, 96 native query validations (including cache revalidation/host proofs), 128 previous siblings per structural step, and 2,048 characters per queried selector. Evidence reads inherit 07.2A's 32 attribute/class entries and 160-character value bound. Unresolved bounded searches return truncated instead of building huge paths or guessing.
+
+There are no selector observers, polling, geometry reads, hover hooks, render hooks, source hooks, or cascade hooks. A WeakMap caches successful construction for the existing target binding. Explicit requests always revalidate each cached segment to catch duplicates, sibling insertion, changed classes, moved ancestors, and host ambiguity. Invalid cache proofs trigger fresh bounded generation. `refresh` and `invalidate` intentionally discard construction; target loss invalidates its entry, and teardown retires the engine. A cache hit saves generation work, not the correctness proof.
+
+## Verification
+
+- `tests/selectors.test.ts`: CSS identifier/string serialization; no eager work; exact-object uniqueness; zero/multiple matches; cache revalidation/refresh/invalidation; unsafe target/frame/teardown guards; authored/context separation; invalid syntax; length and global query bounds.
+- `tests/e2e/selectors.spec.ts`: actual unpacked production extension in native Chrome. S01–S18 cover escaped IDs, duplicate ID/data, semantic and escaped attributes, minimal single/pair/triple classes and reordered/state/hash classes, stable card ancestry, structural fallback, DOM reorder/sibling insertion, all open/nested host proofs, same identifiers in different roots, SVG/rect/circle/path/use/text, slots, outer iframe, source/authored/pseudo/group separation, unsafe binding, bounds, and stable attributes preceding semantic evidence independently of DOM attribute order.
+- Browser proof independently traverses paths from Document, runs native queries per segment, checks counts and exact target objects, crosses only the actual host's open ShadowRoot, and finally checks the original selection. No production test globals were added.
+- `picker-performance.spec.ts` asserts zero selector requests/generations/validations through hover, selection, source/cascade reads and teardown; S01 confirms zero work through real built Design and Code editing.
+- Focused regressions: locator, targeting hardening, selection audit, source index, cascade, Design editing, Code editing, picker performance, and existing actual 200% Chrome zoom tests.
+
+Verification result (2026-09-30): `pnpm typecheck`, `pnpm test` (213 tests / 14 files), and `pnpm build` passed. The production Chrome MV3 bundle is 1.09 MB. All 18 selector Chrome cases and 45 focused regression cases passed; the final build was retested with all 18 selector cases plus picker performance (19/19). Diagnostic evidence is retained in `artifacts/diagnostics/selectors/S01.json`–`S18.json`. Previously locked regression evidence was restored after test runs. No permissions or UI changes were made.
+
+Limits: uniqueness is a current-root fact, not future DOM identity or permanence. Conservative evidence filtering can choose a lower-quality structural fallback or truncate. Structural selectors are sensitive to insertion/reordering. Authored nested/contextual selectors are validated as native root queries, without reconstructing stylesheet nesting. Closed roots and iframe interiors remain unsupported. Native query calls are bounded; DOM size can still affect a single browser query's cost. Engine 07.3, source mutation, reconciliation/session migration, copy/export/Changes UI, and frame transport are deferred.

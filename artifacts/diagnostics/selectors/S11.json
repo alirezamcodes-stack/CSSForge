@@ -1,0 +1,102 @@
+{
+  "result": {
+    "selector": "#same",
+    "state": "unique",
+    "strategy": "stable-id",
+    "origin": "generated",
+    "stability": "high",
+    "risks": [],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "shadow-root",
+    "path": [
+      {
+        "selector": "#outer-host",
+        "scope": "document",
+        "boundary": "open-shadow",
+        "count": 1,
+        "valid": true
+      },
+      {
+        "selector": "#inner-host",
+        "scope": "shadow-root",
+        "boundary": "open-shadow",
+        "count": 1,
+        "valid": true
+      },
+      {
+        "selector": "#same",
+        "scope": "shadow-root",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Selectors are root-local; traverse each open shadow boundary separately.",
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 1,
+      "generations": 1,
+      "validations": 3,
+      "cacheHits": 0
+    }
+  },
+  "changed": {
+    "selector": "#same",
+    "state": "unique",
+    "strategy": "stable-id",
+    "origin": "generated",
+    "stability": "low",
+    "risks": [
+      "position-dependent"
+    ],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "shadow-root",
+    "path": [
+      {
+        "selector": "div:nth-of-type(4)",
+        "scope": "document",
+        "boundary": "open-shadow",
+        "count": 1,
+        "valid": true
+      },
+      {
+        "selector": "#inner-host",
+        "scope": "shadow-root",
+        "boundary": "open-shadow",
+        "count": 1,
+        "valid": true
+      },
+      {
+        "selector": "#same",
+        "scope": "shadow-root",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Selectors are root-local; traverse each open shadow boundary separately.",
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 2,
+      "generations": 2,
+      "validations": 11,
+      "cacheHits": 0
+    }
+  }
+}

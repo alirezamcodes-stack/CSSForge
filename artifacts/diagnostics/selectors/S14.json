@@ -1,0 +1,65 @@
+{
+  "first": {
+    "selector": "button",
+    "state": "unique",
+    "strategy": "structural",
+    "origin": "generated",
+    "stability": "low",
+    "risks": [
+      "position-dependent"
+    ],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "document",
+    "path": [
+      {
+        "selector": "button",
+        "scope": "document",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 1,
+      "generations": 1,
+      "validations": 1,
+      "cacheHits": 0
+    }
+  },
+  "truncated": {
+    "selector": null,
+    "state": "truncated",
+    "strategy": null,
+    "origin": "generated",
+    "stability": "low",
+    "risks": [],
+    "validation": {
+      "state": "truncated",
+      "count": null,
+      "matchesTarget": false
+    },
+    "scope": "document",
+    "path": [],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Search or validation budget exceeded.",
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 2,
+      "generations": 2,
+      "validations": 3,
+      "cacheHits": 0
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "deep": {
+    "selector": null,
+    "state": "truncated",
+    "strategy": null,
+    "origin": "generated",
+    "stability": "low",
+    "risks": [],
+    "validation": {
+      "state": "truncated",
+      "count": null,
+      "matchesTarget": false
+    },
+    "scope": "document",
+    "path": [],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Search or validation budget exceeded.",
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 1,
+      "generations": 1,
+      "validations": 19,
+      "cacheHits": 0
+    }
+  },
+  "shadow": {
+    "selector": null,
+    "state": "truncated",
+    "strategy": null,
+    "origin": "generated",
+    "stability": "low",
+    "risks": [],
+    "validation": {
+      "state": "truncated",
+      "count": null,
+      "matchesTarget": false
+    },
+    "scope": "shadow-root",
+    "path": [],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Selectors are root-local; traverse each open shadow boundary separately.",
+      "Search or validation budget exceeded.",
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 2,
+      "generations": 2,
+      "validations": 19,
+      "cacheHits": 0
+    }
+  }
+}

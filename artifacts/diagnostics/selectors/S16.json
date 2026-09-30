@@ -1,0 +1,146 @@
+[
+  {
+    "selector": "[name=\"order\"]",
+    "state": "unique",
+    "strategy": "semantic",
+    "origin": "generated",
+    "stability": "medium",
+    "risks": [
+      "attributes-or-classes-may-change"
+    ],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "document",
+    "path": [
+      {
+        "selector": "[name=\"order\"]",
+        "scope": "document",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 1,
+      "generations": 1,
+      "validations": 1,
+      "cacheHits": 0
+    }
+  },
+  {
+    "selector": "[type=\"submit\"]",
+    "state": "unique",
+    "strategy": "semantic",
+    "origin": "generated",
+    "stability": "medium",
+    "risks": [
+      "attributes-or-classes-may-change"
+    ],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "document",
+    "path": [
+      {
+        "selector": "[type=\"submit\"]",
+        "scope": "document",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 2,
+      "generations": 2,
+      "validations": 2,
+      "cacheHits": 0
+    }
+  },
+  {
+    "selector": "[role=\"switch\"]",
+    "state": "unique",
+    "strategy": "semantic",
+    "origin": "generated",
+    "stability": "medium",
+    "risks": [
+      "attributes-or-classes-may-change"
+    ],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "document",
+    "path": [
+      {
+        "selector": "[role=\"switch\"]",
+        "scope": "document",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 3,
+      "generations": 3,
+      "validations": 3,
+      "cacheHits": 0
+    }
+  },
+  {
+    "selector": "[aria-label=\"Save \\\"order\\\"\"]",
+    "state": "unique",
+    "strategy": "semantic",
+    "origin": "generated",
+    "stability": "medium",
+    "risks": [
+      "attributes-or-classes-may-change"
+    ],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "document",
+    "path": [
+      {
+        "selector": "[aria-label=\"Save \\\"order\\\"\"]",
+        "scope": "document",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 4,
+      "generations": 4,
+      "validations": 4,
+      "cacheHits": 0
+    }
+  }
+]

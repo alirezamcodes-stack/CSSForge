@@ -1,0 +1,146 @@
+{
+  "first": {
+    "selector": "[data-id=\"2\"] .buy",
+    "state": "unique",
+    "strategy": "ancestor-assisted",
+    "origin": "generated",
+    "stability": "medium",
+    "risks": [
+      "attributes-or-classes-may-change"
+    ],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "document",
+    "path": [
+      {
+        "selector": "[data-id=\"2\"] .buy",
+        "scope": "document",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 1,
+      "generations": 1,
+      "validations": 5,
+      "cacheHits": 0
+    }
+  },
+  "reused": {
+    "selector": "[data-id=\"2\"] .buy",
+    "state": "unique",
+    "strategy": "ancestor-assisted",
+    "origin": "generated",
+    "stability": "medium",
+    "risks": [
+      "attributes-or-classes-may-change"
+    ],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "document",
+    "path": [
+      {
+        "selector": "[data-id=\"2\"] .buy",
+        "scope": "document",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 2,
+      "generations": 1,
+      "validations": 6,
+      "cacheHits": 1
+    }
+  },
+  "changed": {
+    "selector": "button:nth-of-type(2)",
+    "state": "unique",
+    "strategy": "structural",
+    "origin": "generated",
+    "stability": "low",
+    "risks": [
+      "position-dependent"
+    ],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "document",
+    "path": [
+      {
+        "selector": "button:nth-of-type(2)",
+        "scope": "document",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 3,
+      "generations": 2,
+      "validations": 17,
+      "cacheHits": 1
+    }
+  },
+  "refreshed": {
+    "selector": "button:nth-of-type(2)",
+    "state": "unique",
+    "strategy": "structural",
+    "origin": "generated",
+    "stability": "low",
+    "risks": [
+      "position-dependent"
+    ],
+    "validation": {
+      "state": "unique",
+      "count": 1,
+      "matchesTarget": true
+    },
+    "scope": "document",
+    "path": [
+      {
+        "selector": "button:nth-of-type(2)",
+        "scope": "document",
+        "boundary": null,
+        "count": 1,
+        "valid": true
+      }
+    ],
+    "proof": true,
+    "context": {},
+    "limitations": [
+      "Iframe interiors and closed shadow roots are unsupported."
+    ],
+    "stats": {
+      "requests": 4,
+      "generations": 3,
+      "validations": 27,
+      "cacheHits": 1
+    }
+  }
+}
