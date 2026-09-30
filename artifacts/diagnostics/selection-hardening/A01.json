@@ -1,0 +1,97 @@
+{
+  "nested": {
+    "selection": {
+      "identity": "path#nested-path",
+      "tag": "path",
+      "id": "nested-path",
+      "classes": [],
+      "rect": {
+        "x": 100,
+        "y": 48,
+        "width": 60,
+        "height": 40
+      },
+      "fontFamily": "Arial",
+      "fontSize": "16px",
+      "hasParent": true,
+      "hasChild": false,
+      "hasPrevious": false,
+      "hasNext": false,
+      "boundary": null
+    },
+    "candidates": [
+      {
+        "id": "nested-path",
+        "interactive": false
+      },
+      {
+        "id": "nested-svg",
+        "interactive": false
+      },
+      {
+        "id": "nested-span",
+        "interactive": false
+      },
+      {
+        "id": "nested",
+        "interactive": true
+      },
+      {
+        "id": "main",
+        "interactive": false
+      },
+      {
+        "id": "body",
+        "interactive": false
+      },
+      {
+        "id": "html",
+        "interactive": false
+      }
+    ],
+    "path": [
+      "nested-path",
+      "nested-svg",
+      "nested-span",
+      "nested",
+      "main",
+      "body",
+      "html"
+    ],
+    "stack": [
+      "nested-path",
+      "nested-svg",
+      "nested-span",
+      "nested",
+      "main",
+      "body",
+      "html"
+    ]
+  },
+  "overlap": {
+    "candidates": [
+      "transparent",
+      "underlay",
+      "overlap",
+      "",
+      "",
+      ""
+    ],
+    "stack": [
+      "transparent",
+      "underlay",
+      "overlap",
+      "main",
+      "body",
+      "html"
+    ],
+    "path": [
+      "transparent",
+      "overlap",
+      "main",
+      "body",
+      "html"
+    ]
+  },
+  "pointerEventsNone": "pointer-button"
+}

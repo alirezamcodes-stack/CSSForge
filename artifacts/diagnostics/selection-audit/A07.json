@@ -1,0 +1,319 @@
+{
+  "cases": [
+    {
+      "selection": {
+        "identity": "button#shadow-button",
+        "tag": "button",
+        "id": "shadow-button",
+        "classes": [],
+        "rect": {
+          "x": 40,
+          "y": 740,
+          "width": 140,
+          "height": 40
+        },
+        "fontFamily": "Arial",
+        "fontSize": "25px",
+        "hasParent": true,
+        "hasChild": false,
+        "hasPrevious": false,
+        "hasNext": false
+      },
+      "source": {
+        "inline": [],
+        "rules": [
+          {
+            "label": "<style>",
+            "selector": "#shadow-button",
+            "context": {
+              "media": [],
+              "pseudo": ""
+            },
+            "editable": true,
+            "conditions": [],
+            "declarations": [
+              {
+                "id": "rule-4:declaration:height",
+                "sourceId": "sheet-3",
+                "ruleId": "rule-4",
+                "contexts": [],
+                "property": "height",
+                "value": "40px",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              },
+              {
+                "id": "rule-4:declaration:--shadow-source",
+                "sourceId": "sheet-3",
+                "ruleId": "rule-4",
+                "contexts": [],
+                "property": "--shadow-source",
+                "value": "1",
+                "priority": "",
+                "important": false,
+                "order": 1,
+                "enabled": true
+              }
+            ]
+          }
+        ],
+        "keyframes": [],
+        "notices": [
+          "Shadow-host, slotted and inherited styles are not resolved. Closed shadow roots are unsupported."
+        ]
+      },
+      "applied": true,
+      "path": [
+        "shadow-button",
+        "open-host",
+        "main",
+        "body",
+        "html"
+      ]
+    },
+    {
+      "selection": {
+        "identity": "button#nested-shadow",
+        "tag": "button",
+        "id": "nested-shadow",
+        "classes": [],
+        "rect": {
+          "x": 200,
+          "y": 740,
+          "width": 140,
+          "height": 40
+        },
+        "fontFamily": "Arial",
+        "fontSize": "25px",
+        "hasParent": true,
+        "hasChild": false,
+        "hasPrevious": false,
+        "hasNext": false
+      },
+      "source": {
+        "inline": [],
+        "rules": [
+          {
+            "label": "<style>",
+            "selector": "#nested-shadow",
+            "context": {
+              "media": [],
+              "pseudo": ""
+            },
+            "editable": true,
+            "conditions": [],
+            "declarations": [
+              {
+                "id": "rule-57:declaration:height",
+                "sourceId": "sheet-56",
+                "ruleId": "rule-57",
+                "contexts": [],
+                "property": "height",
+                "value": "40px",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              },
+              {
+                "id": "rule-57:declaration:--nested-source",
+                "sourceId": "sheet-56",
+                "ruleId": "rule-57",
+                "contexts": [],
+                "property": "--nested-source",
+                "value": "2",
+                "priority": "",
+                "important": false,
+                "order": 1,
+                "enabled": true
+              }
+            ]
+          }
+        ],
+        "keyframes": [],
+        "notices": [
+          "Shadow-host, slotted and inherited styles are not resolved. Closed shadow roots are unsupported."
+        ]
+      },
+      "applied": true,
+      "path": [
+        "nested-shadow",
+        "inner-host",
+        "outer-host",
+        "main",
+        "body",
+        "html"
+      ],
+      "pointStacks": {
+        "document": [
+          "outer-host",
+          "main",
+          "body",
+          "html"
+        ],
+        "outer": [
+          "inner-host",
+          "outer-host",
+          "main",
+          "body",
+          "html"
+        ],
+        "inner": [
+          "nested-shadow",
+          "inner-host",
+          "outer-host",
+          "main",
+          "body",
+          "html"
+        ]
+      }
+    },
+    {
+      "selection": {
+        "identity": "span#slotted",
+        "tag": "span",
+        "id": "slotted",
+        "classes": [],
+        "rect": {
+          "x": 360,
+          "y": 740,
+          "width": 140,
+          "height": 35
+        },
+        "fontFamily": "Arial",
+        "fontSize": "25px",
+        "hasParent": true,
+        "hasChild": false,
+        "hasPrevious": false,
+        "hasNext": false
+      },
+      "source": {
+        "inline": [],
+        "rules": [
+          {
+            "label": "<style>",
+            "selector": "*",
+            "context": {
+              "media": [],
+              "pseudo": ""
+            },
+            "editable": true,
+            "conditions": [],
+            "declarations": [
+              {
+                "id": "rule-7:declaration:box-sizing",
+                "sourceId": "sheet-5",
+                "ruleId": "rule-7",
+                "contexts": [],
+                "property": "box-sizing",
+                "value": "border-box",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              }
+            ]
+          },
+          {
+            "label": "<style>",
+            "selector": "#slotted",
+            "context": {
+              "media": [],
+              "pseudo": ""
+            },
+            "editable": true,
+            "conditions": [],
+            "declarations": [
+              {
+                "id": "rule-46:declaration:display",
+                "sourceId": "sheet-5",
+                "ruleId": "rule-46",
+                "contexts": [],
+                "property": "display",
+                "value": "block",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              },
+              {
+                "id": "rule-46:declaration:height",
+                "sourceId": "sheet-5",
+                "ruleId": "rule-46",
+                "contexts": [],
+                "property": "height",
+                "value": "35px",
+                "priority": "",
+                "important": false,
+                "order": 1,
+                "enabled": true
+              },
+              {
+                "id": "rule-46:declaration:background",
+                "sourceId": "sheet-5",
+                "ruleId": "rule-46",
+                "contexts": [],
+                "property": "background",
+                "value": "rgb(255, 204, 153)",
+                "priority": "",
+                "important": false,
+                "order": 2,
+                "enabled": true
+              }
+            ]
+          }
+        ],
+        "keyframes": [],
+        "notices": []
+      },
+      "applied": true,
+      "path": [
+        "slotted",
+        "slot",
+        "slot-wrap",
+        "slot-host",
+        "main",
+        "body",
+        "html"
+      ]
+    }
+  ],
+  "slotNavigation": {
+    "identity": "slot#slot",
+    "tag": "slot",
+    "id": "slot",
+    "classes": [],
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "fontFamily": "Arial",
+    "fontSize": "16px",
+    "hasParent": true,
+    "hasChild": false,
+    "hasPrevious": false,
+    "hasNext": false
+  },
+  "closedBoundary": {
+    "identity": "div#closed-host",
+    "tag": "div",
+    "id": "closed-host",
+    "classes": [],
+    "rect": {
+      "x": 520,
+      "y": 740,
+      "width": 140,
+      "height": 60
+    },
+    "fontFamily": "Arial",
+    "fontSize": "16px",
+    "hasParent": true,
+    "hasChild": false,
+    "hasPrevious": true,
+    "hasNext": true
+  }
+}

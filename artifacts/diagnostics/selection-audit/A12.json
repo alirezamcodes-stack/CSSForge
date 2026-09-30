@@ -1,0 +1,23 @@
+{
+  "start": {
+    "scans": 0,
+    "cascade": 0
+  },
+  "raw": {},
+  "hover": {
+    "scans": 0,
+    "cascade": 0,
+    "geometry": {
+      "absolute": 1,
+      "div": 1
+    },
+    "moves": 1000
+  },
+  "cleanup": {
+    "geometryUnchanged": true,
+    "overlays": 0,
+    "layers": 0,
+    "markers": [],
+    "selection": null
+  }
+}

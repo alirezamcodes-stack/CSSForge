@@ -1,0 +1,28 @@
+{
+  "stale": {
+    "selection": {
+      "identity": "div#zero",
+      "tag": "div",
+      "id": "zero",
+      "classes": [],
+      "rect": {
+        "x": 63,
+        "y": 566,
+        "width": 0,
+        "height": 0
+      },
+      "fontFamily": "Arial",
+      "fontSize": "16px",
+      "hasParent": true,
+      "hasChild": false,
+      "hasPrevious": false,
+      "hasNext": true
+    },
+    "designTarget": "2",
+    "connected": false,
+    "source": null
+  },
+  "edit": false,
+  "error": "The editing target or context changed. Pick it again.",
+  "afterRefresh": null
+}

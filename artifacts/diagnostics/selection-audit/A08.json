@@ -1,0 +1,47 @@
+{
+  "duplicated": {
+    "original": "31px",
+    "clone": "31px",
+    "copiedMarker": "1"
+  },
+  "immediate": {
+    "disconnected": true,
+    "replacementFont": "31px",
+    "marker": "1",
+    "pickerSelection": {
+      "identity": "div#dynamic.box",
+      "tag": "div",
+      "id": "dynamic",
+      "classes": [
+        "box"
+      ],
+      "rect": {
+        "x": 40,
+        "y": 1030,
+        "width": 140,
+        "height": 50
+      },
+      "fontFamily": "Arial",
+      "fontSize": "31px",
+      "hasParent": true,
+      "hasChild": false,
+      "hasPrevious": true,
+      "hasNext": true
+    },
+    "designTarget": "1",
+    "source": null
+  },
+  "settled": {
+    "selection": null,
+    "design": null,
+    "layerCount": 1,
+    "replacementFont": "31px"
+  },
+  "edit": false,
+  "error": "The editing target or context changed. Pick it again.",
+  "afterReset": {
+    "font": "18px",
+    "marker": null,
+    "layers": 0
+  }
+}

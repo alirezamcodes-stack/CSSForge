@@ -1,0 +1,15 @@
+{
+  "moved": {
+    "x": -55,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  },
+  "transformed": {
+    "x": -70.0032958984375,
+    "y": -0.0077362060546875,
+    "width": -0.009033203125,
+    "height": -0.000152587890625
+  },
+  "recovery": "picker.refresh schedules a correct new box"
+}

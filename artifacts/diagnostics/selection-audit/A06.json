@@ -1,0 +1,122 @@
+{
+  "tiny": {
+    "selection": {
+      "identity": "div#tiny",
+      "tag": "div",
+      "id": "tiny",
+      "classes": [],
+      "rect": {
+        "x": 40,
+        "y": 560,
+        "width": 1,
+        "height": 1
+      },
+      "fontFamily": "Arial",
+      "fontSize": "16px",
+      "hasParent": true,
+      "hasChild": false,
+      "hasPrevious": true,
+      "hasNext": true
+    },
+    "gap": {
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    }
+  },
+  "zero": {
+    "identity": "div#zero",
+    "tag": "div",
+    "id": "zero",
+    "classes": [],
+    "rect": {
+      "x": 63,
+      "y": 566,
+      "width": 0,
+      "height": 0
+    },
+    "fontFamily": "Arial",
+    "fontSize": "16px",
+    "hasParent": true,
+    "hasChild": false,
+    "hasPrevious": false,
+    "hasNext": true
+  },
+  "hidden": {
+    "identity": "div#hidden-css",
+    "tag": "div",
+    "id": "hidden-css",
+    "classes": [],
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    },
+    "fontFamily": "Arial",
+    "fontSize": "16px",
+    "hasParent": true,
+    "hasChild": false,
+    "hasPrevious": true,
+    "hasNext": false
+  },
+  "pseudos": [
+    {
+      "selection": {
+        "identity": "div#pseudo.box",
+        "tag": "div",
+        "id": "pseudo",
+        "classes": [
+          "box"
+        ],
+        "rect": {
+          "x": 520,
+          "y": 550,
+          "width": 140,
+          "height": 65
+        },
+        "fontFamily": "Arial",
+        "fontSize": "16px",
+        "hasParent": true,
+        "hasChild": false,
+        "hasPrevious": true,
+        "hasNext": true
+      },
+      "path": [
+        "pseudo",
+        "main",
+        "body",
+        "html"
+      ]
+    },
+    {
+      "selection": {
+        "identity": "div#pseudo.box",
+        "tag": "div",
+        "id": "pseudo",
+        "classes": [
+          "box"
+        ],
+        "rect": {
+          "x": 520,
+          "y": 550,
+          "width": 140,
+          "height": 65
+        },
+        "fontFamily": "Arial",
+        "fontSize": "16px",
+        "hasParent": true,
+        "hasChild": false,
+        "hasPrevious": true,
+        "hasNext": true
+      },
+      "path": [
+        "pseudo",
+        "main",
+        "body",
+        "html"
+      ]
+    }
+  ]
+}

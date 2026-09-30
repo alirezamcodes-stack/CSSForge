@@ -1,0 +1,14 @@
+{
+  "plain": {
+    "selection": null,
+    "design": null,
+    "edit": false,
+    "replacementColor": "rgb(0, 0, 0)"
+  },
+  "moved": {
+    "selection": null,
+    "design": null,
+    "error": "The editing target changed. Pick it again."
+  },
+  "movedSettled": null
+}

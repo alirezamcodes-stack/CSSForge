@@ -1,0 +1,58 @@
+{
+  "nested": {
+    "selection": {
+      "identity": "path#nested-path",
+      "tag": "path",
+      "id": "nested-path",
+      "classes": [],
+      "rect": {
+        "x": 100,
+        "y": 48,
+        "width": 60,
+        "height": 40
+      },
+      "fontFamily": "Arial",
+      "fontSize": "16px",
+      "hasParent": true,
+      "hasChild": false,
+      "hasPrevious": false,
+      "hasNext": false
+    },
+    "path": [
+      "nested-path",
+      "nested-svg",
+      "nested-span",
+      "nested",
+      "main",
+      "body",
+      "html"
+    ],
+    "stack": [
+      "nested-path",
+      "nested-svg",
+      "nested-span",
+      "nested",
+      "main",
+      "body",
+      "html"
+    ]
+  },
+  "overlap": {
+    "stack": [
+      "transparent",
+      "underlay",
+      "overlap",
+      "main",
+      "body",
+      "html"
+    ],
+    "path": [
+      "transparent",
+      "overlap",
+      "main",
+      "body",
+      "html"
+    ]
+  },
+  "pointerEventsNone": "pointer-button"
+}

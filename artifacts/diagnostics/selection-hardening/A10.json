@@ -1,0 +1,45 @@
+{
+  "frames": [
+    {
+      "id": "same-frame",
+      "insideSelection": "Pick an element",
+      "boundary": {
+        "accessible": true,
+        "rect": {
+          "x": 40,
+          "y": 821,
+          "width": 260,
+          "height": 125,
+          "top": 821,
+          "right": 300,
+          "bottom": 946,
+          "left": 40
+        }
+      },
+      "childUI": 0
+    },
+    {
+      "id": "cross-frame",
+      "insideSelection": "iframe#same-frame",
+      "boundary": {
+        "accessible": false,
+        "rect": {
+          "x": 340,
+          "y": 405,
+          "width": 260,
+          "height": 125,
+          "top": 405,
+          "right": 600,
+          "bottom": 530,
+          "left": 340
+        }
+      },
+      "childUI": 0
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "injection": "top frame only"
+}

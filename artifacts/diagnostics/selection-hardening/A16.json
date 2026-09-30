@@ -1,0 +1,14 @@
+{
+  "geometry": {
+    "absolute": 1,
+    "div": 1
+  },
+  "before": {
+    "scans": 1,
+    "cascade": 0
+  },
+  "after": {
+    "scans": 1,
+    "cascade": 0
+  }
+}

@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CSSForge selection diagnostic</title><style>
+*{box-sizing:border-box}body{margin:0;min-height:2400px;font:16px Arial}main{width:850px;height:1150px;position:relative}button{font:16px Arial} .box{position:absolute;background:#d7e9df;width:150px;height:60px;padding:8px}
+#nested{position:absolute;left:40px;top:40px;width:180px;height:60px}#nested-span{display:block}#nested-svg{width:60px;height:40px}#overlap{left:260px;top:40px}#underlay{width:100%;height:100%}#transparent{position:absolute;inset:0;background:transparent}
+#pass-through{left:450px;top:40px}#no-pointer-overlay{position:absolute;inset:0;pointer-events:none}#absolute{left:40px;top:180px}#fixed{position:fixed;left:720px;top:100px}
+#transformed{left:260px;top:180px;width:100px;height:60px;transform:rotate(10deg)}#sticky-scroll{left:450px;top:180px;height:130px;overflow:auto;padding:0}#sticky{position:sticky;top:0;height:35px;background:#bbb}#sticky-filler{height:350px}
+#scroller{left:40px;top:340px;width:250px;height:140px;overflow:auto;padding:0}#inner-scroller{margin-top:80px;width:220px;height:100px;overflow:auto}#scroll-target{margin-top:70px;height:45px;background:gold}#scroll-tail{height:300px}
+#clip{left:340px;top:340px;width:80px;height:60px;overflow:hidden;padding:0}#clipped-child{width:160px;height:100px;background:coral}
+#tiny{position:absolute;left:40px;top:560px;width:1px;height:1px;background:red}#zero-host{left:55px;top:540px;width:65px;height:40px}#zero{width:0;height:0}#hidden-css{display:none;width:30px;height:30px}
+#svg-case{position:absolute;left:150px;top:550px;width:320px;height:120px}#svg-case svg{width:320px;height:120px}#pseudo{left:520px;top:550px;height:65px;width:140px}#pseudo::before{content:'BEFORE';display:block;background:#bdf;height:20px}#pseudo::after{content:'AFTER';display:block;background:#fdb;height:20px}
+#open-host,#outer-host,#slot-host,#closed-host{position:absolute;top:740px;display:block;width:140px;height:60px}#open-host{left:40px}#outer-host{left:200px}#slot-host{left:360px}#closed-host{left:520px}#slotted{display:block;height:35px;background:#fc9}
+iframe{position:absolute;top:840px;width:260px;height:125px;border:4px solid #999}#same-frame{left:40px}#cross-frame{left:340px}#dynamic{left:40px;top:1030px;width:140px;height:50px}#dynamic-sibling{left:220px;top:1030px;width:140px;height:50px}
+cssforge-ui{position:fixed;top:0;left:0;width:0;height:0;pointer-events:none}
+</style></head><body><main>
+<button id="nested"><span id="nested-span"><svg id="nested-svg" viewBox="0 0 60 40"><path id="nested-path" d="M0 0H60V40H0Z" fill="green"/></svg></span></button>
+<div id="overlap" class="box"><button id="underlay">Underlying button</button><div id="transparent"></div></div>
+<div id="pass-through" class="box"><button id="pointer-button">Pointer button</button><div id="no-pointer-overlay"></div></div>
+<div id="absolute" class="box">Absolute</div><div id="fixed" class="box">Fixed</div><div id="transformed" class="box">Transform</div>
+<div id="sticky-scroll" class="box"><div id="sticky">Sticky</div><div id="sticky-filler"></div></div>
+<div id="scroller" class="box"><div id="inner-scroller"><div id="scroll-target">Nested scroll target</div><div id="scroll-tail"></div></div><div style="height:300px"></div></div>
+<div id="clip" class="box"><div id="clipped-child">Clipped box</div></div><div id="tiny"></div><div id="zero-host" class="box">Zero<div id="zero"></div><div id="hidden-css"></div></div>
+<div id="svg-case"><svg id="svg-root" viewBox="0 0 320 120"><defs><rect id="use-symbol" width="35" height="30" fill="purple"/></defs><path id="svg-path" d="M5 5H45V40H5Z" fill="green"/><rect id="svg-rect" x="60" y="5" width="40" height="35" fill="blue"/><circle id="svg-circle" cx="135" cy="23" r="18" fill="red"/><use id="svg-use" href="#use-symbol" x="170" y="5"/><text id="svg-text" x="220" y="30" font-size="24">TEXT</text></svg></div>
+<div id="pseudo" class="box"></div><div id="open-host"></div><div id="outer-host"></div><div id="slot-host"><span id="slotted">Slotted content</span></div><div id="closed-host"></div>
+<iframe id="same-frame" srcdoc="<!doctype html><style>body{margin:0}button{margin:15px;width:180px;height:60px}</style><button id='frame-button'>Same-origin frame</button>"></iframe>
+<iframe id="cross-frame" src="http://frames.test/selection-audit-frame.html"></iframe><div id="dynamic" class="box" style="font-size:18px">Dynamic target</div><div id="dynamic-sibling" class="box">Sibling</div>
+</main><cssforge-ui></cssforge-ui><script>
+document.querySelector('#open-host').attachShadow({mode:'open'}).innerHTML='<style>#shadow-button{height:40px;--shadow-source:1}</style><button id="shadow-button">Open shadow</button>';
+const outer=document.querySelector('#outer-host').attachShadow({mode:'open'});outer.innerHTML='<div id="inner-host"></div>';outer.querySelector('#inner-host').attachShadow({mode:'open'}).innerHTML='<style>#nested-shadow{height:40px;--nested-source:2}</style><button id="nested-shadow">Nested shadow</button>';
+document.querySelector('#slot-host').attachShadow({mode:'open'}).innerHTML='<div id="slot-wrap"><slot id="slot"></slot></div>';
+document.querySelector('#closed-host').attachShadow({mode:'closed'}).innerHTML='<button style="height:40px">Closed shadow</button>';
+</script></body></html>

@@ -1,0 +1,347 @@
+{
+  "cases": [
+    {
+      "selected": {
+        "identity": "path#svg-path",
+        "tag": "path",
+        "id": "svg-path",
+        "classes": [],
+        "rect": {
+          "x": 155,
+          "y": 555,
+          "width": 40,
+          "height": 35
+        },
+        "fontFamily": "Arial",
+        "fontSize": "16px",
+        "hasParent": true,
+        "hasChild": false,
+        "hasPrevious": true,
+        "hasNext": true,
+        "boundary": null
+      },
+      "applied": true,
+      "opacity": "0.45",
+      "source": {
+        "inline": [],
+        "rules": [
+          {
+            "label": "<style>",
+            "selector": "*",
+            "context": {
+              "media": [],
+              "pseudo": ""
+            },
+            "editable": true,
+            "conditions": [],
+            "declarations": [
+              {
+                "id": "rule-4:declaration:box-sizing",
+                "sourceId": "sheet-3",
+                "ruleId": "rule-4",
+                "contexts": [],
+                "property": "box-sizing",
+                "value": "border-box",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              }
+            ]
+          }
+        ],
+        "keyframes": [],
+        "notices": []
+      },
+      "canSize": false,
+      "path": [
+        "svg-path",
+        "svg-root",
+        "svg-case",
+        "main",
+        "body",
+        "html"
+      ]
+    },
+    {
+      "selected": {
+        "identity": "rect#svg-rect",
+        "tag": "rect",
+        "id": "svg-rect",
+        "classes": [],
+        "rect": {
+          "x": 210,
+          "y": 555,
+          "width": 40,
+          "height": 35
+        },
+        "fontFamily": "Arial",
+        "fontSize": "16px",
+        "hasParent": true,
+        "hasChild": false,
+        "hasPrevious": true,
+        "hasNext": true,
+        "boundary": null
+      },
+      "applied": true,
+      "opacity": "0.45",
+      "source": {
+        "inline": [],
+        "rules": [
+          {
+            "label": "<style>",
+            "selector": "*",
+            "context": {
+              "media": [],
+              "pseudo": ""
+            },
+            "editable": true,
+            "conditions": [],
+            "declarations": [
+              {
+                "id": "rule-4:declaration:box-sizing",
+                "sourceId": "sheet-3",
+                "ruleId": "rule-4",
+                "contexts": [],
+                "property": "box-sizing",
+                "value": "border-box",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              }
+            ]
+          }
+        ],
+        "keyframes": [],
+        "notices": []
+      },
+      "canSize": true,
+      "path": [
+        "svg-rect",
+        "svg-root",
+        "svg-case",
+        "main",
+        "body",
+        "html"
+      ]
+    },
+    {
+      "selected": {
+        "identity": "circle#svg-circle",
+        "tag": "circle",
+        "id": "svg-circle",
+        "classes": [],
+        "rect": {
+          "x": 267,
+          "y": 555,
+          "width": 36,
+          "height": 36
+        },
+        "fontFamily": "Arial",
+        "fontSize": "16px",
+        "hasParent": true,
+        "hasChild": false,
+        "hasPrevious": true,
+        "hasNext": true,
+        "boundary": null
+      },
+      "applied": true,
+      "opacity": "0.45",
+      "source": {
+        "inline": [],
+        "rules": [
+          {
+            "label": "<style>",
+            "selector": "*",
+            "context": {
+              "media": [],
+              "pseudo": ""
+            },
+            "editable": true,
+            "conditions": [],
+            "declarations": [
+              {
+                "id": "rule-4:declaration:box-sizing",
+                "sourceId": "sheet-3",
+                "ruleId": "rule-4",
+                "contexts": [],
+                "property": "box-sizing",
+                "value": "border-box",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              }
+            ]
+          }
+        ],
+        "keyframes": [],
+        "notices": []
+      },
+      "canSize": false,
+      "path": [
+        "svg-circle",
+        "svg-root",
+        "svg-case",
+        "main",
+        "body",
+        "html"
+      ]
+    },
+    {
+      "selected": {
+        "identity": "use#svg-use",
+        "tag": "use",
+        "id": "svg-use",
+        "classes": [],
+        "rect": {
+          "x": 320,
+          "y": 555,
+          "width": 35,
+          "height": 30
+        },
+        "fontFamily": "Arial",
+        "fontSize": "16px",
+        "hasParent": true,
+        "hasChild": false,
+        "hasPrevious": true,
+        "hasNext": true,
+        "boundary": null
+      },
+      "applied": true,
+      "opacity": "0.45",
+      "source": {
+        "inline": [],
+        "rules": [
+          {
+            "label": "<style>",
+            "selector": "*",
+            "context": {
+              "media": [],
+              "pseudo": ""
+            },
+            "editable": true,
+            "conditions": [],
+            "declarations": [
+              {
+                "id": "rule-4:declaration:box-sizing",
+                "sourceId": "sheet-3",
+                "ruleId": "rule-4",
+                "contexts": [],
+                "property": "box-sizing",
+                "value": "border-box",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              }
+            ]
+          }
+        ],
+        "keyframes": [],
+        "notices": []
+      },
+      "canSize": false,
+      "path": [
+        "svg-use",
+        "svg-root",
+        "svg-case",
+        "main",
+        "body",
+        "html"
+      ]
+    },
+    {
+      "selected": {
+        "identity": "text#svg-text",
+        "tag": "text",
+        "id": "svg-text",
+        "classes": [],
+        "rect": {
+          "x": 370,
+          "y": 558,
+          "width": 61.67578125,
+          "height": 27
+        },
+        "fontFamily": "Arial",
+        "fontSize": "24px",
+        "hasParent": true,
+        "hasChild": false,
+        "hasPrevious": true,
+        "hasNext": false,
+        "boundary": null
+      },
+      "applied": true,
+      "opacity": "0.45",
+      "source": {
+        "inline": [],
+        "rules": [
+          {
+            "label": "<style>",
+            "selector": "*",
+            "context": {
+              "media": [],
+              "pseudo": ""
+            },
+            "editable": true,
+            "conditions": [],
+            "declarations": [
+              {
+                "id": "rule-4:declaration:box-sizing",
+                "sourceId": "sheet-3",
+                "ruleId": "rule-4",
+                "contexts": [],
+                "property": "box-sizing",
+                "value": "border-box",
+                "priority": "",
+                "important": false,
+                "order": 0,
+                "enabled": true
+              }
+            ]
+          }
+        ],
+        "keyframes": [],
+        "notices": []
+      },
+      "canSize": false,
+      "path": [
+        "svg-text",
+        "svg-root",
+        "svg-case",
+        "main",
+        "body",
+        "html"
+      ]
+    }
+  ],
+  "root": {
+    "identity": "svg#svg-root",
+    "tag": "svg",
+    "id": "svg-root",
+    "classes": [],
+    "rect": {
+      "x": 150,
+      "y": 550,
+      "width": 320,
+      "height": 120
+    },
+    "fontFamily": "Arial",
+    "fontSize": "16px",
+    "hasParent": true,
+    "hasChild": true,
+    "hasPrevious": false,
+    "hasNext": false,
+    "boundary": null
+  },
+  "rootEdit": true,
+  "rectSizing": {
+    "before": 40,
+    "editorApplied": true,
+    "error": null,
+    "editedWidth": 80,
+    "heightApplied": true,
+    "editedHeight": 50
+  }
+}

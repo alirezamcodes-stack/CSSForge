@@ -1,0 +1,28 @@
+{
+  "synchronousClone": "31px",
+  "duplicated": {
+    "original": "31px",
+    "clone": "18px",
+    "copiedMarker": null
+  },
+  "immediate": {
+    "disconnected": true,
+    "replacementFont": "31px",
+    "marker": "1",
+    "pickerSelection": null,
+    "source": null
+  },
+  "settled": {
+    "selection": null,
+    "design": null,
+    "layerCount": 0,
+    "replacementFont": "18px"
+  },
+  "edit": false,
+  "error": "The editing target or context changed. Pick it again.",
+  "afterReset": {
+    "font": "18px",
+    "marker": null,
+    "layers": 0
+  }
+}

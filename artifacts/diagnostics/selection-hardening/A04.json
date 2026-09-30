@@ -1,0 +1,32 @@
+{
+  "rootTransform": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  },
+  "rootScale": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  },
+  "clipping": {
+    "target": {
+      "x": 340,
+      "y": 340,
+      "width": 160,
+      "height": 100
+    },
+    "clip": {
+      "x": 340,
+      "y": 340,
+      "width": 80,
+      "height": 60,
+      "top": 340,
+      "right": 420,
+      "bottom": 400,
+      "left": 340
+    }
+  }
+}

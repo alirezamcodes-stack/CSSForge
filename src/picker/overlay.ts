@@ -5,16 +5,19 @@ export function createOverlay(doc: Document) {
   const host = doc.createElement('cssforge-overlay');
   host.setAttribute('aria-hidden', 'true');
   // Important resets resist host-page styles without touching any host element.
-  host.style.cssText = 'all:initial!important;position:fixed!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none!important;z-index:2147483645!important;';
+  host.setAttribute('popover', 'manual');
+  host.style.cssText = 'all:initial!important;position:fixed!important;inset:0!important;margin:0!important;padding:0!important;border:0!important;overflow:visible!important;width:100%!important;height:100%!important;pointer-events:none!important;z-index:2147483645!important;';
   const shadow = host.attachShadow({ mode: 'open' });
   const style = doc.createElement('style');
-  style.textContent = tokens + ':host{pointer-events:none}*{box-sizing:border-box;pointer-events:none!important}.outline{position:fixed;border:1.5px solid #52edaa;background:#52edaa08;display:none}.outline[data-mode=hover]{border-style:dashed}.label{position:fixed;display:none;max-width:calc(100vw - 16px);padding:4px 7px;border-radius:4px;background:#1b1c1f;color:#b7f5d0;font:11px/16px var(--font-ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 8px #0003}.label b{font-weight:400;color:#d0d3d4;margin-left:10px}';
+  style.textContent = tokens + ':host{pointer-events:none}:host::backdrop{display:none}*{box-sizing:border-box;pointer-events:none!important}.outline{position:fixed;outline:1.5px solid #52edaa;background:#52edaa08;display:none}.outline[data-mode=hover]{outline-style:dashed}.label{position:fixed;display:none;max-width:calc(100vw - 16px);padding:4px 7px;border-radius:4px;background:#1b1c1f;color:#b7f5d0;font:11px/16px var(--font-ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 8px #0003}.label b{font-weight:400;color:#d0d3d4;margin-left:10px}';
   const outline = doc.createElement('div');
   outline.className = 'outline'; outline.dataset.testid = 'target-outline';
   const label = doc.createElement('div'); label.className = 'label'; label.dataset.testid = 'target-label';
   const identity = doc.createElement('span'); const size = doc.createElement('b');
   label.append(identity, size); shadow.append(style, outline, label);
   doc.documentElement.append(host);
+  // The top layer's fixed containing block is the viewport, even under transformed html.
+  host.showPopover();
   let previous = '';
   return {
     host,
@@ -24,6 +27,7 @@ export function createOverlay(doc: Document) {
       const key = JSON.stringify([rect, text, mode, win.innerWidth, win.innerHeight]);
       if (key === previous) return;
       previous = key;
+      if (rect.width <= 0 || rect.height <= 0) { outline.style.display = label.style.display = 'none'; return; }
       Object.assign(outline.style, { display: 'block', left: `${rect.x}px`, top: `${rect.y}px`, width: `${rect.width}px`, height: `${rect.height}px` });
       outline.dataset.mode = mode;
       identity.textContent = text; size.textContent = dimensions(rect);

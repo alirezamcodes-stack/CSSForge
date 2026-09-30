@@ -1,0 +1,10 @@
+{
+  "stale": {
+    "selection": null,
+    "connected": false,
+    "source": null
+  },
+  "edit": false,
+  "error": "The editing target or context changed. Pick it again.",
+  "afterRefresh": null
+}

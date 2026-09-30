@@ -9,7 +9,7 @@ test('built Chrome picker selects real data, navigates, tracks geometry and capt
     await mkdir('artifacts/screenshots/phase-03', { recursive: true });
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(1440);
     await expect(inspector(page)).toHaveCSS('width', '350px');
-    await expect(page.getByRole('tab', { name: 'Design', exact: true })).toHaveCSS('font-size', '13px');
+    await expect(page.getByRole('tab', { name: 'Design', exact: true })).toHaveCSS('font-size', '12px');
     await page.locator('#checkout').hover();
     await expect(outline(page)).toHaveAttribute('data-mode', 'hover');
     await expect(page.getByTestId('target-label')).toContainText('button#checkout.primary');

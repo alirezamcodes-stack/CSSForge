@@ -1,6 +1,7 @@
 import { splitCSS } from '../../editing/rich';
 import { matchingContexts } from './matching';
 import type { Declaration, RuleContext, SelectedSources, SessionGroup, SourceAccessibility, SourceRule, SourceSheet } from './model';
+import type { TargetLifecycle } from '../../picker/targetLifecycle';
 
 type Scope = Document | ShadowRoot;
 const readable = { readable: true } as const;
@@ -8,7 +9,7 @@ const failure = (error: unknown): SourceAccessibility => ({ readable: false, rea
 const animationNames = (style: CSSStyleDeclaration) => splitCSS(style.getPropertyValue('animation-name')).map(name => name.replace(/^['"]|['"]$/g, ''));
 
 /** One session-owned CSSOM index. No observers, polling, computed-style reads or UI dependencies. */
-export function createSourceIndex(doc: Document, owns: (element: Element) => boolean = () => false) {
+export function createSourceIndex(doc: Document, owns: (element: Element) => boolean = () => false, lifecycle?: TargetLifecycle) {
   let identities = new WeakMap<object, string>(), sequence = 0, scans = 0;
   let scopes = new WeakMap<Scope, { sheets: SourceSheet[]; notices: string[] }>();
   let selected = new WeakMap<Element, SelectedSources>();
@@ -80,12 +81,12 @@ export function createSourceIndex(doc: Document, owns: (element: Element) => boo
     const snapshot = { sheets, notices: [...notices] }; scopes.set(root, snapshot); return snapshot;
   }
   function read(element: Element): SelectedSources {
-    const cached = selected.get(element); if (cached) return cached;
+    const cached = selected.get(element); if (cached && (!lifecycle || lifecycle.valid(element))) return cached;
     const root = element.getRootNode() as Scope;
     const scopeId = id(root, 'scope'), elementId = id(element, 'element');
     const inlineId = `${elementId}:inline`, inlineRuleId = `${inlineId}:rule`;
     const notices = new Set<string>();
-    const allowed = !owns(element) && (root === doc || ('mode' in root && root.mode === 'open' && !owns(root.host)));
+    const allowed = (!lifecycle || lifecycle.valid(element)) && !owns(element) && (root === doc || ('mode' in root && root.mode === 'open' && !owns(root.host)));
     const inline: SourceSheet = { id: inlineId, scopeId, kind: 'inline', label: 'inline style', url: null, order: 0, disabled: false, accessibility: readable, rules: [] };
     const snapshot: SelectedSources = { scopeId, sheets: [], inline, matches: [], keyframes: [], notices: [] };
     if (!allowed) { snapshot.notices.push('Closed or CSSForge-owned scopes are not inspected.'); return snapshot; }

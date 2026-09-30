@@ -1,0 +1,53 @@
+{
+  "plain": {
+    "selection": null,
+    "design": null,
+    "edit": false,
+    "replacementColor": "rgb(0, 0, 0)"
+  },
+  "removed": "cleared on ResizeObserver-driven paint",
+  "moved": {
+    "selection": {
+      "identity": "div#absolute.box",
+      "tag": "div",
+      "id": "absolute",
+      "classes": [
+        "box"
+      ],
+      "rect": {
+        "x": 40,
+        "y": 180,
+        "width": 150,
+        "height": 60
+      },
+      "fontFamily": "Arial",
+      "fontSize": "16px",
+      "hasParent": true,
+      "hasChild": false,
+      "hasPrevious": true,
+      "hasNext": true
+    },
+    "design": null,
+    "error": "This element moved to another document tree. Reset session edits before inspecting it again."
+  },
+  "movedSettled": {
+    "identity": "div#absolute.box",
+    "tag": "div",
+    "id": "absolute",
+    "classes": [
+      "box"
+    ],
+    "rect": {
+      "x": 40,
+      "y": 780,
+      "width": 140,
+      "height": 18
+    },
+    "fontFamily": "Arial",
+    "fontSize": "16px",
+    "hasParent": true,
+    "hasChild": false,
+    "hasPrevious": true,
+    "hasNext": true
+  }
+}

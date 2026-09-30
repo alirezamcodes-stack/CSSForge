@@ -1,0 +1,17 @@
+{
+  "zoom": {
+    "target": {
+      "x": 81,
+      "y": 427.7890625,
+      "width": 219.1015625,
+      "height": 53
+    },
+    "outline": {
+      "x": 81,
+      "y": 427.7890625,
+      "width": 219.1015625,
+      "height": 53
+    }
+  },
+  "replacement": "Code edited the original node; cloning copied its marker. Selection clears and Code unmounts, but 31px persists until deactivate; teardown restores 18px."
+}

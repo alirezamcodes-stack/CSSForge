@@ -1,4 +1,5 @@
 import { identityOf } from './identity';
+import { navigationChildren } from './navigation';
 export type TreeRow = { id: string; label: string; tag: string; elementId: string; classes: string; depth: number; selected: boolean; expanded: boolean; expandable: boolean; boundary: string; text: string };
 export type TreeSnapshot = { rows: TreeRow[]; limited: boolean };
 
@@ -9,9 +10,7 @@ export function createTree(valid: (node: Element | null) => node is Element, par
   let current: Element | null = null;
   const id = (node: Element) => { let value = ids.get(node); if (!value) { value = String(++sequence); ids.set(node, value); } return value; };
   const child = (node: Element) => {
-    let next = (node.shadowRoot ?? node).firstElementChild, count = 0;
-    while (next && count++ < 100) { const sibling = next.nextElementSibling; if (valid(next)) return next; next = sibling; }
-    return null;
+    return navigationChildren(node).find(valid) ?? null;
   };
   const read = (selected: Element | null): TreeSnapshot => {
     handles.clear(); const rows: TreeRow[] = []; let limited = false;
@@ -29,15 +28,16 @@ export function createTree(valid: (node: Element | null) => node is Element, par
       rows.push({ id: key, label: identityOf(node), tag: node.localName, elementId: compact(node.id), classes: compact(node.getAttribute('class') ?? ''), depth, selected: node === selected, expanded: isExpanded, expandable, boundary: node.shadowRoot ? '#shadow-root (open)' : node.localName === 'iframe' ? 'Frame contents unavailable' : '', text });
       if (!expandable || !isExpanded) return;
       const pathChild = path[path.indexOf(node) + 1];
-      let next: Element | null = child(node);
+      const children = navigationChildren(node, pathChild);
+      let offset = 0;
       // Keep the selected path in view even when it is far down a large sibling list.
       if (path.includes(node) && pathChild && pathChild !== node) {
-        next = pathChild; for (let i = 0; i < 8 && next.previousElementSibling; i++) next = next.previousElementSibling;
-        if (next.previousElementSibling) limited = true;
+        offset = Math.max(0, children.indexOf(pathChild) - 8);
+        if (offset || children[0] !== child(node)) limited = true;
       }
-      let scanned = 0, shown = 0;
-      while (next && scanned++ < 100 && shown < 32) { if (valid(next)) { visit(next, depth + 1); shown++; } next = next.nextElementSibling; }
-      if (next) limited = true;
+      let shown = 0;
+      for (; offset < children.length && shown < 32; offset++) if (valid(children[offset])) { visit(children[offset], depth + 1); shown++; }
+      if (offset < children.length) limited = true;
     };
     visit(path[0], 0); return { rows, limited };
   };

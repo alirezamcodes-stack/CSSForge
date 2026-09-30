@@ -3,6 +3,10 @@ import { baseContext, contextKey, discoverMedia, pseudos, type EditContext, type
 import { readConversionContext } from './conversionContext';
 import type { ValueProperty, ConversionContext, ValueReference } from './values';
 import type { SourceIndex } from '../engine/sources';
+import { createTargetLifecycle, type TargetIdentity } from '../picker/targetLifecycle';
+import { observeTarget } from '../picker/invalidation';
+import { supportsSize } from './capabilities';
+import { createMarkerContainment } from './markerContainment';
 
 export type FieldValue = { computed: string; presented: string; authored?: string; override?: string };
 export type DesignSnapshot = { targetId: string; values: Record<Property, FieldValue>; canSize: boolean };
@@ -10,17 +14,18 @@ export type OverrideGroup = { context: EditContext; declarations: { property: Pr
 export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean };
 type Values = Partial<Record<Property, string>>;
 type Scope = { context: EditContext; values: Values; disabled?: Values };
-type Target = { id: string; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; scopes: Map<string, Scope>; layer?: HTMLStyleElement; media: ReturnType<typeof discoverMedia> };
+type Target = { id: string; identity: TargetIdentity; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; scopes: Map<string, Scope>; layer?: HTMLStyleElement; stop?: () => void; guard?: () => void; retired?: boolean; media: ReturnType<typeof discoverMedia> };
 export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string }[]; order: number; gesture?: string };
 export const emptyEditState = (): EditState => ({ design: null, overrides: [], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false });
 
 /** One session controller for core and rich editing. No author declarations are rewritten. */
-export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: () => void, sources: SourceIndex) {
+export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: () => void, sources: SourceIndex, lifecycle = createTargetLifecycle(doc, owns)) {
   const win = doc.defaultView!;
   const prefix = `data-cssforge-target-${crypto.randomUUID().replaceAll('-', '')}`;
   const targets = new Map<string, Target>(); let byElement = new WeakMap<Element, Target>();
   const listeners = new Set<() => void>(), history: Transaction[] = [];
   let sequence = 0, order = 0, destroyed = false, state = emptyEditState();
+  const containment = createMarkerContainment(doc, owns);
   const edited = (target: Target) => [...target.scopes.values()].some(scope => Object.keys(scope.values).length || Object.keys(scope.disabled ?? {}).length);
   const publish = (patch: Partial<EditState> = {}) => {
     state = { ...state, undoCount: history.length, editedCount: [...targets.values()].filter(edited).length, ...patch };
@@ -31,16 +36,25 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     ] })).filter(group => group.declarations.length) : [];
     listeners.forEach(listener => listener());
   };
-  const safe = (target: Target) => target.element.isConnected && target.element.ownerDocument === doc && target.element.getRootNode() === target.root && !owns(target.element);
+  const safe = (target: Target) => lifecycle.safe(target.identity);
+  const quarantine = (target = state.design ? targets.get(state.design.targetId) : undefined) => {
+    if (target && !target.retired && !safe(target)) {
+      target.retired = true; release(target, false); target.scopes.clear();
+      if (byElement.get(target.element) === target) byElement.delete(target.element);
+      publish(state.design?.targetId === target.id ? { design: null, error: 'The editing target changed. Pick it again.' } : {});
+    }
+  };
   function inspect(element: Element | null, computed?: CSSStyleDeclaration, discover = false) {
     if (destroyed) return;
-    if (!element || owns(element) || !element.isConnected || !(element instanceof win.HTMLElement || element instanceof win.SVGElement)) { publish({ design: null, error: null }); return; }
+    quarantine();
+    if (!element || !lifecycle.valid(element) || !(element instanceof win.HTMLElement || element instanceof win.SVGElement)) { publish({ design: null, error: null }); return; }
     const root = element.getRootNode();
     if (root !== doc && !(root instanceof win.ShadowRoot && root.mode === 'open')) { publish({ design: null }); return; }
+    quarantine(byElement.get(element));
     let target = byElement.get(element);
     if (!target) {
       const id = String(++sequence); let attribute = prefix; while (element.hasAttribute(attribute)) attribute += '-x';
-      target = { id, element, root: root as Document | ShadowRoot, attribute, scopes: new Map(), media: { contexts: [], limited: false } };
+      target = { id, identity: lifecycle.bind(element), element, root: root as Document | ShadowRoot, attribute, scopes: new Map(), media: { contexts: [], limited: false } };
       targets.set(id, target); byElement.set(element, target);
     }
     if (!safe(target)) { publish({ design: null, error: 'This element moved to another document tree. Reset session edits before inspecting it again.' }); return; }
@@ -57,13 +71,13 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     })) as Record<Property, FieldValue>;
     const mediaContexts = [...target.media.contexts];
     for (const scope of target.scopes.values()) if (scope.context.media.length && !mediaContexts.some(item => JSON.stringify(item.queries) === JSON.stringify(scope.context.media))) mediaContexts.push({ queries: scope.context.media, source: 'session override' });
-    const replaced = ['img', 'input', 'textarea', 'select', 'button', 'video', 'canvas', 'svg', 'iframe', 'object', 'embed'].includes(element.localName);
-    publish({ design: { targetId: target.id, values, canSize: css.display !== 'contents' && (css.display !== 'inline' || replaced) }, mediaContexts, mediaLimited: target.media.limited, error: changed ? null : state.error });
+    publish({ design: { targetId: target.id, values, canSize: supportsSize(element, css.display) }, mediaContexts, mediaLimited: target.media.limited, error: changed ? null : state.error });
   }
-  const release = (target: Target) => {
+  const release = (target: Target, cleanCopies = true) => {
+    target.stop?.(); target.stop = undefined; target.guard?.(); target.guard = undefined;
     target.layer?.remove(); target.layer = undefined;
     if (target.element.getAttribute(target.attribute) === target.id) target.element.removeAttribute(target.attribute);
-    for (const copy of target.root.querySelectorAll(`[${target.attribute}="${target.id}"]`)) copy.removeAttribute(target.attribute);
+    if (cleanCopies) for (const copy of target.root.querySelectorAll(`[${target.attribute}="${target.id}"]`)) copy.removeAttribute(target.attribute);
   };
   const render = (target: Target) => {
     if (![...target.scopes.values()].some(scope => Object.keys(scope.values).length)) { release(target); return; }
@@ -83,8 +97,23 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     } catch (error) { layer.remove(); throw error; }
     for (const copy of target.root.querySelectorAll(`[${target.attribute}="${target.id}"]`)) if (copy !== target.element) copy.removeAttribute(target.attribute);
     target.element.setAttribute(target.attribute, target.id); target.layer?.remove(); target.layer = layer;
+    if (!target.stop) {
+      const watch = () => {
+        target.stop?.();
+        const observation = observeTarget(target.element, () => {
+          if (!safe(target)) { quarantine(target); onChange(); }
+          else if (observation.moved()) watch();
+        }, owns);
+        target.stop = observation.stop;
+      };
+      watch();
+    }
+    if (!target.guard) target.guard = containment.add(target.root, { element: target.element, attribute: target.attribute, id: target.id, quarantine: () => {
+      lifecycle.forget(target.identity); quarantine(target); onChange();
+    } });
   };
   const applyBatch = (targetId: string, inputs: Values, gesture?: string, expectedContext = contextKey(state.context)) => {
+    quarantine();
     const target = targets.get(targetId); const fail = (error: string) => { publish({ error }); return false; };
     if (destroyed || !target || state.design?.targetId !== targetId || !safe(target) || expectedContext !== contextKey(state.context)) return fail('The editing target or context changed. Pick it again.');
     if (target.element.hasAttribute(target.attribute) && target.element.getAttribute(target.attribute) !== target.id) return fail('The page changed the edit marker. Reset session edits before continuing.');
@@ -108,7 +137,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     publish({ error: null }); onChange(); return true;
   };
   return {
-    inspect, applyBatch,
+    inspect, applyBatch, quarantine,
     sourcePosition(element: Element): number | undefined {
       const target = byElement.get(element);
       if (!target?.layer?.sheet || !safe(target)) return undefined;
@@ -154,7 +183,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       if (context.media.length && !state.mediaContexts.some(item => JSON.stringify(item.queries) === JSON.stringify(context.media))) return;
       publish({ context: { media: [...context.media], pseudo: context.pseudo }, error: null }); onChange();
     },
-    getSnapshot: () => state,
+    getSnapshot: () => { quarantine(); return state; },
     cancelGesture(gesture: string) { if (gesture && history.at(-1)?.gesture === gesture) { this.undo(); return true; } return false; },
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
     undo() {
@@ -178,12 +207,14 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     reset() {
       if (destroyed) return;
       for (const target of targets.values()) release(target);
+      containment.destroy();
       targets.clear(); byElement = new WeakMap(); history.length = 0;
       publish({ error: null, context: baseContext() }); onChange();
     },
     destroy() {
       if (destroyed) return; destroyed = true;
       for (const target of targets.values()) release(target);
+      containment.destroy();
       targets.clear(); history.length = 0; listeners.clear(); state = emptyEditState();
     },
   };
