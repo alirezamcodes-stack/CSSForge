@@ -9,7 +9,7 @@ export function useEscapePolicy(ref: RefObject<HTMLElement | null>) {
     const doc = ref.current!.ownerDocument;
     const onKey = (event: KeyboardEvent) => {
       if (event.key !== 'Escape' || event.isComposing) return;
-      if (event.composedPath().some(node => node instanceof HTMLInputElement && node.hasAttribute('data-escape-cancel'))) return;
+      if (event.composedPath().some(node => node instanceof HTMLElement && node.hasAttribute('data-escape-cancel'))) return;
       const state = useUI.getState();
       const inside = event.composedPath().includes(ref.current!);
       if (!inside && !state.activePopover && !state.surface && !picker?.getSnapshot().active) return;

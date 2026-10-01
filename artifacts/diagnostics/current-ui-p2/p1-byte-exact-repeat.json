@@ -1,0 +1,240 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\alire\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/current-ui-p1.spec.ts",
+      "--grep",
+      "UI03-normal",
+      "--repeat-each=3",
+      "--reporter=list,json",
+      "--output=.preview/current-ui-p2-p1-repeat-results"
+    ],
+    "configFile": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\playwright.config.ts",
+    "rootDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/.preview/current-ui-p2-p1-repeat-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node node_modules/vite/bin/vite.js --config vite.preview.config.ts --host 127.0.0.1",
+      "url": "http://127.0.0.1:5173",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "current-ui-p1.spec.ts",
+      "file": "current-ui-p1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "UI03-normal feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1722,
+                  "error": {
+                    "message": "Error: Feedback must not alter pixels in the opaque interior of the overlapping UI control\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: Feedback must not alter pixels in the opaque interior of the overlapping UI control\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at paintBehind (C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:125:123)\n    at C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:133:5",
+                    "location": {
+                      "file": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts",
+                      "column": 123,
+                      "line": 125
+                    },
+                    "snippet": "  123 |     const hidden = await page.screenshot({ clip, animations: 'disabled', caret: 'hide' });\n  124 |     if (!visible.equals(hidden)) { await writeFile('.preview/p1-feedback-visible.png', visible); await writeFile('.preview/p1-feedback-hidden.png', hidden); }\n> 125 |     expect(visible.equals(hidden), 'Feedback must not alter pixels in the opaque interior of the overlapping UI control').toBe(true);\n      |                                                                                                                           ^\n  126 |   }\n  127 |   finally { await page.locator('cssforge-overlay').evaluate(node => { for (const name of ['.outline', '.label']) { const part = node.shadowRoot!.querySelector<HTMLElement>(name)!; part.style.removeProperty('background-color'); part.style.removeProperty('outline-color'); } }); }\n  128 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts",
+                        "column": 123,
+                        "line": 125
+                      },
+                      "message": "Error: Feedback must not alter pixels in the opaque interior of the overlapping UI control\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  123 |     const hidden = await page.screenshot({ clip, animations: 'disabled', caret: 'hide' });\n  124 |     if (!visible.equals(hidden)) { await writeFile('.preview/p1-feedback-visible.png', visible); await writeFile('.preview/p1-feedback-hidden.png', hidden); }\n> 125 |     expect(visible.equals(hidden), 'Feedback must not alter pixels in the opaque interior of the overlapping UI control').toBe(true);\n      |                                                                                                                           ^\n  126 |   }\n  127 |   finally { await page.locator('cssforge-overlay').evaluate(node => { for (const name of ['.outline', '.label']) { const part = node.shadowRoot!.querySelector<HTMLElement>(name)!; part.style.removeProperty('background-color'); part.style.removeProperty('outline-color'); } }); }\n  128 | }\n    at paintBehind (C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:125:123)\n    at C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:133:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:13:45.195Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-p1-repeat-results\\current-ui-p1-UI03-normal--8f2b8--unit-Changes-and-Navigator\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-p1-repeat-results\\current-ui-p1-UI03-normal--8f2b8--unit-Changes-and-Navigator\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts",
+                    "column": 123,
+                    "line": 125
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-5f240c61c573e322cc38",
+          "file": "current-ui-p1.spec.ts",
+          "line": 129,
+          "column": 134
+        },
+        {
+          "title": "UI03-normal feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5275,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:13:47.449Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-p1-repeat-results\\current-ui-p1-UI03-normal--8f2b8--unit-Changes-and-Navigator-repeat1\\attachments\\P1-regression-1f16311affb5fcae808b82e745b75ba6dfbca2b2.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-759ba1b1680c7deb23fd",
+          "file": "current-ui-p1.spec.ts",
+          "line": 129,
+          "column": 134
+        },
+        {
+          "title": "UI03-normal feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4834,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:13:53.231Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-p1-repeat-results\\current-ui-p1-UI03-normal--8f2b8--unit-Changes-and-Navigator-repeat2\\attachments\\P1-regression-1f16311affb5fcae808b82e745b75ba6dfbca2b2.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-b5d48fc563778853926b",
+          "file": "current-ui-p1.spec.ts",
+          "line": 129,
+          "column": 134
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T13:13:44.696Z",
+    "duration": 13463.414,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

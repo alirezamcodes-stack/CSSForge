@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { EditorState } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
 import { css } from '@codemirror/lang-css';
@@ -16,26 +16,40 @@ import { declarationStatus } from '../../engine/cascade/status';
 
 const CascadeContext = createContext<CascadeResult | null>(null);
 
-function ValueEditor({ value, label, commit }: { value: string; label: string; commit: (value: string) => void }) {
-  const mount = useRef<HTMLSpanElement>(null), callback = useRef(commit); callback.current = commit;
+function ValueEditor({ value, label, commit, cancel }: { value: string; label: string; commit: (value: string) => void; cancel: () => void }) {
+  const mount = useRef<HTMLSpanElement>(null), callback = useRef(commit), cancellation = useRef(cancel); callback.current = commit; cancellation.current = cancel;
   useEffect(() => {
     const view = new EditorView({ parent: mount.current!, root: mount.current!.getRootNode() as ShadowRoot, state: EditorState.create({ doc: value, extensions: [
       css(), syntaxHighlighting(HighlightStyle.define([{ tag: [tags.number, tags.unit, tags.color, tags.string], color: '#c2a2ea' }, { tag: [tags.keyword, tags.function(tags.variableName), tags.propertyName], color: '#5ed5ec' }])), EditorView.lineWrapping,
       EditorView.contentAttributes.of({ 'aria-label': label, 'aria-multiline': 'false', spellcheck: 'false' }),
       EditorState.transactionFilter.of(transaction => transaction.newDoc.lines > 1 ? [] : transaction),
-      EditorView.domEventHandlers({ keydown(event, editor) { if (event.key === 'Enter') { event.preventDefault(); callback.current(editor.state.doc.toString()); return true; } return false; } }),
+      EditorView.domEventHandlers({ keydown(event, editor) { if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); cancellation.current(); return true; } if (event.key === 'Enter') { event.preventDefault(); callback.current(editor.state.doc.toString()); return true; } return false; } }),
       EditorView.theme({ '&': { fontSize: '13px', backgroundColor: '#292c31', color: '#c2a2ea' }, '.cm-content': { padding: '2px 0', fontFamily: 'var(--font-code)', minHeight: '20px' }, '.cm-line': { padding: '0 3px' }, '&.cm-focused': { outline: '1px solid #97dfb6' } }, { dark: true }),
     ] }) });
     view.focus(); view.dispatch({ selection: { anchor: 0, head: value.length } });
     return () => view.destroy();
   }, []);
-  return <span className={s.editor} ref={mount} />;
+  return <span className={s.editor} data-escape-cancel ref={mount} />;
 }
 
 function DeclarationRow({ declaration, context, editable, owned = false, enabled = true }: { declaration: Declaration & { id?: string }; context: EditContext; editable: boolean; owned?: boolean; enabled?: boolean }) {
   const { editor, design, mutationPolicy } = useEditing();
   const status = declarationStatus(useContext(CascadeContext), declaration.id);
   const [editing, setEditing] = useState(false), [error, setError] = useState('');
+  const focusKey = JSON.stringify([owned, contextKey(context), declaration.sourceId, declaration.ruleId, declaration.property]);
+  const valueButton = useRef<HTMLButtonElement>(null), row = useRef<HTMLDivElement>(null), returnFocus = useRef(false);
+  useLayoutEffect(() => { if (!editing && returnFocus.current && valueButton.current) { valueButton.current.focus({ preventScroll: true }); returnFocus.current = false; } }, [editing]);
+  const finish = () => {
+    const scope = row.current?.closest('[data-testid=live-code]');
+    const section = row.current?.closest('section');
+    returnFocus.current = true; setEditing(false); setError('');
+    // Resolve after React renders: author/override updates may replace the row.
+    requestAnimationFrame(() => {
+      const replacementRow = Array.from((section?.isConnected ? section : scope)?.querySelectorAll<HTMLElement>('[data-code-focus]') ?? []).find(node => node.getAttribute('data-code-focus') === focusKey);
+      const replacement = replacementRow?.querySelector<HTMLButtonElement>('button[aria-label]');
+      (valueButton.current?.isConnected ? valueButton.current : replacement)?.focus({ preventScroll: true });
+    });
+  };
   const supported = (properties.includes(declaration.property as Property) || (!owned && mutationPolicy.mode === 'SAFE_AUTHOR_MUTATION' && declaration.property.startsWith('--'))) && (editable || (!owned && mutationPolicy.mode === 'SAFE_AUTHOR_MUTATION'));
   const authorMode = !owned && mutationPolicy.mode === 'SAFE_AUTHOR_MUTATION';
   const rgb = declaration.value.match(/^rgb\(\s*(\d+)\s*[, ]\s*(\d+)\s*[, ]\s*(\d+)\s*\)$/);
@@ -46,17 +60,17 @@ function DeclarationRow({ declaration, context, editable, owned = false, enabled
       ? editor!.applyAuthor(design!.targetId, declaration.property, value, { sourceId: declaration.sourceId, ruleId: declaration.ruleId, declarationId: declaration.id, allowShared: mutationPolicy.allowShared }, contextKey(context))
       : editor!.applyBatch(design!.targetId, { [declaration.property]: value }, undefined, contextKey(context));
     setError(success ? '' : editor!.getSnapshot().error ?? 'This value cannot be applied.');
-    if (success) setEditing(false);
+    if (success && editing) finish();
   };
-  return <div className={s.declaration} data-property={declaration.property} data-owned={owned} data-source-state={owned ? 'session-override' : declaration.mutationState ?? 'authored'} data-cascade-status={status} title={`${status ? `Readable author cascade: ${status}. ` : ''}${declaration.mutationState === 'cssforge-mutated-author' ? 'CSSForge-mutated authored declaration.' : owned ? 'CSSForge session override.' : 'Authored declaration.'}`}>
+  return <div ref={row} className={s.declaration} data-code-focus={focusKey} data-property={declaration.property} data-owned={owned} data-source-state={owned ? 'session-override' : declaration.mutationState ?? 'authored'} data-cascade-status={status} title={`${status ? `Readable author cascade: ${status}. ` : ''}${declaration.mutationState === 'cssforge-mutated-author' ? 'CSSForge-mutated authored declaration.' : owned ? 'CSSForge session override.' : 'Authored declaration.'}`}>
     <div className={`${s.line} ${!enabled ? s.disabled : ''}`}>
       <input type="checkbox" aria-label={`${owned ? 'Toggle override' : 'Authored declaration'} ${declaration.property}`} checked={enabled} disabled={!owned} title={owned ? 'Remove or restore this CSSForge override; authored styles remain intact.' : 'Disabling authored CSS requires cascade knowledge and is unavailable.'} onChange={() => { const ok = editor!.toggle(design!.targetId, context, declaration.property as Property); setError(ok ? '' : editor!.getSnapshot().error ?? 'This declaration cannot be toggled.'); }} />
       <span className={s.property}>{declaration.property}</span><span>:</span>
-      {editing ? <ValueEditor value={declaration.value} label={`CSS value ${declaration.property}`} commit={commit} /> : <button className={s.value} disabled={!supported} title={supported ? authorMode ? 'Edit authored declaration when safe · Enter to apply' : 'Edit as a CSSForge override · Enter to apply' : 'Read-only declaration or unsupported selector context'} onClick={() => setEditing(true)} aria-label={`Edit ${declaration.property}`}>{declaration.value}</button>}
+      {editing ? <ValueEditor value={declaration.value} label={`CSS value ${declaration.property}`} commit={commit} cancel={finish} /> : <button ref={valueButton} className={s.value} disabled={!supported} title={supported ? authorMode ? 'Edit authored declaration when safe · Enter to apply' : 'Edit as a CSSForge override · Enter to apply' : 'Read-only declaration or unsupported selector context'} onClick={() => setEditing(true)} aria-label={`Edit ${declaration.property}`}>{declaration.value}</button>}
       {declaration.priority && <span className={s.priority}>!{declaration.priority}</span>}<span>;</span>
       {supported && swatch && /^(color|background-color|border-color)$/.test(declaration.property) && <input type="color" className={s.swatch} aria-label={`Code color ${declaration.property}`} value={swatch} onChange={event => commit(event.target.value)} title={authorMode ? 'Apply color with safe author policy' : 'Apply a color override'} />}
     </div>
-    {editing && <small className={s.hint}>{authorMode ? 'Enter to apply safely; uncertain sources use overrides' : 'Enter to apply as an override'} <button onClick={() => { setEditing(false); setError(''); }}>Cancel</button></small>}
+    {editing && <small className={s.hint}>{authorMode ? 'Enter to apply safely; uncertain sources use overrides' : 'Enter to apply as an override'} <button onClick={finish}>Cancel</button></small>}
     {error && <p className={s.error} role="alert">{error}</p>}
   </div>;
 }

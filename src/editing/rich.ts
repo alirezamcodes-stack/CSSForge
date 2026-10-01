@@ -20,6 +20,13 @@ export function parseGradient(value: string): Gradient | null {
   const match = value.match(/^(linear|radial)-gradient\((.*)\)$/s); if (!match) return null;
   const args = splitCSS(match[2]); let direction = match[1] === 'linear' ? '180deg' : 'ellipse at center';
   if (/^(to |[-+\d.]+(?:deg|turn|rad|grad)$|circle|ellipse|at |closest-|farthest-)/.test(args[0])) direction = args.shift()!;
+  // Hints and double-position stops cannot be represented by this simple editor.
+  // Leave the original gradient intact rather than inventing colors or positions.
+  if (args.some(arg => {
+    const tokens = splitCSS(arg, ' ');
+    const position = (token: string) => /^[-+\d.]+(?:%|px|em|rem)$/.test(token);
+    return tokens.length === 1 && position(tokens[0]) || tokens.length > 2 && position(tokens.at(-1)!) && position(tokens.at(-2)!);
+  })) return null;
   const stops = args.map(arg => {
     const tokens = splitCSS(arg, ' '); const position = tokens.length > 1 && /^[-+\d.]+(?:%|px|em|rem)$/.test(tokens.at(-1)!) ? tokens.pop()! : '';
     return { color: tokens.join(' '), position };

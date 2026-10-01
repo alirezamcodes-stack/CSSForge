@@ -1,0 +1,10 @@
+{
+  "observations": {
+    "escape": true,
+    "cancel": true,
+    "apply": true,
+    "tabContinuation": true,
+    "remountedOverride": true
+  },
+  "chrome": "154.0.8037.92"
+}

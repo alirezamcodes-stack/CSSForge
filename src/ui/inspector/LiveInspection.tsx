@@ -29,6 +29,6 @@ export function LiveTask({ task }: { task: Task }) {
 export function LiveSurface({ surface }: { surface: 'navigator' | 'changes' }) {
   const { selection } = useInspection();
   const { editedCount } = useEditing();
-  if (surface === 'changes') return <Surface title="Changes" subtitle={`${editedCount} edited elements · current session`} wide><SessionActions /><p className={s.fixtureNote}>Core Design edits are active for this session. Detailed change review and export are not connected yet.</p></Surface>;
+  if (surface === 'changes') return <Surface title="Changes" subtitle={`${editedCount} edited elements · current session`} wide><SessionActions /><p className={s.fixtureNote}>Session edit controls: undo the last edit or reset all session edits. Detailed review and export are unavailable.</p></Surface>;
   return <LiveNavigator />;
 }

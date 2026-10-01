@@ -9,6 +9,9 @@ it('splits layers without splitting colors, gradients or quoted URLs', () => {
 it('round trips linear and radial stops with explicit positions', () => {
   for (const value of ['linear-gradient(90deg, rgb(0, 0, 0) 0%, white 100%)', 'radial-gradient(circle at center, red 10%, blue 90%)']) expect(serializeGradient(parseGradient(value)!)).toBe(value);
   expect(parseGradient('url("a.png")')).toBeNull();
+  expect(parseGradient('linear-gradient(90deg, red 0% 20%, 45%, blue 100%)')).toBeNull();
+  expect(parseGradient('linear-gradient(90deg, red 0%, 45%, blue 100%)')).toBeNull();
+  expect(parseGradient('linear-gradient(90deg, red 0% 20%, blue 100%)')).toBeNull();
 });
 it('preserves background lists with cycling companion values', () => {
   const layers = backgroundLayers({ image: 'url("a.png"), linear-gradient(red, blue)', position: 'center', size: 'cover, 50%', repeat: 'no-repeat' });

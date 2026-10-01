@@ -1,0 +1,2352 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\alire\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/current-ui-p2.spec.ts",
+      "tests/e2e/current-ui-p1.spec.ts",
+      "tests/e2e/editing.spec.ts",
+      "tests/e2e/code-html.spec.ts",
+      "tests/e2e/rich.spec.ts",
+      "tests/e2e/typography-polish.spec.ts",
+      "tests/e2e/units.spec.ts",
+      "tests/e2e/interactions.spec.ts",
+      "tests/e2e/picker-performance.spec.ts",
+      "tests/e2e/extension.spec.ts",
+      "tests/e2e/background-polish.spec.ts",
+      "tests/e2e/shadow-polish.spec.ts",
+      "--reporter=list,json",
+      "--output=.preview/current-ui-p2-final-results"
+    ],
+    "configFile": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\playwright.config.ts",
+    "rootDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/.preview/current-ui-p2-final-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node node_modules/vite/bin/vite.js --config vite.preview.config.ts --host 127.0.0.1",
+      "url": "http://127.0.0.1:5173",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "background-polish.spec.ts",
+      "file": "background-polish.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Phase 06.5.2B five Background views, stop dragging, layers, presets, narrow and zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7045,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:08:21.258Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "74ecaa4e500dae4f40d0-33b27d9acee603cbcd7a",
+          "file": "background-polish.spec.ts",
+          "line": 24,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "code-html.spec.ts",
+      "file": "code-html.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Code shows authored sources and safely edits, validates, toggles, undoes and resets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3166,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:08:28.366Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7dc7049b81ee897b477-3c3430cb3459da9135ea",
+          "file": "code-html.spec.ts",
+          "line": 26,
+          "column": 1
+        },
+        {
+          "title": "Code media and pseudo edits retain their conditions and readable source refresh is explicit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2143,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:08:31.544Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7dc7049b81ee897b477-7e68bb2045f159df7811",
+          "file": "code-html.spec.ts",
+          "line": 68,
+          "column": 1
+        },
+        {
+          "title": "HTML and Navigator select real parents, children, siblings and open shadow nodes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3441,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:08:33.697Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7dc7049b81ee897b477-498b3fdbd527846f1bb1",
+          "file": "code-html.spec.ts",
+          "line": 88,
+          "column": 1
+        },
+        {
+          "title": "Code and lazy HTML remain bounded at narrow width and actual 200% tab zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3456,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:08:37.148Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a7dc7049b81ee897b477-c6f79899aafbacada071",
+          "file": "code-html.spec.ts",
+          "line": 116,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "current-ui-p1.spec.ts",
+      "file": "current-ui-p1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "UI01-html-translate viewport hosting, scrolling, drag, narrow view and native zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6986,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:08:40.643Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI01-html-tr-4be7b-narrow-view-and-native-zoom\\attachments\\P1-regression-b99bb7381a49e6f199cb05f26f3a06d103848140.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-130f6bee99edd074e7b9",
+          "file": "current-ui-p1.spec.ts",
+          "line": 41,
+          "column": 13
+        },
+        {
+          "title": "UI01-html-scale viewport hosting, scrolling, drag, narrow view and native zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6973,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:08:47.640Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI01-html-sc-0852d-narrow-view-and-native-zoom\\attachments\\P1-regression-d00f937af9deda58bc56e4e504a8f04acdf5bab4.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-580e81839b52ae55fb6d",
+          "file": "current-ui-p1.spec.ts",
+          "line": 41,
+          "column": 13
+        },
+        {
+          "title": "UI01-html-combined viewport hosting, scrolling, drag, narrow view and native zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7088,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:08:54.625Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI01-html-co-c4621-narrow-view-and-native-zoom\\attachments\\P1-regression-ca033543dcd9ce2171b10d461ed1b02567727838.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-343c7453acad5a2701a8",
+          "file": "current-ui-p1.spec.ts",
+          "line": 41,
+          "column": 13
+        },
+        {
+          "title": "UI01-body-translate viewport hosting, scrolling, drag, narrow view and native zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7052,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:09:01.724Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI01-body-tr-b2be1-narrow-view-and-native-zoom\\attachments\\P1-regression-4eb05597178dab85ccf1cf6442e90693a88ce658.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-4e8e3b0dcdd99993bfba",
+          "file": "current-ui-p1.spec.ts",
+          "line": 41,
+          "column": 13
+        },
+        {
+          "title": "UI01-body-scale viewport hosting, scrolling, drag, narrow view and native zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7166,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:09:08.789Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI01-body-sc-95430-narrow-view-and-native-zoom\\attachments\\P1-regression-d4ed73a9e16f0b60ae3a883bd29cd34ec550ccff.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-5a0926fff07e000333e9",
+          "file": "current-ui-p1.spec.ts",
+          "line": 41,
+          "column": 13
+        },
+        {
+          "title": "UI01-body-combined viewport hosting, scrolling, drag, narrow view and native zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10301,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:09:15.973Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI01-body-co-440da-narrow-view-and-native-zoom\\attachments\\P1-regression-95a108d14f74bbb7b851e79198f738ded92d0109.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-8fa5ffde3de2c8e9c523",
+          "file": "current-ui-p1.spec.ts",
+          "line": 41,
+          "column": 13
+        },
+        {
+          "title": "UI01-cold activation on an already transformed html and body preserves host geometry and picking",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1813,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:09:26.291Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI01-cold-ac-27344-s-host-geometry-and-picking\\attachments\\P1-regression-9cbb8ea5f605be1e0999d7aaec4227253bbf7f70.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-e5061340f0ebe98d2968",
+          "file": "current-ui-p1.spec.ts",
+          "line": 75,
+          "column": 1
+        },
+        {
+          "title": "UI02 hostile maximum-z-index overlay leaves inspector dock popovers and modals operable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3076,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:09:28.116Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI02-hostile-c53a5-opovers-and-modals-operable\\attachments\\P1-regression-0e5f8e757beb08c9b56e37e6e1411bd5534c47ac.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-881a03d6d1282f6257df",
+          "file": "current-ui-p1.spec.ts",
+          "line": 85,
+          "column": 1
+        },
+        {
+          "title": "UI03-normal feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5351,
+                  "error": {
+                    "message": "Error: Feedback must not alter pixels in the opaque interior of the overlapping UI control\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: Feedback must not alter pixels in the opaque interior of the overlapping UI control\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at paintBehind (C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:125:123)\n    at C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:137:145",
+                    "location": {
+                      "file": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts",
+                      "column": 123,
+                      "line": 125
+                    },
+                    "snippet": "  123 |     const hidden = await page.screenshot({ clip, animations: 'disabled', caret: 'hide' });\n  124 |     if (!visible.equals(hidden)) { await writeFile('.preview/p1-feedback-visible.png', visible); await writeFile('.preview/p1-feedback-hidden.png', hidden); }\n> 125 |     expect(visible.equals(hidden), 'Feedback must not alter pixels in the opaque interior of the overlapping UI control').toBe(true);\n      |                                                                                                                           ^\n  126 |   }\n  127 |   finally { await page.locator('cssforge-overlay').evaluate(node => { for (const name of ['.outline', '.label']) { const part = node.shadowRoot!.querySelector<HTMLElement>(name)!; part.style.removeProperty('background-color'); part.style.removeProperty('outline-color'); } }); }\n  128 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts",
+                        "column": 123,
+                        "line": 125
+                      },
+                      "message": "Error: Feedback must not alter pixels in the opaque interior of the overlapping UI control\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  123 |     const hidden = await page.screenshot({ clip, animations: 'disabled', caret: 'hide' });\n  124 |     if (!visible.equals(hidden)) { await writeFile('.preview/p1-feedback-visible.png', visible); await writeFile('.preview/p1-feedback-hidden.png', hidden); }\n> 125 |     expect(visible.equals(hidden), 'Feedback must not alter pixels in the opaque interior of the overlapping UI control').toBe(true);\n      |                                                                                                                           ^\n  126 |   }\n  127 |   finally { await page.locator('cssforge-overlay').evaluate(node => { for (const name of ['.outline', '.label']) { const part = node.shadowRoot!.querySelector<HTMLElement>(name)!; part.style.removeProperty('background-color'); part.style.removeProperty('outline-color'); } }); }\n  128 | }\n    at paintBehind (C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:125:123)\n    at C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:137:145"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:09:31.203Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI03-normal--8f2b8--unit-Changes-and-Navigator\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI03-normal--8f2b8--unit-Changes-and-Navigator\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts",
+                    "column": 123,
+                    "line": 125
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-5f240c61c573e322cc38",
+          "file": "current-ui-p1.spec.ts",
+          "line": 129,
+          "column": 134
+        },
+        {
+          "title": "UI03-narrow feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5731,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:09:37.610Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI03-narrow--50076--unit-Changes-and-Navigator\\attachments\\P1-regression-73aa7fc9825724addebf7c44911f7e6510c17c48.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-17751a0d66dd3e2a44ac",
+          "file": "current-ui-p1.spec.ts",
+          "line": 129,
+          "column": 134
+        },
+        {
+          "title": "UI03-zoom200 feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6187,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:09:43.374Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-UI03-zoom200-1646b--unit-Changes-and-Navigator\\attachments\\P1-regression-c39e9a2b94cb9a32f6f759bfd0e48c4b24f53c4e.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-a62782340da493a595e0",
+          "file": "current-ui-p1.spec.ts",
+          "line": 129,
+          "column": 134
+        },
+        {
+          "title": "DA01-normal every spacing side and enabled unit accepts native pointer clicks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 23593,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:09:49.574Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-DA01-normal--440b5-cepts-native-pointer-clicks\\attachments\\P1-regression-b56050ab54ab9411491d6b6e111e1f7dd9072106.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-884160a98ecb8979bcc7",
+          "file": "current-ui-p1.spec.ts",
+          "line": 143,
+          "column": 134
+        },
+        {
+          "title": "DA01-narrow every spacing side and enabled unit accepts native pointer clicks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20854,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:10:13.186Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-DA01-narrow--ad477-cepts-native-pointer-clicks\\attachments\\P1-regression-b2aaeacec8e7136124379c38658115ab4b0a8bba.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-fdec5a26d804616d8c4e",
+          "file": "current-ui-p1.spec.ts",
+          "line": 143,
+          "column": 134
+        },
+        {
+          "title": "DA01-zoom200 every spacing side and enabled unit accepts native pointer clicks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18642,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:10:34.055Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-DA01-zoom200-55796-cepts-native-pointer-clicks\\attachments\\P1-regression-901e6f9fb43c72092b3877ecc22a620e1331abec.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-d90f6c42095ac0f44607",
+          "file": "current-ui-p1.spec.ts",
+          "line": 143,
+          "column": 134
+        },
+        {
+          "title": "CA64 assigned and nested assigned nodes appear once with coherent Parent Child Refresh and ordinary DOM",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3364,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:10:52.714Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-CA64-assigne-8f8f7-ld-Refresh-and-ordinary-DOM\\attachments\\P1-regression-6f06e35b4e8f49fd6d247997e7d4eacdabac830a.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-fa7162c8a2abd3b1624a",
+          "file": "current-ui-p1.spec.ts",
+          "line": 165,
+          "column": 1
+        },
+        {
+          "title": "J01-J03 empty tools absent dock keyboard order balanced geometry and clean teardown",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2081,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:10:56.089Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\current-ui-p2-final-results\\current-ui-p1-J01-J03-empt-4519d-geometry-and-clean-teardown\\attachments\\P1-regression-c3d8ff4f2ff8115cd328cbcb55f668f3d58545ba.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-07872e6a226260e3c70b",
+          "file": "current-ui-p1.spec.ts",
+          "line": 186,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "current-ui-p2.spec.ts",
+      "file": "current-ui-p2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "EFF-A-01 EFF-A-02 EFF-F-01 Text color: cancellation, tokens, formats and alpha",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 100000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4794,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:10:58.204Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-acb37934e3d49fb7456e",
+          "file": "current-ui-p2.spec.ts",
+          "line": 49,
+          "column": 4
+        },
+        {
+          "title": "EFF-A-01 EFF-A-02 EFF-F-01 Background color: cancellation, tokens, formats and alpha",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 100000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4925,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:03.008Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-5dc300983025103454fb",
+          "file": "current-ui-p2.spec.ts",
+          "line": 49,
+          "column": 4
+        },
+        {
+          "title": "EFF-A-01 EFF-A-02 EFF-F-01 Border color: cancellation, tokens, formats and alpha",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 100000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5161,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:07.945Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-466f382d9ca39448f527",
+          "file": "current-ui-p2.spec.ts",
+          "line": 49,
+          "column": 4
+        },
+        {
+          "title": "EFF-A-01 EFF-A-02 EFF-F-01 Box shadow color: cancellation, tokens, formats and alpha",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 100000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5680,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:13.118Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-3fc947b4050669553888",
+          "file": "current-ui-p2.spec.ts",
+          "line": 49,
+          "column": 4
+        },
+        {
+          "title": "EFF-A-01 EFF-A-02 EFF-F-01 Text shadow color: cancellation, tokens, formats and alpha",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 100000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5381,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:18.809Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-83670b9a661809356220",
+          "file": "current-ui-p2.spec.ts",
+          "line": 49,
+          "column": 4
+        },
+        {
+          "title": "EFF-A-01 EFF-A-02 EFF-F-01 Stop 1 color: cancellation, tokens, formats and alpha",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 100000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5064,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:24.201Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-e949cfcd33487bb4f019",
+          "file": "current-ui-p2.spec.ts",
+          "line": 49,
+          "column": 4
+        },
+        {
+          "title": "EFF-B-01 interpolation hint is preserved without fake stops; ordinary gradient Undo/Reset",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3215,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:29.275Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-766581c021fa156cbb77",
+          "file": "current-ui-p2.spec.ts",
+          "line": 95,
+          "column": 1
+        },
+        {
+          "title": "EFF-B-02 four mixed border colors, replace all, Escape and Undo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2380,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:32.501Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-01605533e28be8cffd20",
+          "file": "current-ui-p2.spec.ts",
+          "line": 112,
+          "column": 1
+        },
+        {
+          "title": "CA61 CA62 Code Escape, Apply/Cancel focus and Tab continuation including replaced rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1953,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:34.890Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-05dfd1235f7106cac478",
+          "file": "current-ui-p2.spec.ts",
+          "line": 126,
+          "column": 1
+        },
+        {
+          "title": "CA63 HTML complete tree keys and roving tabindex",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1671,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:36.853Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-73256989cd27e98afaeb",
+          "file": "current-ui-p2.spec.ts",
+          "line": 145,
+          "column": 44
+        },
+        {
+          "title": "CA63 Navigator complete tree keys and roving tabindex",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1788,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:38.531Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-7bdf2dd65b6888d94955",
+          "file": "current-ui-p2.spec.ts",
+          "line": 145,
+          "column": 44
+        },
+        {
+          "title": "DA02 DA03 integer modifiers, local unsupported-unit errors and decimal controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3428,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:40.327Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-62601169091a9fc93373",
+          "file": "current-ui-p2.spec.ts",
+          "line": 164,
+          "column": 1
+        },
+        {
+          "title": "J04 Changes reports real count, limitations, Undo/Reset and restores modal focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1897,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:43.764Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-c3d0d32a108ed943fe0d",
+          "file": "current-ui-p2.spec.ts",
+          "line": 180,
+          "column": 1
+        },
+        {
+          "title": "P2 narrow viewport and actual Chrome 200% zoom with accessible validation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2679,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:45.672Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "279afb62108bf42d47b1-4c97857d53e1128bb61f",
+          "file": "current-ui-p2.spec.ts",
+          "line": 194,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "editing.spec.ts",
+      "file": "editing.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "real Design values and reversible spacing, typography, background and border edits; six evidence views",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3301,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:48.371Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9cdefc69da2b06b5d427-e9dd595cd51365935e5d",
+          "file": "editing.spec.ts",
+          "line": 27,
+          "column": 1
+        },
+        {
+          "title": "geometry, display, opacity, positioning and prior-override undo use real CSS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2715,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:51.680Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9cdefc69da2b06b5d427-421a120738ee405cc06c",
+          "file": "editing.spec.ts",
+          "line": 78,
+          "column": 1
+        },
+        {
+          "title": "selection isolation, explicit units, author styles, strong replacement migration and full teardown",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2798,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:54.403Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9cdefc69da2b06b5d427-3881c57e023fd1489567",
+          "file": "editing.spec.ts",
+          "line": 101,
+          "column": 1
+        },
+        {
+          "title": "open-shadow editing, inline-important protection and real 200% zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2130,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:57.209Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9cdefc69da2b06b5d427-4b8d5efac11f0cc76736",
+          "file": "editing.spec.ts",
+          "line": 141,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "extension.spec.ts",
+      "file": "extension.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "built Chrome picker selects real data, navigates, tracks geometry and captures five Phase 03 views",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2381,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:11:59.358Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da119938d3268322a91b-0ac1a8eb5e53f498caad",
+          "file": "extension.spec.ts",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "picker excludes all owned UI, respects Escape layers and releases host clicks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2978,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:01.746Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da119938d3268322a91b-e0282e1d8abe83c939c2",
+          "file": "extension.spec.ts",
+          "line": 56,
+          "column": 1
+        },
+        {
+          "title": "actual action toggles cleanly, preserves host page, and supports real 200% Chrome zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2301,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:04.733Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da119938d3268322a91b-664d4e5bcd89acb2bf6a",
+          "file": "extension.spec.ts",
+          "line": 100,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "interactions.spec.ts",
+      "file": "interactions.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "all tab keys preserve fixture input and accordion state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1318,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:07.062Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3a1181bd00640addebc-e1dc745b34b3b179317b",
+          "file": "interactions.spec.ts",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "title": "media, pseudo and font choices persist; exclusive popovers support keys and cancellation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1660,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:08.501Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3a1181bd00640addebc-dbac34aa2a4b0a5337e2",
+          "file": "interactions.spec.ts",
+          "line": 42,
+          "column": 1
+        },
+        {
+          "title": "drag clamps all edges, preserves position and input, and reflows after resize",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2068,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:10.174Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3a1181bd00640addebc-65efe8cce05d6ade0788",
+          "file": "interactions.spec.ts",
+          "line": 79,
+          "column": 1
+        },
+        {
+          "title": "drag cancellation, action exclusion and keyboard movement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 828,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:12.256Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3a1181bd00640addebc-6e19e1b8dc36e8a758d3",
+          "file": "interactions.spec.ts",
+          "line": 101,
+          "column": 1
+        },
+        {
+          "title": "surface opened through a menu restores the surviving origin and blocks background focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1575,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:13.096Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3a1181bd00640addebc-ac8df98dc9989622a5dd",
+          "file": "interactions.spec.ts",
+          "line": 123,
+          "column": 1
+        },
+        {
+          "title": "dock tool state, pause state and tooltips remain consistent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2026,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:14.683Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3a1181bd00640addebc-834434def169cbb3b0ec",
+          "file": "interactions.spec.ts",
+          "line": 149,
+          "column": 1
+        },
+        {
+          "title": "UI keyboard events stay in the Shadow Root; page Escape leaves base inspector open",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 821,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:16.725Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3a1181bd00640addebc-890f0f376a132985c44a",
+          "file": "interactions.spec.ts",
+          "line": 175,
+          "column": 1
+        },
+        {
+          "title": "font picker stays clamped at an edge and interactions support reduced motion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 766,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:17.562Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e3a1181bd00640addebc-8d5f25120bf2c2d4afd3",
+          "file": "interactions.spec.ts",
+          "line": 193,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "picker-performance.spec.ts",
+      "file": "picker-performance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "raw hover bursts do no computed inspection, publish no UI state, and stop completely on teardown",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 220,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:18.348Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7505e50c7d850ea67f27-c38b4fe76f99295184ab",
+          "file": "picker-performance.spec.ts",
+          "line": 3,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "rich.spec.ts",
+      "file": "rich.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "proven media and actual pseudo rules stay separate and reversible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3072,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:18.598Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b629c3c32dbc18a7cac-76e8c55387d271dc30dc",
+          "file": "rich.spec.ts",
+          "line": 37,
+          "column": 1
+        },
+        {
+          "title": "a burst of filter input events performs at most one selected-style refresh per frame",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1281,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:21.678Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b629c3c32dbc18a7cac-171fc08109df0e68b33d",
+          "file": "rich.spec.ts",
+          "line": 69,
+          "column": 1
+        },
+        {
+          "title": "background layers, gradients, URLs and companion lists apply real atomic edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2688,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:22.966Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b629c3c32dbc18a7cac-8261ef318007f7578c7c",
+          "file": "rich.spec.ts",
+          "line": 89,
+          "column": 1
+        },
+        {
+          "title": "shadow presets and multiple shadows share undo and isolate targets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2895,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:25.662Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b629c3c32dbc18a7cac-74d533e3e823a8cce291",
+          "file": "rich.spec.ts",
+          "line": 118,
+          "column": 1
+        },
+        {
+          "title": "filters preserve unsupported functions, work at narrow/200% and clean up completely",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2066,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:28.565Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0b629c3c32dbc18a7cac-27168e44b23e5896ec32",
+          "file": "rich.spec.ts",
+          "line": 147,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "shadow-polish.spec.ts",
+      "file": "shadow-polish.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Phase 06.5.2C six shadow views, layer clarity, edits, presets, undo, narrow and zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8152,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:30.647Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "110c25cbda9030873bf6-3b1eeca071a1cdb5c4c1",
+          "file": "shadow-polish.spec.ts",
+          "line": 38,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "typography-polish.spec.ts",
+      "file": "typography-polish.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Phase 06.5.2A three Typography views, editing, alignment, narrow color and 200% zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4119,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:38.823Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8f3bfdf3d8559d99bbde-18fbb96cee771ec71603",
+          "file": "typography-polish.spec.ts",
+          "line": 32,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "units.spec.ts",
+      "file": "units.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Phase 06.5.4 built Chrome units, preservation, transactions, six views, narrow and zoom",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16100,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:42.973Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9c9a397a629ed7eb078b-a03398847ad99de664fa",
+          "file": "units.spec.ts",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "unit safety rejects ambiguous percentages and preserves raw manual CSS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3252,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:12:59.085Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9c9a397a629ed7eb078b-f08085ba389cae9728e1",
+          "file": "units.spec.ts",
+          "line": 98,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T13:08:20.267Z",
+    "duration": 283204.883,
+    "expected": 59,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

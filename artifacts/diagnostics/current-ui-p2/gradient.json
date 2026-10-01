@@ -1,0 +1,8 @@
+{
+  "observations": {
+    "hintBefore": "linear-gradient(90deg, rgb(255, 0, 0) 0%, rgb(255, 0, 0) 20%, 45%, rgb(0, 0, 255) 100%)",
+    "hintPreserved": true,
+    "normalUndoReset": true
+  },
+  "chrome": "154.0.8037.92"
+}

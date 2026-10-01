@@ -1,5 +1,7 @@
 .numeric{display:flex;align-items:center;min-width:0;max-width:100%;height:var(--input-height);background:var(--raised);border:1px solid transparent;border-radius:5px;color:var(--text-secondary);font:var(--font-size-sm)/var(--line-compact) var(--font-ui)}
 .numeric{border-color:var(--input-edge)}
+.srError{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.numeric:has(>.error){height:auto;flex-wrap:wrap}.numeric:has(>.error)>input{width:0;flex:1;height:var(--input-height)}.numeric>.error{order:1;flex-basis:100%;padding:0 7px}
 .numeric:has(input:disabled){opacity:.45;background:var(--surface);border-color:transparent}
 .numeric .unit{display:flex;align-items:center;justify-content:center;gap:2px;min-width:32px;min-height:24px;padding:0 3px!important;font-size:10px;flex-shrink:0}
 .numeric .unit>svg{display:block;width:10px;height:10px}

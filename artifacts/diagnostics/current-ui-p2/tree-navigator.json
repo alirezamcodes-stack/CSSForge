@@ -1,0 +1,8 @@
+{
+  "observations": {
+    "keys": true,
+    "selection": true,
+    "roving": true
+  },
+  "chrome": "154.0.8037.92"
+}

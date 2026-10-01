@@ -1,0 +1,15 @@
+{
+  "observations": {
+    "colorEscapeRestores": true,
+    "noDuplicateUndo": true,
+    "formats": [
+      "HEX",
+      "RGB",
+      "HSL"
+    ],
+    "invalidAssociated": true,
+    "alpha": true,
+    "unresolvedTokenPreserved": true
+  },
+  "chrome": "154.0.8037.92"
+}

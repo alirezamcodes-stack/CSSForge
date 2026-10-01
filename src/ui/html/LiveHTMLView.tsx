@@ -16,15 +16,26 @@ export function DOMNavigation() {
 export function LiveDOMTree() {
   const { picker } = useInspection(), { design } = useEditing();
   const [revision, setRevision] = useState(0);
+  const [focusedId, setFocusedId] = useState<string | null>(null);
   const treeRoot = useRef<HTMLDivElement>(null);
   const snapshot = useMemo(() => picker!.tree(), [picker, design?.targetId, revision]);
+  const tabStop = snapshot.rows.some(row => row.id === focusedId) ? focusedId : (snapshot.rows.find(row => row.selected) ?? snapshot.rows[0])?.id;
   useLayoutEffect(() => { treeRoot.current?.querySelector('[aria-selected=true]')?.scrollIntoView({ block: 'nearest' }); }, [design?.targetId]);
   return <><div className={t.toolbar}><span>DOM around selection</span><button onClick={() => setRevision(value => value + 1)}>Refresh tree</button></div><div ref={treeRoot} className={t.tree} role="tree" aria-label="Page DOM tree">{snapshot.rows.map((row, index) => <div key={row.id} className={`${t.row} ${row.selected ? t.selected : ''}`} style={{ paddingLeft: 12 + Math.min(row.depth, 7) * 12 }}>
     <button className={t.expand} tabIndex={-1} disabled={!row.expandable} aria-label={`${row.expanded ? 'Collapse' : 'Expand'} ${row.label}`} onClick={() => { picker!.toggleNode(row.id); setRevision(value => value + 1); }}>{row.expandable && <Icon name={row.expanded ? 'chevron' : 'chevronRight'} />}</button>
-    <button role="treeitem" aria-label={row.label} aria-level={row.depth + 1} aria-selected={row.selected} aria-expanded={row.expandable ? row.expanded : undefined} tabIndex={row.selected || !snapshot.rows.some(item => item.selected) && index === 0 ? 0 : -1} className={t.node} title={row.label} onClick={() => picker!.selectNode(row.id)} onKeyDown={event => {
+    <button role="treeitem" aria-label={row.label} aria-level={row.depth + 1} aria-selected={row.selected} aria-expanded={row.expandable ? row.expanded : undefined} tabIndex={row.id === tabStop ? 0 : -1} className={t.node} title={row.label} onFocus={() => setFocusedId(row.id)} onClick={() => picker!.selectNode(row.id)} onKeyDown={event => {
       const items = Array.from(event.currentTarget.closest('[role=tree]')!.querySelectorAll<HTMLButtonElement>('[role=treeitem]'));
       if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) { event.preventDefault(); items[event.key === 'Home' ? 0 : event.key === 'End' ? items.length - 1 : Math.max(0, Math.min(items.length - 1, index + (event.key === 'ArrowDown' ? 1 : -1)))]?.focus(); }
-      if (event.key === 'ArrowRight' && row.expandable && !row.expanded || event.key === 'ArrowLeft' && row.expanded) { event.preventDefault(); picker!.toggleNode(row.id); setRevision(value => value + 1); }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        if (row.expandable && !row.expanded) { picker!.toggleNode(row.id); setRevision(value => value + 1); }
+        else if (row.expanded && snapshot.rows[index + 1]?.depth > row.depth) items[index + 1]?.focus();
+      }
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        if (row.expandable && row.expanded) { picker!.toggleNode(row.id); setRevision(value => value + 1); }
+        else { for (let parent = index - 1; parent >= 0; parent--) if (snapshot.rows[parent].depth < row.depth) { items[parent]?.focus(); break; } }
+      }
     }}><span className={t.tag}>&lt;{row.tag}{row.elementId && <span className={t.attribute}> id="{row.elementId}"</span>}{row.classes && <span className={t.attribute}> class="{row.classes}"</span>}&gt;</span>{row.boundary && <small>{row.boundary}</small>}{row.text && <span className={t.text}>{row.text}</span>}</button>
   </div>)}</div>{snapshot.limited && <p className={t.note}>Showing a bounded branch around selection. Select a node to inspect its nearby siblings and children.</p>}<p className={t.note}>Open shadow roots are marked. Closed roots and frame contents are unavailable. CSSForge UI is excluded.</p></>;
 }

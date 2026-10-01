@@ -1,0 +1,9 @@
+{
+  "observations": {
+    "zIndexInteger": true,
+    "decimalPreserved": true,
+    "localErrorAssociated": true,
+    "cssUnchanged": true
+  },
+  "chrome": "154.0.8037.92"
+}

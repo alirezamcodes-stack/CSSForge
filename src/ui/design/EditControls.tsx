@@ -2,16 +2,22 @@ import { useEditing } from '../../picker/context';
 import type { Property } from '../../editing/properties';
 import { Popover, Options } from '../popovers/Popover';
 import { NumericScrubber } from '../shared/NumericScrubber';
-import { ColorControl } from '../shared/ColorControl';
+import { ColorControl, colorToken } from '../shared/ColorControl';
 import { Icon } from '../shared/Icon';
 import { TokenInput } from './RichControls';
+import { splitCSS } from '../../editing/rich';
 import s from '../ui.module.css';
 
 export function EditField({ property, label, disabled = false, color = false, compact = false }: { property: Property; label: string; disabled?: boolean; color?: boolean; compact?: boolean }) {
   const { editor, design } = useEditing(); const field = design!.values[property];
   const title = `Browser: ${field.computed}\n${field.override ? `Session override: ${field.override}` : 'No session override'}\nDrag horizontally or use arrows. Escape reverts the current gesture.`;
   const apply = (value: string, gesture?: string) => editor!.apply(design!.targetId, property, value, gesture);
-  if (color) return <ColorControl label={label} value={field.presented} onChange={apply} title={title} overridden={!!field.override} />;
+  if (color) {
+    const sides = property === 'border-color' ? splitCSS(field.presented, ' ') : [];
+    const sideColors = sides.length > 1 && sides.every(side => CSS.supports('color', side));
+    const mixed = sideColors && new Set(sides.map(side => colorToken(side) ?? side.toLowerCase())).size > 1;
+    return <ColorControl label={label} value={sideColors && !mixed ? sides[0] : field.presented} mixed={mixed} onChange={apply} title={title} overridden={!!field.override} />;
+  }
   if (property === 'font-family') return <TokenInput label={label} value={field.presented} onChange={apply} />;
   const unitless = ['z-index', 'font-weight', 'line-height'].includes(property);
   // Keep the established percentage presentation for computed opacity, but retain
