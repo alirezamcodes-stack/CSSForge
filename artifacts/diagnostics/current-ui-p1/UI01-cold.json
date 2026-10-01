@@ -1,0 +1,11 @@
+{
+  "test": "UI01-cold activation on an already transformed html and body preserves host geometry and picking",
+  "observations": {
+    "transforms": [
+      "matrix(0.9, 0, 0, 0.9, 30, 20)",
+      "matrix(0.95, 0, 0, 0.95, 10, 5)"
+    ],
+    "hostGeometryPreservedByHarness": true,
+    "pickingAccurate": true
+  }
+}

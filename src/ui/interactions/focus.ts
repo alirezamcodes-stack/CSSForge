@@ -5,6 +5,7 @@ const popoverTriggers = new Map<string, HTMLElement>();
 let cancelDrag: (() => void) | null = null;
 
 export function registerUIRoot(element: HTMLElement | null) { root = element; }
+export function getUIRoot() { return root; }
 export function registerPopoverTrigger(id: string, element: HTMLElement | null) {
   if (element) popoverTriggers.set(id, element); else popoverTriggers.delete(id);
 }

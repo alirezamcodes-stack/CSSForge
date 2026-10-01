@@ -21,8 +21,9 @@ test('NumericScrubber inputs, unit preservation, step modifiers, drag, Escape an
     await size.press('Escape'); await expect(target).toHaveCSS('font-size','20px');
     await size.focus(); await size.press('ArrowDown'); await size.press('Enter'); await expect(target).toHaveCSS('font-size','19px');
     await action(page,'Undo last edit'); await expect(target).toHaveCSS('font-size','20px');
-    await input(page,'Padding left','2em'); await field(page,'Padding left').focus(); await field(page,'Padding left').press('ArrowUp'); await field(page,'Padding left').press('Enter'); await expect(target).toHaveCSS('padding-left','60px');
-    await expect(field(page,'Padding left')).toHaveValue('3em');
+    await input(page,'Padding left','2em'); await field(page,'Padding left').focus(); await field(page,'Padding left').press('ArrowUp'); await field(page,'Padding left').press('Enter'); await expect(target).toHaveCSS('padding-left','42px');
+    await expect(field(page,'Padding left')).toHaveValue('2.1');
+    await expect(page.getByRole('button',{name:'Padding left unit',exact:true})).toHaveText('em');
     await size.scrollIntoViewIfNeeded(); const box=(await size.boundingBox())!; await page.mouse.move(box.x+8,box.y+box.height/2); await page.mouse.down(); await page.mouse.move(box.x+18,box.y+box.height/2,{steps:3}); await page.mouse.up(); await size.press('Enter'); await expect(target).toHaveCSS('font-size','30px');
     await action(page,'Undo last edit'); await expect(target).toHaveCSS('font-size','20px');
     await choice(page,'Position','relative'); await input(page,'Position top','4'); await input(page,'Z-index','2'); await expect(target).toHaveCSS('top','4px');

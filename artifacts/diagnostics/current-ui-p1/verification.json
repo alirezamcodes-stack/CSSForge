@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-01",
+  "status": "CURRENT UI FUNCTIONAL FIXES P1 COMPLETE",
+  "resolvedFindings": [
+    "UI01",
+    "UI02",
+    "UI03",
+    "DA01",
+    "CA64",
+    "J01",
+    "J02",
+    "J03"
+  ],
+  "remainingConfirmedP1": [],
+  "chrome": {
+    "version": "154.0.8037.92",
+    "productionMv3": true,
+    "permissions": [
+      "activeTab",
+      "scripting"
+    ],
+    "hostPermissions": [],
+    "bundleSha256": "c6f591248685dc17a050faddee0b25bea78838663d346113ab0787f3b48c30c3"
+  },
+  "checks": {
+    "typecheck": "passed",
+    "unitTests": {
+      "passed": 251,
+      "files": 17
+    },
+    "build": "passed",
+    "p1AndRelatedChrome": {
+      "cases": 30,
+      "initialPassed": 29,
+      "initialFailed": 1,
+      "initialDuration": "7.5m",
+      "failure": "Initial inspector activation wait in setup before applying the body transform.",
+      "unchangedFailureRepetitions": {
+        "passed": 3,
+        "failed": 0,
+        "duration": "34.9s"
+      },
+      "uniqueCasesPassedAcrossRuns": 30
+    },
+    "currentUiAndEngineChrome": {
+      "cases": 262,
+      "initialPassed": 256,
+      "initialFailed": 6,
+      "initialDuration": "10.9m",
+      "failures": {
+        "inspectorActivationWaits": 5,
+        "obsoleteNumericPresentationExpectation": 1
+      },
+      "retry": {
+        "passed": 6,
+        "failed": 0,
+        "duration": "12.7s"
+      },
+      "uniqueCasesPassedAcrossRuns": 262
+    },
+    "caveat": "The initial batches had activation failures; all failed cases passed subsequent runs. Original traces retained. No background activation changes were made."
+  },
+  "coverage": {
+    "nativeZoom": [
+      1,
+      1.25,
+      1.5,
+      2
+    ],
+    "inspectorNarrowWidth": 390,
+    "spacingAndDockNarrowWidth": 320,
+    "transformedAncestors": [
+      "html",
+      "body"
+    ],
+    "transforms": [
+      "translate",
+      "scale",
+      "translate+scale"
+    ],
+    "coldTransformedActivation": true,
+    "pointerOptionsVerified": 120,
+    "spacingSidesPerViewport": 8,
+    "feedbackPixelComparisons": 21,
+    "nestedAssignedSlots": true,
+    "productionDockControls": 7
+  },
+  "performance": {
+    "rawPointerEvents": 1000,
+    "additionalSourceScans": 0,
+    "additionalCascadeResolutions": 0,
+    "additionalSelectorWork": 0,
+    "additionalReconciliation": 0,
+    "additionalMutationAnalysis": 0,
+    "permanentLayoutPollingAdded": false,
+    "evidence": "performance-T32.json"
+  },
+  "preservation": {
+    "existingArtifactsByteVerified": 601,
+    "lockedEngineEditingAuditFilesHashVerified": 33,
+    "engineOrEditingSourceChanges": 0,
+    "historicalAuditReportChanges": 0
+  },
+  "maintenance": "professional.spec.ts now asserts 42px, numeric 2.1 and separate em unit; production unitStep unchanged.",
+  "p2Started": false,
+  "newFeaturesAdded": false,
+  "redesignStarted": false,
+  "exactCommands": "docs/current-ui-functional-fixes-p1.md, Verification"
+}

@@ -21,11 +21,17 @@ export default defineContentScript({
     };
     const ui = await createShadowRootUi(ctx, {
       name: 'cssforge-ui', position: 'inline', anchor: 'body', isolateEvents: true,
+      css: ':host::backdrop{display:none!important;pointer-events:none!important}',
       onMount(container) {
         const host = (container.getRootNode() as ShadowRoot).host as HTMLElement;
-        // Keep the ownership host out of flex/grid/inline layout on arbitrary pages.
-        for (const [property, value] of Object.entries({ position: 'fixed', top: '0', left: '0', width: '0', height: '0', 'pointer-events': 'none', 'z-index': '2147483646' })) host.style.setProperty(property, value, 'important');
+        // A manual top-layer host has a viewport containing block, independent of
+        // page transforms and stacking. Only existing UI controls receive input.
+        for (const [property, value] of Object.entries({ position: 'fixed', inset: '0', margin: '0', padding: '0', border: '0', width: '100%', height: '100%', overflow: 'visible', 'pointer-events': 'none' })) host.style.setProperty(property, value, 'important');
+        host.setAttribute('popover', 'manual');
         picker = createPicker(document, host, () => useUI.getState().setInspector(true), authorLedger);
+        // The picker mounts its noninteractive feedback first. The shell is the
+        // next top-layer entry, so all its controls paint above that feedback.
+        host.showPopover();
         // UI flags stay in Zustand; target Elements remain owned by the controller.
         useUI.setState({ activePopover: null, surface: null, activeTooltip: null, activeDockTool: null, inspectorOpen: true });
         unsubscribe = useUI.subscribe((next, previous) => {

@@ -1,0 +1,92 @@
+{
+  "case": "SH06 host resets clipping transforms and high z-index interference",
+  "actual": {
+    "rows": [
+      {
+        "case": "global host styles",
+        "host": {
+          "color": "rgb(255, 0, 0)",
+          "font": "48px"
+        },
+        "ui": {
+          "color": "rgb(197, 200, 206)",
+          "font": "13px",
+          "border": "0px"
+        }
+      },
+      {
+        "case": "transformed host",
+        "node": "html",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "panel": {
+          "x": 1068,
+          "y": 24,
+          "width": 350,
+          "height": 782
+        },
+        "tools": {
+          "x": 528,
+          "y": 826,
+          "width": 384,
+          "height": 52
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false,
+        "interactionError": null,
+        "popup": {
+          "x": 700,
+          "y": 745,
+          "width": 268,
+          "height": 85.59375
+        }
+      },
+      {
+        "case": "transformed host",
+        "node": "body",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "panel": {
+          "x": 1068,
+          "y": 24,
+          "width": 350,
+          "height": 782
+        },
+        "tools": {
+          "x": 528,
+          "y": 826,
+          "width": 384,
+          "height": 52
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false,
+        "interactionError": null,
+        "popup": {
+          "x": 700,
+          "y": 745,
+          "width": 268,
+          "height": 85.59375
+        }
+      },
+      {
+        "case": "highest host overlay",
+        "hit": {
+          "tag": "cssforge-ui",
+          "id": ""
+        },
+        "uiHostZ": "auto"
+      },
+      {
+        "case": "after overlay removed",
+        "dialogVisible": true
+      }
+    ],
+    "errors": []
+  }
+}

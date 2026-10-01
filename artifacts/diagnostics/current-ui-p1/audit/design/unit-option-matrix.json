@@ -1,0 +1,3494 @@
+{
+  "name": "unit-option-matrix",
+  "observations": [
+    {
+      "id": "unit-option-matrix-001",
+      "case": "Native unedited button with authored display:inline",
+      "status": "observed",
+      "actual": "inline-block"
+    },
+    {
+      "id": "unit-option-matrix-002",
+      "case": "Extension display:inline equals unedited native button behavior",
+      "status": "pass",
+      "expected": "inline-block",
+      "actual": "inline-block"
+    },
+    {
+      "id": "unit-option-matrix-003",
+      "case": "Width: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-004",
+      "case": "Width: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-005",
+      "case": "Width: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "240.5px",
+        "ui": "240.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-006",
+      "case": "Width: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-007",
+      "case": "Width: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-008",
+      "case": "Width: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-009",
+      "case": "Width: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "240.5px",
+        "ui": "12.025",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-010",
+      "case": "Width: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-011",
+      "case": "Width: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-012",
+      "case": "Width: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "240.5px",
+        "ui": "15.03125",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-013",
+      "case": "Width: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-014",
+      "case": "Width: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-015",
+      "case": "Width: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "240.5px",
+        "ui": "16.701389",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-016",
+      "case": "Width: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-017",
+      "case": "Width: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-018",
+      "case": "Width: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "240.5px",
+        "ui": "26.722222",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-019",
+      "case": "Width: vmin option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-020",
+      "case": "Width: vmin enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-021",
+      "case": "Width: vmin converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "240.5px",
+        "ui": "26.722222",
+        "invalid": null,
+        "unit": "vmin"
+      }
+    },
+    {
+      "id": "unit-option-matrix-022",
+      "case": "Width: vmax option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-023",
+      "case": "Width: vmax enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-024",
+      "case": "Width: vmax converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "240.5px",
+        "ui": "16.701389",
+        "invalid": null,
+        "unit": "vmax"
+      }
+    },
+    {
+      "id": "unit-option-matrix-025",
+      "case": "Width: ch disabled option",
+      "status": "expected-limitation",
+      "actual": "The required font or viewport reference is not available."
+    },
+    {
+      "id": "unit-option-matrix-026",
+      "case": "Height: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-027",
+      "case": "Height: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-028",
+      "case": "Height: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "80.5px",
+        "ui": "80.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-029",
+      "case": "Height: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-030",
+      "case": "Height: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-031",
+      "case": "Height: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-032",
+      "case": "Height: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "80.5px",
+        "ui": "4.025",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-033",
+      "case": "Height: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-034",
+      "case": "Height: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-035",
+      "case": "Height: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "80.5px",
+        "ui": "5.03125",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-036",
+      "case": "Height: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-037",
+      "case": "Height: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-038",
+      "case": "Height: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "80.5px",
+        "ui": "5.590278",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-039",
+      "case": "Height: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-040",
+      "case": "Height: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-041",
+      "case": "Height: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "80.4844px",
+        "ui": "8.944444",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-042",
+      "case": "Height: vmin option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-043",
+      "case": "Height: vmin enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-044",
+      "case": "Height: vmin converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "80.4844px",
+        "ui": "8.944444",
+        "invalid": null,
+        "unit": "vmin"
+      }
+    },
+    {
+      "id": "unit-option-matrix-045",
+      "case": "Height: vmax option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-046",
+      "case": "Height: vmax enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-047",
+      "case": "Height: vmax converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "80.5px",
+        "ui": "5.590278",
+        "invalid": null,
+        "unit": "vmax"
+      }
+    },
+    {
+      "id": "unit-option-matrix-048",
+      "case": "Height: ch disabled option",
+      "status": "expected-limitation",
+      "actual": "The required font or viewport reference is not available."
+    },
+    {
+      "id": "unit-option-matrix-049",
+      "case": "Geometry radius: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-050",
+      "case": "Geometry radius: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-051",
+      "case": "Geometry radius: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-052",
+      "case": "Geometry radius: % disabled option",
+      "status": "expected-limitation",
+      "actual": "A single % radius cannot preserve both axes on a non-square box."
+    },
+    {
+      "id": "unit-option-matrix-053",
+      "case": "Geometry radius: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-054",
+      "case": "Geometry radius: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-055",
+      "case": "Geometry radius: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-056",
+      "case": "Geometry radius: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-057",
+      "case": "Geometry radius: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-058",
+      "case": "Geometry radius: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-059",
+      "case": "Margin top: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-060",
+      "case": "Margin top: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-061",
+      "case": "Margin top: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-062",
+      "case": "Margin top: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-063",
+      "case": "Margin top: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-064",
+      "case": "Margin top: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-065",
+      "case": "Margin top: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-066",
+      "case": "Margin top: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-067",
+      "case": "Margin top: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-068",
+      "case": "Margin top: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-069",
+      "case": "Margin top: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-070",
+      "case": "Margin top: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-071",
+      "case": "Margin top: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-072",
+      "case": "Margin top: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-073",
+      "case": "Margin top: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-074",
+      "case": "Margin top: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-075",
+      "case": "Margin right: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-076",
+      "case": "Margin right: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-077",
+      "case": "Margin right: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-078",
+      "case": "Margin right: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-079",
+      "case": "Margin right: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-080",
+      "case": "Margin right: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-081",
+      "case": "Margin right: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-082",
+      "case": "Margin right: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-083",
+      "case": "Margin right: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-084",
+      "case": "Margin right: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-085",
+      "case": "Margin right: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-086",
+      "case": "Margin right: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-087",
+      "case": "Margin right: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-088",
+      "case": "Margin right: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-089",
+      "case": "Margin right: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-090",
+      "case": "Margin right: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-091",
+      "case": "Margin bottom: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-092",
+      "case": "Margin bottom: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-093",
+      "case": "Margin bottom: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-094",
+      "case": "Margin bottom: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-095",
+      "case": "Margin bottom: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-096",
+      "case": "Margin bottom: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-097",
+      "case": "Margin bottom: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-098",
+      "case": "Margin bottom: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-099",
+      "case": "Margin bottom: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-100",
+      "case": "Margin bottom: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-101",
+      "case": "Margin bottom: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-102",
+      "case": "Margin bottom: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-103",
+      "case": "Margin bottom: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-104",
+      "case": "Margin bottom: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-105",
+      "case": "Margin bottom: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-106",
+      "case": "Margin bottom: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-107",
+      "case": "Margin left: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-108",
+      "case": "Margin left: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-109",
+      "case": "Margin left: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-110",
+      "case": "Margin left: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-111",
+      "case": "Margin left: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-112",
+      "case": "Margin left: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-113",
+      "case": "Margin left: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-114",
+      "case": "Margin left: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-115",
+      "case": "Margin left: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-116",
+      "case": "Margin left: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-117",
+      "case": "Margin left: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-118",
+      "case": "Margin left: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-119",
+      "case": "Margin left: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-120",
+      "case": "Margin left: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-121",
+      "case": "Margin left: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-122",
+      "case": "Margin left: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-123",
+      "case": "Padding top: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-124",
+      "case": "Padding top: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-125",
+      "case": "Padding top: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-126",
+      "case": "Padding top: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-127",
+      "case": "Padding top: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-128",
+      "case": "Padding top: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-129",
+      "case": "Padding top: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-130",
+      "case": "Padding top: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-131",
+      "case": "Padding top: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-132",
+      "case": "Padding top: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-133",
+      "case": "Padding top: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-134",
+      "case": "Padding top: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-135",
+      "case": "Padding top: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-136",
+      "case": "Padding top: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-137",
+      "case": "Padding top: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-138",
+      "case": "Padding top: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-139",
+      "case": "Padding right: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-140",
+      "case": "Padding right: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-141",
+      "case": "Padding right: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-142",
+      "case": "Padding right: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-143",
+      "case": "Padding right: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-144",
+      "case": "Padding right: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-145",
+      "case": "Padding right: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-146",
+      "case": "Padding right: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-147",
+      "case": "Padding right: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-148",
+      "case": "Padding right: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-149",
+      "case": "Padding right: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-150",
+      "case": "Padding right: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-151",
+      "case": "Padding right: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-152",
+      "case": "Padding right: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-153",
+      "case": "Padding right: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-154",
+      "case": "Padding right: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-155",
+      "case": "Padding bottom: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-156",
+      "case": "Padding bottom: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-157",
+      "case": "Padding bottom: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-158",
+      "case": "Padding bottom: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-159",
+      "case": "Padding bottom: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-160",
+      "case": "Padding bottom: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-161",
+      "case": "Padding bottom: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-162",
+      "case": "Padding bottom: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-163",
+      "case": "Padding bottom: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-164",
+      "case": "Padding bottom: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-165",
+      "case": "Padding bottom: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-166",
+      "case": "Padding bottom: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-167",
+      "case": "Padding bottom: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-168",
+      "case": "Padding bottom: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-169",
+      "case": "Padding bottom: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-170",
+      "case": "Padding bottom: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-171",
+      "case": "Padding left: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-172",
+      "case": "Padding left: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-173",
+      "case": "Padding left: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-174",
+      "case": "Padding left: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-175",
+      "case": "Padding left: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-176",
+      "case": "Padding left: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-177",
+      "case": "Padding left: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-178",
+      "case": "Padding left: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-179",
+      "case": "Padding left: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-180",
+      "case": "Padding left: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-181",
+      "case": "Padding left: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-182",
+      "case": "Padding left: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-183",
+      "case": "Padding left: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-184",
+      "case": "Padding left: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-185",
+      "case": "Padding left: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-186",
+      "case": "Padding left: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-187",
+      "case": "Font size: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-188",
+      "case": "Font size: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-189",
+      "case": "Font size: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-190",
+      "case": "Font size: % option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-191",
+      "case": "Font size: % enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-192",
+      "case": "Font size: % converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "85.416667",
+        "invalid": null,
+        "unit": "%"
+      }
+    },
+    {
+      "id": "unit-option-matrix-193",
+      "case": "Font size: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-194",
+      "case": "Font size: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-195",
+      "case": "Font size: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "0.854167",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-196",
+      "case": "Font size: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-197",
+      "case": "Font size: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-198",
+      "case": "Font size: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "1.28125",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-199",
+      "case": "Font size: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-200",
+      "case": "Font size: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-201",
+      "case": "Font size: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "1.423611",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-202",
+      "case": "Font size: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-203",
+      "case": "Font size: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-204",
+      "case": "Font size: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "2.277778",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-205",
+      "case": "Line height: unitless option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-206",
+      "case": "Line height: unitless enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-207",
+      "case": "Line height: unitless converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "30px",
+        "ui": "1.5",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "unit-option-matrix-208",
+      "case": "Line height: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-209",
+      "case": "Line height: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-210",
+      "case": "Line height: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "30px",
+        "ui": "30",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-211",
+      "case": "Line height: % option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-212",
+      "case": "Line height: % enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-213",
+      "case": "Line height: % converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "30px",
+        "ui": "150",
+        "invalid": null,
+        "unit": "%"
+      }
+    },
+    {
+      "id": "unit-option-matrix-214",
+      "case": "Line height: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-215",
+      "case": "Line height: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-216",
+      "case": "Line height: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "30px",
+        "ui": "1.5",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-217",
+      "case": "Line height: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-218",
+      "case": "Line height: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-219",
+      "case": "Line height: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "30px",
+        "ui": "1.875",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-220",
+      "case": "Letter spacing: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-221",
+      "case": "Letter spacing: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-222",
+      "case": "Letter spacing: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "1.5px",
+        "ui": "1.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-223",
+      "case": "Letter spacing: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-224",
+      "case": "Letter spacing: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-225",
+      "case": "Letter spacing: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "1.5px",
+        "ui": "0.075",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-226",
+      "case": "Letter spacing: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-227",
+      "case": "Letter spacing: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-228",
+      "case": "Letter spacing: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "1.5px",
+        "ui": "0.09375",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-229",
+      "case": "Opacity: unitless option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-230",
+      "case": "Opacity: unitless enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-231",
+      "case": "Opacity: unitless converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "0.75",
+        "ui": ".75",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "unit-option-matrix-232",
+      "case": "Opacity: % option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-233",
+      "case": "Opacity: % enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-234",
+      "case": "Opacity: % converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "0.75",
+        "ui": "75",
+        "invalid": null,
+        "unit": "%"
+      }
+    },
+    {
+      "id": "unit-option-matrix-235",
+      "case": "Border width: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-236",
+      "case": "Border width: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-237",
+      "case": "Border width: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "3px",
+        "ui": "3",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-238",
+      "case": "Border width: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-239",
+      "case": "Border width: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-240",
+      "case": "Border width: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "3px",
+        "ui": "0.15",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-241",
+      "case": "Border width: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-242",
+      "case": "Border width: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-243",
+      "case": "Border width: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "3px",
+        "ui": "0.1875",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-244",
+      "case": "Border radius: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-245",
+      "case": "Border radius: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-246",
+      "case": "Border radius: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-247",
+      "case": "Border radius: % disabled option",
+      "status": "expected-limitation",
+      "actual": "A single % radius cannot preserve both axes on a non-square box."
+    },
+    {
+      "id": "unit-option-matrix-248",
+      "case": "Border radius: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-249",
+      "case": "Border radius: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-250",
+      "case": "Border radius: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-251",
+      "case": "Border radius: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-252",
+      "case": "Border radius: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-253",
+      "case": "Border radius: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-254",
+      "case": "Position top: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-255",
+      "case": "Position top: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-256",
+      "case": "Position top: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-257",
+      "case": "Position top: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-258",
+      "case": "Position top: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-259",
+      "case": "Position top: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-260",
+      "case": "Position top: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-261",
+      "case": "Position top: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-262",
+      "case": "Position top: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-263",
+      "case": "Position top: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-264",
+      "case": "Position top: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-265",
+      "case": "Position top: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-266",
+      "case": "Position top: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-267",
+      "case": "Position top: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-268",
+      "case": "Position top: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-269",
+      "case": "Position top: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-270",
+      "case": "Position right: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-271",
+      "case": "Position right: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-272",
+      "case": "Position right: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-273",
+      "case": "Position right: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-274",
+      "case": "Position right: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-275",
+      "case": "Position right: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-276",
+      "case": "Position right: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-277",
+      "case": "Position right: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-278",
+      "case": "Position right: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-279",
+      "case": "Position right: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-280",
+      "case": "Position right: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-281",
+      "case": "Position right: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-282",
+      "case": "Position right: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-283",
+      "case": "Position right: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-284",
+      "case": "Position right: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-285",
+      "case": "Position right: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-286",
+      "case": "Position bottom: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-287",
+      "case": "Position bottom: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-288",
+      "case": "Position bottom: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-289",
+      "case": "Position bottom: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-290",
+      "case": "Position bottom: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-291",
+      "case": "Position bottom: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-292",
+      "case": "Position bottom: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-293",
+      "case": "Position bottom: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-294",
+      "case": "Position bottom: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-295",
+      "case": "Position bottom: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-296",
+      "case": "Position bottom: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-297",
+      "case": "Position bottom: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-298",
+      "case": "Position bottom: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-299",
+      "case": "Position bottom: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-300",
+      "case": "Position bottom: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-301",
+      "case": "Position bottom: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-302",
+      "case": "Position left: px option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-303",
+      "case": "Position left: px enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-304",
+      "case": "Position left: px converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "10.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "unit-option-matrix-305",
+      "case": "Position left: % disabled option",
+      "status": "expected-limitation",
+      "actual": "This percentage reference is ambiguous; enter a percentage manually if intended."
+    },
+    {
+      "id": "unit-option-matrix-306",
+      "case": "Position left: em option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-307",
+      "case": "Position left: em enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-308",
+      "case": "Position left: em converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.525",
+        "invalid": null,
+        "unit": "em"
+      }
+    },
+    {
+      "id": "unit-option-matrix-309",
+      "case": "Position left: rem option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-310",
+      "case": "Position left: rem enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-311",
+      "case": "Position left: rem converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "unit-option-matrix-312",
+      "case": "Position left: vw option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-313",
+      "case": "Position left: vw enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-314",
+      "case": "Position left: vw converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.729167",
+        "invalid": null,
+        "unit": "vw"
+      }
+    },
+    {
+      "id": "unit-option-matrix-315",
+      "case": "Position left: vh option pointer reachability",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/ui.module.css"
+    },
+    {
+      "id": "unit-option-matrix-316",
+      "case": "Position left: vh enabled option applies and preserves computed size",
+      "status": "pass",
+      "expected": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "actual": {
+        "differenceWithinTolerance": true,
+        "invalid": null
+      },
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "unit-option-matrix-317",
+      "case": "Position left: vh converted value",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "1.166667",
+        "invalid": null,
+        "unit": "vh"
+      }
+    },
+    {
+      "id": "unit-option-matrix-318",
+      "case": "Native inline span sizes correctly disabled",
+      "status": "pass",
+      "expected": {
+        "width": true,
+        "height": true
+      },
+      "actual": {
+        "width": true,
+        "height": true
+      }
+    },
+    {
+      "id": "unit-option-matrix-319",
+      "case": "Invalid unit accessibility diagnostic",
+      "status": "observed",
+      "actual": {
+        "invalid": "true",
+        "describedBy": null,
+        "errorMessage": null,
+        "title": "Browser: 8px\nNo session override\nDrag horizontally or use arrows. Escape reverts the current gesture."
+      }
+    },
+    {
+      "id": "unit-option-matrix-320",
+      "case": "Invalid unit visible alert",
+      "status": "observed",
+      "actual": []
+    },
+    {
+      "id": "unit-option-matrix-321",
+      "case": "Native Chrome 200% zoom applied",
+      "status": "pass",
+      "expected": 2,
+      "actual": 2
+    },
+    {
+      "id": "unit-option-matrix-322",
+      "case": "Spacing: 200% zoom visible layout",
+      "status": "observed",
+      "actual": {
+        "x": 348,
+        "y": 8,
+        "width": 350,
+        "height": 372,
+        "viewportWidth": 720,
+        "viewportHeight": 450,
+        "overflow": 0
+      }
+    },
+    {
+      "id": "unit-option-matrix-323",
+      "case": "Typography: 200% zoom visible layout",
+      "status": "observed",
+      "actual": {
+        "x": 348,
+        "y": 8,
+        "width": 350,
+        "height": 372,
+        "viewportWidth": 720,
+        "viewportHeight": 450,
+        "overflow": 0
+      }
+    },
+    {
+      "id": "unit-option-matrix-324",
+      "case": "Border: 200% zoom visible layout",
+      "status": "observed",
+      "actual": {
+        "x": 348,
+        "y": 8,
+        "width": 350,
+        "height": 372,
+        "viewportWidth": 720,
+        "viewportHeight": 450,
+        "overflow": 0
+      }
+    },
+    {
+      "id": "unit-option-matrix-325",
+      "case": "Positioning: 200% zoom visible layout",
+      "status": "observed",
+      "actual": {
+        "x": 348,
+        "y": 8,
+        "width": 350,
+        "height": 372,
+        "viewportWidth": 720,
+        "viewportHeight": 450,
+        "overflow": 0
+      }
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "artifacts/diagnostics/current-ui-p1/audit/design/invalid-unit-spacing.png",
+    "artifacts/diagnostics/current-ui-p1/audit/design/zoom-200-spacing.png",
+    "artifacts/diagnostics/current-ui-p1/audit/design/zoom-200-typography.png",
+    "artifacts/diagnostics/current-ui-p1/audit/design/zoom-200-border.png",
+    "artifacts/diagnostics/current-ui-p1/audit/design/zoom-200-positioning.png"
+  ]
+}

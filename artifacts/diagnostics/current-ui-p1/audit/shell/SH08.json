@@ -1,0 +1,116 @@
+{
+  "case": "SH08 built picker hover accuracy iframe outer border and cleanup",
+  "actual": {
+    "rows": [
+      {
+        "case": "hover",
+        "selector": "#tiny",
+        "target": {
+          "x": 40,
+          "y": 560,
+          "width": 1,
+          "height": 1
+        },
+        "highlight": {
+          "x": 40,
+          "y": 560,
+          "width": 1,
+          "height": 1
+        },
+        "selected": "Pick an element"
+      },
+      {
+        "case": "hover",
+        "selector": "#transformed",
+        "target": {
+          "x": 255.5501708984375,
+          "y": 171.7733612060547,
+          "width": 108.899658203125,
+          "height": 76.45327758789062
+        },
+        "highlight": {
+          "x": 255.546875,
+          "y": 171.765625,
+          "width": 108.890625,
+          "height": 76.453125
+        },
+        "selected": "Pick an element"
+      },
+      {
+        "case": "hover",
+        "selector": "#shadow-button",
+        "target": {
+          "x": 40,
+          "y": 740,
+          "width": 98.265625,
+          "height": 40
+        },
+        "highlight": {
+          "x": 40,
+          "y": 740,
+          "width": 98.265625,
+          "height": 40
+        },
+        "selected": "Pick an element"
+      },
+      {
+        "case": "hover",
+        "selector": "#slotted",
+        "target": {
+          "x": 360,
+          "y": 740,
+          "width": 140,
+          "height": 35
+        },
+        "highlight": {
+          "x": 360,
+          "y": 740,
+          "width": 140,
+          "height": 35
+        },
+        "selected": "Pick an element"
+      },
+      {
+        "case": "iframe outer border",
+        "selector": "#same-frame",
+        "point": {
+          "x": 42,
+          "y": 837.5
+        },
+        "hit": "same-frame",
+        "selected": "iframe#same-frame",
+        "pickerActive": 0,
+        "highlight": {
+          "x": 40,
+          "y": 775,
+          "width": 260,
+          "height": 125
+        }
+      },
+      {
+        "case": "iframe outer border",
+        "selector": "#cross-frame",
+        "point": {
+          "x": 342,
+          "y": 837.5
+        },
+        "hit": "cross-frame",
+        "selected": "iframe#cross-frame",
+        "pickerActive": 0,
+        "highlight": {
+          "x": 340,
+          "y": 775,
+          "width": 260,
+          "height": 125
+        }
+      },
+      {
+        "case": "deactivate cleanup",
+        "hosts": 0,
+        "outlines": 0,
+        "overlays": 0
+      }
+    ],
+    "errors": []
+  }
+}

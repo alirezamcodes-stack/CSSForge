@@ -3,7 +3,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
 import { setup, fixture, pick, dock, inspector, identity, outline } from './extensionHarness';
 declare const chrome: typeof browser;
-const directory='artifacts/diagnostics/current-ui-audit/shell';
+const directory='artifacts/diagnostics/current-ui-p1/audit/shell';
 const selectionFixture=(await readFile('tests/e2e/fixtures/selection-audit.html','utf8')).replace('<cssforge-ui></cssforge-ui>','');
 async function save(info:TestInfo,actual:unknown) {
   await mkdir(directory,{recursive:true});const path=`${directory}/${info.title.split(' ')[0]}.json`;
@@ -77,7 +77,9 @@ test('SH03 every visible live dock action tooltip state keyboard and repeated cl
   try {
     await pick(r.page,'#checkout');
     rows.push({case:'inventory',buttons:await dock(r.page).getByRole('button').evaluateAll(nodes=>nodes.map(node=>({label:node.getAttribute('aria-label'),disabled:(node as HTMLButtonElement).disabled,pressed:node.getAttribute('aria-pressed')})))});
-    for(const name of ['Background tools','Measurement tools','Color tools','Eyedropper information','More tools']) {
+    for(const name of ['Background tools','Color tools','Eyedropper information']) await expect(dock(r.page).getByRole('button',{name,exact:true})).toHaveCount(0);
+    await expect(dock(r.page).getByRole('button')).toHaveCount(7);
+    for(const name of ['Measurement tools','More tools']) {
       const trigger=dock(r.page).getByRole('button',{name,exact:true});await trigger.focus();
       await expect(r.page.getByRole('tooltip',{name,exact:true})).toBeVisible();
       await trigger.press('Enter');const popup=r.page.getByRole('dialog',{name,exact:true});await expect(popup).toBeVisible();
@@ -139,10 +141,12 @@ test('SH06 host resets clipping transforms and high z-index interference',async(
       await r.page.evaluate(name=>(name==='html'?document.documentElement:document.body).style.transform='translate(30px,20px) scale(.9)',node);
       let interactionError:string|null=null;try{await trigger.click({timeout:4000});}catch(error){interactionError=String(error);}
       rows.push({case:'transformed host',node,...await bounds(r.page),interactionError,popup:await r.page.getByRole('dialog',{name:'Measurement tools',exact:true}).boundingBox()});await shot(r.page,`07-transform-${node}`);await r.page.keyboard.press('Escape');
+      expect(interactionError).toBeNull();const geometry=await bounds(r.page);expect(geometry.panelWithin).toBe(true);expect(geometry.dockWithin).toBe(true);
       await r.page.evaluate(name=>(name==='html'?document.documentElement:document.body).style.transform='',node);
     }
     await r.page.evaluate(()=>{const overlay=document.createElement('div');overlay.id='host-cover';Object.assign(overlay.style,{position:'fixed',inset:'0',zIndex:'2147483647',background:'rgba(200,30,30,.15)'});document.body.append(overlay);});
     const box=(await trigger.boundingBox())!;const hit=await r.page.evaluate(({x,y})=>{const node=document.elementFromPoint(x,y);return {tag:node?.localName,id:node?.id};},{x:box.x+box.width/2,y:box.y+box.height/2});rows.push({case:'highest host overlay',hit,uiHostZ:await r.page.locator('cssforge-ui').evaluate(node=>getComputedStyle(node).zIndex)});await shot(r.page,'08-host-high-z');
+    expect(hit.tag).toBe('cssforge-ui');await trigger.click();await expect(r.page.getByRole('dialog',{name:'Measurement tools',exact:true})).toBeVisible();await r.page.keyboard.press('Escape');
     await r.page.locator('#host-cover').evaluate(node=>node.remove());await trigger.click();rows.push({case:'after overlay removed',dialogVisible:await r.page.getByRole('dialog',{name:'Measurement tools',exact:true}).isVisible()});await r.page.keyboard.press('Escape');
     await save(info,{rows,errors:r.errors});
   }finally{await r.context.close();}
@@ -185,7 +189,7 @@ test('SH07 keyboard focus tabs popovers host events and current control inventor
     const focus=[];await design.focus();for(let i=0;i<25;i++){await r.page.keyboard.press('Tab');focus.push(await r.page.locator('cssforge-ui').evaluate(node=>({tag:node.shadowRoot!.activeElement?.localName,label:node.shadowRoot!.activeElement?.getAttribute('aria-label')||node.shadowRoot!.activeElement?.textContent?.slice(0,65)})));}
     rows.push({case:'Tab sequence',focus});await r.page.keyboard.press('Shift+Tab');
     rows.push({case:'current Design inventory',controls:await r.page.getByRole('tabpanel',{name:'Design',exact:true}).locator('button,input').evaluateAll(nodes=>nodes.map(node=>({tag:node.localName,role:node.getAttribute('role'),label:node.getAttribute('aria-label')||node.textContent?.trim(),type:node.getAttribute('type'),disabled:(node as HTMLInputElement).disabled,value:(node as HTMLInputElement).value,expanded:node.getAttribute('aria-expanded')})))});
-    await r.page.getByRole('button',{name:'Background tools',exact:true}).click();await r.page.locator('#host-link').click();rows.push({case:'outside click',popupCount:await r.page.getByRole('dialog').count(),hostHash:new URL(r.page.url()).hash});
+    await r.page.getByRole('button',{name:'Measurement tools',exact:true}).click();await r.page.locator('#host-link').click();rows.push({case:'outside click',popupCount:await r.page.getByRole('dialog').count(),hostHash:new URL(r.page.url()).hash});
     await shot(r.page,'09-current-design');await save(info,{rows,errors:r.errors});
   }finally{await r.context.close();}
 });

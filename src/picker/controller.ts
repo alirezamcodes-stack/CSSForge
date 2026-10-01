@@ -9,7 +9,7 @@ import { createCascade } from '../engine/cascade';
 import { createTree } from './tree';
 import { createTargetLifecycle, type TargetIdentity } from './targetLifecycle';
 import { observeTarget } from './invalidation';
-import { navigationChildren } from './navigation';
+import { navigationChildren, navigationParent } from './navigation';
 import { collectCandidates, type TargetCandidate } from './candidates';
 import { createTargetLocator, type TargetLocator, type LocatorResolution, type ResolveRequest } from '../engine/locator';
 import { createSelectorEngine, type SelectorRequest } from '../engine/selectors';
@@ -89,8 +89,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     return true;
   }, () => reconciliation.cancel('Session reset.'));
   const parentOf = (element: Element) => {
-    const root = element.getRootNode();
-    const parent = element.parentElement ?? (root instanceof win.ShadowRoot && root.mode === 'open' ? root.host : null);
+    const parent = navigationParent(element);
     return valid(parent) ? parent : null;
   };
   const childOf = (element: Element) => {

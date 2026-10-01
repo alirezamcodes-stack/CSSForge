@@ -1,0 +1,19 @@
+{
+  "test": "CA64 assigned and nested assigned nodes appear once with coherent Parent Child Refresh and ordinary DOM",
+  "observations": [
+    {
+      "selectedName": "strong#slotted-label",
+      "slot": "slot#outer-slot",
+      "unique": true,
+      "refresh": true,
+      "parentChild": true
+    },
+    {
+      "selectedName": "strong#nested-slotted",
+      "slot": "slot#deep-slot",
+      "unique": true,
+      "refresh": true,
+      "parentChild": true
+    }
+  ]
+}

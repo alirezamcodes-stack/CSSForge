@@ -1,0 +1,17 @@
+{
+  "test": "J01-J03 empty tools absent dock keyboard order balanced geometry and clean teardown",
+  "observations": {
+    "names": [
+      "Pick page element",
+      "Open Changes",
+      "Open Navigator",
+      "Measurement tools",
+      "More tools",
+      "Hide inspector panel",
+      "Deactivate CSSForge"
+    ],
+    "hiddenTools": 3,
+    "keyboardOrder": true,
+    "cleanReactivation": true
+  }
+}

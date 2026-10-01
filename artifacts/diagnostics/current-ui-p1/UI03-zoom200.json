@@ -1,0 +1,9 @@
+{
+  "test": "UI03-zoom200 feedback paints behind inspector dock color unit Changes and Navigator",
+  "observations": {
+    "pixelComparisonsPassed": 7,
+    "factor": 2,
+    "width": 1440,
+    "height": 900
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "test": "UI03-narrow feedback paints behind inspector dock color unit Changes and Navigator",
+  "observations": {
+    "pixelComparisonsPassed": 7,
+    "factor": 1,
+    "width": 390,
+    "height": 844
+  }
+}

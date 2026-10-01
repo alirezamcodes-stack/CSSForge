@@ -5,7 +5,7 @@ import { setup, pick, identity, inspector, dock } from './extensionHarness';
 
 // Diagnostic only: product observations never assert a known issue or prevent
 // later controls being exercised. All user edits go through the shipped UI.
-const directory = path.resolve('artifacts/diagnostics/current-ui-audit/code-tree');
+const directory = path.resolve('artifacts/diagnostics/current-ui-p1/audit/code-tree');
 const fixture = `<!doctype html><html><head><meta charset="utf-8"><title>CSSForge current UI audit</title><style id="author">
 *{box-sizing:border-box}body{margin:0;background:#f1eee6;color:#243b32;font:17px Arial;min-height:20000px}header{padding:28px 40px;border-bottom:1px solid #bbc9bd}main{padding:32px 40px;max-width:900px}h1{font:38px Georgia;margin:0 0 18px}.card{padding:24px;background:#fffdf7;border:1px solid #c4cec2;border-radius:14px;margin:22px 0}.primary{font-size:18px;color:rgb(255,255,255);background-color:#294c3b;border:0;padding:16px 24px;border-radius:6px;letter-spacing:1px}.primary::before{content:"↗ ";color:gold}.primary::after{content:" ✓";color:cyan}.primary:hover{color:rgb(220,120,40)}.primary:focus{outline:3px solid #e0a141}.primary:active{transform:translateY(1px)}
 @media (min-width:1000px){.primary{letter-spacing:2px}.primary:hover{background-color:rgb(42,94,62)}@media (prefers-reduced-motion:no-preference){.primary{line-height:1.4}}}
@@ -171,8 +171,14 @@ test('current UI diagnostic — focused follow-up evidence for Code keyboard, sw
     await page.getByRole('tab',{name:'HTML',exact:true}).click();
     await step(observations,'FU04','ArrowRight on expanded selected button, then ArrowLeft on its leaf child','Tree keys navigate expanded child/parent relationships as well as toggling branches.',async()=>{const selected=page.getByRole('treeitem',{name:'button#target.primary',exact:true});await selected.focus();await selected.press('ArrowRight');const right=await ui(page);const leaf=page.getByRole('treeitem',{name:'span#target-label',exact:true});await leaf.focus();await leaf.press('ArrowLeft');const left=await ui(page);return {right,left,screenshot:await shot(page,'18-tree-keyboard')}});
     await step(observations,'FU05','Pick slotted light-DOM label, inspect HTML, then open Navigator and refresh','The selected assigned node remains visible exactly once and its slot ancestry is traversable in both trees.',async()=>{await pick(page,'#slotted-label');const html=await ui(page);const htmlScreenshot=await shot(page,'19-html-slotted-selected');await page.getByRole('button',{name:'Open Navigator',exact:true}).first().click();const navigator=await ui(page);await page.getByRole('dialog',{name:'Navigator',exact:true}).getByRole('button',{name:'Refresh tree',exact:true}).click();const refreshed=await ui(page);return {html,navigator,refreshed,screenshots:[htmlScreenshot,await shot(page,'20-navigator-slotted-selected')]}});
+    const navigatorTree=page.getByRole('dialog',{name:'Navigator',exact:true}).getByRole('tree');
+    await expect(navigatorTree.getByRole('treeitem',{name:'strong#slotted-label',exact:true})).toHaveCount(1);
+    await expect(navigatorTree.getByRole('treeitem',{selected:true})).toHaveAccessibleName('strong#slotted-label');
     await page.keyboard.press('Escape');
+    await expect(page.getByRole('treeitem',{selected:true})).toHaveAccessibleName('strong#slotted-label');
     await step(observations,'FU06','Use actual HTML tree to select slot and Child to select assigned node','Visible slot nodes can navigate assigned content even when picked-node ancestry initially omitted it.',async()=>{await pick(page,'#shadow-target');const section=page.getByRole('button',{name:'Expand section#shadow-section',exact:true});if(await section.count())await section.click();await page.getByRole('treeitem',{name:'slot',exact:true}).click();const slot=await ui(page);await page.getByRole('button',{name:'Child',exact:true}).click();return {slot,child:await ui(page),screenshot:await shot(page,'21-html-slot-child')}});
+    await expect(page.getByRole('treeitem',{name:'strong#slotted-label',exact:true})).toHaveCount(1);
+    await expect(page.getByRole('treeitem',{selected:true})).toHaveAccessibleName('strong#slotted-label');
     await save(info,'followup-observations',{runtime:{chrome:r.version},observations,pageErrors:r.errors});
   }finally{await r.context.close()}
 });

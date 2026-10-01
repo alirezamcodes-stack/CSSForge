@@ -1,0 +1,9 @@
+{
+  "test": "UI02 hostile maximum-z-index overlay leaves inspector dock popovers and modals operable",
+  "observations": {
+    "coverUnchanged": true,
+    "inspectorEdit": "29px",
+    "colorEdit": "#123456",
+    "focusRestored": true
+  }
+}

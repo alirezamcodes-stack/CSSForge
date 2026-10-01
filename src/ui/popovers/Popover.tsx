@@ -1,13 +1,13 @@
-import { useRef, useCallback, type ReactNode } from 'react';
-import { autoUpdate, useFloating, useClick, useDismiss, useRole, useInteractions, FloatingFocusManager } from '@floating-ui/react';
+import { Fragment, useRef, useCallback, type ReactNode } from 'react';
+import { autoUpdate, useFloating, useClick, useDismiss, useRole, useInteractions, FloatingFocusManager, FloatingPortal } from '@floating-ui/react';
 import { useUI } from '../../state/ui';
 import { Icon } from '../shared/Icon';
 import s from '../ui.module.css';
 import { placementMiddleware } from '../interactions/placement';
-import { registerPopoverTrigger } from '../interactions/focus';
+import { getUIRoot, registerPopoverTrigger } from '../interactions/focus';
 import { Tooltip } from '../interactions/Tooltip';
 
-export function Popover({ id, label, children, className = '', iconOnly = false }: { id: string; label: ReactNode; children: ReactNode; className?: string; iconOnly?: boolean }) {
+export function Popover({ id, label, children, className = '', iconOnly = false, portal = false }: { id: string; label: ReactNode; children: ReactNode; className?: string; iconOnly?: boolean; portal?: boolean }) {
   const open = useUI(state => state.activePopover === id);
   const setPopover = useUI(state => state.setPopover);
   const { refs, floatingStyles, context } = useFloating({
@@ -18,11 +18,12 @@ export function Popover({ id, label, children, className = '', iconOnly = false 
   const interactions = useInteractions([useClick(context), useDismiss(context, { escapeKey: false, outsidePressEvent: 'pointerdown' }), useRole(context, { role: 'dialog' })]);
   const setReference = useCallback((node: HTMLButtonElement | null) => { refs.setReference(node); registerPopoverTrigger(id, node); }, [id, refs.setReference]);
   const content = useRef<HTMLDivElement>(null);
+  const FloatingHost = portal ? FloatingPortal : Fragment;
   return <>
     <Tooltip label={id} disabled={!iconOnly || open}><button type="button" ref={setReference} className={`${s.popoverTrigger} ${className}`} aria-label={id} data-active={iconOnly && open ? 'true' : undefined} {...interactions.getReferenceProps()} onKeyDown={event => {
       if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); setPopover(id); }
     }}><span className={s.triggerLabel}>{label}</span>{!iconOnly && <Icon name="chevron" />}</button></Tooltip>
-    {open && <FloatingFocusManager context={context} modal={false} returnFocus><div ref={refs.setFloating} style={floatingStyles} className={s.popover} {...interactions.getFloatingProps()} aria-label={id} onKeyDown={event => {
+    {open && <FloatingHost {...(portal ? { root: getUIRoot() } : {})}><FloatingFocusManager context={context} modal={false} returnFocus><div ref={refs.setFloating} style={floatingStyles} className={s.popover} {...interactions.getFloatingProps()} aria-label={id} onKeyDown={event => {
       if (event.target instanceof HTMLInputElement) return;
       if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
       const buttons = Array.from(content.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)') ?? []);
@@ -31,7 +32,7 @@ export function Popover({ id, label, children, className = '', iconOnly = false 
       const index = buttons.indexOf(event.target as HTMLButtonElement);
       const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (index + (event.key === 'ArrowDown' ? 1 : -1) + buttons.length) % buttons.length;
       buttons[next]?.focus();
-    }}><div ref={content}>{children}</div></div></FloatingFocusManager>}
+    }}><div ref={content}>{children}</div></div></FloatingFocusManager></FloatingHost>}
   </>;
 }
 export function Options({ values, value, onChange }: { values: string[]; value: string; onChange: (value: string) => void }) {

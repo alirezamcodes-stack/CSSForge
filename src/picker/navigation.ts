@@ -1,3 +1,15 @@
+/** Parent and children follow the same open composed-tree policy. */
+export function navigationParent(element: Element): Element | null {
+  const win = element.ownerDocument.defaultView!;
+  const slot = element.assignedSlot;
+  if (slot) {
+    const slotRoot = slot.getRootNode();
+    if (slotRoot instanceof win.ShadowRoot && slotRoot.mode === 'open') return slot;
+  }
+  const root = element.getRootNode();
+  return element.parentElement ?? (root instanceof win.ShadowRoot && root.mode === 'open' ? root.host : null);
+}
+
 export function navigationChildren(element: Element, around?: Element): Element[] {
   if (element.localName === 'slot' && 'assignedElements' in element) {
     const assigned = (element as HTMLSlotElement).assignedElements();

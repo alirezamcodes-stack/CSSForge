@@ -1,9 +1,9 @@
-import { test, type Page } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { setup, fixture, pick, inspector } from './extensionHarness';
 
 // Diagnostic audit only. All product changes happen through exposed UI controls.
-const out = 'artifacts/diagnostics/current-ui-audit/design';
+const out = 'artifacts/diagnostics/current-ui-p1/audit/design';
 const auditFixture = fixture.replace('</main>', `<section id="audit-parent" style="width:600px;height:300px;position:relative;font:24px/1.5 Georgia;color:rgb(20,40,60);text-align:left;--audit-length:18px;--audit-line:1.5;--audit-opacity:.6;--audit-index:7"><button id="audit-target" style="display:inline-block;position:relative;top:0;right:0;bottom:0;left:0;z-index:1;width:240px;height:80px;margin:8px;padding:8px;border:2px solid rgb(70,80,90);border-radius:8px;font:20px/1.4 Arial;letter-spacing:1px;color:rgb(40,50,60);opacity:1">Audit control target</button><div><span id="audit-inherited" style="display:inline-block">Inherited child</span><span id="audit-owned" style="display:inline-block;font-size:16px;color:rgb(90,100,110);font-family:Verdana;line-height:2">Owned child</span></div></section></main>`);
 type Observation = { id: string; case: string; status: 'pass'|'mismatch'|'error'|'observed'|'expected-limitation'; expected?: unknown; actual?: unknown; evidence?: string; module?: string };
 type Run = { name: string; observations: Observation[]; errors: string[]; inventory?: unknown; screenshots: string[] };
@@ -247,6 +247,7 @@ test('current UI design audit — every enabled unit option, native comparisons,
         if(await option.isEnabled()){
           const pointerTarget=await option.evaluate(node=>{const rect=node.getBoundingClientRect();const hit=(node.getRootNode() as ShadowRoot).elementFromPoint(rect.x+rect.width/2,rect.y+rect.height/2);return {reachable:hit===node||node.contains(hit),hit:hit?.className,rect:{x:rect.x,y:rect.y,width:rect.width,height:rect.height}};});
           add(run,`${item.label}: ${unit} option pointer reachability`,pointerTarget.reachable,true,'src/ui/ui.module.css');
+          expect(pointerTarget.reachable,`${item.label} ${unit} must accept pointer interaction`).toBe(true);
           if(pointerTarget.reachable)await option.click({timeout:1500});
           else {await shot(page,run,`blocked-unit-${item.label.toLowerCase().replaceAll(' ','-')}-${unit||'unitless'}`);add(run,`${item.label}: ${unit} occluding geometry`,pointerTarget);await option.focus();await page.keyboard.press('Enter');}
           await page.waitForTimeout(70);const after=parseFloat(await css(page,item.property));

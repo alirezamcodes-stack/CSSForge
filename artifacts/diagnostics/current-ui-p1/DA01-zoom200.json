@@ -1,0 +1,245 @@
+{
+  "test": "DA01-zoom200 every spacing side and enabled unit accepts native pointer clicks",
+  "observations": [
+    {
+      "label": "Margin top",
+      "unit": "px",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin top",
+      "unit": "em",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin top",
+      "unit": "rem",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin top",
+      "unit": "vw",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin top",
+      "unit": "vh",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin right",
+      "unit": "px",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin right",
+      "unit": "em",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin right",
+      "unit": "rem",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin right",
+      "unit": "vw",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin right",
+      "unit": "vh",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin bottom",
+      "unit": "px",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin bottom",
+      "unit": "em",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin bottom",
+      "unit": "rem",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin bottom",
+      "unit": "vw",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin bottom",
+      "unit": "vh",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin left",
+      "unit": "px",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin left",
+      "unit": "em",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin left",
+      "unit": "rem",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin left",
+      "unit": "vw",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Margin left",
+      "unit": "vh",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding top",
+      "unit": "px",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding top",
+      "unit": "em",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding top",
+      "unit": "rem",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding top",
+      "unit": "vw",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding top",
+      "unit": "vh",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding right",
+      "unit": "px",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding right",
+      "unit": "em",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding right",
+      "unit": "rem",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding right",
+      "unit": "vw",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding right",
+      "unit": "vh",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding bottom",
+      "unit": "px",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding bottom",
+      "unit": "em",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding bottom",
+      "unit": "rem",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding bottom",
+      "unit": "vw",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding bottom",
+      "unit": "vh",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding left",
+      "unit": "px",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding left",
+      "unit": "em",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding left",
+      "unit": "rem",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding left",
+      "unit": "vw",
+      "pointerReachable": true,
+      "sizePreserved": true
+    },
+    {
+      "label": "Padding left",
+      "unit": "vh",
+      "pointerReachable": true,
+      "sizePreserved": true
+    }
+  ]
+}

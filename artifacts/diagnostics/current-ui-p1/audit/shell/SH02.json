@@ -1,0 +1,250 @@
+{
+  "case": "SH02 built inspector drag clamp focus scroll Escape and resize",
+  "actual": {
+    "rows": [
+      {
+        "case": "keyboard move",
+        "initial": {
+          "x": 1068,
+          "y": 24,
+          "width": 350,
+          "height": 782
+        },
+        "after": {
+          "x": 1058,
+          "y": 24,
+          "width": 350,
+          "height": 782
+        }
+      },
+      {
+        "case": "drag",
+        "x": 20,
+        "y": 20,
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "panel": {
+          "x": 8,
+          "y": 8,
+          "width": 350,
+          "height": 782
+        },
+        "tools": {
+          "x": 528,
+          "y": 826,
+          "width": 384,
+          "height": 52
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false
+      },
+      {
+        "case": "drag",
+        "x": 1435,
+        "y": 20,
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "panel": {
+          "x": 1082,
+          "y": 8,
+          "width": 350,
+          "height": 782
+        },
+        "tools": {
+          "x": 528,
+          "y": 826,
+          "width": 384,
+          "height": 52
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false
+      },
+      {
+        "case": "drag",
+        "x": 1435,
+        "y": 895,
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "panel": {
+          "x": 1082,
+          "y": 32,
+          "width": 350,
+          "height": 782
+        },
+        "tools": {
+          "x": 528,
+          "y": 826,
+          "width": 384,
+          "height": 52
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false
+      },
+      {
+        "case": "drag",
+        "x": 20,
+        "y": 895,
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "panel": {
+          "x": 8,
+          "y": 32,
+          "width": 350,
+          "height": 782
+        },
+        "tools": {
+          "x": 528,
+          "y": 826,
+          "width": 384,
+          "height": 52
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false
+      },
+      {
+        "case": "cancel drag",
+        "beforeCancel": {
+          "x": 1068,
+          "y": 24,
+          "width": 350,
+          "height": 782
+        },
+        "after": {
+          "x": 1068,
+          "y": 24,
+          "width": 350,
+          "height": 782
+        }
+      },
+      {
+        "case": "header close",
+        "hidden": true
+      },
+      {
+        "case": "resize",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "panel": {
+          "x": 32,
+          "y": 24,
+          "width": 350,
+          "height": 746
+        },
+        "tools": {
+          "x": 74.5,
+          "y": 784,
+          "width": 241,
+          "height": 44
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false
+      },
+      {
+        "case": "last field reachable",
+        "width": 390,
+        "height": 844,
+        "inViewport": true
+      },
+      {
+        "case": "resize",
+        "viewport": {
+          "width": 320,
+          "height": 450
+        },
+        "panel": {
+          "x": 16,
+          "y": 12,
+          "width": 296,
+          "height": 372
+        },
+        "tools": {
+          "x": 52.5,
+          "y": 396,
+          "width": 215,
+          "height": 44
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false
+      },
+      {
+        "case": "last field reachable",
+        "width": 320,
+        "height": 450,
+        "inViewport": true
+      },
+      {
+        "case": "resize",
+        "viewport": {
+          "width": 390,
+          "height": 280
+        },
+        "panel": {
+          "x": 16,
+          "y": 12,
+          "width": 350,
+          "height": 202
+        },
+        "tools": {
+          "x": 74.5,
+          "y": 226,
+          "width": 241,
+          "height": 44
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false
+      },
+      {
+        "case": "resize",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "panel": {
+          "x": 16,
+          "y": 12,
+          "width": 350,
+          "height": 782
+        },
+        "tools": {
+          "x": 528,
+          "y": 826,
+          "width": 384,
+          "height": 52
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false
+      },
+      {
+        "case": "last field reachable",
+        "width": 1440,
+        "height": 900,
+        "inViewport": true
+      },
+      {
+        "case": "Escape closes popover not inspector",
+        "dialogCount": 0,
+        "inspectorVisible": true,
+        "focusReturned": true
+      }
+    ],
+    "errors": []
+  }
+}
