@@ -1,0 +1,298 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\alire\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/current-ui-visual-polish.spec.ts",
+      "tests/e2e/current-ui-p1.spec.ts",
+      "--grep",
+      "production visual inventory|UI03",
+      "--output=.preview/visual-polish-reference-check",
+      "--reporter=list,json",
+      "--max-failures=2"
+    ],
+    "configFile": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\playwright.config.ts",
+    "rootDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 2,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/.preview/visual-polish-reference-check",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node node_modules/vite/bin/vite.js --config vite.preview.config.ts --host 127.0.0.1",
+      "url": "http://127.0.0.1:5173",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "current-ui-p1.spec.ts",
+      "file": "current-ui-p1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "UI03-normal feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5463,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T16:35:32.705Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-polish-reference-check\\current-ui-p1-UI03-normal--8f2b8--unit-Changes-and-Navigator\\attachments\\P1-regression-1f16311affb5fcae808b82e745b75ba6dfbca2b2.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-5f240c61c573e322cc38",
+          "file": "current-ui-p1.spec.ts",
+          "line": 107,
+          "column": 134
+        },
+        {
+          "title": "UI03-narrow feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4596,
+                  "error": {
+                    "message": "Error: Navigator: opaque UI must cover red feedback\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m1\u001b[39m\nReceived:    \u001b[31m10\u001b[39m",
+                    "stack": "Error: Navigator: opaque UI must cover red feedback\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m1\u001b[39m\nReceived:    \u001b[31m10\u001b[39m\n    at feedbackPaintComparison (C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\paintOrder.ts:95:78)\n    at compare (C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:109:81)\n    at C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:116:145",
+                    "location": {
+                      "file": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\paintOrder.ts",
+                      "column": 78,
+                      "line": 95
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39mpaintOrder.ts:95\n\n  93 |     expect(difference.sameSize, `${name}: screenshot dimensions must match`).toBe(true);\n  94 |     expect(difference.maximumAlpha, `${name}: screenshot alpha must match`).toBe(0);\n> 95 |     expect(difference.maximum, `${name}: opaque UI must cover red feedback`).toBeLessThanOrEqual(feedbackRasterBounds.maximumChannelDifference);\n     |                                                                              ^\n  96 |     expect(difference.changedPixelRatio, `${name}: gradient raster noise must remain confined to ≤1% of pixels`).toBeLessThanOrEqual(feedbackRasterBounds.maximumChangedPixelRatio);\n  97 |     expect(difference.outsideGradientPixelRatio, `${name}: other opaque UI keeps the ≤0.1% raster noise budget`).toBeLessThanOrEqual(feedbackRasterBounds.maximumOutsideGradientPixelRatio);\n  98 |     return { name, ...difference };"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\paintOrder.ts",
+                        "column": 78,
+                        "line": 95
+                      },
+                      "message": "Error: Navigator: opaque UI must cover red feedback\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m1\u001b[39m\nReceived:    \u001b[31m10\u001b[39m\n\n   at paintOrder.ts:95\n\n  93 |     expect(difference.sameSize, `${name}: screenshot dimensions must match`).toBe(true);\n  94 |     expect(difference.maximumAlpha, `${name}: screenshot alpha must match`).toBe(0);\n> 95 |     expect(difference.maximum, `${name}: opaque UI must cover red feedback`).toBeLessThanOrEqual(feedbackRasterBounds.maximumChannelDifference);\n     |                                                                              ^\n  96 |     expect(difference.changedPixelRatio, `${name}: gradient raster noise must remain confined to ≤1% of pixels`).toBeLessThanOrEqual(feedbackRasterBounds.maximumChangedPixelRatio);\n  97 |     expect(difference.outsideGradientPixelRatio, `${name}: other opaque UI keeps the ≤0.1% raster noise budget`).toBeLessThanOrEqual(feedbackRasterBounds.maximumOutsideGradientPixelRatio);\n  98 |     return { name, ...difference };\n    at feedbackPaintComparison (C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\paintOrder.ts:95:78)\n    at compare (C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:109:81)\n    at C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\current-ui-p1.spec.ts:116:145"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T16:35:38.198Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "Navigator: original feedback",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-polish-reference-check\\current-ui-p1-UI03-narrow--50076--unit-Changes-and-Navigator\\attachments\\Navigator-original-feedback-39e7fc7784e6f42fefe394c6a628e3f98e503bd5.png"
+                    },
+                    {
+                      "name": "Navigator: red feedback",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-polish-reference-check\\current-ui-p1-UI03-narrow--50076--unit-Changes-and-Navigator\\attachments\\Navigator-red-feedback-21b16e5c12f894c56708d1590ffc3ae64b208ac8.png"
+                    },
+                    {
+                      "name": "Navigator: pixel diagnostics",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-polish-reference-check\\current-ui-p1-UI03-narrow--50076--unit-Changes-and-Navigator\\attachments\\Navigator-pixel-diagnostics-4123459f8992e41b519ca1c36af182da436b3191.json"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-polish-reference-check\\current-ui-p1-UI03-narrow--50076--unit-Changes-and-Navigator\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-polish-reference-check\\current-ui-p1-UI03-narrow--50076--unit-Changes-and-Navigator\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\tests\\e2e\\paintOrder.ts",
+                    "column": 78,
+                    "line": 95
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-17751a0d66dd3e2a44ac",
+          "file": "current-ui-p1.spec.ts",
+          "line": 107,
+          "column": 134
+        },
+        {
+          "title": "UI03-zoom200 feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5903,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T16:35:43.456Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-polish-reference-check\\current-ui-p1-UI03-zoom200-1646b--unit-Changes-and-Navigator\\attachments\\P1-regression-c39e9a2b94cb9a32f6f759bfd0e48c4b24f53c4e.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-a62782340da493a595e0",
+          "file": "current-ui-p1.spec.ts",
+          "line": 107,
+          "column": 134
+        }
+      ]
+    },
+    {
+      "title": "current-ui-visual-polish.spec.ts",
+      "file": "current-ui-visual-polish.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "production visual inventory and fourteen representative screens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14637,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T16:35:49.395Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c5ef7900a36b485c06f5-ddf83132b7976cbe03db",
+          "file": "current-ui-visual-polish.spec.ts",
+          "line": 35,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T16:35:31.051Z",
+    "duration": 33278.352,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

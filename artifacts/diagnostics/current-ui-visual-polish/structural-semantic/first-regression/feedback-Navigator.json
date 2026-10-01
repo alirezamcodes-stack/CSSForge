@@ -1,0 +1,33 @@
+{
+  "name": "Navigator",
+  "clip": {
+    "x": 28,
+    "y": 28,
+    "width": 334,
+    "height": 718
+  },
+  "gradients": [],
+  "difference": {
+    "sameSize": true,
+    "width": 334,
+    "height": 718,
+    "pixels": 239812,
+    "changed": 1,
+    "maximum": 18,
+    "maximumAlpha": 0,
+    "changedPixelRatio": 0.000004169933114272847,
+    "changedOutsideGradients": 1,
+    "outsideGradientPixelRatio": 0.000004169933114272847,
+    "changedBounds": {
+      "left": 0,
+      "top": 650,
+      "right": 0,
+      "bottom": 650
+    }
+  },
+  "bounds": {
+    "maximumChannelDifference": 1,
+    "maximumChangedPixelRatio": 0.01,
+    "maximumOutsideGradientPixelRatio": 0.001
+  }
+}

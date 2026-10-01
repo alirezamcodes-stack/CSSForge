@@ -1,0 +1,142 @@
+{
+  "chrome": "154.0.8037.92",
+  "inspector": {
+    "x": 1068,
+    "y": 24,
+    "width": 350,
+    "height": 1110
+  },
+  "design": {
+    "typographyHeight": 209,
+    "visibleSections": [
+      "Spacing",
+      "Typography",
+      "Background",
+      "Display",
+      "Border",
+      "Positioning",
+      "Box shadow",
+      "Text shadow",
+      "Filters"
+    ],
+    "visiblePropertyRows": 16,
+    "largeFieldCardContainers": 3
+  },
+  "code": {
+    "visibleDeclarations": 16,
+    "totalDeclarations": 21,
+    "mediaHeaders": 4,
+    "repeatedMediaHeaders": 1,
+    "sourceLabels": 6,
+    "repeatedSourceLabels": 5,
+    "largeRuleContainers": 2,
+    "metadataExplanationPixels": 408,
+    "records": [
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-4\",\"box-sizing\"]",
+        "property": "box-sizing",
+        "text": "box-sizing:border-box;"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-12\",\"font\"]",
+        "property": "font",
+        "text": "font:18px Arial;"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-12\",\"padding\"]",
+        "property": "padding",
+        "text": "padding:16px 24px;"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-12\",\"background\"]",
+        "property": "background",
+        "text": "background:rgb(41, 76, 59);"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-12\",\"color\"]",
+        "property": "color",
+        "text": "color:white;"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-12\",\"border\"]",
+        "property": "border",
+        "text": "border:0px;"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-12\",\"border-radius\"]",
+        "property": "border-radius",
+        "text": "border-radius:6px;"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-18\",\"cursor\"]",
+        "property": "cursor",
+        "text": "cursor:pointer;"
+      },
+      {
+        "key": "[false,\"[[\\\"(max-width: 600px)\\\"],\\\"\\\"]\",\"sheet-3\",\"rule-24\",\"font-size\"]",
+        "property": "font-size",
+        "text": "font-size:16px;"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-25\",\"border\"]",
+        "property": "border",
+        "text": "border:1px solid rgb(132, 168, 151);"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-25\",\"background-image\"]",
+        "property": "background-image",
+        "text": "background-image:linear-gradient(110deg, rgb(49, 89, 67) 0%, rgb(99, 132, 112) 55%, rgb(162, 184, 159) 100%);"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-25\",\"box-shadow\"]",
+        "property": "box-shadow",
+        "text": "box-shadow:rgba(23, 51, 41, 0.19) 0px 4px 12px;"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-25\",\"text-shadow\"]",
+        "property": "text-shadow",
+        "text": "text-shadow:rgba(23, 51, 41, 0.25) 0px 1px 2px;"
+      },
+      {
+        "key": "[false,\"[[],\\\"\\\"]\",\"sheet-3\",\"rule-25\",\"letter-spacing\"]",
+        "property": "letter-spacing",
+        "text": "letter-spacing:0.2px;"
+      },
+      {
+        "key": "[false,\"[[\\\"(min-width: 800px)\\\"],\\\"\\\"]\",\"sheet-3\",\"rule-27\",\"max-width\"]",
+        "property": "max-width",
+        "text": "max-width:360px;"
+      },
+      {
+        "key": "[false,\"[[\\\"(min-width: 800px)\\\"],\\\"\\\"]\",\"sheet-3\",\"rule-28\",\"line-height\"]",
+        "property": "line-height",
+        "text": "line-height:1.4;"
+      },
+      {
+        "key": "[false,\"[[\\\"(min-width: 800px)\\\"],\\\"\\\"]\",\"sheet-3\",\"rule-29\",\"letter-spacing\"]",
+        "property": "letter-spacing",
+        "text": "letter-spacing:0.2px;"
+      },
+      {
+        "key": "[false,\"[[\\\"print\\\"],\\\"\\\"]\",\"sheet-3\",\"rule-31\",\"padding\"]",
+        "property": "padding",
+        "text": "padding:0px;"
+      },
+      {
+        "key": "[false,\"[[\\\"print\\\"],\\\"\\\"]\",\"sheet-3\",\"rule-32\",\"border\"]",
+        "property": "border",
+        "text": "border:0px;"
+      },
+      {
+        "key": "[false,\"[[\\\"print\\\"],\\\"\\\"]\",\"sheet-3\",\"rule-33\",\"color\"]",
+        "property": "color",
+        "text": "color:black;"
+      },
+      {
+        "key": "[false,\"[[\\\"print\\\"],\\\"\\\"]\",\"sheet-34\",\"rule-36\",\"opacity\"]",
+        "property": "opacity",
+        "text": "opacity:0.9;"
+      }
+    ]
+  }
+}

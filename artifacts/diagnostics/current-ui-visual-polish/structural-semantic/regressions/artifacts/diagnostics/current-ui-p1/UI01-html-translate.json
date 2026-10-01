@@ -1,0 +1,105 @@
+{
+  "test": "UI01-html-translate viewport hosting, scrolling, drag, narrow view and native zoom",
+  "observations": [
+    {
+      "factor": 1,
+      "viewport": [
+        1440,
+        900
+      ],
+      "panel": {
+        "x": 1068,
+        "y": 24,
+        "width": 350,
+        "height": 782
+      },
+      "dock": {
+        "x": 559,
+        "y": 830,
+        "width": 322,
+        "height": 48
+      },
+      "target": {
+        "x": 111,
+        "y": 288.28125,
+        "width": 219.109375,
+        "height": 53
+      }
+    },
+    {
+      "factor": 1.25,
+      "viewport": [
+        1152,
+        720
+      ],
+      "panel": {
+        "x": 780,
+        "y": 24,
+        "width": 350,
+        "height": 602
+      },
+      "dock": {
+        "x": 415.20001220703125,
+        "y": 650,
+        "width": 321.5999755859375,
+        "height": 48
+      },
+      "target": {
+        "x": 110.80000305175781,
+        "y": 288.70001220703125,
+        "width": 219.09999084472656,
+        "height": 52.79998779296875
+      }
+    },
+    {
+      "factor": 1.5,
+      "viewport": [
+        960,
+        600
+      ],
+      "panel": {
+        "x": 588,
+        "y": 24,
+        "width": 350,
+        "height": 482
+      },
+      "dock": {
+        "x": 319.3333435058594,
+        "y": 530,
+        "width": 321.3333435058594,
+        "height": 48
+      },
+      "target": {
+        "x": 110.66667175292969,
+        "y": 288.29168701171875,
+        "width": 219.1041717529297,
+        "height": 52.666656494140625
+      }
+    },
+    {
+      "factor": 2,
+      "viewport": [
+        720,
+        450
+      ],
+      "panel": {
+        "x": 348,
+        "y": 8,
+        "width": 350,
+        "height": 372
+      },
+      "dock": {
+        "x": 199,
+        "y": 396,
+        "width": 322,
+        "height": 44
+      },
+      "target": {
+        "x": 111,
+        "y": 287.7890625,
+        "width": 219.1015625,
+        "height": 53
+      }
+    }
+  ]
+}

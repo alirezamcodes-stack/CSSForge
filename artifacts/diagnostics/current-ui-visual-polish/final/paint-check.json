@@ -1,0 +1,211 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\alire\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/current-ui-p1.spec.ts",
+      "--grep",
+      "UI03",
+      "--output=.preview/visual-polish-reference-paint",
+      "--reporter=list,json",
+      "--max-failures=1"
+    ],
+    "configFile": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\playwright.config.ts",
+    "rootDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/.preview/visual-polish-reference-paint",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node node_modules/vite/bin/vite.js --config vite.preview.config.ts --host 127.0.0.1",
+      "url": "http://127.0.0.1:5173",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "current-ui-p1.spec.ts",
+      "file": "current-ui-p1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "UI03-normal feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6861,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T16:39:23.326Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-polish-reference-paint\\current-ui-p1-UI03-normal--8f2b8--unit-Changes-and-Navigator\\attachments\\P1-regression-1f16311affb5fcae808b82e745b75ba6dfbca2b2.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-5f240c61c573e322cc38",
+          "file": "current-ui-p1.spec.ts",
+          "line": 107,
+          "column": 134
+        },
+        {
+          "title": "UI03-narrow feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6441,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T16:39:30.217Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-polish-reference-paint\\current-ui-p1-UI03-narrow--50076--unit-Changes-and-Navigator\\attachments\\P1-regression-73aa7fc9825724addebf7c44911f7e6510c17c48.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-17751a0d66dd3e2a44ac",
+          "file": "current-ui-p1.spec.ts",
+          "line": 107,
+          "column": 134
+        },
+        {
+          "title": "UI03-zoom200 feedback paints behind inspector dock color unit Changes and Navigator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7306,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T16:39:36.667Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "P1 regression",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-polish-reference-paint\\current-ui-p1-UI03-zoom200-1646b--unit-Changes-and-Navigator\\attachments\\P1-regression-c39e9a2b94cb9a32f6f759bfd0e48c4b24f53c4e.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "52c34132ed3b251127f2-a62782340da493a595e0",
+          "file": "current-ui-p1.spec.ts",
+          "line": 107,
+          "column": 134
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T16:39:21.770Z",
+    "duration": 22544.171,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

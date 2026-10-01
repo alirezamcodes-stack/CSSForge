@@ -1,6 +1,7 @@
 import { test, expect, type Page, type Locator, type TestInfo } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { setup, fixture, pick, inspector, dock, identity, outline, aligned, withinViewport } from './extensionHarness';
+import { setup, fixture, pick, inspector, dock, identity, aligned, withinViewport } from './extensionHarness';
+import { feedbackPaintComparison, feedbackRasterBounds } from './paintOrder';
 
 const evidence = 'artifacts/diagnostics/current-ui-p1';
 const button = (page: Page, name: string) => page.getByRole('button', { name, exact: true });
@@ -103,40 +104,18 @@ test('UI02 hostile maximum-z-index overlay leaves inspector dock popovers and mo
   } finally { await r.context.close(); }
 });
 
-async function paintBehind(page: Page, control: Locator) {
-  await control.scrollIntoViewIfNeeded(); const box = (await control.boundingBox())!;
-  await page.locator('#checkout').evaluate((node, box) => Object.assign((node as HTMLElement).style, { position: 'fixed', left: `${box.x + 2}px`, top: `${box.y + Math.min(box.height / 2, 30)}px`, width: `${Math.max(20, box.width - 8)}px`, height: '40px', margin: '0' }), box);
-  await aligned(page, '#checkout'); await expect(outline(page)).toBeVisible();
-  expect(await page.locator('cssforge-overlay').evaluate(node => getComputedStyle(node).pointerEvents)).toBe('none');
-  await page.mouse.move(0, 0);
-  // Rounded corners intentionally reveal page content. Compare the opaque
-  // interior, where an outline/label must never paint over a control.
-  const inset = Math.min(16, Math.min(box.width, box.height) / 4);
-  const clip = { x: box.x + inset, y: box.y + inset, width: box.width - inset * 2, height: box.height - inset * 2 };
-  const visible = await page.screenshot({ clip, animations: 'disabled', caret: 'hide' });
-  // Recolor feedback without hiding its layer: hiding changes Chrome text
-  // antialiasing/compositing and is not evidence of a paint-order defect.
-  await page.locator('cssforge-overlay').evaluate(node => {
-    for (const name of ['.outline', '.label']) { const part = node.shadowRoot!.querySelector<HTMLElement>(name)!; part.style.setProperty('background-color', '#ff0000', 'important'); part.style.setProperty('outline-color', '#ff0000', 'important'); }
-  });
-  try {
-    const hidden = await page.screenshot({ clip, animations: 'disabled', caret: 'hide' });
-    if (!visible.equals(hidden)) { await writeFile('.preview/p1-feedback-visible.png', visible); await writeFile('.preview/p1-feedback-hidden.png', hidden); }
-    expect(visible.equals(hidden), 'Feedback must not alter pixels in the opaque interior of the overlapping UI control').toBe(true);
-  }
-  finally { await page.locator('cssforge-overlay').evaluate(node => { for (const name of ['.outline', '.label']) { const part = node.shadowRoot!.querySelector<HTMLElement>(name)!; part.style.removeProperty('background-color'); part.style.removeProperty('outline-color'); } }); }
-}
 for (const [name, width, height, factor] of [['normal', 1440, 900, 1], ['narrow', 390, 844, 1], ['zoom200', 1440, 900, 2]] as const) test(`UI03-${name} feedback paints behind inspector dock color unit Changes and Navigator`, async ({}, info) => {
-  test.setTimeout(90000); const r = await setup(info);
+  test.setTimeout(90000); const r = await setup(info), comparisons: unknown[] = [];
+  const compare = async (control: Locator, label: string) => { comparisons.push(await feedbackPaintComparison(r.page, control, info, label)); };
   try {
     await pick(r.page, '#checkout'); await r.page.setViewportSize({ width, height }); await zoom(r, factor); await withinViewport(r.page);
-    await paintBehind(r.page, inspector(r.page));
-    await paintBehind(r.page, dock(r.page).getByRole('button', { name: 'Open Changes', exact: true }));
-    await button(r.page, 'Text color picker').click(); const color = r.page.getByRole('dialog', { name: 'Text color picker', exact: true }); await popupFits(color); await paintBehind(r.page, color); await r.page.keyboard.press('Escape');
-    await closeSections(r.page, 'Spacing'); await edit(r.page, 'Margin top', '16px'); await button(r.page, 'Margin top unit').click(); const units = r.page.getByRole('dialog', { name: 'Margin top unit', exact: true }); await popupFits(units); await paintBehind(r.page, units); await reachable(units.getByRole('button', { name: 'em', exact: true })); await r.page.keyboard.press('Escape');
-    for (const surface of ['Changes', 'Navigator']) { await dock(r.page).getByRole('button', { name: `Open ${surface}`, exact: true }).click(); await paintBehind(r.page, r.page.getByRole('dialog', { name: surface, exact: true })); await r.page.keyboard.press('Escape'); }
+    await compare(inspector(r.page), 'inspector');
+    await compare(dock(r.page).getByRole('button', { name: 'Open Changes', exact: true }), 'dock');
+    await button(r.page, 'Text color picker').click(); const color = r.page.getByRole('dialog', { name: 'Text color picker', exact: true }); await popupFits(color); await compare(color, 'color-popup'); await r.page.keyboard.press('Escape');
+    await closeSections(r.page, 'Spacing'); await edit(r.page, 'Margin top', '16px'); await button(r.page, 'Margin top unit').click(); const units = r.page.getByRole('dialog', { name: 'Margin top unit', exact: true }); await popupFits(units); await compare(units, 'spacing-units'); await reachable(units.getByRole('button', { name: 'em', exact: true })); await r.page.keyboard.press('Escape');
+    for (const surface of ['Changes', 'Navigator']) { await dock(r.page).getByRole('button', { name: `Open ${surface}`, exact: true }).click(); await compare(r.page.getByRole('dialog', { name: surface, exact: true }), surface); await r.page.keyboard.press('Escape'); }
     await r.page.evaluate(() => { const cover = document.createElement('div'); cover.id = 'host-cover'; Object.assign(cover.style, { position: 'fixed', inset: '0', zIndex: '2147483647', background: '#ff000022' }); document.body.append(cover); });
-    await paintBehind(r.page, inspector(r.page)); await reachable(button(r.page, 'Inspector menu')); await shot(r.page, `UI03-${name}-feedback-order`); expect(r.errors).toEqual([]); await save(info, { pixelComparisonsPassed: 7, factor, width, height });
+    await compare(inspector(r.page), 'hostile-inspector'); await reachable(button(r.page, 'Inspector menu')); await shot(r.page, `UI03-${name}-feedback-order`); expect(r.errors).toEqual([]); await save(info, { pixelComparisonsPassed: 7, factor, width, height, comparisons, bounds: feedbackRasterBounds });
   } finally { await r.context.close(); }
 });
 

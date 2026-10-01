@@ -1,0 +1,67 @@
+{
+  "state": "migrated",
+  "generation": 4,
+  "attempts": 2,
+  "reason": "Strong same-root replacement migrated.",
+  "resolution": "resolved-unique",
+  "confidence": "strong",
+  "selection": "save",
+  "targetId": "1",
+  "undo": 1,
+  "context": {
+    "media": [],
+    "pseudo": ""
+  },
+  "overrides": [
+    {
+      "context": {
+        "media": [],
+        "pseudo": ""
+      },
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "32px",
+          "enabled": true
+        }
+      ]
+    }
+  ],
+  "locator": {
+    "captures": 2,
+    "requests": 3,
+    "searches": 3,
+    "queries": 6,
+    "candidates": 4
+  },
+  "reconciliation": {
+    "starts": 1,
+    "resolutions": 2,
+    "retries": 1,
+    "migrations": 1,
+    "deliveries": 1,
+    "records": 1,
+    "candidateNodes": 1
+  },
+  "source": {
+    "scopeScans": 2
+  },
+  "cascade": {
+    "resolutions": 0
+  },
+  "selectors": {
+    "requests": 0,
+    "generations": 0,
+    "validations": 0,
+    "cacheHits": 0
+  },
+  "markers": [
+    "data-cssforge-target-96ab9bff77244e5fb6cfac52f9492744-m1"
+  ],
+  "retired": [
+    {
+      "connected": false,
+      "markers": []
+    }
+  ]
+}

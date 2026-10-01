@@ -1,0 +1,232 @@
+{
+  "before": {
+    "state": "active-original",
+    "generation": 3,
+    "attempts": 0,
+    "reason": "Original target active.",
+    "selection": "save",
+    "targetId": "1",
+    "undo": 5,
+    "context": {
+      "media": [
+        "(min-width: 800px)"
+      ],
+      "pseudo": ":hover"
+    },
+    "overrides": [
+      {
+        "context": {
+          "media": [],
+          "pseudo": ""
+        },
+        "declarations": [
+          {
+            "property": "font-size",
+            "value": "32px",
+            "enabled": true
+          },
+          {
+            "property": "letter-spacing",
+            "value": "3px",
+            "enabled": false
+          }
+        ]
+      },
+      {
+        "context": {
+          "media": [
+            "(min-width: 800px)"
+          ],
+          "pseudo": ":hover"
+        },
+        "declarations": [
+          {
+            "property": "color",
+            "value": "#ff0000",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "locator": {
+      "captures": 1,
+      "requests": 0,
+      "searches": 0,
+      "queries": 1,
+      "candidates": 1
+    },
+    "reconciliation": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 1
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    },
+    "markers": [
+      "data-cssforge-target-cb488386e228421a8733a89f22e48c53"
+    ],
+    "retired": []
+  },
+  "current": {
+    "state": "migrated",
+    "generation": 5,
+    "attempts": 1,
+    "reason": "Strong same-root replacement migrated.",
+    "resolution": "resolved-unique",
+    "confidence": "strong",
+    "selection": "save",
+    "targetId": "1",
+    "undo": 5,
+    "context": {
+      "media": [
+        "(min-width: 800px)"
+      ],
+      "pseudo": ":hover"
+    },
+    "overrides": [
+      {
+        "context": {
+          "media": [],
+          "pseudo": ""
+        },
+        "declarations": [
+          {
+            "property": "font-size",
+            "value": "32px",
+            "enabled": true
+          },
+          {
+            "property": "letter-spacing",
+            "value": "3px",
+            "enabled": false
+          }
+        ]
+      },
+      {
+        "context": {
+          "media": [
+            "(min-width: 800px)"
+          ],
+          "pseudo": ":hover"
+        },
+        "declarations": [
+          {
+            "property": "color",
+            "value": "#ff0000",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "locator": {
+      "captures": 3,
+      "requests": 4,
+      "searches": 4,
+      "queries": 7,
+      "candidates": 7
+    },
+    "reconciliation": {
+      "starts": 2,
+      "resolutions": 2,
+      "retries": 0,
+      "migrations": 2,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 3
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    },
+    "markers": [
+      "data-cssforge-target-cb488386e228421a8733a89f22e48c53-m2"
+    ],
+    "retired": [
+      {
+        "connected": false,
+        "markers": []
+      },
+      {
+        "connected": false,
+        "markers": []
+      }
+    ]
+  },
+  "result": {
+    "state": "retired",
+    "generation": 6,
+    "attempts": 1,
+    "reason": "Session reset.",
+    "resolution": "resolved-unique",
+    "confidence": "strong",
+    "selection": "save",
+    "targetId": "2",
+    "undo": 0,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "overrides": [],
+    "locator": {
+      "captures": 3,
+      "requests": 4,
+      "searches": 4,
+      "queries": 7,
+      "candidates": 7
+    },
+    "reconciliation": {
+      "starts": 2,
+      "resolutions": 2,
+      "retries": 0,
+      "migrations": 2,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 3
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    },
+    "markers": [],
+    "retired": [
+      {
+        "connected": false,
+        "markers": []
+      },
+      {
+        "connected": false,
+        "markers": []
+      }
+    ]
+  }
+}

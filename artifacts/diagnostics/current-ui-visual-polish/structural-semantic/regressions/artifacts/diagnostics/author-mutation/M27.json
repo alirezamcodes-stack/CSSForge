@@ -1,0 +1,16 @@
+{
+  "mode": "SESSION_OVERRIDE",
+  "undo": 1,
+  "edited": 1,
+  "error": "Author source changed or blocked reset. Pending author rollback retained; page changes were preserved.",
+  "target": "2",
+  "reconciliation": "retired",
+  "overrides": [],
+  "stats": {
+    "analyses": 2,
+    "capabilityChecks": 1,
+    "writes": 1,
+    "rollbacks": 0,
+    "rejections": 0
+  }
+}

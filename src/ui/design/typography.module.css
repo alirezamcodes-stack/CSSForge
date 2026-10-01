@@ -1,25 +1,35 @@
-.typography{display:grid;gap:10px;min-width:0;padding:0 4px}
-.fontGroup{display:grid;gap:2px}
-.family{display:flex;align-items:center;gap:7px;min-width:0}
-.family>svg{width:14px;height:14px;color:var(--text-muted);margin-left:5px}
-.family>button{min-width:0;font-size:13px;font-weight:500}
-.inlineChoice{display:grid;grid-template-columns:minmax(80px,.9fr) minmax(0,1.1fr);align-items:center;gap:8px;min-width:0}
-.inlineChoice>span,.alignmentRow>span{font-size:11px;color:var(--text-muted);padding-left:5px}
-.inlineChoice>button{font-size:12px;font-weight:400}
-.metrics,.details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start;border-top:1px solid var(--divider);padding-top:10px}
-.metrics label>span:first-child,.details label>span:first-child{padding-left:7px;font-size:11px;line-height:15px}
-.metrics input,.details input{font-variant-numeric:tabular-nums}
-.metrics [data-scrubbing]:focus-within,.details [data-scrubbing]:focus-within{box-shadow:0 0 0 1px #97dfb633}
-.metrics [data-scrubbing] input:focus-visible,.details [data-scrubbing] input:focus-visible{outline-offset:-2px}
-.metrics button[aria-label$=" unit"],.details button[aria-label$=" unit"]{min-width:27px;margin-right:2px;text-align:center}
-.details>label>button{height:30px;min-height:30px;background:var(--raised);border:1px solid var(--input-edge);border-radius:5px;font-size:12px}
-.appearance{display:grid;gap:4px}
-.alignmentRow{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.alignment{display:flex;gap:3px;padding:2px;border-radius:6px;background:var(--surface-deep)}
-.alignment button{width:30px;height:30px;border-radius:4px;color:var(--text-secondary)}
-.alignment button[aria-pressed=true]{background:var(--selected-surface)!important;color:var(--accent);box-shadow:inset 0 0 0 1px #ffffff0d}
-.alignment button:hover{background:var(--control-hover)!important}
-.alignment button:focus-visible{outline-offset:1px}
-.alignment svg{width:16px;height:16px}
-/* The existing floating dialog is rendered within Typography, not portaled. */
-.typography [role=dialog][aria-label="Text color picker"]{padding:10px;background:var(--popover-surface);border:1px solid #ffffff2b;border-radius:10px;box-shadow:0 14px 36px #0006,0 2px 6px #0004}
+.typography { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;gap:4px 10px;min-width:0;padding:0 4px; }
+.family,.fullWidth { grid-column:1/-1;min-width:0; }
+.family { display:flex;align-items:center;gap:6px; }
+.family>svg { flex:none;width:14px;height:14px;margin-left:3px;color:var(--text-secondary); }
+.typography .family>button { min-width:0;min-height:28px;padding:2px 4px!important;font:500 12px/1.4 var(--font-ui); }
+.inlineChoice,.inlineMetric { display:flex;align-items:center;gap:4px;min-width:0; }
+.inlineChoice>span,.inlineMetric>span { flex:none;color:var(--text-secondary);font:400 11px/1.4 var(--font-ui); }
+.inlineChoice>span { padding-left:3px; }
+.inlineMetric>span { padding-left:2px; }
+.inlineChoice>button,.inlineMetric>[data-scrubbing] { flex:1;min-width:0; }
+.typography .inlineChoice>button { min-height:28px;padding:2px 4px!important;font:400 12px/1.4 var(--font-ui); }
+.typography .inlineMetric>[data-scrubbing] { min-height:28px; }
+.typography .inlineMetric>[data-scrubbing]>input { padding:3px 4px!important; }
+.fullWidth.inlineMetric { gap:6px; }
+.fullWidth.inlineMetric>span { min-width:66px; }
+.lineHeight { grid-column:1/-1;gap:6px; }
+.lineHeight>span { min-width:66px; }
+.detailChoice { display:flex;align-items:center;gap:3px;min-width:0; }
+.detailChoice>span { display:flex;align-items:center;gap:4px;flex:none;padding-left:3px;color:var(--text-muted);font:var(--type-label); }
+.detailChoice>span svg { width:13px;height:13px; }
+.detailChoice>button { flex:1; }
+.typography .detailChoice>button { min-height:28px;min-width:0;padding:2px 4px!important;font:400 12px/1.4 var(--font-ui); }
+.typography .family>button,.typography .inlineChoice>button,.typography .detailChoice>button {
+  border:1px solid transparent;border-radius:var(--radius-control,4px);background:transparent;color:var(--text);
+}
+.typography .family>button:hover,.typography .inlineChoice>button:hover,.typography .detailChoice>button:hover { background:var(--group-surface); }
+.typography .family>button>span,.typography .inlineChoice>button>span,.typography .detailChoice>button>span { min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.alignmentRow { display:flex;align-items:center;min-width:0; }
+.alignment { display:flex;flex:none;gap:2px;padding:0;background:none; }
+.alignment button { flex:none;width:30px;height:30px;min-height:30px;border-radius:4px;color:var(--text-secondary); }
+.alignment button[aria-pressed=true] { color:var(--text);background:var(--selected-surface)!important;box-shadow:none; }
+.alignment button:hover { color:var(--text);background:var(--control-hover)!important; }
+.alignment button:focus-visible { outline:1px solid var(--focus-ring,var(--accent));outline-offset:1px; }
+.alignment svg { width:16px;height:16px; }
+@media(max-width:380px) { .typography { column-gap:6px; }.alignment { gap:0; } }

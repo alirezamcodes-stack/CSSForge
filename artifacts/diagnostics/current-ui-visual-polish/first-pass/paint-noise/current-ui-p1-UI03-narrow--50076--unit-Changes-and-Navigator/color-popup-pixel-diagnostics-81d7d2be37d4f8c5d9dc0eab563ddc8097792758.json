@@ -1,0 +1,29 @@
+{
+  "name": "color-popup",
+  "clip": {
+    "x": 66,
+    "y": 92,
+    "width": 236,
+    "height": 327
+  },
+  "difference": {
+    "sameSize": true,
+    "width": 236,
+    "height": 327,
+    "pixels": 77172,
+    "changed": 391,
+    "maximum": 1,
+    "maximumAlpha": 0,
+    "changedPixelRatio": 0.005066604467941741,
+    "changedBounds": {
+      "left": 112,
+      "top": 35,
+      "right": 234,
+      "bottom": 203
+    }
+  },
+  "bounds": {
+    "maximumChannelDifference": 1,
+    "maximumChangedPixelRatio": 0.001
+  }
+}

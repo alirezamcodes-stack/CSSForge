@@ -25,7 +25,7 @@ export function RichContextControls() {
       {mediaContexts.map(item => <button key={JSON.stringify(item.queries)} className={s.menuOption} aria-pressed={JSON.stringify(item.queries) === JSON.stringify(context.media)} onClick={() => editor?.setContext({ ...context, media: item.queries })}><span>{item.queries.join(' ∧ ')}<small className={s.contextSource}>{item.source} · {item.queries.every(query => matchMedia(query).matches) ? 'matches viewport' : 'inactive at this viewport'}</small></span></button>)}
       <p className={s.menuNote}>{mediaContexts.length ? 'Matching readable rules, not winning-rule provenance. Conditional edits remain separate from base edits.' : 'No relevant readable media rules were found. Only base editing is available.'}{mediaLimited && ' Some rules are inaccessible or outside the bounded discovery scope.'}</p>
     </Popover>
-    <Popover id="State or pseudo" className={s.pseudo} label={<span className={s.inline}><Icon name="target" />State or pseudo <strong>{stateLabel(context.pseudo)}</strong></span>}>
+    <Popover id="State or pseudo" className={`${s.pseudo} ${context.pseudo.startsWith('::') ? s.generatedContext : ''}`} label={<span className={s.inline}><Icon name="target" />State or pseudo <strong>{stateLabel(context.pseudo)}</strong></span>}>
       <div className={s.menuCaption}>CSS rule context · no forcing</div>
       {pseudos.map(pseudo => <button key={pseudo} className={s.menuOption} aria-pressed={pseudo === context.pseudo} onClick={() => editor?.setContext({ ...context, pseudo })}>{stateLabel(pseudo)}</button>)}
       <p className={s.menuNote}>Interactive rules apply only on actual browser hover, focus or active state. Before/after edits style existing generated content; they do not create it.</p>

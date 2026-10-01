@@ -1,0 +1,99 @@
+{
+  "test": "UI03-zoom200 feedback paints behind inspector dock color unit Changes and Navigator",
+  "observations": {
+    "pixelComparisonsPassed": 7,
+    "factor": 2,
+    "width": 1440,
+    "height": 900,
+    "comparisons": [
+      {
+        "name": "inspector",
+        "sameSize": true,
+        "width": 318,
+        "height": 340,
+        "pixels": 108120,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "dock",
+        "sameSize": true,
+        "width": 18,
+        "height": 18,
+        "pixels": 324,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "color-popup",
+        "sameSize": true,
+        "width": 236,
+        "height": 194,
+        "pixels": 45784,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "spacing-units",
+        "sameSize": true,
+        "width": 236,
+        "height": 252,
+        "pixels": 59472,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "Changes",
+        "sameSize": true,
+        "width": 660,
+        "height": 336,
+        "pixels": 221760,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "Navigator",
+        "sameSize": true,
+        "width": 640,
+        "height": 319,
+        "pixels": 204160,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "hostile-inspector",
+        "sameSize": true,
+        "width": 318,
+        "height": 340,
+        "pixels": 108120,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      }
+    ],
+    "bounds": {
+      "maximumChannelDifference": 1,
+      "maximumChangedPixelRatio": 0.001
+    }
+  }
+}

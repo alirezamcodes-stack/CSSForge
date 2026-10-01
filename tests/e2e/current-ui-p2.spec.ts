@@ -1,6 +1,7 @@
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { setup, fixture, pick, dock, inspector, aligned, withinViewport } from './extensionHarness';
+import { setup, fixture, pick, dock, inspector, withinViewport } from './extensionHarness';
+import { feedbackPaintComparison, feedbackRasterBounds } from './paintOrder';
 
 const out = 'artifacts/diagnostics/current-ui-p2';
 const html = fixture.replace('</style>', `
@@ -210,37 +211,13 @@ test('P2 narrow viewport and actual Chrome 200% zoom with accessible validation'
 test('P1 opaque UI still covers feedback with bounded Chrome raster noise',async({},info)=>{
   test.setTimeout(60000);
   const r=await setup(info),{page}=r, comparisons:unknown[]=[];
-  const compare = async(control:Locator) => {
-    await control.scrollIntoViewIfNeeded();const box=(await control.boundingBox())!;
-    await page.locator('#checkout').evaluate((node,box)=>Object.assign((node as HTMLElement).style,{position:'fixed',left:`${box.x+2}px`,top:`${box.y+Math.min(box.height/2,30)}px`,width:`${Math.max(20,box.width-8)}px`,height:'40px',margin:'0'}),box);
-    await aligned(page,'#checkout');await page.evaluate(()=>document.fonts.ready);
-    await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))));
-    await page.mouse.move(0,0);
-    const inset=Math.min(16,Math.min(box.width,box.height)/4),clip={x:box.x+inset,y:box.y+inset,width:box.width-inset*2,height:box.height-inset*2};
-    const before=await page.screenshot({clip,animations:'disabled',caret:'hide'});
-    await page.locator('cssforge-overlay').evaluate(node=>{for(const selector of ['.outline','.label']){const part=node.shadowRoot!.querySelector<HTMLElement>(selector)!;part.style.setProperty('background-color','#ff0000','important');part.style.setProperty('outline-color','#ff0000','important');}});
-    try {
-      const after=await page.screenshot({clip,animations:'disabled',caret:'hide'});
-      const difference=await page.evaluate(async buffers=>{
-        const decode=async(buffer:string)=>{const bitmap=await createImageBitmap(await(await fetch(`data:image/png;base64,${buffer}`)).blob());const canvas=new OffscreenCanvas(bitmap.width,bitmap.height),ctx=canvas.getContext('2d')!;ctx.drawImage(bitmap,0,0);bitmap.close();return ctx.getImageData(0,0,canvas.width,canvas.height).data;};
-        const [a,b]=await Promise.all(buffers.map(decode));let maximum=0,changed=0;
-        for(let pixel=0;pixel<a.length;pixel+=4){let different=false;for(let channel=0;channel<4;channel++){const delta=Math.abs(a[pixel+channel]-b[pixel+channel]);maximum=Math.max(maximum,delta);different ||= delta>0;}if(different)changed++;}
-        return {sameSize:a.length===b.length,pixels:a.length/4,changed,maximum};
-      },[before.toString('base64'),after.toString('base64')]);
-      if(difference.maximum>1 || difference.changed/difference.pixels>.001){await writeFile('.preview/p2-feedback-before.png',before);await writeFile('.preview/p2-feedback-after.png',after);console.log('Feedback comparison',await control.getAttribute('aria-label'),difference);}
-      // Byte-exact PNG comparisons occasionally differ by one channel level at
-      // icon/text edges in Chrome. Actual feedback contamination exceeds this
-      // bound; also reject changes covering more than 0.1% of the opaque area.
-      expect(difference.sameSize).toBe(true);expect(difference.maximum).toBeLessThanOrEqual(1);expect(difference.changed/difference.pixels).toBeLessThanOrEqual(.001);
-      comparisons.push(difference);
-    }finally{await page.locator('cssforge-overlay').evaluate(node=>{for(const selector of ['.outline','.label']){const part=node.shadowRoot!.querySelector<HTMLElement>(selector)!;part.style.removeProperty('background-color');part.style.removeProperty('outline-color');}});}
-  };
+  const compare = async(control:Locator,name:string) => {comparisons.push(await feedbackPaintComparison(page,control,info,name));};
   try {
-    await pick(page,'#checkout');await compare(inspector(page));await compare(dock(page).getByRole('button',{name:'Open Changes',exact:true}));
-    await button(page,'Text color picker').click();await compare(page.getByRole('dialog',{name:'Text color picker',exact:true}));await page.keyboard.press('Escape');
-    await section(page,'Spacing');await edit(page,'Margin top','16px');await button(page,'Margin top unit').click();await compare(page.getByRole('dialog',{name:'Margin top unit',exact:true}));await page.keyboard.press('Escape');
-    for(const name of ['Changes','Navigator']){await dock(page).getByRole('button',{name:`Open ${name}`,exact:true}).click();await compare(page.getByRole('dialog',{name,exact:true}));await page.keyboard.press('Escape');}
-    await page.evaluate(()=>{const cover=document.createElement('div');Object.assign(cover.style,{position:'fixed',inset:'0',zIndex:'2147483647',background:'#ff000022'});document.body.append(cover);});await compare(inspector(page));
-    await save(page,'p1-feedback-order',{comparisons,maximumAllowedChannelDifference:1,maximumChangedPixelRatio:.001});expect(r.errors).toEqual([]);
+    await pick(page,'#checkout');await compare(inspector(page),'inspector');await compare(dock(page).getByRole('button',{name:'Open Changes',exact:true}),'dock');
+    await button(page,'Text color picker').click();await compare(page.getByRole('dialog',{name:'Text color picker',exact:true}),'color-popup');await page.keyboard.press('Escape');
+    await section(page,'Spacing');await edit(page,'Margin top','16px');await button(page,'Margin top unit').click();await compare(page.getByRole('dialog',{name:'Margin top unit',exact:true}),'spacing-units');await page.keyboard.press('Escape');
+    for(const name of ['Changes','Navigator']){await dock(page).getByRole('button',{name:`Open ${name}`,exact:true}).click();await compare(page.getByRole('dialog',{name,exact:true}),name);await page.keyboard.press('Escape');}
+    await page.evaluate(()=>{const cover=document.createElement('div');Object.assign(cover.style,{position:'fixed',inset:'0',zIndex:'2147483647',background:'#ff000022'});document.body.append(cover);});await compare(inspector(page),'hostile-inspector');
+    await save(page,'p1-feedback-order',{comparisons,maximumAllowedChannelDifference:feedbackRasterBounds.maximumChannelDifference,maximumChangedPixelRatio:feedbackRasterBounds.maximumChangedPixelRatio});expect(r.errors).toEqual([]);
   }finally{await r.context.close();}
 });

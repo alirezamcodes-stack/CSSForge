@@ -1,0 +1,257 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\alire\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/author-mutation.spec.ts",
+      "tests/e2e/engine-integration.spec.ts",
+      "tests/e2e/current-ui-freeze.spec.ts",
+      "--grep",
+      "M01 |T29 |freeze",
+      "--max-failures=1",
+      "--output=.preview/visual-freeze-smoke",
+      "--reporter=list,json"
+    ],
+    "configFile": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\playwright.config.ts",
+    "rootDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/.preview/visual-freeze-smoke",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/alire/Documents/ChatGPT/CSSForge/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node node_modules/vite/bin/vite.js --config vite.preview.config.ts --host 127.0.0.1",
+      "url": "http://127.0.0.1:5173",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "author-mutation.spec.ts",
+      "file": "author-mutation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M01 inline declaration preserves unrelated state priority and undo/reset",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1368,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:54:58.335Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "mutation-result",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-freeze-smoke\\author-mutation-M01-inline-80689-ate-priority-and-undo-reset\\attachments\\mutation-result-38dba5b3a090662dff513f4113575e702c2f9118.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "dcb32d412cd72cb329fb-2b3f612e84b80cff00ae",
+          "file": "author-mutation.spec.ts",
+          "line": 33,
+          "column": 4
+        }
+      ]
+    },
+    {
+      "title": "current-ui-freeze.spec.ts",
+      "file": "current-ui-freeze.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "freeze built MV3 short viewports retain reachable fields and bounded overlays",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2395,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:54:59.747Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "dc80b5b9b935c4203e0f-d756578001bd19e0df35",
+          "file": "current-ui-freeze.spec.ts",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "title": "freeze built MV3 modal contains keyboard and host focus and restores nested opener",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2530,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:55:02.150Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "dc80b5b9b935c4203e0f-a9b47945936b4b056d88",
+          "file": "current-ui-freeze.spec.ts",
+          "line": 36,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "engine-integration.spec.ts",
+      "file": "engine-integration.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "T29 document replacement retires partial ownership and old callbacks remain inert",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1433,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T13:55:04.703Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "engine-integration",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\.preview\\visual-freeze-smoke\\engine-integration-T29-doc-42e7d--old-callbacks-remain-inert\\attachments\\engine-integration-4f86bdb5dd0fe59386590cad8c20e30407ac5d01.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b5b88c1498c8a8b94c0-f17b692fe25b3184b593",
+          "file": "engine-integration.spec.ts",
+          "line": 259,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T13:54:56.829Z",
+    "duration": 9576.379,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

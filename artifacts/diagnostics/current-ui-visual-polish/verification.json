@@ -1,0 +1,98 @@
+{
+  "stageA": {
+    "status": "CURRENT UI FUNCTIONAL BASELINE REMAINS FROZEN",
+    "browser": {
+      "startTime": "2026-10-01T13:55:28.244Z",
+      "duration": 548584.248,
+      "expected": 295,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "actualMV3Cases": 284,
+    "supplements": 11
+  },
+  "stageB": {
+    "status": "REFERENCE-GUIDED UI/UX PROFESSIONAL POLISH COMPLETE",
+    "browser": {
+      "startTime": "2026-10-01T16:42:00.238Z",
+      "duration": 587690.37,
+      "expected": 296,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "actualMV3Cases": 285,
+    "supplements": 11
+  },
+  "validation": {
+    "typecheck": "passed",
+    "unitTests": 251,
+    "unitFiles": 17,
+    "build": "production chrome-mv3 passed",
+    "chrome": "154.0.8037.92"
+  },
+  "performance": {
+    "events": 1000,
+    "countersUnchanged": true,
+    "evidence": "stage-b/performance.json"
+  },
+  "sharedColorContexts": 6,
+  "screenshots": [
+    "01-inspector-design.png",
+    "02-typography.png",
+    "03-spacing.png",
+    "04-background-gradient.png",
+    "05-box-shadow.png",
+    "06-filters.png",
+    "07-code.png",
+    "08-html.png",
+    "09-navigator.png",
+    "10-changes.png",
+    "11-color-control.png",
+    "12-dock.png",
+    "13-narrow-320.png",
+    "14-zoom-200.png",
+    "15-reference-design-inspector.png",
+    "15-reference-design.png",
+    "16-reference-code-inspector.png",
+    "16-reference-code.png",
+    "17-narrow-390.png",
+    "18-design-effects-lower.png",
+    "19-filters-narrow-320.png"
+  ],
+  "productionFiles": [
+    "src/styles/tokens.css",
+    "src/ui/code/LiveCodeView.tsx",
+    "src/ui/code/liveCode.module.css",
+    "src/ui/design/LiveDesignView.tsx",
+    "src/ui/design/background.module.css",
+    "src/ui/design/filters.module.css",
+    "src/ui/design/shadows.module.css",
+    "src/ui/design/typography.module.css",
+    "src/ui/html/liveTree.module.css",
+    "src/ui/shared/propertyControls.module.css",
+    "src/ui/ui.module.css"
+  ],
+  "lockedProductionSourceDiff": [],
+  "built": {
+    "content-scripts/content.js": "98d8ca3413825c9eb75498badcde4bf89b156f4e682bc8647e8b90f8fc09afb5",
+    "content-scripts/content.css": "5db53f35f7bfd8bc376799d61ee9d63c9cd45e1acbb2416769934f7d176bd199",
+    "background.js": "abc68f0fd71cca82ba241a4ccee1a10e23be589d7fa9ef0410224f61b3ffed13",
+    "manifest.json": "1cd2918fbfe545e25583ec26f7e12e356fb8b5bbab9d60837bf2594d133e486f"
+  },
+  "historicalFilesRestored": 776,
+  "historicalHashesVerified": true,
+  "rasterMethodology": {
+    "channelCeiling": 1,
+    "gradientPixelBudget": 0.01,
+    "outsideGradientPixelBudget": 0.001,
+    "dimensionsExact": true,
+    "alphaExact": true,
+    "finiteAnimationsSettled": true
+  },
+  "remainingVisualLimitations": [
+    "Vertical ColorControl scrolling at constrained heights/native zoom",
+    "Compact truncation of long CSS values/source paths with focused-input scrolling/title disclosure"
+  ]
+}

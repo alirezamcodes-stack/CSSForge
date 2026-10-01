@@ -1,0 +1,190 @@
+{
+  "status": "STRUCTURAL + SEMANTIC UI/UX REFINEMENT COMPLETE",
+  "functionalBaseline": "CURRENT UI FUNCTIONAL BASELINE REMAINS FROZEN",
+  "browser": {
+    "startTime": "2026-10-01T18:01:51.758Z",
+    "duration": 733091.6050000001,
+    "expected": 297,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "actualMV3Cases": 286,
+  "supplements": 11,
+  "unitTests": 256,
+  "unitFiles": 18,
+  "typecheck": "passed",
+  "productionBuild": "passed",
+  "chrome": "154.0.8037.92",
+  "sharedColorContexts": 6,
+  "performance": {
+    "events": 1000,
+    "countersUnchanged": true
+  },
+  "sourceAudit": {
+    "changedPresentationFiles": [
+      "src/styles/tokens.css",
+      "src/ui/code/liveCode.module.css",
+      "src/ui/code/LiveCodeView.tsx",
+      "src/ui/design/background.module.css",
+      "src/ui/design/filters.module.css",
+      "src/ui/design/LiveDesignView.tsx",
+      "src/ui/design/RichControls.tsx",
+      "src/ui/design/shadows.module.css",
+      "src/ui/design/typography.module.css",
+      "src/ui/html/liveTree.module.css",
+      "src/ui/inspector/LiveInspection.tsx",
+      "src/ui/shared/propertyControls.module.css",
+      "src/ui/ui.module.css",
+      "src/ui/code/sourcePresentation.ts"
+    ],
+    "lockedSourceFilesUnchanged": 80,
+    "handlers": [
+      {
+        "file": "src/ui/code/LiveCodeView.tsx",
+        "originalEventHandlersUnchanged": 10,
+        "logicAndHooksUnchanged": true
+      },
+      {
+        "file": "src/ui/design/LiveDesignView.tsx",
+        "originalEventHandlersUnchanged": 1,
+        "logicAndHooksUnchanged": true
+      },
+      {
+        "file": "src/ui/design/RichControls.tsx",
+        "originalEventHandlersUnchanged": 8,
+        "logicAndHooksUnchanged": true
+      },
+      {
+        "file": "src/ui/inspector/LiveInspection.tsx",
+        "originalEventHandlersUnchanged": 7,
+        "logicAndHooksUnchanged": true
+      }
+    ],
+    "build": [
+      {
+        "file": "manifest.json",
+        "hash": "1cd2918fbfe545e25583ec26f7e12e356fb8b5bbab9d60837bf2594d133e486f"
+      },
+      {
+        "file": "background.js",
+        "hash": "abc68f0fd71cca82ba241a4ccee1a10e23be589d7fa9ef0410224f61b3ffed13"
+      },
+      {
+        "file": "content-scripts/content.js",
+        "hash": "d6514209ff43d952dffd9145018fc04b116347370ad56b6339298b75b9fd9aa5"
+      },
+      {
+        "file": "content-scripts/content.css",
+        "hash": "54e486f0d2dc389d5181e46500c48a3fd149f09c002322d100632384f9115759"
+      }
+    ]
+  },
+  "density": {
+    "before": {
+      "design": {
+        "typographyHeight": 277.390625,
+        "visibleSections": [
+          "Spacing",
+          "Typography",
+          "Background",
+          "Display",
+          "Border",
+          "Positioning",
+          "Box shadow"
+        ],
+        "visiblePropertyRows": 22,
+        "largeFieldCardContainers": 3
+      },
+      "code": {
+        "visibleDeclarations": 10,
+        "totalDeclarations": 21,
+        "mediaHeaders": 8,
+        "repeatedMediaHeaders": 5,
+        "sourceLabels": 12,
+        "repeatedSourceLabels": 11,
+        "largeRuleContainers": 12,
+        "metadataExplanationPixels": 421,
+        "totalMetadataExplanationPixels": 1018
+      }
+    },
+    "after": {
+      "design": {
+        "typographyHeight": 241,
+        "visibleSections": [
+          "Spacing",
+          "Typography",
+          "Background",
+          "Display",
+          "Border",
+          "Positioning",
+          "Box shadow",
+          "Text shadow",
+          "Filters"
+        ],
+        "visiblePropertyRows": 17,
+        "largeFieldCardContainers": 3
+      },
+      "code": {
+        "visibleDeclarations": 16,
+        "totalDeclarations": 21,
+        "mediaHeaders": 4,
+        "repeatedMediaHeaders": 1,
+        "sourceLabels": 6,
+        "repeatedSourceLabels": 5,
+        "largeRuleContainers": 2,
+        "metadataExplanationPixels": 319,
+        "totalMetadataExplanationPixels": 568
+      }
+    },
+    "originalRecordsUnchanged": true
+  },
+  "contrast": {
+    "text": 15.08,
+    "text-secondary": 10.3,
+    "text-muted": 6.74,
+    "accent": 10.46,
+    "accent-bright": 10.07,
+    "accent-interaction": 10.16,
+    "context-media": 7.9,
+    "context-state": 10.56,
+    "context-pseudo": 8.77,
+    "syntax-selector": 11.69,
+    "syntax-property": 10.16,
+    "syntax-value": 8.25,
+    "syntax-keyword": 10.16,
+    "syntax-source": 6.91,
+    "syntax-important": 9.15,
+    "focus-ring": 10.16,
+    "success": 9.6,
+    "warning": 10.33,
+    "error": 8.6
+  },
+  "screenshots": [
+    "01-inspector-design.png",
+    "02-typography.png",
+    "03-spacing.png",
+    "04-background-gradient.png",
+    "05-box-shadow.png",
+    "06-filters.png",
+    "07-code.png",
+    "08-html.png",
+    "09-navigator.png",
+    "10-changes.png",
+    "11-color-control.png",
+    "12-dock.png",
+    "13-narrow-320.png",
+    "14-zoom-200.png",
+    "15-reference-design-inspector.png",
+    "15-reference-design.png",
+    "16-reference-code-inspector.png",
+    "16-reference-code.png",
+    "17-narrow-390.png",
+    "18-design-effects-lower.png",
+    "19-filters-narrow-320.png",
+    "reference-code.png",
+    "reference-design.png"
+  ],
+  "historicalHashesVerified": true,
+  "historicalFilesRestored": 1043
+}

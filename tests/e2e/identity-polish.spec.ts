@@ -32,7 +32,7 @@ test('Phase 06.5.3 identity, real fonts, seven views, narrow and zoom', async ({
     const sans = /CSSForge Geist Sans/, mono = /CSSForge Geist Mono/;
     await expect(inspector(page)).toHaveCSS('font-family', sans);
     await expect(dock(page)).toHaveCSS('font-family', sans);
-    await expect(page.getByTestId('selected-identity')).toHaveCSS('font-family', sans);
+    await expect(page.getByTestId('selected-identity')).toHaveCSS('font-family', mono);
     for (const section of await page.locator('[data-section]').all()) {
       const name = (await section.getAttribute('data-section'))!;
       const header = section.getByRole('button', { name, exact:true });
@@ -40,7 +40,7 @@ test('Phase 06.5.3 identity, real fonts, seven views, narrow and zoom', async ({
     }
     const design = page.getByRole('tabpanel', { name:'Design', exact:true });
     await design.evaluate(node => node.scrollTop = 0);
-    await expect(page.getByRole('textbox', { name:'Font size', exact:true })).toHaveCSS('font-family', sans);
+    await expect(page.getByRole('textbox', { name:'Font size', exact:true })).toHaveCSS('font-family', mono);
     // Verify Chrome's actual rendered font, not just a declared token.
     const cdp = await context.newCDPSession(page); await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
     const documentTree = await cdp.send('DOM.getDocument', { depth:-1, pierce:true });

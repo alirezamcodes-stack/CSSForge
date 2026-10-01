@@ -1,0 +1,114 @@
+{
+  "test": "UI03-narrow feedback paints behind inspector dock color unit Changes and Navigator",
+  "observations": {
+    "pixelComparisonsPassed": 7,
+    "factor": 1,
+    "width": 390,
+    "height": 844,
+    "comparisons": [
+      {
+        "name": "inspector",
+        "sameSize": true,
+        "width": 318,
+        "height": 714,
+        "pixels": 227052,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedOutsideGradients": 0,
+        "outsideGradientPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "dock",
+        "sameSize": true,
+        "width": 16,
+        "height": 16,
+        "pixels": 256,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedOutsideGradients": 0,
+        "outsideGradientPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "color-popup",
+        "sameSize": true,
+        "width": 236,
+        "height": 327,
+        "pixels": 77172,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedOutsideGradients": 0,
+        "outsideGradientPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "spacing-units",
+        "sameSize": true,
+        "width": 236,
+        "height": 280,
+        "pixels": 66080,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedOutsideGradients": 0,
+        "outsideGradientPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "Changes",
+        "sameSize": true,
+        "width": 334,
+        "height": 175,
+        "pixels": 58450,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedOutsideGradients": 0,
+        "outsideGradientPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "Navigator",
+        "sameSize": true,
+        "width": 334,
+        "height": 718,
+        "pixels": 239812,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedOutsideGradients": 0,
+        "outsideGradientPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "hostile-inspector",
+        "sameSize": true,
+        "width": 318,
+        "height": 714,
+        "pixels": 227052,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedOutsideGradients": 0,
+        "outsideGradientPixelRatio": 0,
+        "changedBounds": null
+      }
+    ],
+    "bounds": {
+      "maximumChannelDifference": 1,
+      "maximumChangedPixelRatio": 0.01,
+      "maximumOutsideGradientPixelRatio": 0.001
+    }
+  }
+}

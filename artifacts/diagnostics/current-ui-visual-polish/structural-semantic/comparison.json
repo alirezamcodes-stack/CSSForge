@@ -1,0 +1,59 @@
+{
+  "before": {
+    "design": {
+      "typographyHeight": 277.390625,
+      "visibleSections": [
+        "Spacing",
+        "Typography",
+        "Background",
+        "Display",
+        "Border",
+        "Positioning",
+        "Box shadow"
+      ],
+      "visiblePropertyRows": 22,
+      "largeFieldCardContainers": 3
+    },
+    "code": {
+      "visibleDeclarations": 10,
+      "totalDeclarations": 21,
+      "mediaHeaders": 8,
+      "repeatedMediaHeaders": 5,
+      "sourceLabels": 12,
+      "repeatedSourceLabels": 11,
+      "largeRuleContainers": 12,
+      "metadataExplanationPixels": 421,
+      "totalMetadataExplanationPixels": 1018
+    }
+  },
+  "after": {
+    "design": {
+      "typographyHeight": 241,
+      "visibleSections": [
+        "Spacing",
+        "Typography",
+        "Background",
+        "Display",
+        "Border",
+        "Positioning",
+        "Box shadow",
+        "Text shadow",
+        "Filters"
+      ],
+      "visiblePropertyRows": 17,
+      "largeFieldCardContainers": 3
+    },
+    "code": {
+      "visibleDeclarations": 16,
+      "totalDeclarations": 21,
+      "mediaHeaders": 4,
+      "repeatedMediaHeaders": 1,
+      "sourceLabels": 6,
+      "repeatedSourceLabels": 5,
+      "largeRuleContainers": 2,
+      "metadataExplanationPixels": 319,
+      "totalMetadataExplanationPixels": 568
+    }
+  },
+  "originalRecordsUnchanged": true
+}

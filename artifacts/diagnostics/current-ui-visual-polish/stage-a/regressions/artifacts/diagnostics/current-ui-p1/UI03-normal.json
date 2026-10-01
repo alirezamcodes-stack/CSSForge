@@ -1,0 +1,104 @@
+{
+  "test": "UI03-normal feedback paints behind inspector dock color unit Changes and Navigator",
+  "observations": {
+    "pixelComparisonsPassed": 7,
+    "factor": 1,
+    "width": 1440,
+    "height": 900,
+    "comparisons": [
+      {
+        "name": "inspector",
+        "sameSize": true,
+        "width": 318,
+        "height": 750,
+        "pixels": 238500,
+        "changed": 30,
+        "maximum": 1,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0.00012578616352201257,
+        "changedBounds": {
+          "left": 288,
+          "top": 170,
+          "right": 294,
+          "bottom": 720
+        }
+      },
+      {
+        "name": "dock",
+        "sameSize": true,
+        "width": 18,
+        "height": 18,
+        "pixels": 324,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "color-popup",
+        "sameSize": true,
+        "width": 236,
+        "height": 327,
+        "pixels": 77172,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "spacing-units",
+        "sameSize": true,
+        "width": 236,
+        "height": 280,
+        "pixels": 66080,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "Changes",
+        "sameSize": true,
+        "width": 1380,
+        "height": 840,
+        "pixels": 1159200,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "Navigator",
+        "sameSize": true,
+        "width": 1008,
+        "height": 670,
+        "pixels": 675360,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      },
+      {
+        "name": "hostile-inspector",
+        "sameSize": true,
+        "width": 318,
+        "height": 750,
+        "pixels": 238500,
+        "changed": 0,
+        "maximum": 0,
+        "maximumAlpha": 0,
+        "changedPixelRatio": 0,
+        "changedBounds": null
+      }
+    ],
+    "bounds": {
+      "maximumChannelDifference": 1,
+      "maximumChangedPixelRatio": 0.001
+    }
+  }
+}

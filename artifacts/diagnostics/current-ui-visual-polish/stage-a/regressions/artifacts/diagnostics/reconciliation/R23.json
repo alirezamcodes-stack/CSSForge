@@ -1,0 +1,108 @@
+{
+  "before": {
+    "state": "active-original",
+    "generation": 3,
+    "attempts": 0,
+    "reason": "Original target active.",
+    "selection": "save",
+    "targetId": "1",
+    "undo": 1,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "overrides": [
+      {
+        "context": {
+          "media": [],
+          "pseudo": ""
+        },
+        "declarations": [
+          {
+            "property": "font-size",
+            "value": "32px",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "locator": {
+      "captures": 1,
+      "requests": 0,
+      "searches": 0,
+      "queries": 1,
+      "candidates": 1
+    },
+    "reconciliation": {
+      "starts": 0,
+      "resolutions": 0,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 1
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    },
+    "markers": [
+      "data-cssforge-target-08ce5bcebcbb4c19b45dcc8a8dedcf28"
+    ],
+    "retired": []
+  },
+  "result": {
+    "state": "migration-rejected",
+    "generation": 4,
+    "attempts": 1,
+    "reason": "Session ownership transfer rejected.",
+    "resolution": "resolved-unique",
+    "confidence": "strong",
+    "selection": null,
+    "targetId": null,
+    "undo": 1,
+    "context": {
+      "media": [],
+      "pseudo": ""
+    },
+    "overrides": [],
+    "locator": {
+      "captures": 1,
+      "requests": 1,
+      "searches": 1,
+      "queries": 2,
+      "candidates": 2
+    },
+    "reconciliation": {
+      "starts": 1,
+      "resolutions": 1,
+      "retries": 0,
+      "migrations": 0,
+      "deliveries": 0,
+      "records": 0,
+      "candidateNodes": 0
+    },
+    "source": {
+      "scopeScans": 1
+    },
+    "cascade": {
+      "resolutions": 0
+    },
+    "selectors": {
+      "requests": 0,
+      "generations": 0,
+      "validations": 0,
+      "cacheHits": 0
+    },
+    "markers": [],
+    "retired": []
+  }
+}
