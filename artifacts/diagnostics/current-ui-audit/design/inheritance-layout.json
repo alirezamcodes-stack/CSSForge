@@ -1,0 +1,2264 @@
+{
+  "name": "inheritance-layout",
+  "observations": [
+    {
+      "id": "inheritance-layout-001",
+      "case": "Inherited/owned baseline",
+      "status": "observed",
+      "actual": [
+        {
+          "id": "audit-parent",
+          "font": "24px",
+          "family": "Georgia",
+          "color": "rgb(20, 40, 60)",
+          "lineHeight": "36px"
+        },
+        {
+          "id": "audit-inherited",
+          "font": "24px",
+          "family": "Georgia",
+          "color": "rgb(20, 40, 60)",
+          "lineHeight": "36px"
+        },
+        {
+          "id": "audit-owned",
+          "font": "16px",
+          "family": "Verdana",
+          "color": "rgb(90, 100, 110)",
+          "lineHeight": "32px"
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-002",
+      "case": "Parent font flows to inherited child",
+      "status": "pass",
+      "expected": "30px",
+      "actual": "30px"
+    },
+    {
+      "id": "inheritance-layout-003",
+      "case": "Child-owned font size resists parent edit",
+      "status": "pass",
+      "expected": "16px",
+      "actual": "16px"
+    },
+    {
+      "id": "inheritance-layout-004",
+      "case": "Parent color flows to inherited child",
+      "status": "pass",
+      "expected": "rgb(170, 17, 34)",
+      "actual": "rgb(170, 17, 34)"
+    },
+    {
+      "id": "inheritance-layout-005",
+      "case": "Child-owned color resists parent edit",
+      "status": "pass",
+      "expected": "rgb(90, 100, 110)",
+      "actual": "rgb(90, 100, 110)"
+    },
+    {
+      "id": "inheritance-layout-006",
+      "case": "Parent family flows to inherited child",
+      "status": "pass",
+      "expected": "Arial",
+      "actual": "Arial"
+    },
+    {
+      "id": "inheritance-layout-007",
+      "case": "Child-owned family resists parent edit",
+      "status": "pass",
+      "expected": "Verdana",
+      "actual": "Verdana"
+    },
+    {
+      "id": "inheritance-layout-008",
+      "case": "Parent unitless line-height flows to inherited child",
+      "status": "pass",
+      "expected": "54px",
+      "actual": "54px"
+    },
+    {
+      "id": "inheritance-layout-009",
+      "case": "Child-owned line-height resists parent edit",
+      "status": "pass",
+      "expected": "32px",
+      "actual": "32px"
+    },
+    {
+      "id": "inheritance-layout-010",
+      "case": "Selected inherited child UI sync",
+      "status": "pass",
+      "expected": "30",
+      "actual": "30"
+    },
+    {
+      "id": "inheritance-layout-011",
+      "case": "Child local edit owns its value",
+      "status": "pass",
+      "expected": "22px",
+      "actual": "22px"
+    },
+    {
+      "id": "inheritance-layout-012",
+      "case": "Child edit leaves parent unchanged",
+      "status": "pass",
+      "expected": "30px",
+      "actual": "30px"
+    },
+    {
+      "id": "inheritance-layout-013",
+      "case": "Design/Code/Design value sync",
+      "status": "pass",
+      "expected": "22",
+      "actual": "22"
+    },
+    {
+      "id": "inheritance-layout-014",
+      "case": "Undo child restores inherited parent value",
+      "status": "pass",
+      "expected": "30px",
+      "actual": "30px"
+    },
+    {
+      "id": "inheritance-layout-015",
+      "case": "Reset restores inherited baseline",
+      "status": "pass",
+      "expected": "24px",
+      "actual": "24px"
+    },
+    {
+      "id": "inheritance-layout-016",
+      "case": "Spacing at 1440: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-017",
+      "case": "Spacing at 1440: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-018",
+      "case": "Spacing at 1440: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Spacing",
+          "width": 303,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin top",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin top unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin right",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin right unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin bottom",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin bottom unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin left",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin left unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding top",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding top unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding right",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding right unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding bottom",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding bottom unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding left",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding left unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-019",
+      "case": "Typography at 1440: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-020",
+      "case": "Typography at 1440: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-021",
+      "case": "Typography at 1440: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Typography",
+          "width": 303,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Font family",
+          "width": 269,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Font weight",
+          "width": 157.859375,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Font size",
+          "width": 105.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "20",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Font size unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Line height",
+          "width": 107.421875,
+          "height": 28,
+          "disabled": false,
+          "value": "1.4",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Line height unit",
+          "width": 31.078125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Text color picker",
+          "width": 32,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Text color",
+          "width": 253,
+          "height": 30,
+          "disabled": false,
+          "value": "rgb(40, 50, 60)",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align left",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align center",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 223, 182) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align right",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align justify",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Letter spacing",
+          "width": 105.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "1",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Letter spacing unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Text decoration",
+          "width": 142.5,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Text transform",
+          "width": 157.859375,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-022",
+      "case": "Display at 1440: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-023",
+      "case": "Display at 1440: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-024",
+      "case": "Display at 1440: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Display",
+          "width": 303,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Display mode",
+          "width": 145.5,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Opacity",
+          "width": 88.40625,
+          "height": 28,
+          "disabled": false,
+          "value": "1",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Opacity unit",
+          "width": 31.09375,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-025",
+      "case": "Border at 1440: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-026",
+      "case": "Border at 1440: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-027",
+      "case": "Border at 1440: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Border",
+          "width": 303,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border color picker",
+          "width": 32,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Border color",
+          "width": 263,
+          "height": 30,
+          "disabled": false,
+          "value": "rgb(70, 80, 90)",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Border width",
+          "width": 110.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "2",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border width unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border style",
+          "width": 145.5,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Border radius",
+          "width": 267.6875,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border radius unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-028",
+      "case": "Positioning at 1440: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-029",
+      "case": "Positioning at 1440: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-030",
+      "case": "Positioning at 1440: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Positioning",
+          "width": 303,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position",
+          "width": 303,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position top",
+          "width": 110.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position top unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position right",
+          "width": 110.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position right unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position bottom",
+          "width": 110.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position bottom unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position left",
+          "width": 110.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position left unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Z-index",
+          "width": 301,
+          "height": 28,
+          "disabled": false,
+          "value": "1",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-031",
+      "case": "Spacing at 390: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-032",
+      "case": "Spacing at 390: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-033",
+      "case": "Spacing at 390: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Spacing",
+          "width": 303,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin top",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin top unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin right",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin right unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin bottom",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin bottom unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin left",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin left unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding top",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding top unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding right",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding right unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding bottom",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding bottom unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding left",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding left unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-034",
+      "case": "Typography at 390: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-035",
+      "case": "Typography at 390: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-036",
+      "case": "Typography at 390: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Typography",
+          "width": 303,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Font family",
+          "width": 269,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Font weight",
+          "width": 157.859375,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Font size",
+          "width": 105.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "20",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Font size unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Line height",
+          "width": 107.421875,
+          "height": 28,
+          "disabled": false,
+          "value": "1.4",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Line height unit",
+          "width": 31.078125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Text color picker",
+          "width": 32,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Text color",
+          "width": 253,
+          "height": 30,
+          "disabled": false,
+          "value": "rgb(40, 50, 60)",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align left",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align center",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 223, 182) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align right",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align justify",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Letter spacing",
+          "width": 105.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "1",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Letter spacing unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Text decoration",
+          "width": 142.5,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Text transform",
+          "width": 157.859375,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-037",
+      "case": "Display at 390: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-038",
+      "case": "Display at 390: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-039",
+      "case": "Display at 390: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Display",
+          "width": 303,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Display mode",
+          "width": 145.5,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Opacity",
+          "width": 88.40625,
+          "height": 28,
+          "disabled": false,
+          "value": "1",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Opacity unit",
+          "width": 31.09375,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-040",
+      "case": "Border at 390: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-041",
+      "case": "Border at 390: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-042",
+      "case": "Border at 390: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Border",
+          "width": 303,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border color picker",
+          "width": 32,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Border color",
+          "width": 263,
+          "height": 30,
+          "disabled": false,
+          "value": "rgb(70, 80, 90)",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Border width",
+          "width": 110.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "2",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border width unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border style",
+          "width": 145.5,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Border radius",
+          "width": 267.6875,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border radius unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-043",
+      "case": "Positioning at 390: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-044",
+      "case": "Positioning at 390: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-045",
+      "case": "Positioning at 390: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Positioning",
+          "width": 303,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position",
+          "width": 303,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position top",
+          "width": 110.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position top unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position right",
+          "width": 110.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position right unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position bottom",
+          "width": 110.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position bottom unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position left",
+          "width": 110.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position left unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Z-index",
+          "width": 301,
+          "height": 28,
+          "disabled": false,
+          "value": "1",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-046",
+      "case": "Spacing at 320: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-047",
+      "case": "Spacing at 320: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-048",
+      "case": "Spacing at 320: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Spacing",
+          "width": 249,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin top",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin top unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin right",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin right unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin bottom",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin bottom unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Margin left",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Margin left unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding top",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding top unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding right",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding right unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding bottom",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding bottom unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Padding left",
+          "width": 29,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Padding left unit",
+          "width": 23,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-049",
+      "case": "Typography at 320: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-050",
+      "case": "Typography at 320: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-051",
+      "case": "Typography at 320: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Typography",
+          "width": 249,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Font family",
+          "width": 215,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Font weight",
+          "width": 128.15625,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Font size",
+          "width": 78.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "20",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Font size unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Line height",
+          "width": 80.421875,
+          "height": 28,
+          "disabled": false,
+          "value": "1.4",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Line height unit",
+          "width": 31.078125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Text color picker",
+          "width": 32,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Text color",
+          "width": 199,
+          "height": 30,
+          "disabled": false,
+          "value": "rgb(40, 50, 60)",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align left",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align center",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 223, 182) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align right",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Align justify",
+          "width": 30,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Letter spacing",
+          "width": 78.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "1",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Letter spacing unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Text decoration",
+          "width": 115.5,
+          "height": 30,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Text transform",
+          "width": 128.15625,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-052",
+      "case": "Display at 320: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-053",
+      "case": "Display at 320: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-054",
+      "case": "Display at 320: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Display",
+          "width": 249,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Display mode",
+          "width": 118.5,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Opacity",
+          "width": 61.40625,
+          "height": 28,
+          "disabled": false,
+          "value": "1",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Opacity unit",
+          "width": 31.09375,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-055",
+      "case": "Border at 320: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-056",
+      "case": "Border at 320: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-057",
+      "case": "Border at 320: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Border",
+          "width": 249,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border color picker",
+          "width": 32,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Border color",
+          "width": 209,
+          "height": 30,
+          "disabled": false,
+          "value": "rgb(70, 80, 90)",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Border width",
+          "width": 83.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "2",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border width unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border style",
+          "width": 118.5,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Border radius",
+          "width": 213.6875,
+          "height": 28,
+          "disabled": false,
+          "value": "8",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Border radius unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-058",
+      "case": "Positioning at 320: inspector fits viewport",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-059",
+      "case": "Positioning at 320: inspector horizontal overflow",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-060",
+      "case": "Positioning at 320: control geometry/labels",
+      "status": "observed",
+      "actual": [
+        {
+          "tag": "BUTTON",
+          "label": "Positioning",
+          "width": 249,
+          "height": 42,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(82, 237, 170) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position",
+          "width": 249,
+          "height": 32,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(241, 241, 243) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position top",
+          "width": 83.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position top unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position right",
+          "width": 83.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position right unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position bottom",
+          "width": 83.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position bottom unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Position left",
+          "width": 83.1875,
+          "height": 28,
+          "disabled": false,
+          "value": "0",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        },
+        {
+          "tag": "BUTTON",
+          "label": "Position left unit",
+          "width": 33.3125,
+          "height": 24,
+          "disabled": false,
+          "value": "",
+          "outline": "rgb(151, 156, 166) none 3px",
+          "role": null
+        },
+        {
+          "tag": "INPUT",
+          "label": "Z-index",
+          "width": 247,
+          "height": 28,
+          "disabled": false,
+          "value": "1",
+          "outline": "rgb(197, 200, 206) none 3px",
+          "role": null
+        }
+      ]
+    },
+    {
+      "id": "inheritance-layout-061",
+      "case": "Font family: keyboard opens dialog",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-062",
+      "case": "Font family: End focuses option",
+      "status": "observed",
+      "actual": {
+        "focused": ""
+      }
+    },
+    {
+      "id": "inheritance-layout-063",
+      "case": "Font family: Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-064",
+      "case": "Font weight: keyboard opens dialog",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-065",
+      "case": "Font weight: End focuses option",
+      "status": "observed",
+      "actual": {
+        "focused": "bold"
+      }
+    },
+    {
+      "id": "inheritance-layout-066",
+      "case": "Font weight: Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-067",
+      "case": "Text decoration: keyboard opens dialog",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-068",
+      "case": "Text decoration: End focuses option",
+      "status": "observed",
+      "actual": {
+        "focused": "overline"
+      }
+    },
+    {
+      "id": "inheritance-layout-069",
+      "case": "Text decoration: Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-070",
+      "case": "Text transform: keyboard opens dialog",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-071",
+      "case": "Text transform: End focuses option",
+      "status": "observed",
+      "actual": {
+        "focused": "capitalize"
+      }
+    },
+    {
+      "id": "inheritance-layout-072",
+      "case": "Text transform: Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "inheritance-layout-073",
+      "case": "Inspectable target inline authored values remain untouched by session edits",
+      "status": "observed",
+      "actual": "display:inline-block;position:relative;top:0;right:0;bottom:0;left:0;z-index:1;width:240px;height:80px;margin:8px;padding:8px;border:2px solid rgb(70,80,90);border-radius:8px;font:20px/1.4 Arial;letter-spacing:1px;color:rgb(40,50,60);opacity:1"
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "artifacts/diagnostics/current-ui-audit/design/layout-1440-typography.png",
+    "artifacts/diagnostics/current-ui-audit/design/layout-390-spacing.png",
+    "artifacts/diagnostics/current-ui-audit/design/layout-390-typography.png",
+    "artifacts/diagnostics/current-ui-audit/design/layout-390-display.png",
+    "artifacts/diagnostics/current-ui-audit/design/layout-390-border.png",
+    "artifacts/diagnostics/current-ui-audit/design/layout-390-positioning.png",
+    "artifacts/diagnostics/current-ui-audit/design/layout-320-spacing.png",
+    "artifacts/diagnostics/current-ui-audit/design/layout-320-typography.png",
+    "artifacts/diagnostics/current-ui-audit/design/layout-320-display.png",
+    "artifacts/diagnostics/current-ui-audit/design/layout-320-border.png",
+    "artifacts/diagnostics/current-ui-audit/design/layout-320-positioning.png"
+  ]
+}

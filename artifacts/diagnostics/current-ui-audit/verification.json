@@ -1,0 +1,109 @@
+{
+  "auditDate": "2026-10-01",
+  "status": "CURRENT UI FUNCTIONAL AUDIT COMPLETE",
+  "chromeVersion": "154.0.8037.92",
+  "extension": {
+    "manifestVersion": 3,
+    "permissions": [
+      "activeTab",
+      "scripting"
+    ],
+    "hostPermissions": [],
+    "productionBundle": ".output/chrome-mv3/content-scripts/content.js",
+    "sha256": "9850f20ed7b837e849b2bbcdf707ad1286a98cde960e80d1ac72cf62af962c99"
+  },
+  "checks": {
+    "typecheck": {
+      "command": "pnpm.cmd typecheck",
+      "result": "passed"
+    },
+    "unitTests": {
+      "command": "pnpm.cmd test",
+      "result": "passed",
+      "tests": 251,
+      "files": 17
+    },
+    "build": {
+      "command": "pnpm.cmd build",
+      "result": "passed",
+      "note": "Built at the start; unchanged production bundle audited throughout."
+    },
+    "currentUiDiagnostics": {
+      "command": "pnpm.cmd test:e2e tests/e2e/current-ui-code-tree-audit.spec.ts tests/e2e/current-ui-design-audit.spec.ts tests/e2e/current-ui-effects-audit.spec.ts tests/e2e/current-ui-shell-audit.spec.ts --output=.preview/current-ui-final-audit-results",
+      "passed": 24,
+      "failed": 0,
+      "duration": "9.3m",
+      "recordedPageErrors": 0,
+      "note": "Passing diagnostic execution does not mean the UI is defect-free; defects are recorded as observations."
+    },
+    "broaderRegressions": {
+      "commandReference": "docs/current-ui-functional-audit.md section 15, Broad batch command",
+      "tests": 254,
+      "passed": 246,
+      "failed": 8,
+      "duration": "8.2m",
+      "failureBreakdown": {
+        "initialInspectorWait": 5,
+        "reactivationWait": 1,
+        "unavailableViteNativeImport": 1,
+        "obsoleteProfessionalEmStepExpectation": 1
+      }
+    },
+    "unchangedFailedCaseRetry": {
+      "command": "pnpm.cmd test:e2e --last-failed --output=.preview/current-ui-regression-retry-results",
+      "passed": 7,
+      "failed": 1,
+      "duration": "29.3s",
+      "remainingFailure": "professional.spec.ts:24 expects 3em/60px; locked current em step is 0.1, so 2em becomes 2.1em/42px. Existing test left unchanged."
+    },
+    "activationRepetition": {
+      "command": "node node_modules/@playwright/test/cli.js test tests/e2e/engine-integration.spec.ts tests/e2e/mutation-conflicts.spec.ts tests/e2e/extension.spec.ts --grep 'T1[48] |T29 |F12 |F15 |picker excludes' --repeat-each=3 --output=.preview/current-ui-activation-repeat-results",
+      "passed": 18,
+      "failed": 0,
+      "duration": "40.8s"
+    }
+  },
+  "preservation": {
+    "lockedArtifactsByteVerified": 410,
+    "protectedSourceAndExistingTestsHashVerified": 143,
+    "productChanges": 0,
+    "existingTestChanges": 0,
+    "existingFileChanges": [
+      "vite.preview.config.ts: ignore audit profiles and test/artifact folders in the watcher"
+    ]
+  },
+  "surfaceCounts": {
+    "auditedGroups": 24,
+    "fullyWorkingGroupsInSupportedScenarios": 3,
+    "partialOrIncompleteGroups": 21
+  },
+  "classifiedCounts": {
+    "confirmedDefects": {
+      "Critical": 0,
+      "High": 2,
+      "Medium": 11,
+      "Low": 2,
+      "total": 15
+    },
+    "incomplete": {
+      "Medium": 4,
+      "total": 4
+    },
+    "polish": {
+      "Low": 1,
+      "total": 1
+    },
+    "actionableTotal": 20
+  },
+  "observationCounts": {
+    "design": 1097,
+    "effects": 314,
+    "codeTree": 46
+  },
+  "scopeLimits": [
+    "Operating-system native color dialog not separately audited.",
+    "No full WCAG or screen-reader certification.",
+    "Absent future controls excluded; currently visible placeholder tools recorded.",
+    "No product fixes or new features started."
+  ]
+}

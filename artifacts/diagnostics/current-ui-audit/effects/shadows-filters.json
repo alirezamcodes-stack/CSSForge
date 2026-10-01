@@ -1,0 +1,1279 @@
+{
+  "surface": "shadows-filters",
+  "scope": "Built Chrome MV3, actual visible user actions; native computed style is read only.",
+  "observations": [
+    {
+      "id": "shadows-filters-001",
+      "surface": "shadows-filters",
+      "action": "Box empty state",
+      "status": "pass",
+      "expected": "Empty shadow shows explicit state",
+      "actual": "Box shadow\nAdd box shadow\nNone\n\nNo box shadow. Add one or choose a preset.\n\nBox shadow presets\n15"
+    },
+    {
+      "id": "shadows-filters-002",
+      "surface": "shadows-filters",
+      "action": "Box x numeric",
+      "status": "pass",
+      "expected": "Shadow x accepts -3px",
+      "actual": "rgba(0, 0, 0, 0.267) -3px 4px 12px 0px"
+    },
+    {
+      "id": "shadows-filters-003",
+      "surface": "shadows-filters",
+      "action": "Box y numeric",
+      "status": "pass",
+      "expected": "Shadow y accepts 6px",
+      "actual": "rgba(0, 0, 0, 0.267) -3px 6px 12px 0px"
+    },
+    {
+      "id": "shadows-filters-004",
+      "surface": "shadows-filters",
+      "action": "Box blur numeric",
+      "status": "pass",
+      "expected": "Shadow blur accepts 14px",
+      "actual": "rgba(0, 0, 0, 0.267) -3px 6px 14px 0px"
+    },
+    {
+      "id": "shadows-filters-005",
+      "surface": "shadows-filters",
+      "action": "Box spread numeric",
+      "status": "pass",
+      "expected": "Shadow spread accepts -2px",
+      "actual": "rgba(0, 0, 0, 0.267) -3px 6px 14px -2px"
+    },
+    {
+      "id": "shadows-filters-006",
+      "surface": "shadows-filters",
+      "action": "Inset toggle",
+      "status": "pass",
+      "expected": "Inset toggle applies",
+      "actual": "rgb(20, 51, 34) -3px 6px 14px -2px inset"
+    },
+    {
+      "id": "shadows-filters-007",
+      "surface": "shadows-filters",
+      "action": "Box negative blur rejected",
+      "status": "pass",
+      "expected": "Negative blur rejects without changing rendered CSS",
+      "actual": {
+        "before": "rgb(20, 51, 34) -3px 6px 14px -2px",
+        "after": "rgb(20, 51, 34) -3px 6px 14px -2px",
+        "ariaInvalid": "true"
+      }
+    },
+    {
+      "id": "shadows-filters-008",
+      "surface": "shadows-filters",
+      "action": "Box shadow unit conversion",
+      "status": "pass",
+      "expected": "px→em conversion preserves rendered offset",
+      "actual": {
+        "computed": "rgb(20, 51, 34) -3.00001px 6px 14px -2px",
+        "input": "-0.166667"
+      }
+    },
+    {
+      "id": "shadows-filters-009",
+      "surface": "shadows-filters",
+      "action": "Box reorder up",
+      "status": "pass",
+      "expected": "Second shadow moves to first with its values",
+      "actual": "rgb(170, 34, 51) 8px 4px 12px 0px, rgb(20, 51, 34) -3.00001px 6px 14px -2px"
+    },
+    {
+      "id": "shadows-filters-010",
+      "surface": "shadows-filters",
+      "action": "Box hide",
+      "status": "pass",
+      "expected": "Hide uses transparent placeholder",
+      "actual": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(20, 51, 34) -3.00001px 6px 14px -2px"
+    },
+    {
+      "id": "shadows-filters-011",
+      "surface": "shadows-filters",
+      "action": "Box edit hidden/reveal",
+      "status": "pass",
+      "expected": "Editing hidden shadow survives Show",
+      "actual": "rgb(170, 34, 51) 8px 9px 12px 0px, rgb(20, 51, 34) -3.00001px 6px 14px -2px"
+    },
+    {
+      "id": "shadows-filters-012",
+      "surface": "shadows-filters",
+      "action": "Box selection",
+      "status": "pass",
+      "expected": "Selected shadow editor follows selection",
+      "actual": "Selected shadow 1\nVisible\nX\nem\nY\npx\nBlur\npx\nSpread\npx\nColor\nInset"
+    },
+    {
+      "id": "shadows-filters-013",
+      "surface": "shadows-filters",
+      "action": "Box removal Undo",
+      "status": "pass",
+      "expected": "Undo restores removed shadow",
+      "actual": "rgb(20, 51, 34) -3.00001px 6px 14px -2px, rgb(170, 34, 51) 8px 9px 12px 0px"
+    },
+    {
+      "id": "shadows-filters-014",
+      "surface": "shadows-filters",
+      "action": "Box None",
+      "status": "pass",
+      "expected": "None clears all shadow layers",
+      "actual": "none"
+    },
+    {
+      "id": "shadows-filters-015",
+      "surface": "shadows-filters",
+      "action": "Box None Undo",
+      "status": "pass",
+      "expected": "Undo None restores shadows",
+      "actual": "rgb(20, 51, 34) -3.00001px 6px 14px -2px, rgb(170, 34, 51) 8px 9px 12px 0px"
+    },
+    {
+      "id": "shadows-filters-016",
+      "surface": "shadows-filters",
+      "action": "Box preset inventory",
+      "status": "pass",
+      "expected": "Current preset inventory is complete",
+      "actual": [
+        "Box shadow preset Subtle",
+        "Box shadow preset Subtle Soft",
+        "Box shadow preset Subtle Border",
+        "Box shadow preset Card",
+        "Box shadow preset Elevated",
+        "Box shadow preset Floating",
+        "Box shadow preset Soft",
+        "Box shadow preset Wide",
+        "Box shadow preset Strong",
+        "Box shadow preset Inset Light",
+        "Box shadow preset Inset Dark",
+        "Box shadow preset Pressed",
+        "Box shadow preset Outline",
+        "Box shadow preset Glow",
+        "Box shadow preset Lift"
+      ]
+    },
+    {
+      "id": "shadows-filters-017",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Subtle",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(0, 0, 0, 0.08) 0px 2px 4px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-018",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Subtle Soft",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(0, 0, 0, 0.07) 0px 3px 12px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-019",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Subtle Border",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(27, 36, 48, 0.094) 0px 0px 0px 1px, rgba(0, 0, 0, 0.03) 0px 2px 4px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-020",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Card",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(0, 0, 0, 0.08) 0px 4px 8px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-021",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Elevated",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(0, 0, 0, 0.25) 0px 12px 22px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-022",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Floating",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(19, 35, 56, 0.25) 0px 18px 40px -8px, rgba(19, 35, 56, 0.1) 0px 4px 8px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-023",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Soft",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(26, 40, 51, 0.08) 0px 8px 24px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-024",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Wide",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(24, 38, 52, 0.27) 0px 20px 50px -12px"
+      }
+    },
+    {
+      "id": "shadows-filters-025",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Strong",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(16, 28, 54, 0.3) 0px 10px 20px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-026",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Inset Light",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(255, 255, 255, 0.533) 0px 1px 3px 0px inset"
+      }
+    },
+    {
+      "id": "shadows-filters-027",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Inset Dark",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(0, 0, 0, 0.25) 0px 2px 6px 0px inset"
+      }
+    },
+    {
+      "id": "shadows-filters-028",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Pressed",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(0, 0, 0, 0.2) 0px 2px 4px 0px inset, rgba(255, 255, 255, 0.333) 0px -1px 0px 0px inset"
+      }
+    },
+    {
+      "id": "shadows-filters-029",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Outline",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgb(107, 232, 172) 0px 0px 0px 2px"
+      }
+    },
+    {
+      "id": "shadows-filters-030",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Glow",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(107, 232, 172, 0.4) 0px 0px 20px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-031",
+      "surface": "shadows-filters",
+      "action": "Box shadow preset Lift",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(0, 0, 0, 0.5) 0px 16px 14px -14px"
+      }
+    },
+    {
+      "id": "shadows-filters-032",
+      "surface": "shadows-filters",
+      "action": "Text empty state",
+      "status": "pass",
+      "expected": "Empty shadow shows explicit state",
+      "actual": "Text shadow\nAdd text shadow\nNone\n\nNo text shadow. Add one or choose a preset.\n\nText shadow presets\n8"
+    },
+    {
+      "id": "shadows-filters-033",
+      "surface": "shadows-filters",
+      "action": "Text x numeric",
+      "status": "pass",
+      "expected": "Shadow x accepts -3px",
+      "actual": "rgba(0, 0, 0, 0.267) -3px 4px 12px"
+    },
+    {
+      "id": "shadows-filters-034",
+      "surface": "shadows-filters",
+      "action": "Text y numeric",
+      "status": "pass",
+      "expected": "Shadow y accepts 6px",
+      "actual": "rgba(0, 0, 0, 0.267) -3px 6px 12px"
+    },
+    {
+      "id": "shadows-filters-035",
+      "surface": "shadows-filters",
+      "action": "Text blur numeric",
+      "status": "pass",
+      "expected": "Shadow blur accepts 14px",
+      "actual": "rgba(0, 0, 0, 0.267) -3px 6px 14px"
+    },
+    {
+      "id": "shadows-filters-036",
+      "surface": "shadows-filters",
+      "action": "Text negative blur rejected",
+      "status": "pass",
+      "expected": "Negative blur rejects without changing rendered CSS",
+      "actual": {
+        "before": "rgb(20, 51, 34) -3px 6px 14px",
+        "after": "rgb(20, 51, 34) -3px 6px 14px",
+        "ariaInvalid": "true"
+      }
+    },
+    {
+      "id": "shadows-filters-037",
+      "surface": "shadows-filters",
+      "action": "Text shadow unit conversion",
+      "status": "pass",
+      "expected": "px→em conversion preserves rendered offset",
+      "actual": {
+        "computed": "rgb(20, 51, 34) -3.00001px 6px 14px",
+        "input": "-0.166667"
+      }
+    },
+    {
+      "id": "shadows-filters-038",
+      "surface": "shadows-filters",
+      "action": "Text reorder up",
+      "status": "pass",
+      "expected": "Second shadow moves to first with its values",
+      "actual": "rgb(170, 34, 51) 8px 4px 12px, rgb(20, 51, 34) -3.00001px 6px 14px"
+    },
+    {
+      "id": "shadows-filters-039",
+      "surface": "shadows-filters",
+      "action": "Text hide",
+      "status": "pass",
+      "expected": "Hide uses transparent placeholder",
+      "actual": "rgba(0, 0, 0, 0) 0px 0px 0px, rgb(20, 51, 34) -3.00001px 6px 14px"
+    },
+    {
+      "id": "shadows-filters-040",
+      "surface": "shadows-filters",
+      "action": "Text edit hidden/reveal",
+      "status": "pass",
+      "expected": "Editing hidden shadow survives Show",
+      "actual": "rgb(170, 34, 51) 8px 9px 12px, rgb(20, 51, 34) -3.00001px 6px 14px"
+    },
+    {
+      "id": "shadows-filters-041",
+      "surface": "shadows-filters",
+      "action": "Text selection",
+      "status": "pass",
+      "expected": "Selected shadow editor follows selection",
+      "actual": "Selected shadow 1\nVisible\nX\nem\nY\npx\nBlur\npx\nColor"
+    },
+    {
+      "id": "shadows-filters-042",
+      "surface": "shadows-filters",
+      "action": "Text removal Undo",
+      "status": "pass",
+      "expected": "Undo restores removed shadow",
+      "actual": "rgb(20, 51, 34) -3.00001px 6px 14px, rgb(170, 34, 51) 8px 9px 12px"
+    },
+    {
+      "id": "shadows-filters-043",
+      "surface": "shadows-filters",
+      "action": "Text None",
+      "status": "pass",
+      "expected": "None clears all shadow layers",
+      "actual": "none"
+    },
+    {
+      "id": "shadows-filters-044",
+      "surface": "shadows-filters",
+      "action": "Text None Undo",
+      "status": "pass",
+      "expected": "Undo None restores shadows",
+      "actual": "rgb(20, 51, 34) -3.00001px 6px 14px, rgb(170, 34, 51) 8px 9px 12px"
+    },
+    {
+      "id": "shadows-filters-045",
+      "surface": "shadows-filters",
+      "action": "Text preset inventory",
+      "status": "pass",
+      "expected": "Current preset inventory is complete",
+      "actual": [
+        "Text shadow preset Subtle",
+        "Text shadow preset Soft",
+        "Text shadow preset Strong",
+        "Text shadow preset Outline",
+        "Text shadow preset Glow",
+        "Text shadow preset Retro",
+        "Text shadow preset Raised",
+        "Text shadow preset Emboss"
+      ]
+    },
+    {
+      "id": "shadows-filters-046",
+      "surface": "shadows-filters",
+      "action": "Text shadow preset Subtle",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(0, 0, 0, 0.15) 0px 1px 1px"
+      }
+    },
+    {
+      "id": "shadows-filters-047",
+      "surface": "shadows-filters",
+      "action": "Text shadow preset Soft",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(0, 0, 0, 0.333) 0px 4px 3px"
+      }
+    },
+    {
+      "id": "shadows-filters-048",
+      "surface": "shadows-filters",
+      "action": "Text shadow preset Strong",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(0, 0, 0, 0.5) 0px 3px 2px"
+      }
+    },
+    {
+      "id": "shadows-filters-049",
+      "surface": "shadows-filters",
+      "action": "Text shadow preset Outline",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgb(21, 25, 31) 1px 0px 0px, rgb(21, 25, 31) -1px 0px 0px, rgb(21, 25, 31) 0px 1px 0px, rgb(21, 25, 31) 0px -1px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-050",
+      "surface": "shadows-filters",
+      "action": "Text shadow preset Glow",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgb(82, 237, 170) 0px 0px 6px, rgba(82, 237, 170, 0.4) 0px 0px 14px"
+      }
+    },
+    {
+      "id": "shadows-filters-051",
+      "surface": "shadows-filters",
+      "action": "Text shadow preset Retro",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgb(241, 155, 113) 2px 2px 0px, rgb(84, 69, 102) 4px 4px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-052",
+      "surface": "shadows-filters",
+      "action": "Text shadow preset Raised",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgb(153, 153, 153) 0px 1px 0px, rgb(119, 119, 119) 0px 2px 0px, rgba(0, 0, 0, 0.4) 0px 3px 3px"
+      }
+    },
+    {
+      "id": "shadows-filters-053",
+      "surface": "shadows-filters",
+      "action": "Text shadow preset Emboss",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "rgba(255, 255, 255, 0.667) 0px 1px 0px, rgba(0, 0, 0, 0.25) 0px -1px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-054",
+      "surface": "shadows-filters",
+      "action": "Filter empty state",
+      "status": "pass",
+      "expected": "None disables Reset and presents neutral defaults",
+      "actual": [
+        {
+          "label": "Blur value",
+          "value": "0px"
+        },
+        {
+          "label": "Contrast value",
+          "value": "100%"
+        },
+        {
+          "label": "Brightness value",
+          "value": "100%"
+        },
+        {
+          "label": "Saturate value",
+          "value": "100%"
+        },
+        {
+          "label": "Hue rotate value",
+          "value": "0deg"
+        },
+        {
+          "label": "Invert value",
+          "value": "0%"
+        },
+        {
+          "label": "Grayscale value",
+          "value": "0%"
+        },
+        {
+          "label": "Sepia value",
+          "value": "0%"
+        }
+      ]
+    },
+    {
+      "id": "shadows-filters-055",
+      "surface": "shadows-filters",
+      "action": "Blur numeric",
+      "status": "pass",
+      "expected": "Numeric 2px applies blur",
+      "actual": {
+        "css": "blur(2px)",
+        "input": "2px"
+      }
+    },
+    {
+      "id": "shadows-filters-056",
+      "surface": "shadows-filters",
+      "action": "Blur keyboard slider",
+      "status": "pass",
+      "expected": "Slider key edits native filter",
+      "actual": {
+        "before": "blur(2px)",
+        "after": "blur(2.1px)",
+        "input": "2.1px"
+      }
+    },
+    {
+      "id": "shadows-filters-057",
+      "surface": "shadows-filters",
+      "action": "Blur pointer slider",
+      "status": "pass",
+      "expected": "Pointer slider edits and keeps other functions",
+      "actual": {
+        "before": "blur(2.1px)",
+        "after": "blur(10.3px)"
+      }
+    },
+    {
+      "id": "shadows-filters-058",
+      "surface": "shadows-filters",
+      "action": "Blur invalid input",
+      "status": "pass",
+      "expected": "Invalid value preserves filter and marks field invalid",
+      "actual": {
+        "before": "blur(10.3px)",
+        "after": "blur(10.3px)",
+        "ariaInvalid": "true"
+      }
+    },
+    {
+      "id": "shadows-filters-059",
+      "surface": "shadows-filters",
+      "action": "Contrast numeric",
+      "status": "pass",
+      "expected": "Numeric 130% applies contrast",
+      "actual": {
+        "css": "blur(2px) contrast(1.3)",
+        "input": "130%"
+      }
+    },
+    {
+      "id": "shadows-filters-060",
+      "surface": "shadows-filters",
+      "action": "Contrast keyboard slider",
+      "status": "pass",
+      "expected": "Slider key edits native filter",
+      "actual": {
+        "before": "blur(2px) contrast(1.3)",
+        "after": "blur(2px) contrast(1.31)",
+        "input": "131%"
+      }
+    },
+    {
+      "id": "shadows-filters-061",
+      "surface": "shadows-filters",
+      "action": "Contrast pointer slider",
+      "status": "pass",
+      "expected": "Pointer slider edits and keeps other functions",
+      "actual": {
+        "before": "blur(2px) contrast(1.31)",
+        "after": "blur(2px) contrast(0.68)"
+      }
+    },
+    {
+      "id": "shadows-filters-062",
+      "surface": "shadows-filters",
+      "action": "Contrast invalid input",
+      "status": "pass",
+      "expected": "Invalid value preserves filter and marks field invalid",
+      "actual": {
+        "before": "blur(2px) contrast(0.68)",
+        "after": "blur(2px) contrast(0.68)",
+        "ariaInvalid": "true"
+      }
+    },
+    {
+      "id": "shadows-filters-063",
+      "surface": "shadows-filters",
+      "action": "Brightness numeric",
+      "status": "pass",
+      "expected": "Numeric 110% applies brightness",
+      "actual": {
+        "css": "blur(2px) contrast(1.3) brightness(1.1)",
+        "input": "110%"
+      }
+    },
+    {
+      "id": "shadows-filters-064",
+      "surface": "shadows-filters",
+      "action": "Brightness keyboard slider",
+      "status": "pass",
+      "expected": "Slider key edits native filter",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1)",
+        "after": "blur(2px) contrast(1.3) brightness(1.11)",
+        "input": "111%"
+      }
+    },
+    {
+      "id": "shadows-filters-065",
+      "surface": "shadows-filters",
+      "action": "Brightness pointer slider",
+      "status": "pass",
+      "expected": "Pointer slider edits and keeps other functions",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.11)",
+        "after": "blur(2px) contrast(1.3) brightness(0.68)"
+      }
+    },
+    {
+      "id": "shadows-filters-066",
+      "surface": "shadows-filters",
+      "action": "Brightness invalid input",
+      "status": "pass",
+      "expected": "Invalid value preserves filter and marks field invalid",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(0.68)",
+        "after": "blur(2px) contrast(1.3) brightness(0.68)",
+        "ariaInvalid": "true"
+      }
+    },
+    {
+      "id": "shadows-filters-067",
+      "surface": "shadows-filters",
+      "action": "Saturate numeric",
+      "status": "pass",
+      "expected": "Numeric 140% applies saturate",
+      "actual": {
+        "css": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4)",
+        "input": "140%"
+      }
+    },
+    {
+      "id": "shadows-filters-068",
+      "surface": "shadows-filters",
+      "action": "Saturate keyboard slider",
+      "status": "pass",
+      "expected": "Slider key edits native filter",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.41)",
+        "input": "141%"
+      }
+    },
+    {
+      "id": "shadows-filters-069",
+      "surface": "shadows-filters",
+      "action": "Saturate pointer slider",
+      "status": "pass",
+      "expected": "Pointer slider edits and keeps other functions",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.41)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(0.68)"
+      }
+    },
+    {
+      "id": "shadows-filters-070",
+      "surface": "shadows-filters",
+      "action": "Saturate invalid input",
+      "status": "pass",
+      "expected": "Invalid value preserves filter and marks field invalid",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(0.68)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(0.68)",
+        "ariaInvalid": "true"
+      }
+    },
+    {
+      "id": "shadows-filters-071",
+      "surface": "shadows-filters",
+      "action": "Hue rotate numeric",
+      "status": "pass",
+      "expected": "Numeric 45deg applies hue-rotate",
+      "actual": {
+        "css": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg)",
+        "input": "45deg"
+      }
+    },
+    {
+      "id": "shadows-filters-072",
+      "surface": "shadows-filters",
+      "action": "Hue rotate keyboard slider",
+      "status": "pass",
+      "expected": "Slider key edits native filter",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(46deg)",
+        "input": "46deg"
+      }
+    },
+    {
+      "id": "shadows-filters-073",
+      "surface": "shadows-filters",
+      "action": "Hue rotate pointer slider",
+      "status": "pass",
+      "expected": "Pointer slider edits and keeps other functions",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(46deg)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(123deg)"
+      }
+    },
+    {
+      "id": "shadows-filters-074",
+      "surface": "shadows-filters",
+      "action": "Hue rotate invalid input",
+      "status": "pass",
+      "expected": "Invalid value preserves filter and marks field invalid",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(123deg)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(123deg)",
+        "ariaInvalid": "true"
+      }
+    },
+    {
+      "id": "shadows-filters-075",
+      "surface": "shadows-filters",
+      "action": "Invert numeric",
+      "status": "pass",
+      "expected": "Numeric 10% applies invert",
+      "actual": {
+        "css": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1)",
+        "input": "10%"
+      }
+    },
+    {
+      "id": "shadows-filters-076",
+      "surface": "shadows-filters",
+      "action": "Invert keyboard slider",
+      "status": "pass",
+      "expected": "Slider key edits native filter",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.11)",
+        "input": "11%"
+      }
+    },
+    {
+      "id": "shadows-filters-077",
+      "surface": "shadows-filters",
+      "action": "Invert pointer slider",
+      "status": "pass",
+      "expected": "Pointer slider edits and keeps other functions",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.11)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.34)"
+      }
+    },
+    {
+      "id": "shadows-filters-078",
+      "surface": "shadows-filters",
+      "action": "Invert invalid input",
+      "status": "pass",
+      "expected": "Invalid value preserves filter and marks field invalid",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.34)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.34)",
+        "ariaInvalid": "true"
+      }
+    },
+    {
+      "id": "shadows-filters-079",
+      "surface": "shadows-filters",
+      "action": "Grayscale numeric",
+      "status": "pass",
+      "expected": "Numeric 20% applies grayscale",
+      "actual": {
+        "css": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2)",
+        "input": "20%"
+      }
+    },
+    {
+      "id": "shadows-filters-080",
+      "surface": "shadows-filters",
+      "action": "Grayscale keyboard slider",
+      "status": "pass",
+      "expected": "Slider key edits native filter",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.21)",
+        "input": "21%"
+      }
+    },
+    {
+      "id": "shadows-filters-081",
+      "surface": "shadows-filters",
+      "action": "Grayscale pointer slider",
+      "status": "pass",
+      "expected": "Pointer slider edits and keeps other functions",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.21)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.34)"
+      }
+    },
+    {
+      "id": "shadows-filters-082",
+      "surface": "shadows-filters",
+      "action": "Grayscale invalid input",
+      "status": "pass",
+      "expected": "Invalid value preserves filter and marks field invalid",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.34)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.34)",
+        "ariaInvalid": "true"
+      }
+    },
+    {
+      "id": "shadows-filters-083",
+      "surface": "shadows-filters",
+      "action": "Sepia numeric",
+      "status": "pass",
+      "expected": "Numeric 25% applies sepia",
+      "actual": {
+        "css": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2) sepia(0.25)",
+        "input": "25%"
+      }
+    },
+    {
+      "id": "shadows-filters-084",
+      "surface": "shadows-filters",
+      "action": "Sepia keyboard slider",
+      "status": "pass",
+      "expected": "Slider key edits native filter",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2) sepia(0.25)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2) sepia(0.26)",
+        "input": "26%"
+      }
+    },
+    {
+      "id": "shadows-filters-085",
+      "surface": "shadows-filters",
+      "action": "Sepia pointer slider",
+      "status": "pass",
+      "expected": "Pointer slider edits and keeps other functions",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2) sepia(0.26)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2) sepia(0.34)"
+      }
+    },
+    {
+      "id": "shadows-filters-086",
+      "surface": "shadows-filters",
+      "action": "Sepia invalid input",
+      "status": "pass",
+      "expected": "Invalid value preserves filter and marks field invalid",
+      "actual": {
+        "before": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2) sepia(0.34)",
+        "after": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2) sepia(0.34)",
+        "ariaInvalid": "true"
+      }
+    },
+    {
+      "id": "shadows-filters-087",
+      "surface": "shadows-filters",
+      "action": "Filter combination/order",
+      "status": "pass",
+      "expected": "All eight functions preserve edit insertion order",
+      "actual": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2) sepia(0.25)"
+    },
+    {
+      "id": "shadows-filters-088",
+      "surface": "shadows-filters",
+      "action": "Reset filters",
+      "status": "pass",
+      "expected": "Reset clears filter and disables itself",
+      "actual": "none"
+    },
+    {
+      "id": "shadows-filters-089",
+      "surface": "shadows-filters",
+      "action": "Reset filter Undo",
+      "status": "pass",
+      "expected": "Undo restores entire prior filter chain",
+      "actual": "blur(2px) contrast(1.3) brightness(1.1) saturate(1.4) hue-rotate(45deg) invert(0.1) grayscale(0.2) sepia(0.25)"
+    },
+    {
+      "id": "shadows-filters-090",
+      "surface": "shadows-filters",
+      "action": "Negative hue input",
+      "status": "pass",
+      "expected": "Negative hue input applies",
+      "actual": "hue-rotate(-20deg)"
+    },
+    {
+      "id": "shadows-filters-091",
+      "surface": "shadows-filters",
+      "action": "Filter value beyond slider max",
+      "status": "pass",
+      "expected": "Typed contrast beyond preset slider max expands range",
+      "actual": {
+        "css": "hue-rotate(-20deg) contrast(3)",
+        "max": "300"
+      }
+    },
+    {
+      "id": "shadows-filters-092",
+      "surface": "shadows-filters",
+      "action": "Fixed filter units",
+      "status": "expected",
+      "expected": "Current filter UI rejects unsupported non-px Blur unit",
+      "actual": {
+        "css": "hue-rotate(-20deg) contrast(3)",
+        "unitPopover": 0
+      },
+      "classification": "H expected",
+      "module": "src/ui/design/RichEffects.tsx"
+    },
+    {
+      "id": "shadows-filters-093",
+      "surface": "shadows-filters",
+      "action": "Box shadow 390px",
+      "status": "pass",
+      "expected": "Control rows fit viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 28,
+          "y": 12,
+          "width": 350,
+          "height": 746
+        },
+        "bounds": {
+          "w": 390,
+          "h": 844
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "shadows-filters-094",
+      "surface": "shadows-filters",
+      "action": "Box shadow 320px",
+      "status": "pass",
+      "expected": "Control rows fit viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 746
+        },
+        "bounds": {
+          "w": 320,
+          "h": 844
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "shadows-filters-095",
+      "surface": "shadows-filters",
+      "action": "Box shadow 200%",
+      "status": "pass",
+      "expected": "Controls fit 200% zoom",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 422
+        },
+        "bounds": {
+          "w": 720,
+          "h": 500
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "shadows-filters-096",
+      "surface": "shadows-filters",
+      "action": "Text shadow 390px",
+      "status": "pass",
+      "expected": "Control rows fit viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 28,
+          "y": 12,
+          "width": 350,
+          "height": 746
+        },
+        "bounds": {
+          "w": 390,
+          "h": 844
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "shadows-filters-097",
+      "surface": "shadows-filters",
+      "action": "Text shadow 320px",
+      "status": "pass",
+      "expected": "Control rows fit viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 746
+        },
+        "bounds": {
+          "w": 320,
+          "h": 844
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "shadows-filters-098",
+      "surface": "shadows-filters",
+      "action": "Text shadow 200%",
+      "status": "pass",
+      "expected": "Controls fit 200% zoom",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 422
+        },
+        "bounds": {
+          "w": 720,
+          "h": 500
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "shadows-filters-099",
+      "surface": "shadows-filters",
+      "action": "Filters 390px",
+      "status": "pass",
+      "expected": "Control rows fit viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 28,
+          "y": 12,
+          "width": 350,
+          "height": 746
+        },
+        "bounds": {
+          "w": 390,
+          "h": 844
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "shadows-filters-100",
+      "surface": "shadows-filters",
+      "action": "Filters 320px",
+      "status": "pass",
+      "expected": "Control rows fit viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 746
+        },
+        "bounds": {
+          "w": 320,
+          "h": 844
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "shadows-filters-101",
+      "surface": "shadows-filters",
+      "action": "Filters 200%",
+      "status": "pass",
+      "expected": "Controls fit 200% zoom",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 422
+        },
+        "bounds": {
+          "w": 720,
+          "h": 500
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "shadows-filters-102",
+      "surface": "shadows-filters",
+      "action": "Relative units/currentColor shadow parser",
+      "status": "pass",
+      "expected": "Browser-resolved authored shadow values are presented without changing native CSS",
+      "actual": {
+        "x": "10.5",
+        "color": "rgb(38, 56, 47)",
+        "css": "rgb(38, 56, 47) 10.5px 5.25px 6.3px -2.1px inset, rgba(10, 20, 30, 0.4) 2px 3px 5px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-103",
+      "surface": "shadows-filters",
+      "action": "Relative shadow edit",
+      "status": "pass",
+      "expected": "Editing y in em preserves other components and inset",
+      "actual": {
+        "before": "rgb(38, 56, 47) 10.5px 5.25px 6.3px -2.1px inset, rgba(10, 20, 30, 0.4) 2px 3px 5px 0px",
+        "after": "rgb(38, 56, 47) 10.5px 10.5px 6.3px -2.1px inset, rgba(10, 20, 30, 0.4) 2px 3px 5px 0px"
+      }
+    },
+    {
+      "id": "shadows-filters-104",
+      "surface": "shadows-filters",
+      "action": "Relative text shadow edit",
+      "status": "pass",
+      "expected": "Text shadow blur edits while preserving second layer",
+      "actual": "rgb(38, 56, 47) 2.1px 4.2px 8.4px, rgb(255, 0, 0) -2px 3px 1px"
+    },
+    {
+      "id": "shadows-filters-105",
+      "surface": "shadows-filters",
+      "action": "Repeated blur preservation",
+      "status": "expected",
+      "expected": "Repeated blur controls disabled with preserved native chain",
+      "actual": {
+        "filter": "blur(1px) blur(2px) drop-shadow(rgb(0, 0, 0) 1px 2px 3px) brightness(1.3)",
+        "title": "Existing complex or repeated function preserved; slider unavailable.",
+        "display": "0px"
+      },
+      "classification": "H expected",
+      "module": "src/ui/design/RichEffects.tsx"
+    },
+    {
+      "id": "shadows-filters-106",
+      "surface": "shadows-filters",
+      "action": "Complex filter append",
+      "status": "pass",
+      "expected": "Adding supported filter preserves repeated blur and drop-shadow",
+      "actual": "blur(1px) blur(2px) drop-shadow(rgb(0, 0, 0) 1px 2px 3px) brightness(1.3) sepia(0.15)"
+    },
+    {
+      "id": "shadows-filters-107",
+      "surface": "shadows-filters",
+      "action": "Complex filter Reset Undo",
+      "status": "pass",
+      "expected": "Undo filter Reset restores complex chain and disabled controls",
+      "actual": "blur(1px) blur(2px) drop-shadow(rgb(0, 0, 0) 1px 2px 3px) brightness(1.3) sepia(0.15)"
+    },
+    {
+      "id": "shadows-filters-108",
+      "surface": "shadows-filters",
+      "action": "Session Reset all effects",
+      "status": "pass",
+      "expected": "Reset restores original complex native CSS",
+      "actual": {
+        "box": "rgb(38, 56, 47) 10.5px 5.25px 6.3px -2.1px inset, rgba(10, 20, 30, 0.4) 2px 3px 5px 0px",
+        "text": "rgb(38, 56, 47) 2.1px 4.2px 6.3px, rgb(255, 0, 0) -2px 3px 1px",
+        "filter": "blur(1px) blur(2px) drop-shadow(rgb(0, 0, 0) 1px 2px 3px) brightness(1.3)"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "counts": {
+    "pass": 106,
+    "expected": 2
+  }
+}

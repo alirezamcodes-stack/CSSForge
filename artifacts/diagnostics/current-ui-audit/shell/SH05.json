@@ -1,0 +1,652 @@
+{
+  "case": "SH05 current UI short narrow and actual 125 150 200 percent zoom",
+  "actual": {
+    "rows": [
+      {
+        "case": "viewport",
+        "zoom": 1,
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "panel": {
+          "x": 1068,
+          "y": 24,
+          "width": 350,
+          "height": 782
+        },
+        "tools": {
+          "x": 442.5,
+          "y": 826,
+          "width": 555,
+          "height": 52
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false,
+        "scroll": {
+          "clientWidth": 338,
+          "scrollWidth": 338,
+          "clientHeight": 640,
+          "scrollHeight": 2671
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Media",
+        "zoom": 1,
+        "viewport": {
+          "w": 1440,
+          "h": 900
+        },
+        "bounds": {
+          "x": 1089,
+          "y": 248,
+          "width": 268,
+          "height": 203.78125
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 202,
+          "sh": 202
+        }
+      },
+      {
+        "case": "popover",
+        "label": "State or pseudo",
+        "zoom": 1,
+        "viewport": {
+          "w": 1440,
+          "h": 900
+        },
+        "bounds": {
+          "x": 1089,
+          "y": 291,
+          "width": 268,
+          "height": 330.375
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 328,
+          "sh": 328
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Inspector menu",
+        "zoom": 1,
+        "viewport": {
+          "w": 1440,
+          "h": 900
+        },
+        "bounds": {
+          "x": 1105,
+          "y": 76,
+          "width": 268,
+          "height": 257.5
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 256,
+          "sh": 256
+        }
+      },
+      {
+        "case": "viewport",
+        "zoom": 1,
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "panel": {
+          "x": 28,
+          "y": 12,
+          "width": 350,
+          "height": 746
+        },
+        "tools": {
+          "x": 31,
+          "y": 784,
+          "width": 328,
+          "height": 44
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false,
+        "scroll": {
+          "clientWidth": 338,
+          "scrollWidth": 338,
+          "clientHeight": 604,
+          "scrollHeight": 2671
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Media",
+        "zoom": 1,
+        "viewport": {
+          "w": 390,
+          "h": 844
+        },
+        "bounds": {
+          "x": 49,
+          "y": 236,
+          "width": 268,
+          "height": 203.78125
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 202,
+          "sh": 202
+        }
+      },
+      {
+        "case": "popover",
+        "label": "State or pseudo",
+        "zoom": 1,
+        "viewport": {
+          "w": 390,
+          "h": 844
+        },
+        "bounds": {
+          "x": 49,
+          "y": 279,
+          "width": 268,
+          "height": 330.375
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 328,
+          "sh": 328
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Inspector menu",
+        "zoom": 1,
+        "viewport": {
+          "w": 390,
+          "h": 844
+        },
+        "bounds": {
+          "x": 65,
+          "y": 64,
+          "width": 268,
+          "height": 257.5
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 256,
+          "sh": 256
+        }
+      },
+      {
+        "case": "viewport",
+        "zoom": 1,
+        "viewport": {
+          "width": 320,
+          "height": 450
+        },
+        "panel": {
+          "x": 12,
+          "y": 8,
+          "width": 296,
+          "height": 372
+        },
+        "tools": {
+          "x": 14,
+          "y": 396,
+          "width": 292,
+          "height": 44
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false,
+        "scroll": {
+          "clientWidth": 284,
+          "scrollWidth": 284,
+          "clientHeight": 249,
+          "scrollHeight": 2726
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Media",
+        "zoom": 1,
+        "viewport": {
+          "w": 320,
+          "h": 450
+        },
+        "bounds": {
+          "x": 33,
+          "y": 213,
+          "width": 268,
+          "height": 203.78125
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 202,
+          "sh": 202
+        }
+      },
+      {
+        "case": "popover",
+        "label": "State or pseudo",
+        "zoom": 1,
+        "viewport": {
+          "w": 320,
+          "h": 450
+        },
+        "bounds": {
+          "x": 33,
+          "y": 8,
+          "width": 268,
+          "height": 205
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 203,
+          "sh": 328
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Inspector menu",
+        "zoom": 1,
+        "viewport": {
+          "w": 320,
+          "h": 450
+        },
+        "bounds": {
+          "x": 8,
+          "y": 51,
+          "width": 268,
+          "height": 257.5
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 256,
+          "sh": 256
+        }
+      },
+      {
+        "case": "viewport",
+        "zoom": 1,
+        "viewport": {
+          "width": 390,
+          "height": 280
+        },
+        "panel": {
+          "x": 28,
+          "y": 8,
+          "width": 350,
+          "height": 202
+        },
+        "tools": {
+          "x": 31,
+          "y": 226,
+          "width": 328,
+          "height": 44
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false,
+        "scroll": {
+          "clientWidth": 338,
+          "scrollWidth": 338,
+          "clientHeight": 79,
+          "scrollHeight": 2671
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Media",
+        "zoom": 1,
+        "viewport": {
+          "w": 390,
+          "h": 280
+        },
+        "bounds": {
+          "x": 49,
+          "y": 8,
+          "width": 268,
+          "height": 133
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 131,
+          "sh": 202
+        }
+      },
+      {
+        "case": "popover",
+        "label": "State or pseudo",
+        "zoom": 1,
+        "viewport": {
+          "w": 390,
+          "h": 280
+        },
+        "bounds": {
+          "x": 49,
+          "y": 8,
+          "width": 268,
+          "height": 140
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 138,
+          "sh": 328
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Inspector menu",
+        "zoom": 1,
+        "viewport": {
+          "w": 390,
+          "h": 280
+        },
+        "bounds": {
+          "x": 65,
+          "y": 51,
+          "width": 268,
+          "height": 221
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 219,
+          "sh": 256
+        }
+      },
+      {
+        "case": "viewport",
+        "zoom": 1.25,
+        "viewport": {
+          "width": 1152,
+          "height": 720
+        },
+        "panel": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 602
+        },
+        "tools": {
+          "x": 298.70001220703125,
+          "y": 646,
+          "width": 554.5999755859375,
+          "height": 52
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false,
+        "scroll": {
+          "clientWidth": 340,
+          "scrollWidth": 340,
+          "clientHeight": 460,
+          "scrollHeight": 2665
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Media",
+        "zoom": 1.25,
+        "viewport": {
+          "w": 1152,
+          "h": 720
+        },
+        "bounds": {
+          "x": 800.7999877929688,
+          "y": 232,
+          "width": 268.00006103515625,
+          "height": 203.39999389648438
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 202,
+          "sh": 202
+        }
+      },
+      {
+        "case": "popover",
+        "label": "State or pseudo",
+        "zoom": 1.25,
+        "viewport": {
+          "w": 1152,
+          "h": 720
+        },
+        "bounds": {
+          "x": 800.7999877929688,
+          "y": 275.20001220703125,
+          "width": 268.00006103515625,
+          "height": 330
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 328,
+          "sh": 328
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Inspector menu",
+        "zoom": 1.25,
+        "viewport": {
+          "w": 1152,
+          "h": 720
+        },
+        "bounds": {
+          "x": 817.6000366210938,
+          "y": 76,
+          "width": 267.99993896484375,
+          "height": 255.89999389648438
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 254,
+          "sh": 254
+        }
+      },
+      {
+        "case": "viewport",
+        "zoom": 1.5,
+        "viewport": {
+          "width": 960,
+          "height": 600
+        },
+        "panel": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 482
+        },
+        "tools": {
+          "x": 202.83334350585938,
+          "y": 526,
+          "width": 554.3333435058594,
+          "height": 52
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false,
+        "scroll": {
+          "clientWidth": 342,
+          "scrollWidth": 342,
+          "clientHeight": 341,
+          "scrollHeight": 2662
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Media",
+        "zoom": 1.5,
+        "viewport": {
+          "w": 960,
+          "h": 600
+        },
+        "bounds": {
+          "x": 608.6666870117188,
+          "y": 232,
+          "width": 268,
+          "height": 203.11459350585938
+        },
+        "scroll": {
+          "w": 267,
+          "sw": 267,
+          "h": 202,
+          "sh": 202
+        }
+      },
+      {
+        "case": "popover",
+        "label": "State or pseudo",
+        "zoom": 1.5,
+        "viewport": {
+          "w": 960,
+          "h": 600
+        },
+        "bounds": {
+          "x": 608.6666870117188,
+          "y": 274.66668701171875,
+          "width": 268,
+          "height": 317.33331298828125
+        },
+        "scroll": {
+          "w": 267,
+          "sw": 267,
+          "h": 316,
+          "sh": 328
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Inspector menu",
+        "zoom": 1.5,
+        "viewport": {
+          "w": 960,
+          "h": 600
+        },
+        "bounds": {
+          "x": 625.3333740234375,
+          "y": 76,
+          "width": 268,
+          "height": 255.33334350585938
+        },
+        "scroll": {
+          "w": 267,
+          "sw": 267,
+          "h": 254,
+          "sh": 254
+        }
+      },
+      {
+        "case": "viewport",
+        "zoom": 2,
+        "viewport": {
+          "width": 720,
+          "height": 450
+        },
+        "panel": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 372
+        },
+        "tools": {
+          "x": 82.5,
+          "y": 396,
+          "width": 555,
+          "height": 44
+        },
+        "panelWithin": true,
+        "dockWithin": true,
+        "overlap": false,
+        "scroll": {
+          "clientWidth": 343,
+          "scrollWidth": 343,
+          "clientHeight": 249,
+          "scrollHeight": 2671
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Media",
+        "zoom": 2,
+        "viewport": {
+          "w": 720,
+          "h": 450
+        },
+        "bounds": {
+          "x": 369,
+          "y": 198,
+          "width": 268,
+          "height": 203.78125
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 202,
+          "sh": 202
+        }
+      },
+      {
+        "case": "popover",
+        "label": "State or pseudo",
+        "zoom": 2,
+        "viewport": {
+          "w": 720,
+          "h": 450
+        },
+        "bounds": {
+          "x": 369,
+          "y": 241,
+          "width": 268,
+          "height": 201
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 199,
+          "sh": 328
+        }
+      },
+      {
+        "case": "popover",
+        "label": "Inspector menu",
+        "zoom": 2,
+        "viewport": {
+          "w": 720,
+          "h": 450
+        },
+        "bounds": {
+          "x": 385,
+          "y": 51,
+          "width": 268,
+          "height": 257.5
+        },
+        "scroll": {
+          "w": 266,
+          "sw": 266,
+          "h": 256,
+          "sh": 256
+        }
+      }
+    ],
+    "errors": []
+  }
+}

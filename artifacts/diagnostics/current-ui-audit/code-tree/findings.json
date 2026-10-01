@@ -1,0 +1,82 @@
+{
+  "audit": "Built production Chrome MV3 Code, HTML, Navigator, media/state/pseudo and visible session Undo/Reset diagnostics",
+  "runtime": { "chrome": "154.0.8037.92", "build": ".output/chrome-mv3", "writes": "User-visible controls only; engine snapshots are read-only" },
+  "verification": {
+    "baseline": "3 diagnostic groups passed; .preview/current-ui-code-tree-results/.last-run.json records passed",
+    "followup": "pnpm.cmd test:e2e tests/e2e/current-ui-code-tree-audit.spec.ts --grep \"focused follow-up\" --output=.preview/current-ui-code-tree-followup-results: 1 passed (6.7s)",
+    "pageErrors": 0,
+    "observationActions": 46,
+    "screenshotsInspected": ["01-code-baseline.png", "02-code-invalid.png", "03-code-escape-draft.png", "04-code-refreshed.png", "05-code-migrated.png", "06-media-options.png", "07-state-options.png", "08-context-reset.png", "09-html-baseline.png", "10-navigator-selected.png", "11-html-nested-shadow.png", "12-html-lazy-branch.png", "13-navigator-removed-selection.png", "14-code-narrow.png", "15-navigator-narrow.png", "16-navigator-200pct.png", "17-code-escape-followup.png", "18-tree-keyboard.png", "19-html-slotted-selected.png", "20-navigator-slotted-selected.png", "21-html-slot-child.png"]
+  },
+  "counts": { "confirmedBugs": 4, "Critical": 0, "High": 0, "Medium": 4, "Low": 0 },
+  "findings": [
+    {
+      "id": "CA61", "surface": "Code value editor", "category": "D. Interaction/focus bug", "severity": "Medium", "priority": "P2",
+      "title": "Escape leaves a CodeMirror draft open",
+      "repro": ["Pick button#target.primary through its padding and open Code.", "Edit inline font-size to 25px and press Enter.", "Edit the new CSSForge font-size override, replace the draft with 33px, and press Escape."],
+      "expected": "Escape discards the uncommitted draft and restores the existing 25px value control.",
+      "actual": "The CSS value font-size editor remains focused with 33px and Cancel visible. Browser font-size remains 25px. Only clicking Cancel discards the draft.",
+      "probableRootCause": "ValueEditor handles Enter only; the shared Escape policy has no Code draft cancellation callback.",
+      "modules": ["src/ui/code/LiveCodeView.tsx:18", "src/ui/interactions/useEscapePolicy.ts:6"],
+      "evidence": ["code-observations.json CT06", "followup-observations.json FU02", "03-code-escape-draft.png", "17-code-escape-followup.png"],
+      "recommendedFixPhase": "CURRENT UI FUNCTIONAL FIXES: Code keyboard cancellation"
+    },
+    {
+      "id": "CA62", "surface": "Code Apply/Cancel", "category": "D. Interaction/focus bug", "severity": "Medium", "priority": "P2",
+      "title": "Applying or cancelling a Code value drops focus to the page body",
+      "repro": ["Pick button#target.primary, open Code, and use the inline font-size value editor.", "Type 25px and press Enter; inspect keyboard focus.", "Edit the font-size override again, then click Cancel; inspect keyboard focus and press Tab."],
+      "expected": "Successful apply and cancellation return focus to the corresponding value control; the next Tab follows that row predictably.",
+      "actual": "After both actions the CSSForge ShadowRoot has no active element and document.activeElement is body. After Apply, Tab enters the old inline Edit font-size button; after Cancel, Tab enters Add session declaration, skipping the replacement override value button.",
+      "probableRootCause": "setEditing(false) destroys the focused CodeMirror or Cancel control and does not restore focus through a ref.",
+      "modules": ["src/ui/code/LiveCodeView.tsx:48", "src/ui/code/LiveCodeView.tsx:59"],
+      "evidence": ["code-observations.json CT02/CT04/CT07", "followup-observations.json FU01/FU02"],
+      "recommendedFixPhase": "CURRENT UI FUNCTIONAL FIXES: Code focus restoration"
+    },
+    {
+      "id": "CA63", "surface": "HTML/Navigator tree keyboard", "category": "F. Accessibility/keyboard bug", "severity": "Medium", "priority": "P2",
+      "title": "Tree Left/Right keys omit child and parent navigation",
+      "repro": ["Pick button#target.primary, open HTML, and focus its already expanded treeitem.", "Press ArrowRight.", "Focus its leaf span#target-label treeitem and press ArrowLeft."],
+      "expected": "Right on an expanded node focuses its first child; Left on a leaf focuses its parent. Branch collapse and expansion also remain available.",
+      "actual": "Right leaves focus on button#target.primary; Left leaves focus on span#target-label. Up/Down, Home/End and Enter work. Roving tabIndex remains on the selected row after arrow focus moves.",
+      "probableRootCause": "LiveDOMTree implements Left/Right only as expansion toggles, without a parent/child focus branch; tabIndex derives from selection rather than focused row.",
+      "modules": ["src/ui/html/LiveHTMLView.tsx:23", "src/ui/html/LiveHTMLView.tsx:27"],
+      "evidence": ["tree-observations.json TR02", "followup-observations.json FU04", "18-tree-keyboard.png"],
+      "recommendedFixPhase": "CURRENT UI FUNCTIONAL FIXES: complete existing tree keyboard interaction"
+    },
+    {
+      "id": "CA64", "surface": "HTML/Navigator slotted selection", "category": "C. UI-engine synchronization bug", "severity": "Medium", "priority": "P1",
+      "title": "Selected assigned slot content disappears from both trees",
+      "repro": ["Use an open shadow host with a named slot and an assigned light-DOM strong#slotted-label child.", "Pick the rendered slotted label, then inspect HTML and open Navigator.", "Click Refresh tree.", "Alternatively pick the open-shadow button, select the visible slot treeitem and use Child."],
+      "expected": "The assigned selected node appears exactly once with its slot ancestry in both trees, and selection remains locatable after Refresh or Child navigation.",
+      "actual": "Inspector identity and page highlight correctly show strong#slotted-label, but both trees contain no selected row and no strong#slotted-label row. Refresh preserves the omission. Selecting slot shows the assigned child, but Child selects the strong and makes it disappear again. Parent of the assigned child goes directly to the light-DOM host.",
+      "probableRootCause": "controller.parentOf follows parentElement/open-root host without assignedSlot; navigationChildren traverses a host's shadow tree and assigned slot children. The selected path therefore disagrees with tree traversal.",
+      "modules": ["src/picker/controller.ts:91", "src/picker/navigation.ts:1", "src/picker/tree.ts:16"],
+      "evidence": ["tree-observations.json TR05", "followup-observations.json FU05/FU06", "19-html-slotted-selected.png", "20-navigator-slotted-selected.png", "21-html-slot-child.png"],
+      "recommendedFixPhase": "CURRENT UI FUNCTIONAL FIXES: composed slot ancestry consistency"
+    }
+  ],
+  "working": [
+    "Code separates inline/readable authored declarations from session overrides and labels inaccessible/cascade-unresolved sources conservatively.",
+    "Code edits supported inline author properties through session overrides, repeated edits replace values, invalid declaration/value drafts retain input and leave the browser unchanged, correcting validation clears the error.",
+    "Session declaration toggles remove/restore only the override; Undo and Reset restore expected browser values. Native RGB Code swatch input produces color #334455, preserves authored CSS and participates in Undo.",
+    "Explicit Refresh sources reveals externally inserted letter-spacing:7px and inline text-align:left; same-identity edited SPA replacement remounts drafts and shows current inline 21px/8px rather than old 18px/6px source.",
+    "Media offers base, active/inactive readable conditions and nested conditions. Editing inactive max-width font-size to 29px leaves wide browser value 18px; a 640px viewport activates 29px and returning wide restores 18px.",
+    "Hover/focus/active edits activate only with browser state; before/after edits style the respective existing generated content. Each context gets separate CSS, contextual Undo removes only the last edit and Reset removes all context rules and markers.",
+    "HTML/Navigator actual tree selection, DOM Parent/Child/Previous/Next navigation, nested open-shadow ancestry, SVG rect/group ancestry, explicit DOM refresh, modal Escape/opener restoration, Back to canvas and Pick element work.",
+    "Lazy branch with 600 siblings retains selected lazy-550 around a bounded 32-child slice (45 total rows); collapse/expand work and limitations are explained.",
+    "Code/Navigator fit 390px width without horizontal overflow; Navigator remains scrollable at actual Chrome tabs.setZoom(2) with a 720x500 CSS viewport. Root owns the independently confirmed selection-overlay-above-UI defect visible in screenshots 14-16."
+  ],
+  "nonbugsAndLimitations": [
+    { "category": "H. Expected browser/CSS behavior — NOT a bug", "surface": "Media/state/pseudo", "detail": "Context selection scopes rules and does not force viewport, hover, focus or active. Generated-content edits do not create absent pseudo-elements. The UI explains this; actual activation and scoped Reset passed." },
+    { "category": "I. Current known limitation", "surface": "Code author mutation/blocked or partial rollback", "detail": "Production UI is session-override policy with no user-visible mutation-policy control. Do not claim mutated-author, blocked-author Undo or partial-write rollback were exercised through UI. Those cases require the root's locked ENGINE regression suite." },
+    { "category": "I. Current known limitation", "surface": "Source/cascade", "detail": "Cross-origin CSSOM stylesheet is explicitly inaccessible; winners become unresolved, unsupported/relative/shadow-host sources and imports are outside bounded discovery, keyframes are read-only. This truthful uncertainty is not stale ownership or an incorrect winner." },
+    { "category": "I. Current known limitation", "surface": "Source/tree refresh", "detail": "Code/tree are explicit bounded snapshots. External CSSOM additions and DOM siblings appear after visible Refresh; the UI documents refresh rather than promising live updates. After target migration current inline authored values refresh automatically and drafts remount." },
+    { "category": "I. Current known limitation", "surface": "Selection after unedited replacement", "detail": "Replacing a selected node without any active edited session retires selection (No active edited session to migrate), clears both trees and editor safely, and requires repicking. Active edited replacement migrates. No stale retained selected row was found." },
+    { "category": "I. Current known limitation", "surface": "Closed shadow/frame/bounded tree", "detail": "Closed shadow contents and iframe contents are unavailable; Child is disabled for closed host and the limitation is explained. Tree reads selected nearby branches rather than representing the complete document." }
+  ],
+  "scopeNotes": [
+    "These diagnostic passes mean all steps completed and evidence was retained; they do not assert absence of the reported product defects.",
+    "Native color value change was exercised through its shipped input; operating-system color picker chrome was not separately audited.",
+    "No product source, locked engine tests, locked diagnostics, or build output was modified by this finishing agent. Only new current-UI diagnostic evidence was written."
+  ]
+}

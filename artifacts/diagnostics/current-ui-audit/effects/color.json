@@ -1,0 +1,893 @@
+{
+  "surface": "color",
+  "scope": "Built Chrome MV3, actual visible user actions; native computed style is read only.",
+  "observations": [
+    {
+      "id": "color-001",
+      "surface": "color",
+      "action": "Text color: main HEX",
+      "status": "pass",
+      "expected": "Selected element receives #123456",
+      "actual": "rgb(18, 52, 86)"
+    },
+    {
+      "id": "color-002",
+      "surface": "color",
+      "action": "Text color: HEX popup entry",
+      "status": "pass",
+      "expected": "Color reflects #ab34cd80",
+      "actual": {
+        "computed": "rgba(171, 52, 205, 0.5)",
+        "input": "#ab34cd80"
+      }
+    },
+    {
+      "id": "color-003",
+      "surface": "color",
+      "action": "Text color: RGB popup entry",
+      "status": "pass",
+      "expected": "Color reflects rgba(20, 40, 60, 0.6)",
+      "actual": {
+        "computed": "rgba(20, 40, 60, 0.6)",
+        "input": "rgba(20, 40, 60, 0.6)"
+      }
+    },
+    {
+      "id": "color-004",
+      "surface": "color",
+      "action": "Text color: HSL popup entry",
+      "status": "pass",
+      "expected": "Color reflects hsla(120, 100%, 25%, 0.4)",
+      "actual": {
+        "computed": "rgba(0, 128, 0, 0.4)",
+        "input": "hsla(120, 100%, 25%, 0.4)"
+      }
+    },
+    {
+      "id": "color-005",
+      "surface": "color",
+      "action": "Text color: alpha numeric",
+      "status": "pass",
+      "expected": "Selected color is 25% opaque",
+      "actual": "rgba(0, 128, 0, 0.25)"
+    },
+    {
+      "id": "color-006",
+      "surface": "color",
+      "action": "Text color: alpha keyboard",
+      "status": "pass",
+      "expected": "ArrowUp increases alpha to 26%",
+      "actual": {
+        "input": "26.3%",
+        "computed": "rgba(0, 128, 0, 0.263)"
+      }
+    },
+    {
+      "id": "color-007",
+      "surface": "color",
+      "action": "Text color: invalid popup CSS rejection",
+      "status": "pass",
+      "expected": "Invalid color preserves rendered value",
+      "actual": {
+        "before": "rgba(0, 128, 0, 0.263)",
+        "after": "rgba(0, 128, 0, 0.263)",
+        "ariaInvalid": null,
+        "alerts": [
+          "Enter a valid CSS color."
+        ]
+      }
+    },
+    {
+      "id": "color-008",
+      "surface": "color",
+      "action": "Text color: invalid popup accessibility",
+      "status": "fail",
+      "expected": "Focused invalid popup input exposes aria-invalid=true",
+      "actual": {
+        "ariaInvalid": null
+      },
+      "classification": "F a11y",
+      "severity": "Medium",
+      "module": "src/ui/shared/ColorControl.tsx",
+      "rootCause": "Popover format input omits aria-invalid, while the closed input receives it.",
+      "priority": "P2",
+      "fixPhase": "UI accessibility"
+    },
+    {
+      "id": "color-009",
+      "surface": "color",
+      "action": "Text color: reopen format",
+      "status": "pass",
+      "expected": "Reopening preserves chosen HSL format",
+      "actual": {
+        "format": "true",
+        "value": "hsl(202.96, 35.37%, 44.9%)"
+      }
+    },
+    {
+      "id": "color-010",
+      "surface": "color",
+      "action": "Text color: invalid closed input",
+      "status": "pass",
+      "expected": "Invalid input reports error and preserves CSS",
+      "actual": {
+        "value": "invalid-color",
+        "ariaInvalid": "true",
+        "alerts": [
+          "Enter a valid CSS color."
+        ]
+      }
+    },
+    {
+      "id": "color-011",
+      "surface": "color",
+      "action": "Text color: named color",
+      "status": "pass",
+      "expected": "Named colors apply",
+      "actual": "rgb(102, 51, 153)"
+    },
+    {
+      "id": "color-012",
+      "surface": "color",
+      "action": "Text color: Undo",
+      "status": "pass",
+      "expected": "Undo restores preceding valid color",
+      "actual": {
+        "expected": "rgb(74, 124, 155)",
+        "actual": "rgb(74, 124, 155)",
+        "field": "#4a7c9b"
+      }
+    },
+    {
+      "id": "color-013",
+      "surface": "color",
+      "action": "Background color: main HEX",
+      "status": "pass",
+      "expected": "Selected element receives #123456",
+      "actual": "rgb(18, 52, 86)"
+    },
+    {
+      "id": "color-014",
+      "surface": "color",
+      "action": "Background color: HEX popup entry",
+      "status": "pass",
+      "expected": "Color reflects #ab34cd80",
+      "actual": {
+        "computed": "rgba(171, 52, 205, 0.5)",
+        "input": "#ab34cd80"
+      }
+    },
+    {
+      "id": "color-015",
+      "surface": "color",
+      "action": "Background color: RGB popup entry",
+      "status": "pass",
+      "expected": "Color reflects rgba(20, 40, 60, 0.6)",
+      "actual": {
+        "computed": "rgba(20, 40, 60, 0.6)",
+        "input": "rgba(20, 40, 60, 0.6)"
+      }
+    },
+    {
+      "id": "color-016",
+      "surface": "color",
+      "action": "Background color: HSL popup entry",
+      "status": "pass",
+      "expected": "Color reflects hsla(120, 100%, 25%, 0.4)",
+      "actual": {
+        "computed": "rgba(0, 128, 0, 0.4)",
+        "input": "hsla(120, 100%, 25%, 0.4)"
+      }
+    },
+    {
+      "id": "color-017",
+      "surface": "color",
+      "action": "Background color: alpha numeric",
+      "status": "pass",
+      "expected": "Selected color is 25% opaque",
+      "actual": "rgba(0, 128, 0, 0.25)"
+    },
+    {
+      "id": "color-018",
+      "surface": "color",
+      "action": "Background color: alpha keyboard",
+      "status": "pass",
+      "expected": "ArrowUp increases alpha to 26%",
+      "actual": {
+        "input": "26.3%",
+        "computed": "rgba(0, 128, 0, 0.263)"
+      }
+    },
+    {
+      "id": "color-019",
+      "surface": "color",
+      "action": "Background color: invalid popup CSS rejection",
+      "status": "pass",
+      "expected": "Invalid color preserves rendered value",
+      "actual": {
+        "before": "rgba(0, 128, 0, 0.263)",
+        "after": "rgba(0, 128, 0, 0.263)",
+        "ariaInvalid": null,
+        "alerts": [
+          "Enter a valid CSS color."
+        ]
+      }
+    },
+    {
+      "id": "color-020",
+      "surface": "color",
+      "action": "Background color: invalid popup accessibility",
+      "status": "fail",
+      "expected": "Focused invalid popup input exposes aria-invalid=true",
+      "actual": {
+        "ariaInvalid": null
+      },
+      "classification": "F a11y",
+      "severity": "Medium",
+      "module": "src/ui/shared/ColorControl.tsx",
+      "rootCause": "Popover format input omits aria-invalid, while the closed input receives it.",
+      "priority": "P2",
+      "fixPhase": "UI accessibility"
+    },
+    {
+      "id": "color-021",
+      "surface": "color",
+      "action": "Background color: reopen format",
+      "status": "pass",
+      "expected": "Reopening preserves chosen HSL format",
+      "actual": {
+        "format": "true",
+        "value": "hsl(202.96, 35.37%, 44.9%)"
+      }
+    },
+    {
+      "id": "color-022",
+      "surface": "color",
+      "action": "Background color: invalid closed input",
+      "status": "pass",
+      "expected": "Invalid input reports error and preserves CSS",
+      "actual": {
+        "value": "invalid-color",
+        "ariaInvalid": "true",
+        "alerts": [
+          "Enter a valid CSS color."
+        ]
+      }
+    },
+    {
+      "id": "color-023",
+      "surface": "color",
+      "action": "Background color: named color",
+      "status": "pass",
+      "expected": "Named colors apply",
+      "actual": "rgb(102, 51, 153)"
+    },
+    {
+      "id": "color-024",
+      "surface": "color",
+      "action": "Background color: Undo",
+      "status": "pass",
+      "expected": "Undo restores preceding valid color",
+      "actual": {
+        "expected": "rgb(74, 124, 155)",
+        "actual": "rgb(74, 124, 155)",
+        "field": "#4a7c9b"
+      }
+    },
+    {
+      "id": "color-025",
+      "surface": "color",
+      "action": "Border color: main HEX",
+      "status": "pass",
+      "expected": "Selected element receives #123456",
+      "actual": "rgb(18, 52, 86)"
+    },
+    {
+      "id": "color-026",
+      "surface": "color",
+      "action": "Border color: HEX popup entry",
+      "status": "pass",
+      "expected": "Color reflects #ab34cd80",
+      "actual": {
+        "computed": "rgba(171, 52, 205, 0.5)",
+        "input": "#ab34cd80"
+      }
+    },
+    {
+      "id": "color-027",
+      "surface": "color",
+      "action": "Border color: RGB popup entry",
+      "status": "pass",
+      "expected": "Color reflects rgba(20, 40, 60, 0.6)",
+      "actual": {
+        "computed": "rgba(20, 40, 60, 0.6)",
+        "input": "rgba(20, 40, 60, 0.6)"
+      }
+    },
+    {
+      "id": "color-028",
+      "surface": "color",
+      "action": "Border color: HSL popup entry",
+      "status": "pass",
+      "expected": "Color reflects hsla(120, 100%, 25%, 0.4)",
+      "actual": {
+        "computed": "rgba(0, 128, 0, 0.4)",
+        "input": "hsla(120, 100%, 25%, 0.4)"
+      }
+    },
+    {
+      "id": "color-029",
+      "surface": "color",
+      "action": "Border color: alpha numeric",
+      "status": "pass",
+      "expected": "Selected color is 25% opaque",
+      "actual": "rgba(0, 128, 0, 0.25)"
+    },
+    {
+      "id": "color-030",
+      "surface": "color",
+      "action": "Border color: alpha keyboard",
+      "status": "pass",
+      "expected": "ArrowUp increases alpha to 26%",
+      "actual": {
+        "input": "26.3%",
+        "computed": "rgba(0, 128, 0, 0.263)"
+      }
+    },
+    {
+      "id": "color-031",
+      "surface": "color",
+      "action": "Border color: invalid popup CSS rejection",
+      "status": "pass",
+      "expected": "Invalid color preserves rendered value",
+      "actual": {
+        "before": "rgba(0, 128, 0, 0.263)",
+        "after": "rgba(0, 128, 0, 0.263)",
+        "ariaInvalid": null,
+        "alerts": [
+          "Enter a valid CSS color."
+        ]
+      }
+    },
+    {
+      "id": "color-032",
+      "surface": "color",
+      "action": "Border color: invalid popup accessibility",
+      "status": "fail",
+      "expected": "Focused invalid popup input exposes aria-invalid=true",
+      "actual": {
+        "ariaInvalid": null
+      },
+      "classification": "F a11y",
+      "severity": "Medium",
+      "module": "src/ui/shared/ColorControl.tsx",
+      "rootCause": "Popover format input omits aria-invalid, while the closed input receives it.",
+      "priority": "P2",
+      "fixPhase": "UI accessibility"
+    },
+    {
+      "id": "color-033",
+      "surface": "color",
+      "action": "Border color: reopen format",
+      "status": "pass",
+      "expected": "Reopening preserves chosen HSL format",
+      "actual": {
+        "format": "true",
+        "value": "hsl(202.96, 35.37%, 44.9%)"
+      }
+    },
+    {
+      "id": "color-034",
+      "surface": "color",
+      "action": "Border color: invalid closed input",
+      "status": "pass",
+      "expected": "Invalid input reports error and preserves CSS",
+      "actual": {
+        "value": "invalid-color",
+        "ariaInvalid": "true",
+        "alerts": [
+          "Enter a valid CSS color."
+        ]
+      }
+    },
+    {
+      "id": "color-035",
+      "surface": "color",
+      "action": "Border color: named color",
+      "status": "pass",
+      "expected": "Named colors apply",
+      "actual": "rgb(102, 51, 153)"
+    },
+    {
+      "id": "color-036",
+      "surface": "color",
+      "action": "Border color: Undo",
+      "status": "pass",
+      "expected": "Undo restores preceding valid color",
+      "actual": {
+        "expected": "rgb(74, 124, 155)",
+        "actual": "rgb(74, 124, 155)",
+        "field": "#4a7c9b"
+      }
+    },
+    {
+      "id": "color-037",
+      "surface": "color",
+      "action": "Box shadow color: main HEX",
+      "status": "pass",
+      "expected": "Selected element receives #123456",
+      "actual": "rgb(18, 52, 86) 0px 4px 12px 0px"
+    },
+    {
+      "id": "color-038",
+      "surface": "color",
+      "action": "Box shadow color: HEX popup entry",
+      "status": "pass",
+      "expected": "Color reflects #ab34cd80",
+      "actual": {
+        "computed": "rgba(171, 52, 205, 0.5) 0px 4px 12px 0px",
+        "input": "#ab34cd80"
+      }
+    },
+    {
+      "id": "color-039",
+      "surface": "color",
+      "action": "Box shadow color: RGB popup entry",
+      "status": "pass",
+      "expected": "Color reflects rgba(20, 40, 60, 0.6)",
+      "actual": {
+        "computed": "rgba(20, 40, 60, 0.6) 0px 4px 12px 0px",
+        "input": "rgba(20, 40, 60, 0.6)"
+      }
+    },
+    {
+      "id": "color-040",
+      "surface": "color",
+      "action": "Box shadow color: HSL popup entry",
+      "status": "pass",
+      "expected": "Color reflects hsla(120, 100%, 25%, 0.4)",
+      "actual": {
+        "computed": "rgba(0, 128, 0, 0.4) 0px 4px 12px 0px",
+        "input": "hsla(120, 100%, 25%, 0.4)"
+      }
+    },
+    {
+      "id": "color-041",
+      "surface": "color",
+      "action": "Box shadow color: alpha numeric",
+      "status": "pass",
+      "expected": "Selected color is 25% opaque",
+      "actual": "rgba(0, 128, 0, 0.25) 0px 4px 12px 0px"
+    },
+    {
+      "id": "color-042",
+      "surface": "color",
+      "action": "Box shadow color: alpha keyboard",
+      "status": "pass",
+      "expected": "ArrowUp increases alpha to 26%",
+      "actual": {
+        "input": "26.3%",
+        "computed": "rgba(0, 128, 0, 0.263) 0px 4px 12px 0px"
+      }
+    },
+    {
+      "id": "color-043",
+      "surface": "color",
+      "action": "Box shadow color: invalid popup CSS rejection",
+      "status": "pass",
+      "expected": "Invalid color preserves rendered value",
+      "actual": {
+        "before": "rgba(0, 128, 0, 0.263) 0px 4px 12px 0px",
+        "after": "rgba(0, 128, 0, 0.263) 0px 4px 12px 0px",
+        "ariaInvalid": null,
+        "alerts": [
+          "Enter a valid CSS color."
+        ]
+      }
+    },
+    {
+      "id": "color-044",
+      "surface": "color",
+      "action": "Box shadow color: invalid popup accessibility",
+      "status": "fail",
+      "expected": "Focused invalid popup input exposes aria-invalid=true",
+      "actual": {
+        "ariaInvalid": null
+      },
+      "classification": "F a11y",
+      "severity": "Medium",
+      "module": "src/ui/shared/ColorControl.tsx",
+      "rootCause": "Popover format input omits aria-invalid, while the closed input receives it.",
+      "priority": "P2",
+      "fixPhase": "UI accessibility"
+    },
+    {
+      "id": "color-045",
+      "surface": "color",
+      "action": "Box shadow color: reopen format",
+      "status": "pass",
+      "expected": "Reopening preserves chosen HSL format",
+      "actual": {
+        "format": "true",
+        "value": "hsl(202.96, 35.37%, 44.9%)"
+      }
+    },
+    {
+      "id": "color-046",
+      "surface": "color",
+      "action": "Box shadow color: invalid closed input",
+      "status": "pass",
+      "expected": "Invalid input reports error and preserves CSS",
+      "actual": {
+        "value": "invalid-color",
+        "ariaInvalid": "true",
+        "alerts": [
+          "Enter a valid CSS color."
+        ]
+      }
+    },
+    {
+      "id": "color-047",
+      "surface": "color",
+      "action": "Box shadow color: named color",
+      "status": "pass",
+      "expected": "Named colors apply",
+      "actual": "rgb(102, 51, 153) 0px 4px 12px 0px"
+    },
+    {
+      "id": "color-048",
+      "surface": "color",
+      "action": "Box shadow color: Undo",
+      "status": "pass",
+      "expected": "Undo restores preceding valid color",
+      "actual": {
+        "expected": "rgb(74, 124, 155) 0px 4px 12px 0px",
+        "actual": "rgb(74, 124, 155) 0px 4px 12px 0px",
+        "field": "#4a7c9b"
+      }
+    },
+    {
+      "id": "color-049",
+      "surface": "color",
+      "action": "Text shadow color: main HEX",
+      "status": "pass",
+      "expected": "Selected element receives #123456",
+      "actual": "rgb(18, 52, 86) 0px 4px 12px"
+    },
+    {
+      "id": "color-050",
+      "surface": "color",
+      "action": "Text shadow color: HEX popup entry",
+      "status": "pass",
+      "expected": "Color reflects #ab34cd80",
+      "actual": {
+        "computed": "rgba(171, 52, 205, 0.5) 0px 4px 12px",
+        "input": "#ab34cd80"
+      }
+    },
+    {
+      "id": "color-051",
+      "surface": "color",
+      "action": "Text shadow color: RGB popup entry",
+      "status": "pass",
+      "expected": "Color reflects rgba(20, 40, 60, 0.6)",
+      "actual": {
+        "computed": "rgba(20, 40, 60, 0.6) 0px 4px 12px",
+        "input": "rgba(20, 40, 60, 0.6)"
+      }
+    },
+    {
+      "id": "color-052",
+      "surface": "color",
+      "action": "Text shadow color: HSL popup entry",
+      "status": "pass",
+      "expected": "Color reflects hsla(120, 100%, 25%, 0.4)",
+      "actual": {
+        "computed": "rgba(0, 128, 0, 0.4) 0px 4px 12px",
+        "input": "hsla(120, 100%, 25%, 0.4)"
+      }
+    },
+    {
+      "id": "color-053",
+      "surface": "color",
+      "action": "Text shadow color: alpha numeric",
+      "status": "pass",
+      "expected": "Selected color is 25% opaque",
+      "actual": "rgba(0, 128, 0, 0.25) 0px 4px 12px"
+    },
+    {
+      "id": "color-054",
+      "surface": "color",
+      "action": "Text shadow color: alpha keyboard",
+      "status": "pass",
+      "expected": "ArrowUp increases alpha to 26%",
+      "actual": {
+        "input": "26.3%",
+        "computed": "rgba(0, 128, 0, 0.263) 0px 4px 12px"
+      }
+    },
+    {
+      "id": "color-055",
+      "surface": "color",
+      "action": "Text shadow color: invalid popup CSS rejection",
+      "status": "pass",
+      "expected": "Invalid color preserves rendered value",
+      "actual": {
+        "before": "rgba(0, 128, 0, 0.263) 0px 4px 12px",
+        "after": "rgba(0, 128, 0, 0.263) 0px 4px 12px",
+        "ariaInvalid": null,
+        "alerts": [
+          "Enter a valid CSS color."
+        ]
+      }
+    },
+    {
+      "id": "color-056",
+      "surface": "color",
+      "action": "Text shadow color: invalid popup accessibility",
+      "status": "fail",
+      "expected": "Focused invalid popup input exposes aria-invalid=true",
+      "actual": {
+        "ariaInvalid": null
+      },
+      "classification": "F a11y",
+      "severity": "Medium",
+      "module": "src/ui/shared/ColorControl.tsx",
+      "rootCause": "Popover format input omits aria-invalid, while the closed input receives it.",
+      "priority": "P2",
+      "fixPhase": "UI accessibility"
+    },
+    {
+      "id": "color-057",
+      "surface": "color",
+      "action": "Text shadow color: reopen format",
+      "status": "pass",
+      "expected": "Reopening preserves chosen HSL format",
+      "actual": {
+        "format": "true",
+        "value": "hsl(202.96, 35.37%, 44.9%)"
+      }
+    },
+    {
+      "id": "color-058",
+      "surface": "color",
+      "action": "Text shadow color: invalid closed input",
+      "status": "pass",
+      "expected": "Invalid input reports error and preserves CSS",
+      "actual": {
+        "value": "invalid-color",
+        "ariaInvalid": "true",
+        "alerts": [
+          "Enter a valid CSS color."
+        ]
+      }
+    },
+    {
+      "id": "color-059",
+      "surface": "color",
+      "action": "Text shadow color: named color",
+      "status": "pass",
+      "expected": "Named colors apply",
+      "actual": "rgb(102, 51, 153) 0px 4px 12px"
+    },
+    {
+      "id": "color-060",
+      "surface": "color",
+      "action": "Text shadow color: Undo",
+      "status": "pass",
+      "expected": "Undo restores preceding valid color",
+      "actual": {
+        "expected": "rgb(74, 124, 155) 0px 4px 12px",
+        "actual": "rgb(74, 124, 155) 0px 4px 12px",
+        "field": "#4a7c9b"
+      }
+    },
+    {
+      "id": "color-061",
+      "surface": "color",
+      "action": "Gradient stop popup color/alpha",
+      "status": "pass",
+      "expected": "Gradient color stop receives popup edits",
+      "actual": "linear-gradient(135deg, rgba(44, 55, 66, 0.5) 0%, rgb(100, 118, 255) 100%)"
+    },
+    {
+      "id": "color-062",
+      "surface": "color",
+      "action": "Color picker accessible slider inventory",
+      "status": "pass",
+      "expected": "Saturation, hue and alpha expose three sliders",
+      "actual": [
+        {
+          "name": "Color",
+          "value": null
+        },
+        {
+          "name": "Hue",
+          "value": "203"
+        },
+        {
+          "name": "Alpha",
+          "value": "100"
+        }
+      ]
+    },
+    {
+      "id": "color-063",
+      "surface": "color",
+      "action": "Picker slider 1 keyboard",
+      "status": "pass",
+      "expected": "Arrow key updates color",
+      "actual": {
+        "before": "rgb(74, 124, 155)",
+        "after": "rgb(66, 121, 155)"
+      }
+    },
+    {
+      "id": "color-064",
+      "surface": "color",
+      "action": "Picker slider 2 keyboard",
+      "status": "pass",
+      "expected": "Arrow key updates color",
+      "actual": {
+        "before": "rgb(62, 119, 155)",
+        "after": "rgb(62, 91, 155)"
+      }
+    },
+    {
+      "id": "color-065",
+      "surface": "color",
+      "action": "Picker slider 3 keyboard",
+      "status": "pass",
+      "expected": "Arrow key updates color",
+      "actual": {
+        "before": "rgb(62, 99, 155)",
+        "after": "rgba(62, 99, 155, 0.95)"
+      }
+    },
+    {
+      "id": "color-066",
+      "surface": "color",
+      "action": "Recent color selection",
+      "status": "pass",
+      "expected": "Recent color applies",
+      "actual": {
+        "count": 7,
+        "color": "rgb(62, 99, 155)"
+      }
+    },
+    {
+      "id": "color-067",
+      "surface": "color",
+      "action": "Color picker at 390px",
+      "status": "pass",
+      "expected": "Popover and inspector fit viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 28,
+          "y": 12,
+          "width": 350,
+          "height": 746
+        },
+        "bounds": {
+          "w": 390,
+          "h": 844
+        },
+        "overflow": 0,
+        "popup": {
+          "x": 54,
+          "y": 389,
+          "width": 268,
+          "height": 447
+        }
+      }
+    },
+    {
+      "id": "color-068",
+      "surface": "color",
+      "action": "Color picker at 320px",
+      "status": "pass",
+      "expected": "Popover and inspector fit viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 746
+        },
+        "bounds": {
+          "w": 320,
+          "h": 844
+        },
+        "overflow": 0,
+        "popup": {
+          "x": 38,
+          "y": 389,
+          "width": 268,
+          "height": 447
+        }
+      }
+    },
+    {
+      "id": "color-069",
+      "surface": "color",
+      "action": "Color picker 200% zoom",
+      "status": "pass",
+      "expected": "Popover fits zoomed viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 422
+        },
+        "bounds": {
+          "w": 720,
+          "h": 500
+        },
+        "overflow": 0,
+        "popup": {
+          "x": 374,
+          "y": 8,
+          "width": 268,
+          "height": 318
+        }
+      }
+    },
+    {
+      "id": "color-070",
+      "surface": "color",
+      "action": "Four-side border color presentation",
+      "status": "fail",
+      "expected": "Authored four-side colors have a clear mixed state",
+      "actual": {
+        "initial": "rgb(255, 0, 0) rgb(0, 128, 0) rgb(0, 0, 255) rgb(255, 255, 0)",
+        "before": "rgb(255, 0, 0) rgb(0, 128, 0) rgb(0, 0, 255) rgb(255, 255, 0)",
+        "popup": "Border color\nHEX\nRGB\nHSL\nAlpha\nRecent colors\nEnter a color, or choose a new one to replace this token."
+      },
+      "classification": "B wrong state",
+      "severity": "Medium",
+      "module": "src/ui/shared/ColorControl.tsx + src/ui/design/LiveDesignView.tsx",
+      "rootCause": "Four-side border-color is passed to a single CSS-color parser and presented as an unparseable token.",
+      "priority": "P2",
+      "fixPhase": "Border UI"
+    },
+    {
+      "id": "color-071",
+      "surface": "color",
+      "action": "Mixed border replacement",
+      "status": "pass",
+      "expected": "Choosing one color replaces all four sides",
+      "actual": "rgb(171, 205, 239)"
+    },
+    {
+      "id": "color-072",
+      "surface": "color",
+      "action": "Mixed border Undo",
+      "status": "pass",
+      "expected": "Undo preserves all four original colors",
+      "actual": {
+        "before": "rgb(255, 0, 0) rgb(0, 128, 0) rgb(0, 0, 255) rgb(255, 255, 0)",
+        "after": "rgb(255, 0, 0) rgb(0, 128, 0) rgb(0, 0, 255) rgb(255, 255, 0)"
+      }
+    },
+    {
+      "id": "color-073",
+      "surface": "color",
+      "action": "Repeated Reset session edits",
+      "status": "pass",
+      "expected": "Reset can be invoked after prior resets",
+      "actual": {
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(41, 76, 59)"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "counts": {
+    "pass": 67,
+    "fail": 6
+  }
+}

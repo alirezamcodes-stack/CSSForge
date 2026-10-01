@@ -1,0 +1,928 @@
+{
+  "surface": "effects-followup",
+  "scope": "Built Chrome MV3, actual visible user actions; native computed style is read only.",
+  "observations": [
+    {
+      "id": "effects-followup-001",
+      "surface": "effects-followup",
+      "action": "Text color initial presentation",
+      "status": "pass",
+      "expected": "Initial input matches the native single-color value",
+      "actual": {
+        "field": "rgb(255, 255, 255)",
+        "computed": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "id": "effects-followup-002",
+      "surface": "effects-followup",
+      "action": "Background color initial presentation",
+      "status": "pass",
+      "expected": "Initial input matches the native single-color value",
+      "actual": {
+        "field": "rgb(41, 76, 59)",
+        "computed": "rgb(41, 76, 59)"
+      }
+    },
+    {
+      "id": "effects-followup-003",
+      "surface": "effects-followup",
+      "action": "Border color initial presentation",
+      "status": "pass",
+      "expected": "Initial input matches the native single-color value",
+      "actual": {
+        "field": "rgb(255, 255, 255)",
+        "computed": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "id": "effects-followup-004",
+      "surface": "effects-followup",
+      "action": "Gradient stop main HEX alpha",
+      "status": "pass",
+      "expected": "Eight-digit HEX edits gradient color and alpha",
+      "actual": "linear-gradient(135deg, rgba(32, 48, 64, 0.5) 0%, rgb(100, 118, 255) 100%)"
+    },
+    {
+      "id": "effects-followup-005",
+      "surface": "effects-followup",
+      "action": "Gradient stop HEX popup",
+      "status": "pass",
+      "expected": "HEX entry edits selected gradient stop",
+      "actual": {
+        "css": "linear-gradient(135deg, rgba(171, 205, 239, 0.5) 0%, rgb(100, 118, 255) 100%)",
+        "input": "#abcdef80"
+      }
+    },
+    {
+      "id": "effects-followup-006",
+      "surface": "effects-followup",
+      "action": "Gradient stop RGB popup",
+      "status": "pass",
+      "expected": "RGB entry edits selected gradient stop",
+      "actual": {
+        "css": "linear-gradient(135deg, rgba(20, 40, 60, 0.6) 0%, rgb(100, 118, 255) 100%)",
+        "input": "rgba(20, 40, 60, 0.6)"
+      }
+    },
+    {
+      "id": "effects-followup-007",
+      "surface": "effects-followup",
+      "action": "Gradient stop HSL popup",
+      "status": "pass",
+      "expected": "HSL entry edits selected gradient stop",
+      "actual": {
+        "css": "linear-gradient(135deg, rgba(0, 128, 0, 0.4) 0%, rgb(100, 118, 255) 100%)",
+        "input": "hsla(120, 100%, 25%, 0.4)"
+      }
+    },
+    {
+      "id": "effects-followup-008",
+      "surface": "effects-followup",
+      "action": "Gradient invalid popup preserves color",
+      "status": "pass",
+      "expected": "Invalid gradient popup color preserves CSS",
+      "actual": {
+        "before": "linear-gradient(135deg, rgba(0, 128, 0, 0.4) 0%, rgb(100, 118, 255) 100%)",
+        "after": "linear-gradient(135deg, rgba(0, 128, 0, 0.4) 0%, rgb(100, 118, 255) 100%)"
+      }
+    },
+    {
+      "id": "effects-followup-009",
+      "surface": "effects-followup",
+      "action": "Gradient invalid popup accessibility",
+      "status": "fail",
+      "expected": "Invalid format input identifies itself to assistive technology",
+      "actual": {
+        "ariaInvalid": null
+      },
+      "classification": "F a11y",
+      "severity": "Medium",
+      "module": "src/ui/shared/ColorControl.tsx",
+      "rootCause": "Popover format input omits aria-invalid.",
+      "priority": "P2",
+      "fixPhase": "UI accessibility",
+      "evidence": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\effects\\effects-followup-gradient-invalid-color.png"
+    },
+    {
+      "id": "effects-followup-010",
+      "surface": "effects-followup",
+      "action": "Gradient reopen chosen format",
+      "status": "pass",
+      "expected": "Reopening retains HSL state",
+      "actual": "Stop 1 color\nHEX\nRGB\nHSL\nAlpha\nRecent colors"
+    },
+    {
+      "id": "effects-followup-011",
+      "surface": "effects-followup",
+      "action": "Gradient stop alpha",
+      "status": "pass",
+      "expected": "Alpha input changes selected stop opacity",
+      "actual": "linear-gradient(135deg, rgba(0, 128, 0, 0.25) 0%, rgb(100, 118, 255) 100%)"
+    },
+    {
+      "id": "effects-followup-012",
+      "surface": "effects-followup",
+      "action": "Gradient invalid closed input",
+      "status": "pass",
+      "expected": "Invalid closed stop field reports error and preserves CSS",
+      "actual": {
+        "invalid": "true",
+        "css": "linear-gradient(135deg, rgba(0, 128, 0, 0.25) 0%, rgb(100, 118, 255) 100%)"
+      }
+    },
+    {
+      "id": "effects-followup-013",
+      "surface": "effects-followup",
+      "action": "Gradient stop Undo",
+      "status": "pass",
+      "expected": "Undo restores pre-edit stop color and opacity",
+      "actual": "linear-gradient(135deg, rgba(0, 128, 0, 0.25) 0%, rgb(100, 118, 255) 100%)"
+    },
+    {
+      "id": "effects-followup-014",
+      "surface": "effects-followup",
+      "action": "Angle deg to rad",
+      "status": "pass",
+      "expected": "90deg converts to pi/2 radians",
+      "actual": "1.570796"
+    },
+    {
+      "id": "effects-followup-015",
+      "surface": "effects-followup",
+      "action": "Angle rad to turn",
+      "status": "pass",
+      "expected": "pi/2 radians converts to .25turn",
+      "actual": "0.25"
+    },
+    {
+      "id": "effects-followup-016",
+      "surface": "effects-followup",
+      "action": "Negative angle",
+      "status": "pass",
+      "expected": "Negative angles apply",
+      "actual": "linear-gradient(-450deg, rgba(0, 128, 0, 0.25) 0%, rgb(100, 118, 255) 100%)"
+    },
+    {
+      "id": "effects-followup-017",
+      "surface": "effects-followup",
+      "action": "Gradient stop percentage conversion guard",
+      "status": "expected",
+      "expected": "An unproven gradient percentage basis disables conversion and explains why",
+      "actual": {
+        "disabled": true,
+        "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+        "css": "linear-gradient(90deg, rgba(0, 128, 0, 0.25) 10px, rgb(100, 118, 255) 100%)"
+      },
+      "classification": "H expected",
+      "module": "src/editing/conversionContext.ts",
+      "evidence": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\effects\\effects-followup-gradient-percent-guard.png"
+    },
+    {
+      "id": "effects-followup-018",
+      "surface": "effects-followup",
+      "action": "Disabled conversion preserves gradient",
+      "status": "pass",
+      "expected": "Viewing a disabled percentage conversion never rewrites the gradient",
+      "actual": "linear-gradient(90deg, rgba(0, 128, 0, 0.25) 10px, rgb(100, 118, 255) 100%)"
+    },
+    {
+      "id": "effects-followup-019",
+      "surface": "effects-followup",
+      "action": "Gradient stop px to em",
+      "status": "pass",
+      "expected": "Stop length converts to em without changing its distance",
+      "actual": {
+        "field": "0.555556",
+        "css": "linear-gradient(90deg, rgba(0, 128, 0, 0.25) 10px, rgb(100, 118, 255) 100%)"
+      }
+    },
+    {
+      "id": "effects-followup-020",
+      "surface": "effects-followup",
+      "action": "Gradient stop em to rem",
+      "status": "pass",
+      "expected": "Stop length converts to rem against root font",
+      "actual": {
+        "rootFont": 16,
+        "field": "0.625001",
+        "css": "linear-gradient(90deg, rgba(0, 128, 0, 0.25) 10px, rgb(100, 118, 255) 100%)"
+      }
+    },
+    {
+      "id": "effects-followup-021",
+      "surface": "effects-followup",
+      "action": "Text editing preserves box/background",
+      "status": "pass",
+      "expected": "Text-shadow changes do not contaminate other Effects",
+      "actual": {
+        "box": "rgba(0, 0, 0, 0.267) 5px 4px 12px 0px",
+        "text": "rgba(0, 0, 0, 0.267) -4px 4px 12px",
+        "background": "linear-gradient(90deg, rgba(0, 128, 0, 0.25) 0%, rgb(100, 118, 255) 100%)"
+      }
+    },
+    {
+      "id": "effects-followup-022",
+      "surface": "effects-followup",
+      "action": "Filter editing preserves shadows",
+      "status": "pass",
+      "expected": "Filter edit leaves both shadow chains intact",
+      "actual": {
+        "box": "rgba(0, 0, 0, 0.267) 5px 4px 12px 0px",
+        "text": "rgba(0, 0, 0, 0.267) -4px 4px 12px",
+        "filter": "brightness(1.35)"
+      }
+    },
+    {
+      "id": "effects-followup-023",
+      "surface": "effects-followup",
+      "action": "Authored filter target switch 1",
+      "status": "pass",
+      "expected": "Complex target presents its repeated blur and authored brightness",
+      "actual": {
+        "blurDisabled": true,
+        "brightness": "130%"
+      }
+    },
+    {
+      "id": "effects-followup-024",
+      "surface": "effects-followup",
+      "action": "Session filter target switch 1",
+      "status": "pass",
+      "expected": "Returning target restores its filter UI/session values",
+      "actual": {
+        "brightness": "135%",
+        "filter": "brightness(1.35)"
+      }
+    },
+    {
+      "id": "effects-followup-025",
+      "surface": "effects-followup",
+      "action": "Authored filter target switch 2",
+      "status": "pass",
+      "expected": "Complex target presents its repeated blur and authored brightness",
+      "actual": {
+        "blurDisabled": true,
+        "brightness": "130%"
+      }
+    },
+    {
+      "id": "effects-followup-026",
+      "surface": "effects-followup",
+      "action": "Session filter target switch 2",
+      "status": "pass",
+      "expected": "Returning target restores its filter UI/session values",
+      "actual": {
+        "brightness": "135%",
+        "filter": "brightness(1.35)"
+      }
+    },
+    {
+      "id": "effects-followup-027",
+      "surface": "effects-followup",
+      "action": "Authored filter target switch 3",
+      "status": "pass",
+      "expected": "Complex target presents its repeated blur and authored brightness",
+      "actual": {
+        "blurDisabled": true,
+        "brightness": "130%"
+      }
+    },
+    {
+      "id": "effects-followup-028",
+      "surface": "effects-followup",
+      "action": "Session filter target switch 3",
+      "status": "pass",
+      "expected": "Returning target restores its filter UI/session values",
+      "actual": {
+        "brightness": "135%",
+        "filter": "brightness(1.35)"
+      }
+    },
+    {
+      "id": "effects-followup-029",
+      "surface": "effects-followup",
+      "action": "Box editing preserves text/filter",
+      "status": "pass",
+      "expected": "Box-shadow changes leave text and filter intact",
+      "actual": {
+        "box": "rgba(0, 0, 0, 0.267) 5px 8px 12px 0px",
+        "text": "rgba(0, 0, 0, 0.267) -4px 4px 12px",
+        "filter": "brightness(1.35)"
+      }
+    },
+    {
+      "id": "effects-followup-030",
+      "surface": "effects-followup",
+      "action": "Remove final background layer",
+      "status": "pass",
+      "expected": "Last removal exposes empty layer state",
+      "actual": "Background\nAdd background layer\nBackground presets\n28"
+    },
+    {
+      "id": "effects-followup-031",
+      "surface": "effects-followup",
+      "action": "Final layer Undo restores metadata",
+      "status": "pass",
+      "expected": "Undo restores image plus position, size and repeat",
+      "actual": {
+        "prior": {
+          "image": "linear-gradient(90deg, rgba(0, 128, 0, 0.25) 0%, rgb(100, 118, 255) 100%)",
+          "position": "50% 50%",
+          "size": "auto",
+          "repeat": "no-repeat"
+        },
+        "after": {
+          "image": "linear-gradient(90deg, rgba(0, 128, 0, 0.25) 0%, rgb(100, 118, 255) 100%)",
+          "position": "50% 50%",
+          "size": "auto",
+          "repeat": "no-repeat"
+        }
+      }
+    },
+    {
+      "id": "effects-followup-032",
+      "surface": "effects-followup",
+      "action": "Background short 1440px",
+      "status": "pass",
+      "expected": "Inspector fits and each Effects control is reachable in short viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 1068,
+          "y": 8,
+          "width": 350,
+          "height": 402
+        },
+        "bounds": {
+          "w": 1440,
+          "h": 480
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-033",
+      "surface": "effects-followup",
+      "action": "Box shadow short 1440px",
+      "status": "pass",
+      "expected": "Inspector fits and each Effects control is reachable in short viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 1068,
+          "y": 8,
+          "width": 350,
+          "height": 402
+        },
+        "bounds": {
+          "w": 1440,
+          "h": 480
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-034",
+      "surface": "effects-followup",
+      "action": "Text shadow short 1440px",
+      "status": "pass",
+      "expected": "Inspector fits and each Effects control is reachable in short viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 1068,
+          "y": 8,
+          "width": 350,
+          "height": 402
+        },
+        "bounds": {
+          "w": 1440,
+          "h": 480
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-035",
+      "surface": "effects-followup",
+      "action": "Filters short 1440px",
+      "status": "pass",
+      "expected": "Inspector fits and each Effects control is reachable in short viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 1068,
+          "y": 8,
+          "width": 350,
+          "height": 402
+        },
+        "bounds": {
+          "w": 1440,
+          "h": 480
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-036",
+      "surface": "effects-followup",
+      "action": "Background short 320px",
+      "status": "pass",
+      "expected": "Inspector fits and each Effects control is reachable in short viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 12,
+          "y": 8,
+          "width": 296,
+          "height": 402
+        },
+        "bounds": {
+          "w": 320,
+          "h": 480
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-037",
+      "surface": "effects-followup",
+      "action": "Box shadow short 320px",
+      "status": "pass",
+      "expected": "Inspector fits and each Effects control is reachable in short viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 12,
+          "y": 8,
+          "width": 296,
+          "height": 402
+        },
+        "bounds": {
+          "w": 320,
+          "h": 480
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-038",
+      "surface": "effects-followup",
+      "action": "Text shadow short 320px",
+      "status": "pass",
+      "expected": "Inspector fits and each Effects control is reachable in short viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 12,
+          "y": 8,
+          "width": 296,
+          "height": 402
+        },
+        "bounds": {
+          "w": 320,
+          "h": 480
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-039",
+      "surface": "effects-followup",
+      "action": "Filters short 320px",
+      "status": "pass",
+      "expected": "Inspector fits and each Effects control is reachable in short viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 12,
+          "y": 8,
+          "width": 296,
+          "height": 402
+        },
+        "bounds": {
+          "w": 320,
+          "h": 480
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-040",
+      "surface": "effects-followup",
+      "action": "Color picker short 320px",
+      "status": "pass",
+      "expected": "Color dialog fits narrow short viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 12,
+          "y": 8,
+          "width": 296,
+          "height": 402
+        },
+        "bounds": {
+          "w": 320,
+          "h": 480
+        },
+        "overflow": 0,
+        "popup": {
+          "x": 38,
+          "y": 8,
+          "width": 268,
+          "height": 241
+        }
+      },
+      "evidence": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\effects\\effects-followup-short-color-320.png"
+    },
+    {
+      "id": "effects-followup-041",
+      "surface": "effects-followup",
+      "action": "Short color picker lower fields reachable",
+      "status": "pass",
+      "expected": "Scrolling the short color dialog makes format entry and alpha editing usable",
+      "actual": {
+        "css": "rgba(10, 20, 30, 0.25)",
+        "scroll": {
+          "top": 181,
+          "height": 239,
+          "contentHeight": 420
+        }
+      },
+      "evidence": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\effects\\effects-followup-short-color-lower-fields.png"
+    },
+    {
+      "id": "effects-followup-042",
+      "surface": "effects-followup",
+      "action": "Background 125% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 682
+        },
+        "bounds": {
+          "w": 1152,
+          "h": 800
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-043",
+      "surface": "effects-followup",
+      "action": "Box shadow 125% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 682
+        },
+        "bounds": {
+          "w": 1152,
+          "h": 800
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-044",
+      "surface": "effects-followup",
+      "action": "Text shadow 125% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 682
+        },
+        "bounds": {
+          "w": 1152,
+          "h": 800
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-045",
+      "surface": "effects-followup",
+      "action": "Filters 125% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 682
+        },
+        "bounds": {
+          "w": 1152,
+          "h": 800
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-046",
+      "surface": "effects-followup",
+      "action": "Color picker 125% reachable",
+      "status": "pass",
+      "expected": "Color picker fits intermediate/200% Chrome zoom",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 682
+        },
+        "bounds": {
+          "w": 1152,
+          "h": 800
+        },
+        "overflow": 0,
+        "popup": {
+          "x": 805.6000366210938,
+          "y": 8,
+          "width": 267.99993896484375,
+          "height": 407.20001220703125
+        }
+      }
+    },
+    {
+      "id": "effects-followup-047",
+      "surface": "effects-followup",
+      "action": "Background 150% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 548.6666870117188
+        },
+        "bounds": {
+          "w": 960,
+          "h": 667
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-048",
+      "surface": "effects-followup",
+      "action": "Box shadow 150% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 548.6666870117188
+        },
+        "bounds": {
+          "w": 960,
+          "h": 667
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-049",
+      "surface": "effects-followup",
+      "action": "Text shadow 150% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 548.6666870117188
+        },
+        "bounds": {
+          "w": 960,
+          "h": 667
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-050",
+      "surface": "effects-followup",
+      "action": "Filters 150% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 548.6666870117188
+        },
+        "bounds": {
+          "w": 960,
+          "h": 667
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-051",
+      "surface": "effects-followup",
+      "action": "Color picker 150% reachable",
+      "status": "pass",
+      "expected": "Color picker fits intermediate/200% Chrome zoom",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 548.6666870117188
+        },
+        "bounds": {
+          "w": 960,
+          "h": 667
+        },
+        "overflow": 0,
+        "popup": {
+          "x": 613.3333740234375,
+          "y": 8,
+          "width": 268,
+          "height": 340
+        }
+      }
+    },
+    {
+      "id": "effects-followup-052",
+      "surface": "effects-followup",
+      "action": "Background 200% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 422
+        },
+        "bounds": {
+          "w": 720,
+          "h": 500
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-053",
+      "surface": "effects-followup",
+      "action": "Box shadow 200% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 422
+        },
+        "bounds": {
+          "w": 720,
+          "h": 500
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-054",
+      "surface": "effects-followup",
+      "action": "Text shadow 200% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 422
+        },
+        "bounds": {
+          "w": 720,
+          "h": 500
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-055",
+      "surface": "effects-followup",
+      "action": "Filters 200% reachable",
+      "status": "pass",
+      "expected": "Effect editor remains reachable without horizontal overflow",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 422
+        },
+        "bounds": {
+          "w": 720,
+          "h": 500
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "effects-followup-056",
+      "surface": "effects-followup",
+      "action": "Color picker 200% reachable",
+      "status": "pass",
+      "expected": "Color picker fits intermediate/200% Chrome zoom",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 422
+        },
+        "bounds": {
+          "w": 720,
+          "h": 500
+        },
+        "overflow": 0,
+        "popup": {
+          "x": 374,
+          "y": 8,
+          "width": 268,
+          "height": 251.5
+        }
+      }
+    },
+    {
+      "id": "effects-followup-057",
+      "surface": "effects-followup",
+      "action": "All Effects repeated reset",
+      "status": "pass",
+      "expected": "Repeated session reset returns every Effects chain to native initial values",
+      "actual": {
+        "background": "none",
+        "box": "none",
+        "text": "none",
+        "filter": "none"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "counts": {
+    "pass": 55,
+    "fail": 1,
+    "expected": 1
+  }
+}

@@ -1,0 +1,2942 @@
+{
+  "name": "units-gestures",
+  "observations": [
+    {
+      "id": "units-gestures-001",
+      "case": "Width: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "241.5px",
+        "ui": "241.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-002",
+      "case": "Width: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "240.5",
+      "actual": "240.5"
+    },
+    {
+      "id": "units-gestures-003",
+      "case": "Width: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "250.5px",
+        "ui": "250.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-004",
+      "case": "Width: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "250.391px",
+        "ui": "250.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-005",
+      "case": "Width: Escape restores gesture",
+      "status": "pass",
+      "expected": "240.5px",
+      "actual": "240.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-006",
+      "case": "Width: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "252.5px",
+        "ui": "252.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-007",
+      "case": "Width: Undo restores scrub",
+      "status": "pass",
+      "expected": "240.5px",
+      "actual": "240.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-008",
+      "case": "Width: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "240.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "12.025em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "15.03125rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "16.701389vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "26.722222vh",
+          "pressed": "false"
+        },
+        {
+          "label": "vmin",
+          "disabled": false,
+          "title": "26.722222vmin",
+          "pressed": "false"
+        },
+        {
+          "label": "vmax",
+          "disabled": false,
+          "title": "16.701389vmax",
+          "pressed": "false"
+        },
+        {
+          "label": "ch",
+          "disabled": true,
+          "title": "The required font or viewport reference is not available.",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-009",
+      "case": "Width: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-010",
+      "case": "Width: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-011",
+      "case": "Width: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "240.5px",
+        "ui": "15.03125",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-012",
+      "case": "Height: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "81.5px",
+        "ui": "81.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-013",
+      "case": "Height: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "80.5",
+      "actual": "80.5"
+    },
+    {
+      "id": "units-gestures-014",
+      "case": "Height: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "90.5px",
+        "ui": "90.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-015",
+      "case": "Height: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "90.3906px",
+        "ui": "90.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-016",
+      "case": "Height: Escape restores gesture",
+      "status": "pass",
+      "expected": "80.5px",
+      "actual": "80.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-017",
+      "case": "Height: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "92.5px",
+        "ui": "92.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-018",
+      "case": "Height: Undo restores scrub",
+      "status": "pass",
+      "expected": "80.5px",
+      "actual": "80.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-019",
+      "case": "Height: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "80.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "4.025em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "5.03125rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "5.590278vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "8.944444vh",
+          "pressed": "false"
+        },
+        {
+          "label": "vmin",
+          "disabled": false,
+          "title": "8.944444vmin",
+          "pressed": "false"
+        },
+        {
+          "label": "vmax",
+          "disabled": false,
+          "title": "5.590278vmax",
+          "pressed": "false"
+        },
+        {
+          "label": "ch",
+          "disabled": true,
+          "title": "The required font or viewport reference is not available.",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-020",
+      "case": "Height: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-021",
+      "case": "Height: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-022",
+      "case": "Height: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "80.5px",
+        "ui": "5.03125",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-023",
+      "case": "Geometry radius: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-024",
+      "case": "Geometry radius: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-025",
+      "case": "Geometry radius: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-026",
+      "case": "Geometry radius: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-027",
+      "case": "Geometry radius: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-028",
+      "case": "Geometry radius: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-029",
+      "case": "Geometry radius: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-030",
+      "case": "Geometry radius: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "A single % radius cannot preserve both axes on a non-square box.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-031",
+      "case": "Geometry radius: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-032",
+      "case": "Geometry radius: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-033",
+      "case": "Geometry radius: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-034",
+      "case": "Margin top: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-035",
+      "case": "Margin top: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-036",
+      "case": "Margin top: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-037",
+      "case": "Margin top: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-038",
+      "case": "Margin top: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-039",
+      "case": "Margin top: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-040",
+      "case": "Margin top: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-041",
+      "case": "Margin top: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-042",
+      "case": "Margin top: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-043",
+      "case": "Margin top: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-044",
+      "case": "Margin top: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-045",
+      "case": "Margin right: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-046",
+      "case": "Margin right: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-047",
+      "case": "Margin right: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-048",
+      "case": "Margin right: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-049",
+      "case": "Margin right: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-050",
+      "case": "Margin right: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-051",
+      "case": "Margin right: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-052",
+      "case": "Margin right: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-053",
+      "case": "Margin right: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-054",
+      "case": "Margin right: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-055",
+      "case": "Margin right: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-056",
+      "case": "Margin bottom: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-057",
+      "case": "Margin bottom: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-058",
+      "case": "Margin bottom: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-059",
+      "case": "Margin bottom: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-060",
+      "case": "Margin bottom: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-061",
+      "case": "Margin bottom: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-062",
+      "case": "Margin bottom: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-063",
+      "case": "Margin bottom: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-064",
+      "case": "Margin bottom: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-065",
+      "case": "Margin bottom: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-066",
+      "case": "Margin bottom: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-067",
+      "case": "Margin left: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-068",
+      "case": "Margin left: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-069",
+      "case": "Margin left: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-070",
+      "case": "Margin left: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-071",
+      "case": "Margin left: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-072",
+      "case": "Margin left: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-073",
+      "case": "Margin left: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-074",
+      "case": "Margin left: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-075",
+      "case": "Margin left: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-076",
+      "case": "Margin left: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-077",
+      "case": "Margin left: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-078",
+      "case": "Padding top: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-079",
+      "case": "Padding top: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-080",
+      "case": "Padding top: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-081",
+      "case": "Padding top: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-082",
+      "case": "Padding top: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-083",
+      "case": "Padding top: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-084",
+      "case": "Padding top: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-085",
+      "case": "Padding top: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-086",
+      "case": "Padding top: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-087",
+      "case": "Padding top: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-088",
+      "case": "Padding top: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-089",
+      "case": "Padding right: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-090",
+      "case": "Padding right: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-091",
+      "case": "Padding right: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-092",
+      "case": "Padding right: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-093",
+      "case": "Padding right: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-094",
+      "case": "Padding right: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-095",
+      "case": "Padding right: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-096",
+      "case": "Padding right: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-097",
+      "case": "Padding right: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-098",
+      "case": "Padding right: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-099",
+      "case": "Padding right: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-100",
+      "case": "Padding bottom: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-101",
+      "case": "Padding bottom: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-102",
+      "case": "Padding bottom: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-103",
+      "case": "Padding bottom: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-104",
+      "case": "Padding bottom: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-105",
+      "case": "Padding bottom: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-106",
+      "case": "Padding bottom: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-107",
+      "case": "Padding bottom: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-108",
+      "case": "Padding bottom: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-109",
+      "case": "Padding bottom: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-110",
+      "case": "Padding bottom: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-111",
+      "case": "Padding left: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-112",
+      "case": "Padding left: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-113",
+      "case": "Padding left: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-114",
+      "case": "Padding left: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-115",
+      "case": "Padding left: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-116",
+      "case": "Padding left: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-117",
+      "case": "Padding left: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-118",
+      "case": "Padding left: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-119",
+      "case": "Padding left: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-120",
+      "case": "Padding left: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-121",
+      "case": "Padding left: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-122",
+      "case": "Font size: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "21.5px",
+        "ui": "21.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-123",
+      "case": "Font size: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "20.5",
+      "actual": "20.5"
+    },
+    {
+      "id": "units-gestures-124",
+      "case": "Font size: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "30.5px",
+        "ui": "30.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-125",
+      "case": "Font size: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "30.4px",
+        "ui": "30.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-126",
+      "case": "Font size: Escape restores gesture",
+      "status": "pass",
+      "expected": "20.5px",
+      "actual": "20.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-127",
+      "case": "Font size: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "32.5px",
+        "ui": "32.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-128",
+      "case": "Font size: Undo restores scrub",
+      "status": "pass",
+      "expected": "20.5px",
+      "actual": "20.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-129",
+      "case": "Font size: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "20.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": false,
+          "title": "85.416667%",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.854167em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "1.28125rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "1.423611vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "2.277778vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-130",
+      "case": "Font size: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-131",
+      "case": "Font size: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-132",
+      "case": "Font size: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "1.28125",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-133",
+      "case": "Line height: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "32px",
+        "ui": "1.6",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "units-gestures-134",
+      "case": "Line height: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "1.5",
+      "actual": "1.5"
+    },
+    {
+      "id": "units-gestures-135",
+      "case": "Line height: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "50px",
+        "ui": "2.5",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "units-gestures-136",
+      "case": "Line height: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "49.8px",
+        "ui": "2.49",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "units-gestures-137",
+      "case": "Line height: Escape restores gesture",
+      "status": "pass",
+      "expected": "30px",
+      "actual": "30px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-138",
+      "case": "Line height: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "54px",
+        "ui": "2.7",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "units-gestures-139",
+      "case": "Line height: Undo restores scrub",
+      "status": "pass",
+      "expected": "30px",
+      "actual": "30px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-140",
+      "case": "Line height: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "unitless",
+          "disabled": false,
+          "title": "1.5",
+          "pressed": "true"
+        },
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "30px",
+          "pressed": "false"
+        },
+        {
+          "label": "%",
+          "disabled": false,
+          "title": "150%",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "1.5em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "1.875rem",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-141",
+      "case": "Line height: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-142",
+      "case": "Line height: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-143",
+      "case": "Line height: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "30px",
+        "ui": "1.875",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-144",
+      "case": "Letter spacing: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "2.5px",
+        "ui": "2.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-145",
+      "case": "Letter spacing: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "1.5",
+      "actual": "1.5"
+    },
+    {
+      "id": "units-gestures-146",
+      "case": "Letter spacing: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-147",
+      "case": "Letter spacing: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "11.4px",
+        "ui": "11.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-148",
+      "case": "Letter spacing: Escape restores gesture",
+      "status": "pass",
+      "expected": "1.5px",
+      "actual": "1.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-149",
+      "case": "Letter spacing: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "13.5px",
+        "ui": "13.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-150",
+      "case": "Letter spacing: Undo restores scrub",
+      "status": "pass",
+      "expected": "1.5px",
+      "actual": "1.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-151",
+      "case": "Letter spacing: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "1.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.075em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.09375rem",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-152",
+      "case": "Letter spacing: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-153",
+      "case": "Letter spacing: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-154",
+      "case": "Letter spacing: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "1.5px",
+        "ui": "0.09375",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-155",
+      "case": "Opacity: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "0.85",
+        "ui": "0.85",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "units-gestures-156",
+      "case": "Opacity: ArrowDown reverses up",
+      "status": "mismatch",
+      "expected": ".75",
+      "actual": "0.75"
+    },
+    {
+      "id": "units-gestures-157",
+      "case": "Opacity: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "1",
+        "ui": "1",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "units-gestures-158",
+      "case": "Opacity: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "0.99",
+        "ui": "0.99",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "units-gestures-159",
+      "case": "Opacity: Escape restores gesture",
+      "status": "pass",
+      "expected": "0.75",
+      "actual": "0.75",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-160",
+      "case": "Opacity: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "1",
+        "ui": "1",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "units-gestures-161",
+      "case": "Opacity: Undo restores scrub",
+      "status": "pass",
+      "expected": "0.75",
+      "actual": "0.75",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-162",
+      "case": "Opacity: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "unitless",
+          "disabled": false,
+          "title": ".75",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": false,
+          "title": "75%",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-163",
+      "case": "Opacity: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-164",
+      "case": "Opacity: % conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-165",
+      "case": "Opacity: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "0.75",
+        "ui": "75",
+        "invalid": null,
+        "unit": "%"
+      }
+    },
+    {
+      "id": "units-gestures-166",
+      "case": "Border width: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "4px",
+        "ui": "4.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-167",
+      "case": "Border width: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "3.5",
+      "actual": "3.5"
+    },
+    {
+      "id": "units-gestures-168",
+      "case": "Border width: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "13px",
+        "ui": "13.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-169",
+      "case": "Border width: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "13px",
+        "ui": "13.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-170",
+      "case": "Border width: Escape restores gesture",
+      "status": "pass",
+      "expected": "3px",
+      "actual": "3px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-171",
+      "case": "Border width: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "15px",
+        "ui": "15.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-172",
+      "case": "Border width: Undo restores scrub",
+      "status": "pass",
+      "expected": "3px",
+      "actual": "3px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-173",
+      "case": "Border width: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "3.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "em",
+          "disabled": true,
+          "title": "The editor value does not match a known rendered value. Constraints or competing CSS may apply; enter a value manually.",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": true,
+          "title": "The editor value does not match a known rendered value. Constraints or competing CSS may apply; enter a value manually.",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-174",
+      "case": "Border width: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-175",
+      "case": "Border width: rem disabled with explanation",
+      "status": "expected-limitation",
+      "actual": "The editor value does not match a known rendered value. Constraints or competing CSS may apply; enter a value manually."
+    },
+    {
+      "id": "units-gestures-176",
+      "case": "Border radius: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-177",
+      "case": "Border radius: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-178",
+      "case": "Border radius: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-179",
+      "case": "Border radius: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-180",
+      "case": "Border radius: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-181",
+      "case": "Border radius: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-182",
+      "case": "Border radius: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-183",
+      "case": "Border radius: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "A single % radius cannot preserve both axes on a non-square box.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-184",
+      "case": "Border radius: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-185",
+      "case": "Border radius: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-186",
+      "case": "Border radius: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-187",
+      "case": "Position top: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-188",
+      "case": "Position top: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-189",
+      "case": "Position top: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-190",
+      "case": "Position top: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-191",
+      "case": "Position top: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-192",
+      "case": "Position top: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-193",
+      "case": "Position top: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-194",
+      "case": "Position top: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-195",
+      "case": "Position top: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-196",
+      "case": "Position top: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-197",
+      "case": "Position top: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-198",
+      "case": "Position right: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-199",
+      "case": "Position right: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-200",
+      "case": "Position right: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-201",
+      "case": "Position right: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-202",
+      "case": "Position right: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-203",
+      "case": "Position right: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-204",
+      "case": "Position right: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-205",
+      "case": "Position right: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-206",
+      "case": "Position right: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-207",
+      "case": "Position right: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-208",
+      "case": "Position right: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-209",
+      "case": "Position bottom: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-210",
+      "case": "Position bottom: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-211",
+      "case": "Position bottom: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-212",
+      "case": "Position bottom: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-213",
+      "case": "Position bottom: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-214",
+      "case": "Position bottom: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-215",
+      "case": "Position bottom: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-216",
+      "case": "Position bottom: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-217",
+      "case": "Position bottom: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-218",
+      "case": "Position bottom: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-219",
+      "case": "Position bottom: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-220",
+      "case": "Position left: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "11.5px",
+        "ui": "11.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-221",
+      "case": "Position left: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "10.5",
+      "actual": "10.5"
+    },
+    {
+      "id": "units-gestures-222",
+      "case": "Position left: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.5px",
+        "ui": "20.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-223",
+      "case": "Position left: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "20.4px",
+        "ui": "20.4",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-224",
+      "case": "Position left: Escape restores gesture",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-225",
+      "case": "Position left: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "22.5px",
+        "ui": "22.5",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "units-gestures-226",
+      "case": "Position left: Undo restores scrub",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-227",
+      "case": "Position left: available unit menu",
+      "status": "observed",
+      "actual": [
+        {
+          "label": "px",
+          "disabled": false,
+          "title": "10.5px",
+          "pressed": "true"
+        },
+        {
+          "label": "%",
+          "disabled": true,
+          "title": "This percentage reference is ambiguous; enter a percentage manually if intended.",
+          "pressed": "false"
+        },
+        {
+          "label": "em",
+          "disabled": false,
+          "title": "0.525em",
+          "pressed": "false"
+        },
+        {
+          "label": "rem",
+          "disabled": false,
+          "title": "0.65625rem",
+          "pressed": "false"
+        },
+        {
+          "label": "vw",
+          "disabled": false,
+          "title": "0.729167vw",
+          "pressed": "false"
+        },
+        {
+          "label": "vh",
+          "disabled": false,
+          "title": "1.166667vh",
+          "pressed": "false"
+        }
+      ]
+    },
+    {
+      "id": "units-gestures-228",
+      "case": "Position left: unit Escape returns focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/ui/popovers/Popover.tsx"
+    },
+    {
+      "id": "units-gestures-229",
+      "case": "Position left: rem conversion preserves native size",
+      "status": "pass",
+      "expected": true,
+      "actual": true,
+      "module": "src/editing/values.ts"
+    },
+    {
+      "id": "units-gestures-230",
+      "case": "Position left: converted UI",
+      "status": "observed",
+      "actual": {
+        "computed": "10.5px",
+        "ui": "0.65625",
+        "invalid": null,
+        "unit": "rem"
+      }
+    },
+    {
+      "id": "units-gestures-231",
+      "case": "Z-index: ArrowUp",
+      "status": "observed",
+      "actual": {
+        "computed": "6",
+        "ui": "6",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "units-gestures-232",
+      "case": "Z-index: ArrowDown reverses up",
+      "status": "pass",
+      "expected": "5",
+      "actual": "5"
+    },
+    {
+      "id": "units-gestures-233",
+      "case": "Z-index: Shift step",
+      "status": "observed",
+      "actual": {
+        "computed": "15",
+        "ui": "15",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "units-gestures-234",
+      "case": "Z-index: Alt step",
+      "status": "observed",
+      "actual": {
+        "computed": "15",
+        "ui": "14.9",
+        "invalid": "true",
+        "unit": null
+      }
+    },
+    {
+      "id": "units-gestures-235",
+      "case": "Z-index: Escape restores gesture",
+      "status": "pass",
+      "expected": "5",
+      "actual": "5",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-236",
+      "case": "Z-index: horizontal scrub",
+      "status": "observed",
+      "actual": {
+        "computed": "17",
+        "ui": "17",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "units-gestures-237",
+      "case": "Z-index: Undo restores scrub",
+      "status": "pass",
+      "expected": "5",
+      "actual": "5",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "units-gestures-238",
+      "case": "Z-index: no unit menu (unitless integer)",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "units-gestures-239",
+      "case": "Width ch conversion is disabled rather than guessed",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "units-gestures-240",
+      "case": "Width ch raw entry is supported",
+      "status": "observed",
+      "actual": {
+        "computed": "133.469px",
+        "ui": "12",
+        "invalid": null,
+        "unit": "ch"
+      }
+    },
+    {
+      "id": "units-gestures-241",
+      "case": "Width percent authored token",
+      "status": "observed",
+      "actual": {
+        "computed": "300px",
+        "ui": "50",
+        "invalid": null,
+        "unit": "%"
+      }
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "artifacts/diagnostics/current-ui-audit/design/unit-width.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-height.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-geometry-radius.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-margin-top.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-margin-right.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-margin-bottom.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-margin-left.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-padding-top.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-padding-right.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-padding-bottom.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-padding-left.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-font-size.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-line-height.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-letter-spacing.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-opacity.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-border-width.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-border-radius.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-position-top.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-position-right.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-position-bottom.png",
+    "artifacts/diagnostics/current-ui-audit/design/unit-position-left.png"
+  ]
+}

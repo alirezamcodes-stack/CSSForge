@@ -1,0 +1,2214 @@
+{
+  "name": "numeric",
+  "observations": [
+    {
+      "id": "numeric-001",
+      "case": "Width: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "240px",
+        "ui": "240",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-002",
+      "case": "Width: decimal/direct input",
+      "status": "pass",
+      "expected": "240.5px",
+      "actual": "240.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-003",
+      "case": "Width: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "240.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "240.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-004",
+      "case": "Width: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-005",
+      "case": "Width: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-006",
+      "case": "Width: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-007",
+      "case": "Width: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "20px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-008",
+      "case": "Width: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-009",
+      "case": "Width: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-010",
+      "case": "Width: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-011",
+      "case": "Width: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-012",
+      "case": "Height: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "80px",
+        "ui": "80",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-013",
+      "case": "Height: decimal/direct input",
+      "status": "pass",
+      "expected": "80.5px",
+      "actual": "80.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-014",
+      "case": "Height: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "80.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "80.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-015",
+      "case": "Height: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-016",
+      "case": "Height: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-017",
+      "case": "Height: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-018",
+      "case": "Height: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "20px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-019",
+      "case": "Height: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-020",
+      "case": "Height: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-021",
+      "case": "Height: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-022",
+      "case": "Height: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-023",
+      "case": "Geometry radius: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "8px",
+        "ui": "8",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-024",
+      "case": "Geometry radius: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-025",
+      "case": "Geometry radius: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-026",
+      "case": "Geometry radius: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-027",
+      "case": "Geometry radius: keyword preserved",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-028",
+      "case": "Geometry radius: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-029",
+      "case": "Geometry radius: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-030",
+      "case": "Geometry radius: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-031",
+      "case": "Geometry radius: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-032",
+      "case": "Geometry radius: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-033",
+      "case": "Geometry radius: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-034",
+      "case": "Margin top: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "8px",
+        "ui": "8",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-035",
+      "case": "Margin top: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-036",
+      "case": "Margin top: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-037",
+      "case": "Margin top: negative valid input",
+      "status": "pass",
+      "expected": "-2px",
+      "actual": "-2px"
+    },
+    {
+      "id": "numeric-038",
+      "case": "Margin top: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-039",
+      "case": "Margin top: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-040",
+      "case": "Margin top: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-041",
+      "case": "Margin top: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-042",
+      "case": "Margin top: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-043",
+      "case": "Margin top: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-044",
+      "case": "Margin top: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-045",
+      "case": "Margin right: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "8px",
+        "ui": "8",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-046",
+      "case": "Margin right: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-047",
+      "case": "Margin right: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-048",
+      "case": "Margin right: negative valid input",
+      "status": "pass",
+      "expected": "-2px",
+      "actual": "-2px"
+    },
+    {
+      "id": "numeric-049",
+      "case": "Margin right: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-050",
+      "case": "Margin right: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-051",
+      "case": "Margin right: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-052",
+      "case": "Margin right: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-053",
+      "case": "Margin right: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-054",
+      "case": "Margin right: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-055",
+      "case": "Margin right: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-056",
+      "case": "Margin bottom: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "8px",
+        "ui": "8",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-057",
+      "case": "Margin bottom: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-058",
+      "case": "Margin bottom: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-059",
+      "case": "Margin bottom: negative valid input",
+      "status": "pass",
+      "expected": "-2px",
+      "actual": "-2px"
+    },
+    {
+      "id": "numeric-060",
+      "case": "Margin bottom: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-061",
+      "case": "Margin bottom: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-062",
+      "case": "Margin bottom: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-063",
+      "case": "Margin bottom: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-064",
+      "case": "Margin bottom: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-065",
+      "case": "Margin bottom: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-066",
+      "case": "Margin bottom: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-067",
+      "case": "Margin left: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "8px",
+        "ui": "8",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-068",
+      "case": "Margin left: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-069",
+      "case": "Margin left: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-070",
+      "case": "Margin left: negative valid input",
+      "status": "pass",
+      "expected": "-2px",
+      "actual": "-2px"
+    },
+    {
+      "id": "numeric-071",
+      "case": "Margin left: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-072",
+      "case": "Margin left: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-073",
+      "case": "Margin left: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-074",
+      "case": "Margin left: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-075",
+      "case": "Margin left: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-076",
+      "case": "Margin left: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-077",
+      "case": "Margin left: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-078",
+      "case": "Padding top: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "8px",
+        "ui": "8",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-079",
+      "case": "Padding top: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-080",
+      "case": "Padding top: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-081",
+      "case": "Padding top: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-082",
+      "case": "Padding top: keyword preserved",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-083",
+      "case": "Padding top: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-084",
+      "case": "Padding top: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-085",
+      "case": "Padding top: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-086",
+      "case": "Padding top: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-087",
+      "case": "Padding top: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-088",
+      "case": "Padding top: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-089",
+      "case": "Padding right: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "8px",
+        "ui": "8",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-090",
+      "case": "Padding right: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-091",
+      "case": "Padding right: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-092",
+      "case": "Padding right: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-093",
+      "case": "Padding right: keyword preserved",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-094",
+      "case": "Padding right: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-095",
+      "case": "Padding right: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-096",
+      "case": "Padding right: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-097",
+      "case": "Padding right: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-098",
+      "case": "Padding right: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-099",
+      "case": "Padding right: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-100",
+      "case": "Padding bottom: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "8px",
+        "ui": "8",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-101",
+      "case": "Padding bottom: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-102",
+      "case": "Padding bottom: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-103",
+      "case": "Padding bottom: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-104",
+      "case": "Padding bottom: keyword preserved",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-105",
+      "case": "Padding bottom: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-106",
+      "case": "Padding bottom: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-107",
+      "case": "Padding bottom: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-108",
+      "case": "Padding bottom: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-109",
+      "case": "Padding bottom: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-110",
+      "case": "Padding bottom: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-111",
+      "case": "Padding left: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "8px",
+        "ui": "8",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-112",
+      "case": "Padding left: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-113",
+      "case": "Padding left: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-114",
+      "case": "Padding left: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-115",
+      "case": "Padding left: keyword preserved",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-116",
+      "case": "Padding left: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-117",
+      "case": "Padding left: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-118",
+      "case": "Padding left: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-119",
+      "case": "Padding left: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-120",
+      "case": "Padding left: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-121",
+      "case": "Padding left: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-122",
+      "case": "Font size: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "20px",
+        "ui": "20",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-123",
+      "case": "Font size: decimal/direct input",
+      "status": "pass",
+      "expected": "20.5px",
+      "actual": "20.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-124",
+      "case": "Font size: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "20.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "20.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-125",
+      "case": "Font size: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-126",
+      "case": "Font size: keyword preserved",
+      "status": "pass",
+      "expected": "inherit",
+      "actual": "inherit"
+    },
+    {
+      "id": "numeric-127",
+      "case": "Font size: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "inherit",
+      "actual": "inherit"
+    },
+    {
+      "id": "numeric-128",
+      "case": "Font size: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-129",
+      "case": "Font size: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-130",
+      "case": "Font size: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-131",
+      "case": "Font size: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-132",
+      "case": "Font size: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-133",
+      "case": "Line height: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "28px",
+        "ui": "1.4",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "numeric-134",
+      "case": "Line height: decimal/direct input",
+      "status": "pass",
+      "expected": "30px",
+      "actual": "30px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-135",
+      "case": "Line height: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "30px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "30px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-136",
+      "case": "Line height: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-137",
+      "case": "Line height: keyword preserved",
+      "status": "pass",
+      "expected": "normal",
+      "actual": "normal"
+    },
+    {
+      "id": "numeric-138",
+      "case": "Line height: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "normal",
+      "actual": "normal"
+    },
+    {
+      "id": "numeric-139",
+      "case": "Line height: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "30px",
+        "ui": "calc(1 + .5)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-140",
+      "case": "Line height: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(1 + .5)",
+      "actual": "calc(1 + .5)"
+    },
+    {
+      "id": "numeric-141",
+      "case": "Line height: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-line)",
+      "actual": "var(--audit-line)"
+    },
+    {
+      "id": "numeric-142",
+      "case": "Line height: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-line)",
+      "actual": "var(--audit-line)"
+    },
+    {
+      "id": "numeric-143",
+      "case": "Line height: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-144",
+      "case": "Letter spacing: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "1px",
+        "ui": "1",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-145",
+      "case": "Letter spacing: decimal/direct input",
+      "status": "pass",
+      "expected": "1.5px",
+      "actual": "1.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-146",
+      "case": "Letter spacing: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "1.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "1.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-147",
+      "case": "Letter spacing: negative valid input",
+      "status": "pass",
+      "expected": "-2px",
+      "actual": "-2px"
+    },
+    {
+      "id": "numeric-148",
+      "case": "Letter spacing: keyword preserved",
+      "status": "pass",
+      "expected": "normal",
+      "actual": "normal"
+    },
+    {
+      "id": "numeric-149",
+      "case": "Letter spacing: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "normal",
+      "actual": "normal"
+    },
+    {
+      "id": "numeric-150",
+      "case": "Letter spacing: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-151",
+      "case": "Letter spacing: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-152",
+      "case": "Letter spacing: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-153",
+      "case": "Letter spacing: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-154",
+      "case": "Letter spacing: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-155",
+      "case": "Opacity: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "1",
+        "ui": "1",
+        "invalid": null,
+        "unit": "—"
+      }
+    },
+    {
+      "id": "numeric-156",
+      "case": "Opacity: decimal/direct input",
+      "status": "pass",
+      "expected": "0.75",
+      "actual": "0.75",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-157",
+      "case": "Opacity: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "0.75",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "0.75",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-158",
+      "case": "Opacity: negative invalid unit rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-159",
+      "case": "Opacity: keyword preserved",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-160",
+      "case": "Opacity: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-161",
+      "case": "Opacity: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "0.6",
+        "ui": "calc(.5 + .1)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-162",
+      "case": "Opacity: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(.5 + .1)",
+      "actual": "calc(.5 + .1)"
+    },
+    {
+      "id": "numeric-163",
+      "case": "Opacity: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-opacity)",
+      "actual": "var(--audit-opacity)"
+    },
+    {
+      "id": "numeric-164",
+      "case": "Opacity: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-opacity)",
+      "actual": "var(--audit-opacity)"
+    },
+    {
+      "id": "numeric-165",
+      "case": "Opacity: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-166",
+      "case": "Border width: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "2px",
+        "ui": "2",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-167",
+      "case": "Border width: decimal/direct input",
+      "status": "pass",
+      "expected": "3px",
+      "actual": "3px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-168",
+      "case": "Border width: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "3px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "3px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-169",
+      "case": "Border width: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-170",
+      "case": "Border width: keyword preserved",
+      "status": "pass",
+      "expected": "medium",
+      "actual": "medium"
+    },
+    {
+      "id": "numeric-171",
+      "case": "Border width: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "medium",
+      "actual": "medium"
+    },
+    {
+      "id": "numeric-172",
+      "case": "Border width: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-173",
+      "case": "Border width: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-174",
+      "case": "Border width: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-175",
+      "case": "Border width: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-176",
+      "case": "Border width: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-177",
+      "case": "Border radius: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "8px",
+        "ui": "8",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-178",
+      "case": "Border radius: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-179",
+      "case": "Border radius: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-180",
+      "case": "Border radius: negative length rejected",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-181",
+      "case": "Border radius: keyword preserved",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-182",
+      "case": "Border radius: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "initial",
+      "actual": "initial"
+    },
+    {
+      "id": "numeric-183",
+      "case": "Border radius: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-184",
+      "case": "Border radius: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-185",
+      "case": "Border radius: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-186",
+      "case": "Border radius: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-187",
+      "case": "Border radius: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-188",
+      "case": "Position top: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "0px",
+        "ui": "0",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-189",
+      "case": "Position top: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-190",
+      "case": "Position top: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-191",
+      "case": "Position top: negative valid input",
+      "status": "pass",
+      "expected": "-2px",
+      "actual": "-2px"
+    },
+    {
+      "id": "numeric-192",
+      "case": "Position top: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-193",
+      "case": "Position top: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-194",
+      "case": "Position top: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-195",
+      "case": "Position top: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-196",
+      "case": "Position top: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-197",
+      "case": "Position top: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-198",
+      "case": "Position top: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-199",
+      "case": "Position right: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "0px",
+        "ui": "0",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-200",
+      "case": "Position right: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-201",
+      "case": "Position right: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-202",
+      "case": "Position right: negative valid input",
+      "status": "pass",
+      "expected": "-2px",
+      "actual": "-2px"
+    },
+    {
+      "id": "numeric-203",
+      "case": "Position right: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-204",
+      "case": "Position right: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-205",
+      "case": "Position right: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-206",
+      "case": "Position right: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-207",
+      "case": "Position right: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-208",
+      "case": "Position right: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-209",
+      "case": "Position right: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-210",
+      "case": "Position bottom: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "0px",
+        "ui": "0",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-211",
+      "case": "Position bottom: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-212",
+      "case": "Position bottom: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-213",
+      "case": "Position bottom: negative valid input",
+      "status": "pass",
+      "expected": "-2px",
+      "actual": "-2px"
+    },
+    {
+      "id": "numeric-214",
+      "case": "Position bottom: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-215",
+      "case": "Position bottom: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-216",
+      "case": "Position bottom: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-217",
+      "case": "Position bottom: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-218",
+      "case": "Position bottom: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-219",
+      "case": "Position bottom: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-220",
+      "case": "Position bottom: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-221",
+      "case": "Position left: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "0px",
+        "ui": "0",
+        "invalid": null,
+        "unit": "px"
+      }
+    },
+    {
+      "id": "numeric-222",
+      "case": "Position left: decimal/direct input",
+      "status": "pass",
+      "expected": "10.5px",
+      "actual": "10.5px",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-223",
+      "case": "Position left: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "10.5px",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-224",
+      "case": "Position left: negative valid input",
+      "status": "pass",
+      "expected": "-2px",
+      "actual": "-2px"
+    },
+    {
+      "id": "numeric-225",
+      "case": "Position left: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-226",
+      "case": "Position left: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-227",
+      "case": "Position left: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "12px",
+        "ui": "calc(10px + 2px)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-228",
+      "case": "Position left: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(10px + 2px)",
+      "actual": "calc(10px + 2px)"
+    },
+    {
+      "id": "numeric-229",
+      "case": "Position left: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-230",
+      "case": "Position left: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-length)",
+      "actual": "var(--audit-length)"
+    },
+    {
+      "id": "numeric-231",
+      "case": "Position left: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-232",
+      "case": "Z-index: baseline",
+      "status": "observed",
+      "actual": {
+        "computed": "1",
+        "ui": "1",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-233",
+      "case": "Z-index: decimal/direct input",
+      "status": "pass",
+      "expected": "5",
+      "actual": "5",
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-234",
+      "case": "Z-index: unsupported unit rejects without mutation",
+      "status": "pass",
+      "expected": {
+        "computed": "5",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "5",
+        "invalid": "true"
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "numeric-235",
+      "case": "Z-index: negative valid input",
+      "status": "pass",
+      "expected": "-2",
+      "actual": "-2"
+    },
+    {
+      "id": "numeric-236",
+      "case": "Z-index: fractional integer rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-237",
+      "case": "Z-index: keyword preserved",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-238",
+      "case": "Z-index: keyword arrow does not rewrite",
+      "status": "pass",
+      "expected": "auto",
+      "actual": "auto"
+    },
+    {
+      "id": "numeric-239",
+      "case": "Z-index: calc expression",
+      "status": "observed",
+      "actual": {
+        "computed": "3",
+        "ui": "calc(2 + 1)",
+        "invalid": null,
+        "unit": null
+      }
+    },
+    {
+      "id": "numeric-240",
+      "case": "Z-index: calc arrow preserves token",
+      "status": "pass",
+      "expected": "calc(2 + 1)",
+      "actual": "calc(2 + 1)"
+    },
+    {
+      "id": "numeric-241",
+      "case": "Z-index: var token retained",
+      "status": "pass",
+      "expected": "var(--audit-index)",
+      "actual": "var(--audit-index)"
+    },
+    {
+      "id": "numeric-242",
+      "case": "Z-index: var arrow preserves token",
+      "status": "pass",
+      "expected": "var(--audit-index)",
+      "actual": "var(--audit-index)"
+    },
+    {
+      "id": "numeric-243",
+      "case": "Z-index: malformed declaration rejects",
+      "status": "pass",
+      "expected": "true",
+      "actual": "true"
+    },
+    {
+      "id": "numeric-244",
+      "case": "Radius geometry/Border synchronization: initial",
+      "status": "observed",
+      "actual": {
+        "geometry": "8",
+        "border": "8"
+      }
+    },
+    {
+      "id": "numeric-245",
+      "case": "Radius geometry/Border synchronization: edit",
+      "status": "pass",
+      "expected": {
+        "geometry": "15",
+        "border": "15"
+      },
+      "actual": {
+        "geometry": "15",
+        "border": "15"
+      },
+      "module": "src/ui/design/LiveDesignView.tsx"
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "artifacts/diagnostics/current-ui-audit/design/01-geometry-baseline.png",
+    "artifacts/diagnostics/current-ui-audit/design/02-spacing-baseline.png",
+    "artifacts/diagnostics/current-ui-audit/design/03-border-baseline.png"
+  ],
+  "inventory": {
+    "numericFieldInstances": 22,
+    "fields": [
+      {
+        "label": "Width",
+        "property": "width",
+        "section": ""
+      },
+      {
+        "label": "Height",
+        "property": "height",
+        "section": ""
+      },
+      {
+        "label": "Geometry radius",
+        "property": "border-radius",
+        "section": ""
+      },
+      {
+        "label": "Margin top",
+        "property": "margin-top",
+        "section": "Spacing"
+      },
+      {
+        "label": "Margin right",
+        "property": "margin-right",
+        "section": "Spacing"
+      },
+      {
+        "label": "Margin bottom",
+        "property": "margin-bottom",
+        "section": "Spacing"
+      },
+      {
+        "label": "Margin left",
+        "property": "margin-left",
+        "section": "Spacing"
+      },
+      {
+        "label": "Padding top",
+        "property": "padding-top",
+        "section": "Spacing"
+      },
+      {
+        "label": "Padding right",
+        "property": "padding-right",
+        "section": "Spacing"
+      },
+      {
+        "label": "Padding bottom",
+        "property": "padding-bottom",
+        "section": "Spacing"
+      },
+      {
+        "label": "Padding left",
+        "property": "padding-left",
+        "section": "Spacing"
+      },
+      {
+        "label": "Font size",
+        "property": "font-size",
+        "section": "Typography"
+      },
+      {
+        "label": "Line height",
+        "property": "line-height",
+        "section": "Typography"
+      },
+      {
+        "label": "Letter spacing",
+        "property": "letter-spacing",
+        "section": "Typography"
+      },
+      {
+        "label": "Opacity",
+        "property": "opacity",
+        "section": "Display"
+      },
+      {
+        "label": "Border width",
+        "property": "border-width",
+        "section": "Border"
+      },
+      {
+        "label": "Border radius",
+        "property": "border-radius",
+        "section": "Border"
+      },
+      {
+        "label": "Position top",
+        "property": "top",
+        "section": "Positioning"
+      },
+      {
+        "label": "Position right",
+        "property": "right",
+        "section": "Positioning"
+      },
+      {
+        "label": "Position bottom",
+        "property": "bottom",
+        "section": "Positioning"
+      },
+      {
+        "label": "Position left",
+        "property": "left",
+        "section": "Positioning"
+      },
+      {
+        "label": "Z-index",
+        "property": "z-index",
+        "section": "Positioning"
+      }
+    ],
+    "notExposed": [
+      "min-width",
+      "max-width",
+      "min-height",
+      "max-height",
+      "aspect-ratio",
+      "border per-side controls",
+      "corner-specific radius controls",
+      "font-style/italic",
+      "gap",
+      "flex/grid child controls"
+    ]
+  }
+}

@@ -1,0 +1,1400 @@
+{
+  "case": "SH07 keyboard focus tabs popovers host events and current control inventory",
+  "actual": {
+    "rows": [
+      {
+        "case": "tab key",
+        "key": "ArrowRight",
+        "selected": "Code",
+        "focused": "Code"
+      },
+      {
+        "case": "tab key",
+        "key": "ArrowRight",
+        "selected": "HTML",
+        "focused": "HTML"
+      },
+      {
+        "case": "tab key",
+        "key": "ArrowLeft",
+        "selected": "Code",
+        "focused": "Code"
+      },
+      {
+        "case": "tab key",
+        "key": "Home",
+        "selected": "Design",
+        "focused": "Design"
+      },
+      {
+        "case": "tab key",
+        "key": "End",
+        "selected": "HTML",
+        "focused": "HTML"
+      },
+      {
+        "case": "tab key",
+        "key": "Home",
+        "selected": "Design",
+        "focused": "Design"
+      },
+      {
+        "case": "UI key leakage",
+        "pageKeys": 0
+      },
+      {
+        "case": "menu keys",
+        "focused": "Arial"
+      },
+      {
+        "case": "Tab sequence",
+        "focus": [
+          {
+            "tag": "div",
+            "label": "MediaBase · all viewportsState or pseudo None / currentX81Y428pxW"
+          },
+          {
+            "tag": "button",
+            "label": "Media"
+          },
+          {
+            "tag": "button",
+            "label": "State or pseudo"
+          },
+          {
+            "tag": "input",
+            "label": "Geometry radius"
+          },
+          {
+            "tag": "button",
+            "label": "Geometry radius unit"
+          },
+          {
+            "tag": "input",
+            "label": "Width"
+          },
+          {
+            "tag": "button",
+            "label": "Width unit"
+          },
+          {
+            "tag": "input",
+            "label": "Height"
+          },
+          {
+            "tag": "button",
+            "label": "Height unit"
+          },
+          {
+            "tag": "button",
+            "label": "Spacing"
+          },
+          {
+            "tag": "input",
+            "label": "Margin top"
+          },
+          {
+            "tag": "button",
+            "label": "Margin top unit"
+          },
+          {
+            "tag": "input",
+            "label": "Margin right"
+          },
+          {
+            "tag": "button",
+            "label": "Margin right unit"
+          },
+          {
+            "tag": "input",
+            "label": "Margin bottom"
+          },
+          {
+            "tag": "button",
+            "label": "Margin bottom unit"
+          },
+          {
+            "tag": "input",
+            "label": "Margin left"
+          },
+          {
+            "tag": "button",
+            "label": "Margin left unit"
+          },
+          {
+            "tag": "input",
+            "label": "Padding top"
+          },
+          {
+            "tag": "button",
+            "label": "Padding top unit"
+          },
+          {
+            "tag": "input",
+            "label": "Padding right"
+          },
+          {
+            "tag": "button",
+            "label": "Padding right unit"
+          },
+          {
+            "tag": "input",
+            "label": "Padding bottom"
+          },
+          {
+            "tag": "button",
+            "label": "Padding bottom unit"
+          },
+          {
+            "tag": "input",
+            "label": "Padding left"
+          }
+        ]
+      },
+      {
+        "case": "current Design inventory",
+        "controls": [
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Media",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "State or pseudo",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Geometry radius",
+            "type": null,
+            "disabled": false,
+            "value": "6",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Geometry radius unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Width",
+            "type": null,
+            "disabled": false,
+            "value": "219.109",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Width unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Height",
+            "type": null,
+            "disabled": false,
+            "value": "53",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Height unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Spacing",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "true"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Margin top",
+            "type": null,
+            "disabled": false,
+            "value": "0",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Margin top unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Margin right",
+            "type": null,
+            "disabled": false,
+            "value": "0",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Margin right unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Margin bottom",
+            "type": null,
+            "disabled": false,
+            "value": "0",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Margin bottom unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Margin left",
+            "type": null,
+            "disabled": false,
+            "value": "0",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Margin left unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Padding top",
+            "type": null,
+            "disabled": false,
+            "value": "16",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Padding top unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Padding right",
+            "type": null,
+            "disabled": false,
+            "value": "24",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Padding right unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Padding bottom",
+            "type": null,
+            "disabled": false,
+            "value": "16",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Padding bottom unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Padding left",
+            "type": null,
+            "disabled": false,
+            "value": "24",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Padding left unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Typography",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "true"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Font family",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Font weight",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Font size",
+            "type": null,
+            "disabled": false,
+            "value": "18",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Font size unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Line height",
+            "type": null,
+            "disabled": false,
+            "value": "normal",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text color picker",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Text color",
+            "type": null,
+            "disabled": false,
+            "value": "rgb(255, 255, 255)",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Align left",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Align center",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Align right",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Align justify",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Letter spacing",
+            "type": null,
+            "disabled": false,
+            "value": "normal",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text decoration",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text transform",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "true"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background color picker",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Background color",
+            "type": null,
+            "disabled": false,
+            "value": "rgb(41, 76, 59)",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Add background layer",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Porcelain",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Limestone",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Mist",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Graphite",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Terracotta",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Amber",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Apricot",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Rosewood",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Glacier",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Tidal",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Periwinkle",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Arctic",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Citrus",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Orchid",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Coral",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Electric",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Pistachio",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Lavender",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Petal",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Sky",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Midnight",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Forest",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Plum",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Obsidian",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Frost",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Pearl",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Sea glass",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Background preset Smoke",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Display",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "true"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Display mode",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Opacity",
+            "type": null,
+            "disabled": false,
+            "value": "100",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Opacity unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Border",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "true"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Border color picker",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Border color",
+            "type": null,
+            "disabled": false,
+            "value": "rgb(255, 255, 255)",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Border width",
+            "type": null,
+            "disabled": false,
+            "value": "0",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Border width unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Border style",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Border radius",
+            "type": null,
+            "disabled": false,
+            "value": "6",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Border radius unit",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Positioning",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "true"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Position",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "false"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "true"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Add box shadow",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "None",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Subtle",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Subtle Soft",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Subtle Border",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Card",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Elevated",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Floating",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Soft",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Wide",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Strong",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Inset Light",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Inset Dark",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Pressed",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Outline",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Glow",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Box shadow preset Lift",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text shadow",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "true"
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Add text shadow",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "None",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text shadow preset Subtle",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text shadow preset Soft",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text shadow preset Strong",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text shadow preset Outline",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text shadow preset Glow",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text shadow preset Retro",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text shadow preset Raised",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Text shadow preset Emboss",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Filters",
+            "type": "button",
+            "disabled": false,
+            "value": "",
+            "expanded": "true"
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Blur value",
+            "type": null,
+            "disabled": false,
+            "value": "0px",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Blur",
+            "type": "range",
+            "disabled": false,
+            "value": "0",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Contrast value",
+            "type": null,
+            "disabled": false,
+            "value": "100%",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Contrast",
+            "type": "range",
+            "disabled": false,
+            "value": "100",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Brightness value",
+            "type": null,
+            "disabled": false,
+            "value": "100%",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Brightness",
+            "type": "range",
+            "disabled": false,
+            "value": "100",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Saturate value",
+            "type": null,
+            "disabled": false,
+            "value": "100%",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Saturate",
+            "type": "range",
+            "disabled": false,
+            "value": "100",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Hue rotate value",
+            "type": null,
+            "disabled": false,
+            "value": "0deg",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Hue rotate",
+            "type": "range",
+            "disabled": false,
+            "value": "0",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Invert value",
+            "type": null,
+            "disabled": false,
+            "value": "0%",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Invert",
+            "type": "range",
+            "disabled": false,
+            "value": "0",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Grayscale value",
+            "type": null,
+            "disabled": false,
+            "value": "0%",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Grayscale",
+            "type": "range",
+            "disabled": false,
+            "value": "0",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Sepia value",
+            "type": null,
+            "disabled": false,
+            "value": "0%",
+            "expanded": null
+          },
+          {
+            "tag": "input",
+            "role": null,
+            "label": "Sepia",
+            "type": "range",
+            "disabled": false,
+            "value": "0",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Reset filters",
+            "type": null,
+            "disabled": true,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Undo last edit",
+            "type": null,
+            "disabled": true,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Reset session edits",
+            "type": null,
+            "disabled": true,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Select parent",
+            "type": null,
+            "disabled": false,
+            "value": "",
+            "expanded": null
+          },
+          {
+            "tag": "button",
+            "role": null,
+            "label": "Select child",
+            "type": null,
+            "disabled": true,
+            "value": "",
+            "expanded": null
+          }
+        ]
+      },
+      {
+        "case": "outside click",
+        "popupCount": 0,
+        "hostHash": "#below"
+      }
+    ],
+    "errors": []
+  }
+}

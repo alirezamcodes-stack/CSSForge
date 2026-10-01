@@ -1,0 +1,266 @@
+{
+  "scope": "Diagnostic-only audit of current visible ColorControl, Background/Gradient, Box shadow, Text shadow and Filters UI in built Chrome MV3. Test fixtures provide host CSS; all extension edits use user-visible buttons, fields, sliders, pointer and keyboard. Native computed style reads verify results.",
+  "testFile": "tests/e2e/current-ui-effects-audit.spec.ts",
+  "findings": [
+    {
+      "id": "EFF-A-01",
+      "surface": "Shared closed color inputs",
+      "problem": "Escape retains a color edit despite the field tooltip promising gesture cancellation",
+      "category": "A. Functional bug",
+      "severity": "Medium",
+      "priority": "P2",
+      "reproduction": [
+        "Select #checkout in the built-Chrome fixture.",
+        "Open Typography and focus Text color.",
+        "Replace the native white value with #00ff00.",
+        "Press Escape while the field is focused."
+      ],
+      "expected": "Escape restores the white color, consistent with the displayed tooltip 'Escape reverts the current gesture.'",
+      "actual": "Target stays rgb(0, 255, 0); field stays #00ff00. Undo later restores white.",
+      "module": [
+        "src/ui/shared/ColorControl.tsx",
+        "src/ui/design/EditControls.tsx"
+      ],
+      "probableRootCause": "EditField passes a NumericScrubber tooltip to ColorControl. ColorControl handles Enter but has no Escape/cancelGesture handler.",
+      "recommendedFixPhase": "Shared color interaction and truthful tooltip behavior",
+      "evidence": [
+        "focused-color.json#focused-color-001",
+        "focused-color-escape.png"
+      ]
+    },
+    {
+      "id": "EFF-A-02",
+      "surface": "ColorControl alpha on a valid CSS token",
+      "problem": "Changing currentColor alpha silently changes its hue to black",
+      "category": "A. Functional bug",
+      "severity": "Medium",
+      "priority": "P2",
+      "reproduction": [
+        "Select the white-text #checkout fixture.",
+        "Open Box shadow and Add box shadow.",
+        "Set Box shadow color to currentColor and press Enter.",
+        "Open Box shadow color picker and type 50% in Alpha."
+      ],
+      "expected": "Either preserve the rendered white hue while changing opacity, or disable alpha for a token that cannot be resolved safely.",
+      "actual": "White currentColor shadow becomes rgba(0, 0, 0, 0.5); main field is #00000080. Undo restores currentColor.",
+      "module": [
+        "src/ui/shared/ColorControl.tsx"
+      ],
+      "probableRootCause": "The numeric alpha handler calls rgb(parsed ?? '#000') when Culori cannot parse currentColor, replacing a valid unresolved token with black.",
+      "recommendedFixPhase": "Shared color token handling; disable alpha for unresolved valid tokens until conversion is safe",
+      "evidence": [
+        "focused-color.json#focused-color-003",
+        "focused-color-currentcolor-alpha.png"
+      ]
+    },
+    {
+      "id": "EFF-B-01",
+      "surface": "Complex gradient stop editor",
+      "problem": "A valid interpolation hint is displayed as a color stop with an invented position",
+      "category": "B. Incorrect value/state",
+      "severity": "Medium",
+      "priority": "P2",
+      "reproduction": [
+        "Select #complex-gradient, authored with linear-gradient(90deg, red 0% 20%, 45%, blue 100%).",
+        "Open Background and select Layer 1.",
+        "Inspect the stop rows and track."
+      ],
+      "expected": "Recognize the standalone 45% interpolation hint as a hint, or preserve the complex syntax in a clearly limited editor instead of displaying it as a CSS color.",
+      "actual": "Chrome normalizes red 0% 20% into two red stops. UI shows four color rows; Stop 3 color contains invalid color token 45%, with a default position around 66.7%. Native gradient remains valid; angle edit/Undo/Reset preserve its actual CSS.",
+      "module": [
+        "src/editing/rich.ts:parseGradient",
+        "src/ui/design/RichBackground.tsx",
+        "src/ui/design/GradientTrack.tsx"
+      ],
+      "probableRootCause": "parseGradient treats every remaining argument as a color stop. A lone percentage cannot be distinguished as an interpolation hint and receives an implicit-stop editor.",
+      "recommendedFixPhase": "Rich gradient parser/state presentation; block unsupported hint editing until faithfully represented",
+      "evidence": [
+        "background.json#background-062",
+        "background-complex-gradient.png"
+      ]
+    },
+    {
+      "id": "EFF-B-02",
+      "surface": "Border color for nonuniform four-side colors",
+      "problem": "Four valid side colors appear as a single unparseable color token with a black/default picker",
+      "category": "B. Incorrect value/state",
+      "severity": "Medium",
+      "priority": "P2",
+      "reproduction": [
+        "Select #nonuniform, authored with red/green/blue/yellow side colors.",
+        "Open Border.",
+        "Open Border color picker without editing."
+      ],
+      "expected": "Display a clear mixed/per-side state and explain that choosing one color replaces all sides.",
+      "actual": "Main field contains the four-value rgb shorthand, swatch appears unset, picker defaults to black and says 'Enter a color, or choose a new one to replace this token.' Applying one color and Undo work correctly.",
+      "module": [
+        "src/ui/shared/ColorControl.tsx",
+        "src/ui/design/LiveDesignView.tsx"
+      ],
+      "probableRootCause": "A border-color shorthand containing four valid colors is passed into a parser that expects one CSS color.",
+      "recommendedFixPhase": "Border UI mixed-value presentation",
+      "evidence": [
+        "color.json#color-070",
+        "color-nonuniform-border.png"
+      ]
+    },
+    {
+      "id": "EFF-F-01",
+      "surface": "All six ColorControl format inputs",
+      "problem": "Invalid popup format input omits aria-invalid although CSS is rejected",
+      "category": "F. Accessibility/keyboard bug",
+      "severity": "Medium",
+      "priority": "P2",
+      "reproduction": [
+        "Open a text/background/border/box-shadow/text-shadow/gradient-stop color picker.",
+        "Choose HEX, RGB or HSL.",
+        "Replace its formatted text with an invalid color."
+      ],
+      "expected": "Focused invalid format input exposes aria-invalid=true and an associated error.",
+      "actual": "CSS remains unchanged and visible error appears, but formatted popup input aria-invalid is null. Closed input exposes aria-invalid=true. Confirmed across all six current control contexts.",
+      "module": [
+        "src/ui/shared/ColorControl.tsx"
+      ],
+      "probableRootCause": "The popup formatted input lacks aria-invalid; only the closed color input receives it.",
+      "recommendedFixPhase": "Shared color accessibility",
+      "evidence": [
+        "color.json#color-008",
+        "color.json#color-020",
+        "color.json#color-032",
+        "color.json#color-044",
+        "color.json#color-056",
+        "effects-followup.json#effects-followup-009",
+        "effects-followup-gradient-invalid-color.png"
+      ]
+    },
+    {
+      "id": "EFF-G-01",
+      "surface": "Color controls across Typography and Effects",
+      "problem": "The same color picker has inconsistent format tabs, swatch shape and input typography across sections",
+      "category": "G. Visual consistency/UI polish",
+      "severity": "Low",
+      "priority": "P3",
+      "reproduction": [
+        "Open Text color picker in Typography and select HSL.",
+        "Open Box shadow color picker and select HSL.",
+        "Compare selected tabs, closed swatches, captions and fields."
+      ],
+      "expected": "Shared color controls follow consistent visual conventions unless the surface difference has a clear user purpose.",
+      "actual": "Typography uses underline tabs, square swatch, larger code-styled closed field and a divided heading; Effects uses filled segmented tabs, circular swatch and smaller UI-font closed field.",
+      "module": [
+        "src/ui/shared/propertyControls.module.css"
+      ],
+      "probableRootCause": "Typography-only ColorControl CSS overrides deliberately diverge from the shared base color UI.",
+      "recommendedFixPhase": "Later UI consistency pass; no functional redesign during this audit",
+      "evidence": [
+        "color-text-color.png",
+        "color-box-shadow-color.png"
+      ]
+    }
+  ],
+  "sharedRootFindings": [
+    {
+      "surface": "Selected target overlay stacking",
+      "category": "E. Layout/zoom/overflow bug",
+      "severity": "Medium",
+      "countedHere": false,
+      "owner": "Root audit",
+      "problem": "Target label/outline render above extension inspector and popover at 320px, including on the color spectrum and shadow color row.",
+      "evidence": [
+        "focused-color.json#focused-color-009",
+        "focused-color-narrow-outline-overlap.png",
+        "color-narrow-320.png",
+        "shadows-filters-box-shadow-320.png"
+      ],
+      "module": [
+        "src/picker/overlay.ts",
+        "src/ui/popovers/Popover.tsx"
+      ],
+      "probableRootCause": "Selected overlay is in the browser top layer and the inspector/popovers are in normal DOM stacking."
+    }
+  ],
+  "limitations": [
+    {
+      "id": "EFF-I-01",
+      "category": "I. Current known limitation",
+      "severity": "Low",
+      "surface": "Filters",
+      "actual": "Current UI exposes 8 fixed-unit numeric controls/ranges (blur px, hue deg, remaining percent). It has Reset but no opacity/drop-shadow editor, individual enable/disable or reorder controls. These absent controls are not unwired visible surfaces.",
+      "evidence": [
+        "focused-color.json#focused-color-010",
+        "shadows-filters.json#shadows-filters-092"
+      ],
+      "module": [
+        "src/ui/design/RichEffects.tsx",
+        "src/editing/rich.ts:filterSpecs"
+      ]
+    },
+    {
+      "id": "EFF-I-02",
+      "category": "I. Current known limitation",
+      "severity": "Low",
+      "surface": "Complex/repeated filter functions",
+      "actual": "Repeated blur functions disable the Blur numeric/range controls with the tooltip explaining preservation. New supported filters append without corrupting repeated blur/drop-shadow; Reset and Undo restore the chain. Disabled Blur displays neutral 0px rather than a single merged blur value.",
+      "evidence": [
+        "shadows-filters.json#shadows-filters-105",
+        "shadows-filters.json#shadows-filters-106",
+        "shadows-filters.json#shadows-filters-107",
+        "shadows-filters-complex-filter.png"
+      ],
+      "module": [
+        "src/ui/design/RichEffects.tsx",
+        "src/editing/rich.ts:readFilter"
+      ]
+    }
+  ],
+  "expectedExclusions": [
+    {
+      "id": "EFF-H-01",
+      "category": "H. Expected browser/CSS behavior — NOT a bug",
+      "actual": "Chrome resolves authored relative shadow lengths/currentColor to pixel/RGB computed values. Editing y preserves the other computed components and inset; no change is made merely by opening the UI.",
+      "evidence": [
+        "shadows-filters.json#shadows-filters-102",
+        "shadows-filters.json#shadows-filters-103"
+      ]
+    },
+    {
+      "id": "EFF-H-02",
+      "category": "H. Expected browser/CSS behavior — NOT a bug",
+      "actual": "Chrome omits default ellipse and normalizes left top to 0% 0% in radial-gradient, right bottom background-position to 100% 100%, and double-position red to two equivalent red stops. Those normalized values are correct.",
+      "evidence": [
+        "background.json#background-019",
+        "background.json#background-063",
+        "background.json#background-064"
+      ]
+    },
+    {
+      "id": "EFF-H-03",
+      "category": "H. Expected browser/CSS behavior — NOT a bug",
+      "actual": "px-to-em shadow conversions yield -3.00001px due to decimal serialization, preserving rendered offset within normal tolerance. Alpha ArrowRight at the maximum is a boundary no-op; the final spec uses ArrowLeft for that case.",
+      "evidence": [
+        "shadows-filters.json#shadows-filters-008",
+        "shadows-filters.json#shadows-filters-037",
+        "color.json#color-065"
+      ]
+    }
+  ],
+  "unwiredEffectsSurfaces": [],
+  "functionalBugsBySeverity": {
+    "Critical": 0,
+    "High": 0,
+    "Medium": 5,
+    "Low": 0
+  },
+  "polishBySeverity": {
+    "Low": 1
+  },
+  "coverageStatus": "Complete: all five effects Chrome diagnostic groups passed in the final 24-group run; no recorded page errors. Known product defects remain documented observations.",
+  "finalObservationCounts": {
+    "color": 73,
+    "focusedColor": 11,
+    "background": 65,
+    "shadowsFilters": 108,
+    "effectsFollowup": 57,
+    "total": 314
+  }
+}

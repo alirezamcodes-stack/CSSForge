@@ -1,0 +1,449 @@
+{
+  "name": "native-zoom",
+  "observations": [
+    {
+      "id": "native-zoom-001",
+      "case": "Chrome 125% zoom applied",
+      "status": "pass",
+      "expected": 1.25,
+      "actual": 1.25
+    },
+    {
+      "id": "native-zoom-002",
+      "case": "Spacing at 125%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-003",
+      "case": "Spacing at 125%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 602
+        },
+        "viewport": {
+          "width": 1152,
+          "height": 720
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-004",
+      "case": "Typography at 125%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-005",
+      "case": "Typography at 125%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 602
+        },
+        "viewport": {
+          "width": 1152,
+          "height": 720
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-006",
+      "case": "Display at 125%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-007",
+      "case": "Display at 125%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 602
+        },
+        "viewport": {
+          "width": 1152,
+          "height": 720
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-008",
+      "case": "Border at 125%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-009",
+      "case": "Border at 125%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 602
+        },
+        "viewport": {
+          "width": 1152,
+          "height": 720
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-010",
+      "case": "Positioning at 125%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-011",
+      "case": "Positioning at 125%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 780,
+          "y": 24,
+          "width": 350,
+          "height": 602
+        },
+        "viewport": {
+          "width": 1152,
+          "height": 720
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-012",
+      "case": "Chrome 150% zoom applied",
+      "status": "pass",
+      "expected": 1.5,
+      "actual": 1.5
+    },
+    {
+      "id": "native-zoom-013",
+      "case": "Spacing at 150%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-014",
+      "case": "Spacing at 150%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 482
+        },
+        "viewport": {
+          "width": 960,
+          "height": 600
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-015",
+      "case": "Typography at 150%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-016",
+      "case": "Typography at 150%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 482
+        },
+        "viewport": {
+          "width": 960,
+          "height": 600
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-017",
+      "case": "Display at 150%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-018",
+      "case": "Display at 150%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 482
+        },
+        "viewport": {
+          "width": 960,
+          "height": 600
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-019",
+      "case": "Border at 150%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-020",
+      "case": "Border at 150%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 482
+        },
+        "viewport": {
+          "width": 960,
+          "height": 600
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-021",
+      "case": "Positioning at 150%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-022",
+      "case": "Positioning at 150%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 588,
+          "y": 24,
+          "width": 350,
+          "height": 482
+        },
+        "viewport": {
+          "width": 960,
+          "height": 600
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-023",
+      "case": "Chrome 200% zoom applied",
+      "status": "pass",
+      "expected": 2,
+      "actual": 2
+    },
+    {
+      "id": "native-zoom-024",
+      "case": "Spacing at 200%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-025",
+      "case": "Spacing at 200%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 372
+        },
+        "viewport": {
+          "width": 720,
+          "height": 450
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-026",
+      "case": "Typography at 200%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-027",
+      "case": "Typography at 200%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 372
+        },
+        "viewport": {
+          "width": 720,
+          "height": 450
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-028",
+      "case": "Display at 200%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-029",
+      "case": "Display at 200%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 372
+        },
+        "viewport": {
+          "width": 720,
+          "height": 450
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-030",
+      "case": "Border at 200%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-031",
+      "case": "Border at 200%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 372
+        },
+        "viewport": {
+          "width": 720,
+          "height": 450
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    },
+    {
+      "id": "native-zoom-032",
+      "case": "Positioning at 200%: native viewport bounds and pointer hit",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "native-zoom-033",
+      "case": "Positioning at 200%: native viewport geometry",
+      "status": "observed",
+      "actual": {
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 372
+        },
+        "viewport": {
+          "width": 720,
+          "height": 450
+        },
+        "overflow": 0,
+        "headerHitIsInspector": true,
+        "scrollY": 836
+      }
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-125-spacing.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-125-typography.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-125-display.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-125-border.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-125-positioning.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-150-spacing.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-150-typography.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-150-display.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-150-border.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-150-positioning.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-200-spacing.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-200-typography.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-200-display.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-200-border.png",
+    "artifacts/diagnostics/current-ui-audit/design/native-zoom-200-positioning.png"
+  ]
+}

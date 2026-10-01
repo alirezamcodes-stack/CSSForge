@@ -1,0 +1,60 @@
+{
+  "case": "SH04 live Changes truth all interactions and focus containment",
+  "actual": {
+    "rows": [
+      {
+        "case": "current changes",
+        "text": "Changes\n\n1 edited elements · current session\n\nUndo last edit\nReset session edits\n\nCore Design edits are active for this session. Detailed change review and export are not connected yet.",
+        "buttons": [
+          {
+            "name": "Close Changes",
+            "disabled": false
+          },
+          {
+            "name": "Undo last edit",
+            "disabled": false
+          },
+          {
+            "name": "Reset session edits",
+            "disabled": false
+          }
+        ],
+        "focused": "Close Changes"
+      },
+      {
+        "case": "modal focus",
+        "focus": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      {
+        "case": "Undo from Changes",
+        "color": "rgb(255, 255, 255)",
+        "text": "Changes\n\n1 edited elements · current session\n\nClose Changes\nUndo last edit\nReset session edits\n\nCore Design edits are active for this session. Detailed change review and export are not connected yet."
+      },
+      {
+        "case": "Reset from Changes",
+        "font": "18px",
+        "text": "Changes\n\n0 edited elements · current session\n\nClose Changes\nUndo last edit\nReset session edits\n\nCore Design edits are active for this session. Detailed change review and export are not connected yet."
+      },
+      {
+        "case": "Close focus origin",
+        "focused": true
+      },
+      {
+        "case": "nested menu origin",
+        "focused": true
+      }
+    ],
+    "errors": []
+  }
+}

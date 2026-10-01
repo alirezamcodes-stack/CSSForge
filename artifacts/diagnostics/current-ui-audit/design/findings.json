@@ -1,0 +1,102 @@
+{
+  "findings": [
+    {
+      "id": "DA01",
+      "surface": "Spacing unit menus",
+      "category": "E",
+      "severity": "Medium",
+      "priority": "P1",
+      "title": "The padding box paints over and intercepts enabled Margin unit options",
+      "repro": [
+        "Pick #audit-target from the Design audit fixture; open only Spacing.",
+        "Enter Margin top10.5px, then open Margin top unit.",
+        "Try to click px or em; alternatively open Margin right unit and click px."
+      ],
+      "expected": "Every enabled unit option is visible and pointer reachable above the spacing diagram.",
+      "actual": "Padding controls paint across the menu. Native ShadowRoot.elementFromPoint hits padding-box controls rather than the enabled option; three tested option positions are blocked. Focusing the option and pressing Enter performs the size-preserving conversion correctly.",
+      "rootCause": "Popover is rendered inside the compact spacing numeric wrapper; the sibling positioned padding-box content establishes paint order that outranks the menu in that wrapper.",
+      "modules": [
+        "src/ui/ui.module.css",
+        "src/ui/design/LiveDesignView.tsx",
+        "src/ui/shared/NumericScrubber.tsx",
+        "src/ui/popovers/Popover.tsx"
+      ],
+      "evidence": [
+        "unit-option-matrix.json#unit-option-matrix-059",
+        "unit-option-matrix.json#unit-option-matrix-064",
+        "unit-option-matrix.json#unit-option-matrix-077",
+        "blocked-unit-margin-top-px.png",
+        "blocked-unit-margin-top-em.png",
+        "blocked-unit-margin-right-px.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: place existing spacing menus above diagram controls; preserve conversion logic."
+    },
+    {
+      "id": "DA02",
+      "surface": "Z-index keyboard stepping",
+      "category": "F",
+      "severity": "Low",
+      "priority": "P2",
+      "title": "Alt+ArrowDown generates an invalid fractional z-index",
+      "repro": [
+        "Pick #audit-target; open Positioning with position:relative.",
+        "Enter Z-index5 and press Enter.",
+        "Focus Z-index and press Alt+ArrowDown."
+      ],
+      "expected": "A keyboard step for an integer-only property produces a valid integer or safely leaves the value unchanged.",
+      "actual": "The field becomes4.9 with aria-invalid=true and an error; the browser remains at z-index5. Escape safely restores5. No incorrect CSS is committed.",
+      "rootCause": "NumericScrubber applies the generic Alt×0.1 multiplier to z-index without an integer-aware step; browser validation subsequently rejects the draft.",
+      "modules": [
+        "src/ui/shared/NumericScrubber.tsx",
+        "src/editing/values.ts",
+        "src/ui/design/EditControls.tsx"
+      ],
+      "evidence": [
+        "supplement.json#supplement-016",
+        "supplement-z-index-alt-step.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: keep the existing integer field stepping valid; no new unit system."
+    },
+    {
+      "id": "DA03",
+      "surface": "Locally rejected NumericScrubber input",
+      "category": "F",
+      "severity": "Low",
+      "priority": "P2",
+      "title": "Unsupported unit rejection has no associated explanation",
+      "repro": [
+        "Pick #audit-target; open Spacing.",
+        "Type11qu into Margin left and press Enter.",
+        "Inspect visible errors and the input accessibility attributes."
+      ],
+      "expected": "The rejected field identifies the invalid unit and links a readable error or explanation.",
+      "actual": "Browser margin stays8px and aria-invalid istrue, but there is no alert, aria-describedby or aria-errormessage. The tooltip still describes the browser value and generic drag/Escape instructions.",
+      "rootCause": "validNumeric rejection occurs locally in NumericScrubber.apply before the editor callback and only sets invalid state; the engine error rendered by SessionActions is never populated.",
+      "modules": [
+        "src/ui/shared/NumericScrubber.tsx",
+        "src/ui/design/EditControls.tsx"
+      ],
+      "evidence": [
+        "unit-option-matrix.json#unit-option-matrix-322",
+        "unit-option-matrix.json#unit-option-matrix-323",
+        "invalid-unit-spacing.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: connect local numeric validation to a concise field explanation."
+    }
+  ],
+  "expectedExclusions": [
+    "Native untouched button with display:inline computes inline-block; the extension matches it.",
+    "Opacity .75 and0.75 are numerically identical canonical serialization.",
+    "All enabled sampled unit-menu conversions preserved computed dimensions within0.05px; unsupported percentages and ch conversions were disabled with a reason.",
+    "All nine parent/inherited/owned typography properties were compared with matching untouched native CSS; descendant ownership is not a CSSForge bug.",
+    "Multi-side border width and multi-corner radius raw shorthands are accepted and retained; no per-side/corner editors are exposed.",
+    "SVG root/rect width-height edits and Undo/Reset work; unsupported circle sizing and native non-replaced inline span sizing are disabled.",
+    "A legacy professional.spec.ts expectation for +1em predates the current unitStep of0.1em. At20px font,2em→2.1em computes42px; it is not a product regression."
+  ],
+  "screenshotsReviewed": [
+    "blocked-unit-margin-top-px.png",
+    "invalid-unit-spacing.png",
+    "supplement-z-index-alt-step.png",
+    "layout-320-spacing.png"
+  ]
+}

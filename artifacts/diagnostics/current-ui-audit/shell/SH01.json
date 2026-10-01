@@ -1,0 +1,248 @@
+{
+  "case": "SH01 built picker target geometry and lifecycle matrix",
+  "actual": {
+    "rows": [
+      {
+        "selector": "#nested-path",
+        "selected": "path#nested-path",
+        "target": {
+          "x": 100,
+          "y": 48,
+          "width": 60,
+          "height": 40
+        },
+        "highlight": {
+          "x": 100,
+          "y": 48,
+          "width": 60,
+          "height": 40
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#transparent",
+        "selected": "div#transparent",
+        "target": {
+          "x": 260,
+          "y": 40,
+          "width": 150,
+          "height": 60
+        },
+        "highlight": {
+          "x": 260,
+          "y": 40,
+          "width": 150,
+          "height": 60
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#pointer-button",
+        "selected": "button#pointer-button",
+        "target": {
+          "x": 458,
+          "y": 48,
+          "width": 115.625,
+          "height": 24
+        },
+        "highlight": {
+          "x": 458,
+          "y": 48,
+          "width": 115.625,
+          "height": 24
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#absolute",
+        "selected": "div#absolute.box",
+        "target": {
+          "x": 40,
+          "y": 180,
+          "width": 150,
+          "height": 60
+        },
+        "highlight": {
+          "x": 40,
+          "y": 180,
+          "width": 150,
+          "height": 60
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#fixed",
+        "selected": "div#fixed.box",
+        "target": {
+          "x": 720,
+          "y": 100,
+          "width": 150,
+          "height": 60
+        },
+        "highlight": {
+          "x": 720,
+          "y": 100,
+          "width": 150,
+          "height": 60
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#transformed",
+        "selected": "div#transformed.box",
+        "target": {
+          "x": 255.5501708984375,
+          "y": 171.7733612060547,
+          "width": 108.899658203125,
+          "height": 76.45327758789062
+        },
+        "highlight": {
+          "x": 255.546875,
+          "y": 171.765625,
+          "width": 108.890625,
+          "height": 76.453125
+        },
+        "difference": 0.009033203125
+      },
+      {
+        "selector": "#sticky",
+        "selected": "div#sticky",
+        "target": {
+          "x": 450,
+          "y": 180,
+          "width": 150,
+          "height": 35
+        },
+        "highlight": {
+          "x": 450,
+          "y": 180,
+          "width": 150,
+          "height": 35
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#clipped-child",
+        "selected": "div#clipped-child",
+        "target": {
+          "x": 260,
+          "y": 300,
+          "width": 160,
+          "height": 100
+        },
+        "highlight": {
+          "x": 260,
+          "y": 300,
+          "width": 160,
+          "height": 100
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#tiny",
+        "selected": "div#tiny",
+        "target": {
+          "x": 40,
+          "y": 560,
+          "width": 1,
+          "height": 1
+        },
+        "highlight": {
+          "x": 40,
+          "y": 560,
+          "width": 1,
+          "height": 1
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#svg-rect",
+        "selected": "rect#svg-rect",
+        "target": {
+          "x": 210,
+          "y": 555,
+          "width": 40,
+          "height": 35
+        },
+        "highlight": {
+          "x": 210,
+          "y": 555,
+          "width": 40,
+          "height": 35
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#shadow-button",
+        "selected": "button#shadow-button",
+        "target": {
+          "x": 40,
+          "y": 740,
+          "width": 98.265625,
+          "height": 40
+        },
+        "highlight": {
+          "x": 40,
+          "y": 740,
+          "width": 98.265625,
+          "height": 40
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#nested-shadow",
+        "selected": "button#nested-shadow",
+        "target": {
+          "x": 200,
+          "y": 740,
+          "width": 107.890625,
+          "height": 40
+        },
+        "highlight": {
+          "x": 200,
+          "y": 740,
+          "width": 107.890625,
+          "height": 40
+        },
+        "difference": 0
+      },
+      {
+        "selector": "#slotted",
+        "selected": "span#slotted",
+        "target": {
+          "x": 360,
+          "y": 740,
+          "width": 140,
+          "height": 35
+        },
+        "highlight": {
+          "x": 360,
+          "y": 740,
+          "width": 140,
+          "height": 35
+        },
+        "difference": 0
+      },
+      {
+        "case": "zero-size through child navigation",
+        "selected": "div#zero",
+        "highlightVisible": false
+      },
+      {
+        "case": "iframe border selection",
+        "selected": "div#zero"
+      },
+      {
+        "case": "SPA replacement with session edit",
+        "selected": "div#dynamic.box",
+        "font": "27px"
+      },
+      {
+        "case": "removal",
+        "selected": "No element selected",
+        "highlightVisible": false
+      }
+    ],
+    "errors": []
+  }
+}

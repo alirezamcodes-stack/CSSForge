@@ -1,0 +1,3342 @@
+{
+  "runtime": {
+    "chrome": "154.0.8037.92"
+  },
+  "observations": [
+    {
+      "id": "FU01",
+      "action": "Apply inline authored font-size in Code using only the keyboard, then Tab",
+      "expected": "Success returns focus to the edited value and Tab continues within its Code row.",
+      "actual": {
+        "afterApply": {
+          "identity": "button#target.primary",
+          "alerts": [],
+          "focused": null,
+          "declarations": [
+            {
+              "property": "font-size",
+              "owned": "true",
+              "source": "session-override",
+              "cascade": "unresolved",
+              "text": "font-size:25px!important;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "font-size:18px;",
+              "editor": false
+            },
+            {
+              "property": "border-radius",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border-radius:6px;",
+              "editor": false
+            },
+            {
+              "property": "box-sizing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "box-sizing:border-box;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "font-size:18px;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "color:rgb(255, 255, 255);",
+              "editor": false
+            },
+            {
+              "property": "background-color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "background-color:rgb(41, 76, 59);",
+              "editor": false
+            },
+            {
+              "property": "border",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border:0px;",
+              "editor": false
+            },
+            {
+              "property": "padding",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "padding:16px 24px;",
+              "editor": false
+            },
+            {
+              "property": "border-radius",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border-radius:6px;",
+              "editor": false
+            },
+            {
+              "property": "letter-spacing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "letter-spacing:1px;",
+              "editor": false
+            },
+            {
+              "property": "content",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "content:\"↗ \";",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:gold;",
+              "editor": false
+            },
+            {
+              "property": "content",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "content:\" ✓\";",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:cyan;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:rgb(220, 120, 40);",
+              "editor": false
+            },
+            {
+              "property": "outline",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "outline:rgb(224, 161, 65) solid 3px;",
+              "editor": false
+            },
+            {
+              "property": "transform",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "transform:translateY(1px);",
+              "editor": false
+            },
+            {
+              "property": "letter-spacing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "letter-spacing:2px;",
+              "editor": false
+            },
+            {
+              "property": "background-color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "background-color:rgb(42, 94, 62);",
+              "editor": false
+            },
+            {
+              "property": "line-height",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "line-height:1.4;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "font-size:15px;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:rgb(200, 230, 210);",
+              "editor": false
+            },
+            {
+              "property": "animation-name",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-name:steady;",
+              "editor": false
+            },
+            {
+              "property": "animation-duration",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-duration:5s;",
+              "editor": false
+            },
+            {
+              "property": "animation-play-state",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-play-state:paused;",
+              "editor": false
+            }
+          ],
+          "tree": [],
+          "dialogs": []
+        },
+        "documentFocus": {
+          "tag": "body",
+          "id": ""
+        },
+        "afterTab": {
+          "identity": "button#target.primary",
+          "alerts": [],
+          "focused": {
+            "tag": "button",
+            "label": "Edit font-size",
+            "text": "18px"
+          },
+          "declarations": [
+            {
+              "property": "font-size",
+              "owned": "true",
+              "source": "session-override",
+              "cascade": "unresolved",
+              "text": "font-size:25px!important;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "font-size:18px;",
+              "editor": false
+            },
+            {
+              "property": "border-radius",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border-radius:6px;",
+              "editor": false
+            },
+            {
+              "property": "box-sizing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "box-sizing:border-box;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "font-size:18px;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "color:rgb(255, 255, 255);",
+              "editor": false
+            },
+            {
+              "property": "background-color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "background-color:rgb(41, 76, 59);",
+              "editor": false
+            },
+            {
+              "property": "border",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border:0px;",
+              "editor": false
+            },
+            {
+              "property": "padding",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "padding:16px 24px;",
+              "editor": false
+            },
+            {
+              "property": "border-radius",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border-radius:6px;",
+              "editor": false
+            },
+            {
+              "property": "letter-spacing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "letter-spacing:1px;",
+              "editor": false
+            },
+            {
+              "property": "content",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "content:\"↗ \";",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:gold;",
+              "editor": false
+            },
+            {
+              "property": "content",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "content:\" ✓\";",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:cyan;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:rgb(220, 120, 40);",
+              "editor": false
+            },
+            {
+              "property": "outline",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "outline:rgb(224, 161, 65) solid 3px;",
+              "editor": false
+            },
+            {
+              "property": "transform",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "transform:translateY(1px);",
+              "editor": false
+            },
+            {
+              "property": "letter-spacing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "letter-spacing:2px;",
+              "editor": false
+            },
+            {
+              "property": "background-color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "background-color:rgb(42, 94, 62);",
+              "editor": false
+            },
+            {
+              "property": "line-height",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "line-height:1.4;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "font-size:15px;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:rgb(200, 230, 210);",
+              "editor": false
+            },
+            {
+              "property": "animation-name",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-name:steady;",
+              "editor": false
+            },
+            {
+              "property": "animation-duration",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-duration:5s;",
+              "editor": false
+            },
+            {
+              "property": "animation-play-state",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-play-state:paused;",
+              "editor": false
+            }
+          ],
+          "tree": [],
+          "dialogs": []
+        },
+        "native": {
+          "identity": "button#target",
+          "inline": "font-size: 18px; border-radius: 6px;",
+          "fontSize": "25px",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(41, 76, 59)",
+          "letterSpacing": "2px",
+          "opacity": "0.99",
+          "transform": "none",
+          "before": {
+            "color": "rgb(255, 215, 0)",
+            "content": "\"↗ \""
+          },
+          "after": {
+            "color": "rgb(0, 255, 255)",
+            "content": "\" ✓\""
+          },
+          "attributes": [
+            [
+              "id",
+              "target"
+            ],
+            [
+              "class",
+              "primary"
+            ],
+            [
+              "style",
+              "font-size:18px; border-radius:6px"
+            ],
+            [
+              "data-cssforge-target-a922c86dc04c467a8b59fee5e378a918",
+              "1"
+            ]
+          ],
+          "layers": [
+            [
+              "[data-cssforge-target-a922c86dc04c467a8b59fee5e378a918=\"1\"] { font-size: 25px !important; }"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "FU02",
+      "action": "Escape a new Code draft, then Cancel it and Tab",
+      "expected": "Escape or Cancel discards the draft and returns focus to the value control.",
+      "actual": {
+        "afterEscape": {
+          "identity": "button#target.primary",
+          "alerts": [],
+          "focused": {
+            "tag": "div",
+            "label": "CSS value font-size",
+            "text": "33px"
+          },
+          "declarations": [
+            {
+              "property": "font-size",
+              "owned": "true",
+              "source": "session-override",
+              "cascade": "unresolved",
+              "text": "font-size:33px!important;Enter to apply as an override Cancel",
+              "editor": true
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "font-size:18px;",
+              "editor": false
+            },
+            {
+              "property": "border-radius",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border-radius:6px;",
+              "editor": false
+            },
+            {
+              "property": "box-sizing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "box-sizing:border-box;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "font-size:18px;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "color:rgb(255, 255, 255);",
+              "editor": false
+            },
+            {
+              "property": "background-color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "background-color:rgb(41, 76, 59);",
+              "editor": false
+            },
+            {
+              "property": "border",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border:0px;",
+              "editor": false
+            },
+            {
+              "property": "padding",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "padding:16px 24px;",
+              "editor": false
+            },
+            {
+              "property": "border-radius",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border-radius:6px;",
+              "editor": false
+            },
+            {
+              "property": "letter-spacing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "letter-spacing:1px;",
+              "editor": false
+            },
+            {
+              "property": "content",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "content:\"↗ \";",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:gold;",
+              "editor": false
+            },
+            {
+              "property": "content",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "content:\" ✓\";",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:cyan;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:rgb(220, 120, 40);",
+              "editor": false
+            },
+            {
+              "property": "outline",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "outline:rgb(224, 161, 65) solid 3px;",
+              "editor": false
+            },
+            {
+              "property": "transform",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "transform:translateY(1px);",
+              "editor": false
+            },
+            {
+              "property": "letter-spacing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "letter-spacing:2px;",
+              "editor": false
+            },
+            {
+              "property": "background-color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "background-color:rgb(42, 94, 62);",
+              "editor": false
+            },
+            {
+              "property": "line-height",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "line-height:1.4;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "font-size:15px;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:rgb(200, 230, 210);",
+              "editor": false
+            },
+            {
+              "property": "animation-name",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-name:steady;",
+              "editor": false
+            },
+            {
+              "property": "animation-duration",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-duration:5s;",
+              "editor": false
+            },
+            {
+              "property": "animation-play-state",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-play-state:paused;",
+              "editor": false
+            }
+          ],
+          "tree": [],
+          "dialogs": []
+        },
+        "afterCancel": {
+          "identity": "button#target.primary",
+          "alerts": [],
+          "focused": null,
+          "declarations": [
+            {
+              "property": "font-size",
+              "owned": "true",
+              "source": "session-override",
+              "cascade": "unresolved",
+              "text": "font-size:25px!important;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "font-size:18px;",
+              "editor": false
+            },
+            {
+              "property": "border-radius",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border-radius:6px;",
+              "editor": false
+            },
+            {
+              "property": "box-sizing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "box-sizing:border-box;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "font-size:18px;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "color:rgb(255, 255, 255);",
+              "editor": false
+            },
+            {
+              "property": "background-color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "background-color:rgb(41, 76, 59);",
+              "editor": false
+            },
+            {
+              "property": "border",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border:0px;",
+              "editor": false
+            },
+            {
+              "property": "padding",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "padding:16px 24px;",
+              "editor": false
+            },
+            {
+              "property": "border-radius",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border-radius:6px;",
+              "editor": false
+            },
+            {
+              "property": "letter-spacing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "letter-spacing:1px;",
+              "editor": false
+            },
+            {
+              "property": "content",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "content:\"↗ \";",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:gold;",
+              "editor": false
+            },
+            {
+              "property": "content",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "content:\" ✓\";",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:cyan;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:rgb(220, 120, 40);",
+              "editor": false
+            },
+            {
+              "property": "outline",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "outline:rgb(224, 161, 65) solid 3px;",
+              "editor": false
+            },
+            {
+              "property": "transform",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "transform:translateY(1px);",
+              "editor": false
+            },
+            {
+              "property": "letter-spacing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "letter-spacing:2px;",
+              "editor": false
+            },
+            {
+              "property": "background-color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "background-color:rgb(42, 94, 62);",
+              "editor": false
+            },
+            {
+              "property": "line-height",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "line-height:1.4;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "font-size:15px;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:rgb(200, 230, 210);",
+              "editor": false
+            },
+            {
+              "property": "animation-name",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-name:steady;",
+              "editor": false
+            },
+            {
+              "property": "animation-duration",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-duration:5s;",
+              "editor": false
+            },
+            {
+              "property": "animation-play-state",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-play-state:paused;",
+              "editor": false
+            }
+          ],
+          "tree": [],
+          "dialogs": []
+        },
+        "documentFocus": {
+          "tag": "body",
+          "id": ""
+        },
+        "afterTab": {
+          "identity": "button#target.primary",
+          "alerts": [],
+          "focused": {
+            "tag": "button",
+            "label": null,
+            "text": "Add session declaration"
+          },
+          "declarations": [
+            {
+              "property": "font-size",
+              "owned": "true",
+              "source": "session-override",
+              "cascade": "unresolved",
+              "text": "font-size:25px!important;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "font-size:18px;",
+              "editor": false
+            },
+            {
+              "property": "border-radius",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border-radius:6px;",
+              "editor": false
+            },
+            {
+              "property": "box-sizing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "box-sizing:border-box;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "font-size:18px;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "color:rgb(255, 255, 255);",
+              "editor": false
+            },
+            {
+              "property": "background-color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "background-color:rgb(41, 76, 59);",
+              "editor": false
+            },
+            {
+              "property": "border",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border:0px;",
+              "editor": false
+            },
+            {
+              "property": "padding",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "padding:16px 24px;",
+              "editor": false
+            },
+            {
+              "property": "border-radius",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "border-radius:6px;",
+              "editor": false
+            },
+            {
+              "property": "letter-spacing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "letter-spacing:1px;",
+              "editor": false
+            },
+            {
+              "property": "content",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "content:\"↗ \";",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:gold;",
+              "editor": false
+            },
+            {
+              "property": "content",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "content:\" ✓\";",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:cyan;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:rgb(220, 120, 40);",
+              "editor": false
+            },
+            {
+              "property": "outline",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "outline:rgb(224, 161, 65) solid 3px;",
+              "editor": false
+            },
+            {
+              "property": "transform",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "transform:translateY(1px);",
+              "editor": false
+            },
+            {
+              "property": "letter-spacing",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "letter-spacing:2px;",
+              "editor": false
+            },
+            {
+              "property": "background-color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "background-color:rgb(42, 94, 62);",
+              "editor": false
+            },
+            {
+              "property": "line-height",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "line-height:1.4;",
+              "editor": false
+            },
+            {
+              "property": "font-size",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "font-size:15px;",
+              "editor": false
+            },
+            {
+              "property": "color",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "inactive",
+              "text": "color:rgb(200, 230, 210);",
+              "editor": false
+            },
+            {
+              "property": "animation-name",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-name:steady;",
+              "editor": false
+            },
+            {
+              "property": "animation-duration",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-duration:5s;",
+              "editor": false
+            },
+            {
+              "property": "animation-play-state",
+              "owned": "false",
+              "source": "authored",
+              "cascade": "unresolved",
+              "text": "animation-play-state:paused;",
+              "editor": false
+            }
+          ],
+          "tree": [],
+          "dialogs": []
+        },
+        "screenshot": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\code-tree\\17-code-escape-followup.png"
+      }
+    },
+    {
+      "id": "FU03",
+      "action": "Apply native RGB authored Code color swatch",
+      "expected": "A native color edit creates an attributed session override, leaves authored source intact and participates in Undo.",
+      "actual": {
+        "applied": {
+          "ui": {
+            "identity": "button#target.primary",
+            "alerts": [],
+            "focused": {
+              "tag": "input",
+              "label": "Code color color",
+              "text": ""
+            },
+            "declarations": [
+              {
+                "property": "font-size",
+                "owned": "true",
+                "source": "session-override",
+                "cascade": "unresolved",
+                "text": "font-size:25px!important;",
+                "editor": false
+              },
+              {
+                "property": "color",
+                "owned": "true",
+                "source": "session-override",
+                "cascade": "unresolved",
+                "text": "color:#334455!important;",
+                "editor": false
+              },
+              {
+                "property": "font-size",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "font-size:18px;",
+                "editor": false
+              },
+              {
+                "property": "border-radius",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "border-radius:6px;",
+                "editor": false
+              },
+              {
+                "property": "box-sizing",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "box-sizing:border-box;",
+                "editor": false
+              },
+              {
+                "property": "font-size",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "font-size:18px;",
+                "editor": false
+              },
+              {
+                "property": "color",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "color:rgb(255, 255, 255);",
+                "editor": false
+              },
+              {
+                "property": "background-color",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "background-color:rgb(41, 76, 59);",
+                "editor": false
+              },
+              {
+                "property": "border",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "border:0px;",
+                "editor": false
+              },
+              {
+                "property": "padding",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "padding:16px 24px;",
+                "editor": false
+              },
+              {
+                "property": "border-radius",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "border-radius:6px;",
+                "editor": false
+              },
+              {
+                "property": "letter-spacing",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "letter-spacing:1px;",
+                "editor": false
+              },
+              {
+                "property": "content",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "inactive",
+                "text": "content:\"↗ \";",
+                "editor": false
+              },
+              {
+                "property": "color",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "inactive",
+                "text": "color:gold;",
+                "editor": false
+              },
+              {
+                "property": "content",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "inactive",
+                "text": "content:\" ✓\";",
+                "editor": false
+              },
+              {
+                "property": "color",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "inactive",
+                "text": "color:cyan;",
+                "editor": false
+              },
+              {
+                "property": "color",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "inactive",
+                "text": "color:rgb(220, 120, 40);",
+                "editor": false
+              },
+              {
+                "property": "outline",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "inactive",
+                "text": "outline:rgb(224, 161, 65) solid 3px;",
+                "editor": false
+              },
+              {
+                "property": "transform",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "inactive",
+                "text": "transform:translateY(1px);",
+                "editor": false
+              },
+              {
+                "property": "letter-spacing",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "letter-spacing:2px;",
+                "editor": false
+              },
+              {
+                "property": "background-color",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "inactive",
+                "text": "background-color:rgb(42, 94, 62);",
+                "editor": false
+              },
+              {
+                "property": "line-height",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "line-height:1.4;",
+                "editor": false
+              },
+              {
+                "property": "font-size",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "inactive",
+                "text": "font-size:15px;",
+                "editor": false
+              },
+              {
+                "property": "color",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "inactive",
+                "text": "color:rgb(200, 230, 210);",
+                "editor": false
+              },
+              {
+                "property": "animation-name",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "animation-name:steady;",
+                "editor": false
+              },
+              {
+                "property": "animation-duration",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "animation-duration:5s;",
+                "editor": false
+              },
+              {
+                "property": "animation-play-state",
+                "owned": "false",
+                "source": "authored",
+                "cascade": "unresolved",
+                "text": "animation-play-state:paused;",
+                "editor": false
+              }
+            ],
+            "tree": [],
+            "dialogs": []
+          },
+          "native": {
+            "identity": "button#target",
+            "inline": "font-size: 18px; border-radius: 6px;",
+            "fontSize": "25px",
+            "color": "rgb(51, 68, 85)",
+            "background": "rgb(41, 76, 59)",
+            "letterSpacing": "2px",
+            "opacity": "1",
+            "transform": "none",
+            "before": {
+              "color": "rgb(255, 215, 0)",
+              "content": "\"↗ \""
+            },
+            "after": {
+              "color": "rgb(0, 255, 255)",
+              "content": "\" ✓\""
+            },
+            "attributes": [
+              [
+                "id",
+                "target"
+              ],
+              [
+                "class",
+                "primary"
+              ],
+              [
+                "style",
+                "font-size:18px; border-radius:6px"
+              ],
+              [
+                "data-cssforge-target-a922c86dc04c467a8b59fee5e378a918",
+                "1"
+              ]
+            ],
+            "layers": [
+              [
+                "[data-cssforge-target-a922c86dc04c467a8b59fee5e378a918=\"1\"] { font-size: 25px !important; color: rgb(51, 68, 85) !important; }"
+              ]
+            ]
+          },
+          "engine": {
+            "selection": "button#target.primary",
+            "design": {
+              "targetId": "1",
+              "bindingGeneration": 0
+            },
+            "context": {
+              "media": [],
+              "pseudo": ""
+            },
+            "mutationPolicy": {
+              "mode": "SESSION_OVERRIDE"
+            },
+            "lastMutation": null,
+            "undo": 2,
+            "edited": 1,
+            "error": null,
+            "overrides": [
+              {
+                "context": {
+                  "media": [],
+                  "pseudo": ""
+                },
+                "declarations": [
+                  {
+                    "property": "font-size",
+                    "value": "25px",
+                    "enabled": true
+                  },
+                  {
+                    "property": "color",
+                    "value": "#334455",
+                    "enabled": true
+                  }
+                ]
+              }
+            ],
+            "reconciliation": {
+              "state": "active-original",
+              "generation": 3,
+              "attempts": 0,
+              "reason": "Original target active.",
+              "locator": {
+                "version": 1,
+                "generation": 1,
+                "identity": {
+                  "element": {},
+                  "document": {
+                    "location": {
+                      "ancestorOrigins": {},
+                      "href": "http://127.0.0.1:5173/extension-fixture.html",
+                      "origin": "http://127.0.0.1:5173",
+                      "protocol": "http:",
+                      "host": "127.0.0.1:5173",
+                      "hostname": "127.0.0.1",
+                      "port": "5173",
+                      "pathname": "/extension-fixture.html",
+                      "search": "",
+                      "hash": "",
+                      "assign": {},
+                      "reload": {},
+                      "replace": {},
+                      "toString": {}
+                    },
+                    "_reactListeningbssi49jd47q": true
+                  },
+                  "root": {
+                    "location": {
+                      "ancestorOrigins": {},
+                      "href": "http://127.0.0.1:5173/extension-fixture.html",
+                      "origin": "http://127.0.0.1:5173",
+                      "protocol": "http:",
+                      "host": "127.0.0.1:5173",
+                      "hostname": "127.0.0.1",
+                      "port": "5173",
+                      "pathname": "/extension-fixture.html",
+                      "search": "",
+                      "hash": "",
+                      "assign": {},
+                      "reload": {},
+                      "replace": {},
+                      "toString": {}
+                    },
+                    "_reactListeningbssi49jd47q": true
+                  },
+                  "session": {}
+                },
+                "document": {
+                  "location": {
+                    "ancestorOrigins": {},
+                    "href": "http://127.0.0.1:5173/extension-fixture.html",
+                    "origin": "http://127.0.0.1:5173",
+                    "protocol": "http:",
+                    "host": "127.0.0.1:5173",
+                    "hostname": "127.0.0.1",
+                    "port": "5173",
+                    "pathname": "/extension-fixture.html",
+                    "search": "",
+                    "hash": "",
+                    "assign": {},
+                    "reload": {},
+                    "replace": {},
+                    "toString": {}
+                  },
+                  "_reactListeningbssi49jd47q": true
+                },
+                "frame": {
+                  "kind": "top-document",
+                  "identity": null
+                },
+                "root": {
+                  "location": {
+                    "ancestorOrigins": {},
+                    "href": "http://127.0.0.1:5173/extension-fixture.html",
+                    "origin": "http://127.0.0.1:5173",
+                    "protocol": "http:",
+                    "host": "127.0.0.1:5173",
+                    "hostname": "127.0.0.1",
+                    "port": "5173",
+                    "pathname": "/extension-fixture.html",
+                    "search": "",
+                    "hash": "",
+                    "assign": {},
+                    "reload": {},
+                    "replace": {},
+                    "toString": {}
+                  },
+                  "_reactListeningbssi49jd47q": true
+                },
+                "boundaries": [],
+                "evidence": {
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "tag": "button",
+                  "id": "target",
+                  "attributes": [],
+                  "classes": [
+                    "primary"
+                  ],
+                  "sibling": {
+                    "index": 2,
+                    "truncated": false
+                  }
+                },
+                "keys": [
+                  {
+                    "kind": "id",
+                    "attributes": [
+                      {
+                        "name": "id",
+                        "value": "target"
+                      }
+                    ],
+                    "uniqueAtCapture": true
+                  }
+                ],
+                "ancestors": [
+                  {
+                    "evidence": {
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "tag": "section",
+                      "id": "collection",
+                      "attributes": [],
+                      "classes": [
+                        "card"
+                      ],
+                      "sibling": {
+                        "index": 2,
+                        "truncated": false
+                      }
+                    },
+                    "key": {
+                      "kind": "id",
+                      "attributes": [
+                        {
+                          "name": "id",
+                          "value": "collection"
+                        }
+                      ],
+                      "uniqueAtCapture": true
+                    },
+                    "targetUniqueAtCapture": true
+                  }
+                ],
+                "truncated": false,
+                "unsupportedRoot": false
+              },
+              "resolution": null,
+              "element": {}
+            },
+            "source": {
+              "inline": [
+                {
+                  "id": "element-2:inline:rule:declaration:font-size",
+                  "sourceId": "element-2:inline",
+                  "ruleId": "element-2:inline:rule",
+                  "contexts": [],
+                  "property": "font-size",
+                  "value": "18px",
+                  "priority": "",
+                  "important": false,
+                  "order": 0,
+                  "enabled": true,
+                  "mutationState": "authored"
+                },
+                {
+                  "id": "element-2:inline:rule:declaration:border-radius",
+                  "sourceId": "element-2:inline",
+                  "ruleId": "element-2:inline:rule",
+                  "contexts": [],
+                  "property": "border-radius",
+                  "value": "6px",
+                  "priority": "",
+                  "important": false,
+                  "order": 1,
+                  "enabled": true,
+                  "mutationState": "authored"
+                }
+              ],
+              "rules": [
+                {
+                  "label": "<style>",
+                  "selector": "*",
+                  "context": {
+                    "media": [],
+                    "pseudo": ""
+                  },
+                  "editable": true,
+                  "conditions": [],
+                  "declarations": [
+                    {
+                      "id": "rule-4:declaration:box-sizing",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-4",
+                      "contexts": [],
+                      "property": "box-sizing",
+                      "value": "border-box",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary",
+                  "context": {
+                    "media": [],
+                    "pseudo": ""
+                  },
+                  "editable": true,
+                  "conditions": [],
+                  "declarations": [
+                    {
+                      "id": "rule-10:declaration:font-size",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-10",
+                      "contexts": [],
+                      "property": "font-size",
+                      "value": "18px",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-10:declaration:color",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-10",
+                      "contexts": [],
+                      "property": "color",
+                      "value": "rgb(255, 255, 255)",
+                      "priority": "",
+                      "important": false,
+                      "order": 1,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-10:declaration:background-color",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-10",
+                      "contexts": [],
+                      "property": "background-color",
+                      "value": "rgb(41, 76, 59)",
+                      "priority": "",
+                      "important": false,
+                      "order": 2,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-10:declaration:border",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-10",
+                      "contexts": [],
+                      "property": "border",
+                      "value": "0px",
+                      "priority": "",
+                      "important": false,
+                      "order": 3,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-10:declaration:padding",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-10",
+                      "contexts": [],
+                      "property": "padding",
+                      "value": "16px 24px",
+                      "priority": "",
+                      "important": false,
+                      "order": 4,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-10:declaration:border-radius",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-10",
+                      "contexts": [],
+                      "property": "border-radius",
+                      "value": "6px",
+                      "priority": "",
+                      "important": false,
+                      "order": 5,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-10:declaration:letter-spacing",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-10",
+                      "contexts": [],
+                      "property": "letter-spacing",
+                      "value": "1px",
+                      "priority": "",
+                      "important": false,
+                      "order": 6,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary::before",
+                  "context": {
+                    "media": [],
+                    "pseudo": "::before"
+                  },
+                  "editable": true,
+                  "conditions": [],
+                  "declarations": [
+                    {
+                      "id": "rule-11:declaration:content",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-11",
+                      "contexts": [],
+                      "property": "content",
+                      "value": "\"↗ \"",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-11:declaration:color",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-11",
+                      "contexts": [],
+                      "property": "color",
+                      "value": "gold",
+                      "priority": "",
+                      "important": false,
+                      "order": 1,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary::after",
+                  "context": {
+                    "media": [],
+                    "pseudo": "::after"
+                  },
+                  "editable": true,
+                  "conditions": [],
+                  "declarations": [
+                    {
+                      "id": "rule-12:declaration:content",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-12",
+                      "contexts": [],
+                      "property": "content",
+                      "value": "\" ✓\"",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-12:declaration:color",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-12",
+                      "contexts": [],
+                      "property": "color",
+                      "value": "cyan",
+                      "priority": "",
+                      "important": false,
+                      "order": 1,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary:hover",
+                  "context": {
+                    "media": [],
+                    "pseudo": ":hover"
+                  },
+                  "editable": true,
+                  "conditions": [],
+                  "declarations": [
+                    {
+                      "id": "rule-13:declaration:color",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-13",
+                      "contexts": [],
+                      "property": "color",
+                      "value": "rgb(220, 120, 40)",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary:focus",
+                  "context": {
+                    "media": [],
+                    "pseudo": ":focus"
+                  },
+                  "editable": true,
+                  "conditions": [],
+                  "declarations": [
+                    {
+                      "id": "rule-14:declaration:outline",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-14",
+                      "contexts": [],
+                      "property": "outline",
+                      "value": "rgb(224, 161, 65) solid 3px",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary:active",
+                  "context": {
+                    "media": [],
+                    "pseudo": ":active"
+                  },
+                  "editable": true,
+                  "conditions": [],
+                  "declarations": [
+                    {
+                      "id": "rule-15:declaration:transform",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-15",
+                      "contexts": [],
+                      "property": "transform",
+                      "value": "translateY(1px)",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary",
+                  "context": {
+                    "media": [
+                      "(min-width: 1000px)"
+                    ],
+                    "pseudo": ""
+                  },
+                  "editable": true,
+                  "conditions": [
+                    "@media (min-width: 1000px)"
+                  ],
+                  "declarations": [
+                    {
+                      "id": "rule-17:declaration:letter-spacing",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-17",
+                      "contexts": [
+                        {
+                          "id": "rule-16:context",
+                          "kind": "media",
+                          "text": "@media (min-width: 1000px)",
+                          "condition": "(min-width: 1000px)",
+                          "matches": true
+                        }
+                      ],
+                      "property": "letter-spacing",
+                      "value": "2px",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary:hover",
+                  "context": {
+                    "media": [
+                      "(min-width: 1000px)"
+                    ],
+                    "pseudo": ":hover"
+                  },
+                  "editable": true,
+                  "conditions": [
+                    "@media (min-width: 1000px)"
+                  ],
+                  "declarations": [
+                    {
+                      "id": "rule-18:declaration:background-color",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-18",
+                      "contexts": [
+                        {
+                          "id": "rule-16:context",
+                          "kind": "media",
+                          "text": "@media (min-width: 1000px)",
+                          "condition": "(min-width: 1000px)",
+                          "matches": true
+                        }
+                      ],
+                      "property": "background-color",
+                      "value": "rgb(42, 94, 62)",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary",
+                  "context": {
+                    "media": [
+                      "(min-width: 1000px)",
+                      "(prefers-reduced-motion: no-preference)"
+                    ],
+                    "pseudo": ""
+                  },
+                  "editable": true,
+                  "conditions": [
+                    "@media (min-width: 1000px)",
+                    "@media (prefers-reduced-motion: no-preference)"
+                  ],
+                  "declarations": [
+                    {
+                      "id": "rule-20:declaration:line-height",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-20",
+                      "contexts": [
+                        {
+                          "id": "rule-16:context",
+                          "kind": "media",
+                          "text": "@media (min-width: 1000px)",
+                          "condition": "(min-width: 1000px)",
+                          "matches": true
+                        },
+                        {
+                          "id": "rule-19:context",
+                          "kind": "media",
+                          "text": "@media (prefers-reduced-motion: no-preference)",
+                          "condition": "(prefers-reduced-motion: no-preference)",
+                          "matches": true
+                        }
+                      ],
+                      "property": "line-height",
+                      "value": "1.4",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary",
+                  "context": {
+                    "media": [
+                      "(max-width: 700px)"
+                    ],
+                    "pseudo": ""
+                  },
+                  "editable": true,
+                  "conditions": [
+                    "@media (max-width: 700px)"
+                  ],
+                  "declarations": [
+                    {
+                      "id": "rule-22:declaration:font-size",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-22",
+                      "contexts": [
+                        {
+                          "id": "rule-21:context",
+                          "kind": "media",
+                          "text": "@media (max-width: 700px)",
+                          "condition": "(max-width: 700px)",
+                          "matches": false
+                        }
+                      ],
+                      "property": "font-size",
+                      "value": "15px",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-22:declaration:color",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-22",
+                      "contexts": [
+                        {
+                          "id": "rule-21:context",
+                          "kind": "media",
+                          "text": "@media (max-width: 700px)",
+                          "condition": "(max-width: 700px)",
+                          "matches": false
+                        }
+                      ],
+                      "property": "color",
+                      "value": "rgb(200, 230, 210)",
+                      "priority": "",
+                      "important": false,
+                      "order": 1,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                },
+                {
+                  "label": "<style>",
+                  "selector": ".primary",
+                  "context": {
+                    "media": [],
+                    "pseudo": ""
+                  },
+                  "editable": true,
+                  "conditions": [],
+                  "declarations": [
+                    {
+                      "id": "rule-23:declaration:animation-name",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-23",
+                      "contexts": [],
+                      "property": "animation-name",
+                      "value": "steady",
+                      "priority": "",
+                      "important": false,
+                      "order": 0,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-23:declaration:animation-duration",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-23",
+                      "contexts": [],
+                      "property": "animation-duration",
+                      "value": "5s",
+                      "priority": "",
+                      "important": false,
+                      "order": 1,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    },
+                    {
+                      "id": "rule-23:declaration:animation-play-state",
+                      "sourceId": "sheet-3",
+                      "ruleId": "rule-23",
+                      "contexts": [],
+                      "property": "animation-play-state",
+                      "value": "paused",
+                      "priority": "",
+                      "important": false,
+                      "order": 2,
+                      "enabled": true,
+                      "mutationState": "authored"
+                    }
+                  ]
+                }
+              ],
+              "keyframes": [
+                {
+                  "name": "steady",
+                  "css": "@keyframes steady { \n  0% { opacity: 0.99; }\n  100% { opacity: 1; }\n}"
+                }
+              ],
+              "notices": [
+                "Inaccessible stylesheet: http://styles.test/ui-audit.css"
+              ]
+            }
+          }
+        },
+        "undone": {
+          "identity": "button#target",
+          "inline": "font-size: 18px; border-radius: 6px;",
+          "fontSize": "25px",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgb(41, 76, 59)",
+          "letterSpacing": "2px",
+          "opacity": "1",
+          "transform": "none",
+          "before": {
+            "color": "rgb(255, 215, 0)",
+            "content": "\"↗ \""
+          },
+          "after": {
+            "color": "rgb(0, 255, 255)",
+            "content": "\" ✓\""
+          },
+          "attributes": [
+            [
+              "id",
+              "target"
+            ],
+            [
+              "class",
+              "primary"
+            ],
+            [
+              "style",
+              "font-size:18px; border-radius:6px"
+            ],
+            [
+              "data-cssforge-target-a922c86dc04c467a8b59fee5e378a918",
+              "1"
+            ]
+          ],
+          "layers": [
+            [
+              "[data-cssforge-target-a922c86dc04c467a8b59fee5e378a918=\"1\"] { font-size: 25px !important; }"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "FU04",
+      "action": "ArrowRight on expanded selected button, then ArrowLeft on its leaf child",
+      "expected": "Tree keys navigate expanded child/parent relationships as well as toggling branches.",
+      "actual": {
+        "right": {
+          "identity": "button#target.primary",
+          "alerts": [],
+          "focused": {
+            "tag": "button",
+            "label": "button#target.primary",
+            "text": "<button id=\"target\" class=\"primary\">"
+          },
+          "declarations": [],
+          "tree": [
+            {
+              "label": "html",
+              "level": "1",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "body",
+              "level": "2",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "header",
+              "level": "3",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "main",
+              "level": "3",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h1",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#intro",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "section#collection.card",
+              "level": "4",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h2#headline",
+              "level": "5",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#description",
+              "level": "5",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "button#target.primary",
+              "level": "5",
+              "selected": "true",
+              "expanded": "true",
+              "tabIndex": 0
+            },
+            {
+              "label": "span#target-label",
+              "level": "6",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "button#other.primary",
+              "level": "5",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#open-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#closed-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "svg#scene",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "a#host-link",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#large-branch",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "p#below",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            }
+          ],
+          "dialogs": []
+        },
+        "left": {
+          "identity": "button#target.primary",
+          "alerts": [],
+          "focused": {
+            "tag": "button",
+            "label": "span#target-label",
+            "text": "<span id=\"target-label\">Explore the collection"
+          },
+          "declarations": [],
+          "tree": [
+            {
+              "label": "html",
+              "level": "1",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "body",
+              "level": "2",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "header",
+              "level": "3",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "main",
+              "level": "3",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h1",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#intro",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "section#collection.card",
+              "level": "4",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h2#headline",
+              "level": "5",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#description",
+              "level": "5",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "button#target.primary",
+              "level": "5",
+              "selected": "true",
+              "expanded": "true",
+              "tabIndex": 0
+            },
+            {
+              "label": "span#target-label",
+              "level": "6",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "button#other.primary",
+              "level": "5",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#open-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#closed-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "svg#scene",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "a#host-link",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#large-branch",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "p#below",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            }
+          ],
+          "dialogs": []
+        },
+        "screenshot": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\code-tree\\18-tree-keyboard.png"
+      }
+    },
+    {
+      "id": "FU05",
+      "action": "Pick slotted light-DOM label, inspect HTML, then open Navigator and refresh",
+      "expected": "The selected assigned node remains visible exactly once and its slot ancestry is traversable in both trees.",
+      "actual": {
+        "html": {
+          "identity": "strong#slotted-label",
+          "alerts": [],
+          "focused": {
+            "tag": "button",
+            "label": "Pick page element",
+            "text": ""
+          },
+          "declarations": [],
+          "tree": [
+            {
+              "label": "html",
+              "level": "1",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": 0
+            },
+            {
+              "label": "body",
+              "level": "2",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "header",
+              "level": "3",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "main",
+              "level": "3",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h1",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#intro",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "section#collection.card",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#open-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "section#shadow-section",
+              "level": "5",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#closed-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "svg#scene",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "a#host-link",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#large-branch",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "p#below",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            }
+          ],
+          "dialogs": []
+        },
+        "navigator": {
+          "identity": "strong#slotted-label",
+          "alerts": [],
+          "focused": {
+            "tag": "button",
+            "label": "Close Navigator",
+            "text": ""
+          },
+          "declarations": [],
+          "tree": [
+            {
+              "label": "html",
+              "level": "1",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": 0
+            },
+            {
+              "label": "body",
+              "level": "2",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "header",
+              "level": "3",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "main",
+              "level": "3",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h1",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#intro",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "section#collection.card",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#open-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "section#shadow-section",
+              "level": "5",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#closed-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "svg#scene",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "a#host-link",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#large-branch",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "p#below",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "html",
+              "level": "1",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": 0
+            },
+            {
+              "label": "body",
+              "level": "2",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "header",
+              "level": "3",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "main",
+              "level": "3",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h1",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#intro",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "section#collection.card",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#open-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "section#shadow-section",
+              "level": "5",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#closed-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "svg#scene",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "a#host-link",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#large-branch",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "p#below",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            }
+          ],
+          "dialogs": [
+            {
+              "label": "Navigator",
+              "modal": "true",
+              "bounds": {
+                "x": 200,
+                "y": 106,
+                "width": 1040,
+                "height": 702,
+                "top": 106,
+                "right": 1240,
+                "bottom": 808,
+                "left": 200
+              },
+              "scrollWidth": 1038,
+              "clientWidth": 1038
+            }
+          ]
+        },
+        "refreshed": {
+          "identity": "strong#slotted-label",
+          "alerts": [],
+          "focused": {
+            "tag": "button",
+            "label": null,
+            "text": "Refresh tree"
+          },
+          "declarations": [],
+          "tree": [
+            {
+              "label": "html",
+              "level": "1",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": 0
+            },
+            {
+              "label": "body",
+              "level": "2",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "header",
+              "level": "3",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "main",
+              "level": "3",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h1",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#intro",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "section#collection.card",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#open-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "section#shadow-section",
+              "level": "5",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#closed-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "svg#scene",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "a#host-link",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#large-branch",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "p#below",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "html",
+              "level": "1",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": 0
+            },
+            {
+              "label": "body",
+              "level": "2",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "header",
+              "level": "3",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "main",
+              "level": "3",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h1",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#intro",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "section#collection.card",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#open-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "section#shadow-section",
+              "level": "5",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#closed-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "svg#scene",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "a#host-link",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#large-branch",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "p#below",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            }
+          ],
+          "dialogs": [
+            {
+              "label": "Navigator",
+              "modal": "true",
+              "bounds": {
+                "x": 200,
+                "y": 106,
+                "width": 1040,
+                "height": 702,
+                "top": 106,
+                "right": 1240,
+                "bottom": 808,
+                "left": 200
+              },
+              "scrollWidth": 1038,
+              "clientWidth": 1038
+            }
+          ]
+        },
+        "screenshots": [
+          "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\code-tree\\19-html-slotted-selected.png",
+          "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\code-tree\\20-navigator-slotted-selected.png"
+        ]
+      }
+    },
+    {
+      "id": "FU06",
+      "action": "Use actual HTML tree to select slot and Child to select assigned node",
+      "expected": "Visible slot nodes can navigate assigned content even when picked-node ancestry initially omitted it.",
+      "actual": {
+        "slot": {
+          "identity": "slot",
+          "alerts": [],
+          "focused": {
+            "tag": "button",
+            "label": "slot",
+            "text": "<slot>"
+          },
+          "declarations": [],
+          "tree": [
+            {
+              "label": "html",
+              "level": "1",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "body",
+              "level": "2",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "header",
+              "level": "3",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "main",
+              "level": "3",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h1",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#intro",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "section#collection.card",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#open-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "section#shadow-section",
+              "level": "5",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "slot",
+              "level": "6",
+              "selected": "true",
+              "expanded": "true",
+              "tabIndex": 0
+            },
+            {
+              "label": "strong#slotted-label",
+              "level": "7",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "button#shadow-target",
+              "level": "6",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#nested-host",
+              "level": "6",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#closed-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "svg#scene",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "a#host-link",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#large-branch",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "p#below",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            }
+          ],
+          "dialogs": []
+        },
+        "child": {
+          "identity": "strong#slotted-label",
+          "alerts": [],
+          "focused": null,
+          "declarations": [],
+          "tree": [
+            {
+              "label": "html",
+              "level": "1",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": 0
+            },
+            {
+              "label": "body",
+              "level": "2",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "header",
+              "level": "3",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "main",
+              "level": "3",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "h1",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "p#intro",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "section#collection.card",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#open-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": "true",
+              "tabIndex": -1
+            },
+            {
+              "label": "section#shadow-section",
+              "level": "5",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "div#closed-host",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "svg#scene",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "a#host-link",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            },
+            {
+              "label": "div#large-branch",
+              "level": "4",
+              "selected": "false",
+              "expanded": "false",
+              "tabIndex": -1
+            },
+            {
+              "label": "p#below",
+              "level": "4",
+              "selected": "false",
+              "expanded": null,
+              "tabIndex": -1
+            }
+          ],
+          "dialogs": []
+        },
+        "screenshot": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\code-tree\\21-html-slot-child.png"
+      }
+    }
+  ],
+  "pageErrors": []
+}

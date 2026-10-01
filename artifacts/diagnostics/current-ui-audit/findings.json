@@ -1,0 +1,570 @@
+{
+  "auditDate": "2026-10-01",
+  "countingRule": "15 confirmed product defects A-F; 4 incomplete surfaces J; 1 polish finding G. Shared defects are deduplicated across controls.",
+  "findings": [
+    {
+      "id": "UI01",
+      "surface": "Inspector shell on transformed pages",
+      "category": "E",
+      "severity": "High",
+      "priority": "P1",
+      "title": "html/body transforms move the inspector header and upper controls off-screen",
+      "repro": [
+        "Activate CSSForge on the hostile Fieldnotes fixture and pick #checkout.",
+        "Set document.documentElement.style.transform (or document.body.style.transform) to translate(30px,20px) scale(.9).",
+        "Open Measurement tools and inspect the inspector bounds."
+      ],
+      "expected": "The inspector stays anchored to the viewport with its header and controls reachable.",
+      "actual": "The 1440×900 viewport contains an inspector at x1063.2,y−768.4,width315,height1513.8. The header and upper Design controls are off-screen for both html and body transforms. Dock and Measurement remain clickable.",
+      "rootCause": "The normal-document UI and its fixed/absolute descendants inherit the transformed ancestor containing block; the selection overlay alone uses the browser top layer.",
+      "modules": [
+        "entrypoints/content.tsx",
+        "src/ui/ui.module.css",
+        "src/ui/interactions/useInspectorDrag.ts"
+      ],
+      "evidence": [
+        "SH06.json",
+        "07-transform-html.png",
+        "07-transform-body.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: viewport anchoring and clamping under host transforms.",
+      "dir": "shell"
+    },
+    {
+      "id": "UI02",
+      "surface": "Host-page stacking",
+      "category": "E",
+      "severity": "High",
+      "priority": "P1",
+      "title": "A maximum-z-index host overlay covers and intercepts the current UI",
+      "repro": [
+        "Activate CSSForge and pick a page element.",
+        "Append a fixed inset:0 host div with z-index:2147483647 and pointer-events:auto.",
+        "Check document.elementFromPoint at the Measurement dock button centre and attempt to operate CSSForge."
+      ],
+      "expected": "Inspector, dock, popovers and modal controls remain operable above host page UI.",
+      "actual": "The top hit is div#host-cover, and the screenshot shows the host covering the inspector and dock. Removing the cover restores the Measurement popover. The page selection overlay remains above the cover.",
+      "rootCause": "App UI uses normal-document stacking (app z-index2147483646), while createOverlay uses showPopover top-layer placement. A higher host stacking layer can occlude the UI.",
+      "modules": [
+        "entrypoints/content.tsx",
+        "src/ui/ui.module.css",
+        "src/picker/overlay.ts"
+      ],
+      "evidence": [
+        "SH06.json",
+        "08-host-high-z.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: ensure existing UI layers stay above hostile page stacking.",
+      "dir": "shell"
+    },
+    {
+      "id": "UI03",
+      "surface": "Selection highlight versus all CSSForge surfaces",
+      "category": "E",
+      "severity": "Medium",
+      "priority": "P1",
+      "title": "Selection outline and identity label paint above inspector, dock and review/popover content",
+      "repro": [
+        "Pick #checkout and move the inspector to the upper-left over the selected button.",
+        "Alternatively open Changes while that target is selected, or use a 320px viewport and open Text color.",
+        "Observe the mint outline and dark target label crossing CSSForge content."
+      ],
+      "expected": "Target feedback stays behind CSSForge control, popover and review surfaces or is hidden while those surfaces cover the target.",
+      "actual": "The target outline/label crosses Typography controls, the ColorControl spectrum, the dock and the Changes review surface. Pointer events remain disabled on the feedback, but it obscures text and color controls.",
+      "rootCause": "createOverlay calls showPopover; its top-layer paint order outranks ordinary CSSForge app/modal z-indices. Suspending picking does not hide the selected feedback.",
+      "modules": [
+        "src/picker/overlay.ts",
+        "src/ui/App.tsx",
+        "entrypoints/content.tsx"
+      ],
+      "evidence": [
+        "02-inspector-normal.png",
+        "04-live-changes.png",
+        "05-zoom-200.png",
+        "06-short-viewport.png",
+        "../effects/color-narrow-320.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: coordinate existing selection feedback and UI stacking.",
+      "dir": "shell"
+    },
+    {
+      "id": "J01",
+      "surface": "Background tools",
+      "category": "J",
+      "severity": "Medium",
+      "priority": "P1",
+      "title": "Enabled Background tools dock action has no connected tool",
+      "repro": [
+        "Focus the Background tools dock button and press Enter (or click).",
+        "Inspect the popover; repeat the trigger click to close it."
+      ],
+      "expected": "An enabled tool affordance provides its stated current action or clearly communicates unavailability before activation.",
+      "actual": "The popover titled Background tools only says “This tool is not connected yet.” It has no action controls; the trigger is enabled and displays active/expanded state.",
+      "rootCause": "LiveDock later() deliberately renders placeholder popovers.",
+      "modules": [
+        "src/ui/dock/LiveDock.tsx"
+      ],
+      "evidence": [
+        "SH03.json"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: hide or disable existing placeholders with truthful labeling; do not implement future tools.",
+      "dir": "shell"
+    },
+    {
+      "id": "J02",
+      "surface": "Color tools",
+      "category": "J",
+      "severity": "Medium",
+      "priority": "P1",
+      "title": "Enabled Color tools dock action has no connected tool",
+      "repro": [
+        "Focus the Color tools dock button and press Enter (or click).",
+        "Inspect the popover; repeat the trigger click to close it."
+      ],
+      "expected": "An enabled tool affordance provides its stated current action or clearly communicates unavailability before activation.",
+      "actual": "The popover titled Color tools only says “This tool is not connected yet.” It has no action controls; the trigger is enabled and displays active/expanded state.",
+      "rootCause": "LiveDock later() deliberately renders placeholder popovers.",
+      "modules": [
+        "src/ui/dock/LiveDock.tsx"
+      ],
+      "evidence": [
+        "SH03.json"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: hide or disable existing placeholders with truthful labeling; do not implement future tools.",
+      "dir": "shell"
+    },
+    {
+      "id": "J03",
+      "surface": "Eyedropper information",
+      "category": "J",
+      "severity": "Medium",
+      "priority": "P1",
+      "title": "Enabled Eyedropper information dock action has no connected tool",
+      "repro": [
+        "Focus the Eyedropper information dock button and press Enter (or click).",
+        "Inspect the popover; repeat the trigger click to close it."
+      ],
+      "expected": "An enabled tool affordance provides its stated current action or clearly communicates unavailability before activation.",
+      "actual": "The popover titled Color sampling only says “This tool is not connected yet.” It has no action controls; the trigger is enabled and displays active/expanded state.",
+      "rootCause": "LiveDock later() deliberately renders placeholder popovers.",
+      "modules": [
+        "src/ui/dock/LiveDock.tsx"
+      ],
+      "evidence": [
+        "SH03.json"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: hide or disable existing placeholders with truthful labeling; do not implement future tools.",
+      "dir": "shell"
+    },
+    {
+      "id": "J04",
+      "surface": "Changes",
+      "category": "J",
+      "severity": "Medium",
+      "priority": "P2",
+      "title": "Changes is a live session summary with incomplete review content",
+      "repro": [
+        "Apply Font size27px and Text color#abcdef to #checkout.",
+        "Open Changes from dock or More tools.",
+        "Inspect available content, press Undo last edit, then Reset session edits and Close."
+      ],
+      "expected": "The current surface accurately describes its available session actions and makes its incomplete review scope clear.",
+      "actual": "The edited-element count and Undo/Reset are real and update browser values; focus containment and opener return work. There is no selector/property/before-after/transaction list, copy/export or detailed review. The only explanation says detailed review/export is not connected. This is not the preview fixture surface.",
+      "rootCause": "LiveSurface renders only editedCount, SessionActions and a limitation paragraph; fixture ChangesSurface is not mounted by the production App.",
+      "modules": [
+        "src/ui/inspector/LiveInspection.tsx",
+        "src/ui/design/EditControls.tsx"
+      ],
+      "evidence": [
+        "SH04.json",
+        "04-live-changes.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: present the existing session summary truthfully; defer full Changes/History and Export.",
+      "dir": "shell"
+    },
+    {
+      "id": "DA01",
+      "surface": "Spacing unit menus",
+      "category": "E",
+      "severity": "Medium",
+      "priority": "P1",
+      "title": "The padding box paints over and intercepts enabled Margin unit options",
+      "repro": [
+        "Pick #audit-target from the Design audit fixture; open only Spacing.",
+        "Enter Margin top10.5px, then open Margin top unit.",
+        "Try to click px or em; alternatively open Margin right unit and click px."
+      ],
+      "expected": "Every enabled unit option is visible and pointer reachable above the spacing diagram.",
+      "actual": "Padding controls paint across the menu. Native ShadowRoot.elementFromPoint hits padding-box controls rather than the enabled option; three tested option positions are blocked. Focusing the option and pressing Enter performs the size-preserving conversion correctly.",
+      "rootCause": "Popover is rendered inside the compact spacing numeric wrapper; the sibling positioned padding-box content establishes paint order that outranks the menu in that wrapper.",
+      "modules": [
+        "src/ui/ui.module.css",
+        "src/ui/design/LiveDesignView.tsx",
+        "src/ui/shared/NumericScrubber.tsx",
+        "src/ui/popovers/Popover.tsx"
+      ],
+      "evidence": [
+        "unit-option-matrix.json#unit-option-matrix-059",
+        "unit-option-matrix.json#unit-option-matrix-064",
+        "unit-option-matrix.json#unit-option-matrix-077",
+        "blocked-unit-margin-top-px.png",
+        "blocked-unit-margin-top-em.png",
+        "blocked-unit-margin-right-px.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: place existing spacing menus above diagram controls; preserve conversion logic.",
+      "dir": "design"
+    },
+    {
+      "id": "DA02",
+      "surface": "Z-index keyboard stepping",
+      "category": "F",
+      "severity": "Low",
+      "priority": "P2",
+      "title": "Alt+ArrowDown generates an invalid fractional z-index",
+      "repro": [
+        "Pick #audit-target; open Positioning with position:relative.",
+        "Enter Z-index5 and press Enter.",
+        "Focus Z-index and press Alt+ArrowDown."
+      ],
+      "expected": "A keyboard step for an integer-only property produces a valid integer or safely leaves the value unchanged.",
+      "actual": "The field becomes4.9 with aria-invalid=true and an error; the browser remains at z-index5. Escape safely restores5. No incorrect CSS is committed.",
+      "rootCause": "NumericScrubber applies the generic Alt×0.1 multiplier to z-index without an integer-aware step; browser validation subsequently rejects the draft.",
+      "modules": [
+        "src/ui/shared/NumericScrubber.tsx",
+        "src/editing/values.ts",
+        "src/ui/design/EditControls.tsx"
+      ],
+      "evidence": [
+        "supplement.json#supplement-016",
+        "supplement-z-index-alt-step.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: keep the existing integer field stepping valid; no new unit system.",
+      "dir": "design"
+    },
+    {
+      "id": "DA03",
+      "surface": "Locally rejected NumericScrubber input",
+      "category": "F",
+      "severity": "Low",
+      "priority": "P2",
+      "title": "Unsupported unit rejection has no associated explanation",
+      "repro": [
+        "Pick #audit-target; open Spacing.",
+        "Type11qu into Margin left and press Enter.",
+        "Inspect visible errors and the input accessibility attributes."
+      ],
+      "expected": "The rejected field identifies the invalid unit and links a readable error or explanation.",
+      "actual": "Browser margin stays8px and aria-invalid istrue, but there is no alert, aria-describedby or aria-errormessage. The tooltip still describes the browser value and generic drag/Escape instructions.",
+      "rootCause": "validNumeric rejection occurs locally in NumericScrubber.apply before the editor callback and only sets invalid state; the engine error rendered by SessionActions is never populated.",
+      "modules": [
+        "src/ui/shared/NumericScrubber.tsx",
+        "src/ui/design/EditControls.tsx"
+      ],
+      "evidence": [
+        "unit-option-matrix.json#unit-option-matrix-322",
+        "unit-option-matrix.json#unit-option-matrix-323",
+        "invalid-unit-spacing.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: connect local numeric validation to a concise field explanation.",
+      "dir": "design"
+    },
+    {
+      "id": "CA61",
+      "surface": "Code value editor",
+      "title": "Escape leaves a CodeMirror draft open",
+      "category": "D",
+      "severity": "Medium",
+      "priority": "P2",
+      "repro": [
+        "Pick button#target.primary through its padding and open Code.",
+        "Edit inline font-size to 25px and press Enter.",
+        "Edit the new CSSForge font-size override, replace the draft with 33px, and press Escape."
+      ],
+      "expected": "Escape discards the uncommitted draft and restores the existing 25px value control.",
+      "actual": "The CSS value font-size editor remains focused with 33px and Cancel visible. Browser font-size remains 25px. Only clicking Cancel discards the draft.",
+      "rootCause": "ValueEditor handles Enter only; the shared Escape policy has no Code draft cancellation callback.",
+      "modules": [
+        "src/ui/code/LiveCodeView.tsx:18",
+        "src/ui/interactions/useEscapePolicy.ts:6"
+      ],
+      "evidence": [
+        "code-observations.json CT06",
+        "followup-observations.json FU02",
+        "03-code-escape-draft.png",
+        "17-code-escape-followup.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: Code keyboard cancellation",
+      "dir": "code-tree"
+    },
+    {
+      "id": "CA62",
+      "surface": "Code Apply/Cancel",
+      "title": "Applying or cancelling a Code value drops focus to the page body",
+      "category": "D",
+      "severity": "Medium",
+      "priority": "P2",
+      "repro": [
+        "Pick button#target.primary, open Code, and use the inline font-size value editor.",
+        "Type 25px and press Enter; inspect keyboard focus.",
+        "Edit the font-size override again, then click Cancel; inspect keyboard focus and press Tab."
+      ],
+      "expected": "Successful apply and cancellation return focus to the corresponding value control; the next Tab follows that row predictably.",
+      "actual": "After both actions the CSSForge ShadowRoot has no active element and document.activeElement is body. After Apply, Tab enters the old inline Edit font-size button; after Cancel, Tab enters Add session declaration, skipping the replacement override value button.",
+      "rootCause": "setEditing(false) destroys the focused CodeMirror or Cancel control and does not restore focus through a ref.",
+      "modules": [
+        "src/ui/code/LiveCodeView.tsx:48",
+        "src/ui/code/LiveCodeView.tsx:59"
+      ],
+      "evidence": [
+        "code-observations.json CT02/CT04/CT07",
+        "followup-observations.json FU01/FU02"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: Code focus restoration",
+      "dir": "code-tree"
+    },
+    {
+      "id": "CA63",
+      "surface": "HTML/Navigator tree keyboard",
+      "title": "Tree Left/Right keys omit child and parent navigation",
+      "category": "F",
+      "severity": "Medium",
+      "priority": "P2",
+      "repro": [
+        "Pick button#target.primary, open HTML, and focus its already expanded treeitem.",
+        "Press ArrowRight.",
+        "Focus its leaf span#target-label treeitem and press ArrowLeft."
+      ],
+      "expected": "Right on an expanded node focuses its first child; Left on a leaf focuses its parent. Branch collapse and expansion also remain available.",
+      "actual": "Right leaves focus on button#target.primary; Left leaves focus on span#target-label. Up/Down, Home/End and Enter work. Roving tabIndex remains on the selected row after arrow focus moves.",
+      "rootCause": "LiveDOMTree implements Left/Right only as expansion toggles, without a parent/child focus branch; tabIndex derives from selection rather than focused row.",
+      "modules": [
+        "src/ui/html/LiveHTMLView.tsx:23",
+        "src/ui/html/LiveHTMLView.tsx:27"
+      ],
+      "evidence": [
+        "tree-observations.json TR02",
+        "followup-observations.json FU04",
+        "18-tree-keyboard.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: complete existing tree keyboard interaction",
+      "dir": "code-tree"
+    },
+    {
+      "id": "CA64",
+      "surface": "HTML/Navigator slotted selection",
+      "title": "Selected assigned slot content disappears from both trees",
+      "category": "C",
+      "severity": "Medium",
+      "priority": "P1",
+      "repro": [
+        "Use an open shadow host with a named slot and an assigned light-DOM strong#slotted-label child.",
+        "Pick the rendered slotted label, then inspect HTML and open Navigator.",
+        "Click Refresh tree.",
+        "Alternatively pick the open-shadow button, select the visible slot treeitem and use Child."
+      ],
+      "expected": "The assigned selected node appears exactly once with its slot ancestry in both trees, and selection remains locatable after Refresh or Child navigation.",
+      "actual": "Inspector identity and page highlight correctly show strong#slotted-label, but both trees contain no selected row and no strong#slotted-label row. Refresh preserves the omission. Selecting slot shows the assigned child, but Child selects the strong and makes it disappear again. Parent of the assigned child goes directly to the light-DOM host.",
+      "rootCause": "controller.parentOf follows parentElement/open-root host without assignedSlot; navigationChildren traverses a host's shadow tree and assigned slot children. The selected path therefore disagrees with tree traversal.",
+      "modules": [
+        "src/picker/controller.ts:91",
+        "src/picker/navigation.ts:1",
+        "src/picker/tree.ts:16"
+      ],
+      "evidence": [
+        "tree-observations.json TR05",
+        "followup-observations.json FU05/FU06",
+        "19-html-slotted-selected.png",
+        "20-navigator-slotted-selected.png",
+        "21-html-slot-child.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: composed slot ancestry consistency",
+      "dir": "code-tree"
+    },
+    {
+      "id": "EFF-A-01",
+      "surface": "Shared closed color inputs",
+      "title": "Escape retains a color edit despite the field tooltip promising gesture cancellation",
+      "category": "A",
+      "severity": "Medium",
+      "priority": "P2",
+      "repro": [
+        "Select #checkout in the built-Chrome fixture.",
+        "Open Typography and focus Text color.",
+        "Replace the native white value with #00ff00.",
+        "Press Escape while the field is focused."
+      ],
+      "expected": "Escape restores the white color, consistent with the displayed tooltip 'Escape reverts the current gesture.'",
+      "actual": "Target stays rgb(0, 255, 0); field stays #00ff00. Undo later restores white.",
+      "rootCause": "EditField passes a NumericScrubber tooltip to ColorControl. ColorControl handles Enter but has no Escape/cancelGesture handler.",
+      "modules": [
+        "src/ui/shared/ColorControl.tsx",
+        "src/ui/design/EditControls.tsx"
+      ],
+      "evidence": [
+        "focused-color.json#focused-color-001",
+        "focused-color-escape.png"
+      ],
+      "next": "Shared color interaction and truthful tooltip behavior",
+      "dir": "effects"
+    },
+    {
+      "id": "EFF-A-02",
+      "surface": "ColorControl alpha on a valid CSS token",
+      "title": "Changing currentColor alpha silently changes its hue to black",
+      "category": "A",
+      "severity": "Medium",
+      "priority": "P2",
+      "repro": [
+        "Select the white-text #checkout fixture.",
+        "Open Box shadow and Add box shadow.",
+        "Set Box shadow color to currentColor and press Enter.",
+        "Open Box shadow color picker and type 50% in Alpha."
+      ],
+      "expected": "Either preserve the rendered white hue while changing opacity, or disable alpha for a token that cannot be resolved safely.",
+      "actual": "White currentColor shadow becomes rgba(0, 0, 0, 0.5); main field is #00000080. Undo restores currentColor.",
+      "rootCause": "The numeric alpha handler calls rgb(parsed ?? '#000') when Culori cannot parse currentColor, replacing a valid unresolved token with black.",
+      "modules": [
+        "src/ui/shared/ColorControl.tsx"
+      ],
+      "evidence": [
+        "focused-color.json#focused-color-003",
+        "focused-color-currentcolor-alpha.png"
+      ],
+      "next": "Shared color token handling; disable alpha for unresolved valid tokens until conversion is safe",
+      "dir": "effects"
+    },
+    {
+      "id": "EFF-B-01",
+      "surface": "Complex gradient stop editor",
+      "title": "A valid interpolation hint is displayed as a color stop with an invented position",
+      "category": "B",
+      "severity": "Medium",
+      "priority": "P2",
+      "repro": [
+        "Select #complex-gradient, authored with linear-gradient(90deg, red 0% 20%, 45%, blue 100%).",
+        "Open Background and select Layer 1.",
+        "Inspect the stop rows and track."
+      ],
+      "expected": "Recognize the standalone 45% interpolation hint as a hint, or preserve the complex syntax in a clearly limited editor instead of displaying it as a CSS color.",
+      "actual": "Chrome normalizes red 0% 20% into two red stops. UI shows four color rows; Stop 3 color contains invalid color token 45%, with a default position around 66.7%. Native gradient remains valid; angle edit/Undo/Reset preserve its actual CSS.",
+      "rootCause": "parseGradient treats every remaining argument as a color stop. A lone percentage cannot be distinguished as an interpolation hint and receives an implicit-stop editor.",
+      "modules": [
+        "src/editing/rich.ts:parseGradient",
+        "src/ui/design/RichBackground.tsx",
+        "src/ui/design/GradientTrack.tsx"
+      ],
+      "evidence": [
+        "background.json#background-062",
+        "background-complex-gradient.png"
+      ],
+      "next": "Rich gradient parser/state presentation; block unsupported hint editing until faithfully represented",
+      "dir": "effects"
+    },
+    {
+      "id": "EFF-B-02",
+      "surface": "Border color for nonuniform four-side colors",
+      "title": "Four valid side colors appear as a single unparseable color token with a black/default picker",
+      "category": "B",
+      "severity": "Medium",
+      "priority": "P2",
+      "repro": [
+        "Select #nonuniform, authored with red/green/blue/yellow side colors.",
+        "Open Border.",
+        "Open Border color picker without editing."
+      ],
+      "expected": "Display a clear mixed/per-side state and explain that choosing one color replaces all sides.",
+      "actual": "Main field contains the four-value rgb shorthand, swatch appears unset, picker defaults to black and says 'Enter a color, or choose a new one to replace this token.' Applying one color and Undo work correctly.",
+      "rootCause": "A border-color shorthand containing four valid colors is passed into a parser that expects one CSS color.",
+      "modules": [
+        "src/ui/shared/ColorControl.tsx",
+        "src/ui/design/LiveDesignView.tsx"
+      ],
+      "evidence": [
+        "color.json#color-070",
+        "color-nonuniform-border.png"
+      ],
+      "next": "Border UI mixed-value presentation",
+      "dir": "effects"
+    },
+    {
+      "id": "EFF-F-01",
+      "surface": "All six ColorControl format inputs",
+      "title": "Invalid popup format input omits aria-invalid although CSS is rejected",
+      "category": "F",
+      "severity": "Medium",
+      "priority": "P2",
+      "repro": [
+        "Open a text/background/border/box-shadow/text-shadow/gradient-stop color picker.",
+        "Choose HEX, RGB or HSL.",
+        "Replace its formatted text with an invalid color."
+      ],
+      "expected": "Focused invalid format input exposes aria-invalid=true and an associated error.",
+      "actual": "CSS remains unchanged and visible error appears, but formatted popup input aria-invalid is null. Closed input exposes aria-invalid=true. Confirmed across all six current control contexts.",
+      "rootCause": "The popup formatted input lacks aria-invalid; only the closed color input receives it.",
+      "modules": [
+        "src/ui/shared/ColorControl.tsx"
+      ],
+      "evidence": [
+        "color.json#color-008",
+        "color.json#color-020",
+        "color.json#color-032",
+        "color.json#color-044",
+        "color.json#color-056",
+        "effects-followup.json#effects-followup-009",
+        "effects-followup-gradient-invalid-color.png"
+      ],
+      "next": "Shared color accessibility",
+      "dir": "effects"
+    },
+    {
+      "id": "EFF-G-01",
+      "surface": "Color controls across Typography and Effects",
+      "title": "The same color picker has inconsistent format tabs, swatch shape and input typography across sections",
+      "category": "G",
+      "severity": "Low",
+      "priority": "P3",
+      "repro": [
+        "Open Text color picker in Typography and select HSL.",
+        "Open Box shadow color picker and select HSL.",
+        "Compare selected tabs, closed swatches, captions and fields."
+      ],
+      "expected": "Shared color controls follow consistent visual conventions unless the surface difference has a clear user purpose.",
+      "actual": "Typography uses underline tabs, square swatch, larger code-styled closed field and a divided heading; Effects uses filled segmented tabs, circular swatch and smaller UI-font closed field.",
+      "rootCause": "Typography-only ColorControl CSS overrides deliberately diverge from the shared base color UI.",
+      "modules": [
+        "src/ui/shared/propertyControls.module.css"
+      ],
+      "evidence": [
+        "color-text-color.png",
+        "color-box-shadow-color.png"
+      ],
+      "next": "Later UI consistency pass; no functional redesign during this audit",
+      "dir": "effects"
+    }
+  ],
+  "auditStatus": "CURRENT UI FUNCTIONAL AUDIT COMPLETE",
+  "surfaceCounts": {
+    "auditedGroups": 24,
+    "fullyWorkingGroupsInSupportedScenarios": 3,
+    "partialOrIncompleteGroups": 21
+  },
+  "classifiedCounts": {
+    "confirmedDefects": {
+      "Critical": 0,
+      "High": 2,
+      "Medium": 11,
+      "Low": 2,
+      "total": 15
+    },
+    "incomplete": {
+      "Medium": 4,
+      "total": 4
+    },
+    "polish": {
+      "Low": 1,
+      "total": 1
+    },
+    "actionableTotal": 20
+  },
+  "verification": "verification.json"
+}

@@ -1,0 +1,754 @@
+{
+  "surface": "background",
+  "scope": "Built Chrome MV3, actual visible user actions; native computed style is read only.",
+  "observations": [
+    {
+      "id": "background-001",
+      "surface": "background",
+      "action": "Create radial second layer",
+      "status": "pass",
+      "expected": "Two layers preserve radial shape",
+      "actual": {
+        "image": "linear-gradient(135deg, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%), radial-gradient(circle at 20% 30%, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%)",
+        "position": "50% 50%, 100% 100%",
+        "size": "auto, 80% 90%",
+        "repeat": "no-repeat, repeat-x"
+      }
+    },
+    {
+      "id": "background-002",
+      "surface": "background",
+      "action": "Move background layer up",
+      "status": "pass",
+      "expected": "Moving layer preserves image and placement",
+      "actual": {
+        "image": "radial-gradient(circle at 20% 30%, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%), linear-gradient(135deg, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%)",
+        "position": "100% 100%, 50% 50%",
+        "size": "80% 90%, auto",
+        "repeat": "repeat-x, no-repeat"
+      }
+    },
+    {
+      "id": "background-003",
+      "surface": "background",
+      "action": "Hide layer",
+      "status": "pass",
+      "expected": "Hidden image becomes transparent placeholder",
+      "actual": "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), linear-gradient(135deg, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%)"
+    },
+    {
+      "id": "background-004",
+      "surface": "background",
+      "action": "Show layer and edit hidden placement",
+      "status": "pass",
+      "expected": "Hidden layer metadata stays editable",
+      "actual": "70% 60%, auto"
+    },
+    {
+      "id": "background-005",
+      "surface": "background",
+      "action": "Select first layer",
+      "status": "pass",
+      "expected": "Selection reflects selected layer",
+      "actual": "true"
+    },
+    {
+      "id": "background-006",
+      "surface": "background",
+      "action": "Remove layer",
+      "status": "pass",
+      "expected": "Removed layer leaves one layer",
+      "actual": "linear-gradient(135deg, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%)"
+    },
+    {
+      "id": "background-007",
+      "surface": "background",
+      "action": "Undo removal",
+      "status": "pass",
+      "expected": "Undo restores removed image and metadata",
+      "actual": "linear-gradient(135deg, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%), radial-gradient(circle at 20% 30%, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%)"
+    },
+    {
+      "id": "background-008",
+      "surface": "background",
+      "action": "Distribute stops",
+      "status": "pass",
+      "expected": "Three stops distribute to 0/50/100",
+      "actual": "50"
+    },
+    {
+      "id": "background-009",
+      "surface": "background",
+      "action": "Drag gradient stop",
+      "status": "pass",
+      "expected": "Dragging 15% changes stop 50% to 65%",
+      "actual": {
+        "field": "65",
+        "css": "linear-gradient(90deg, rgb(152, 222, 183) 0%, rgb(184, 152, 237) 65%, rgb(255, 255, 255) 100%)"
+      }
+    },
+    {
+      "id": "background-010",
+      "surface": "background",
+      "action": "Undo stop drag",
+      "status": "pass",
+      "expected": "Drag is one undo gesture",
+      "actual": "50"
+    },
+    {
+      "id": "background-011",
+      "surface": "background",
+      "action": "Escape cancels stop drag",
+      "status": "pass",
+      "expected": "Escape restores original stop",
+      "actual": "50"
+    },
+    {
+      "id": "background-012",
+      "surface": "background",
+      "action": "Stop keyboard arrows",
+      "status": "pass",
+      "expected": "Arrow right +1 / shift left -10",
+      "actual": "41"
+    },
+    {
+      "id": "background-013",
+      "surface": "background",
+      "action": "Reverse gradient",
+      "status": "pass",
+      "expected": "Reverse maps 45% to 55%",
+      "actual": {
+        "color": "#ffffff",
+        "position": "55"
+      }
+    },
+    {
+      "id": "background-014",
+      "surface": "background",
+      "action": "Minimum stop guard",
+      "status": "pass",
+      "expected": "Two-stop gradients disable removal",
+      "actual": 2
+    },
+    {
+      "id": "background-015",
+      "surface": "background",
+      "action": "Angle unit conversion",
+      "status": "pass",
+      "expected": "0.25turn converts to 90deg",
+      "actual": "90"
+    },
+    {
+      "id": "background-016",
+      "surface": "background",
+      "action": "Nonpercent reverse guard",
+      "status": "pass",
+      "expected": "Reverse disabled when stop uses length",
+      "actual": true
+    },
+    {
+      "id": "background-017",
+      "surface": "background",
+      "action": "Direction keyword",
+      "status": "pass",
+      "expected": "CSS direction keywords apply",
+      "actual": "linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(152, 222, 183) 100%)"
+    },
+    {
+      "id": "background-018",
+      "surface": "background",
+      "action": "Invalid direction rejected",
+      "status": "pass",
+      "expected": "Invalid CSS leaves previous gradient",
+      "actual": {
+        "before": "linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(152, 222, 183) 100%)",
+        "after": "linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(152, 222, 183) 100%)",
+        "ariaInvalid": "true",
+        "alerts": [
+          "Enter a valid background-image value."
+        ]
+      }
+    },
+    {
+      "id": "background-019",
+      "surface": "background",
+      "action": "Radial shape",
+      "status": "pass",
+      "expected": "Radial direction accepts shape/extent/origin",
+      "actual": "radial-gradient(closest-side at 0% 0%, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%)"
+    },
+    {
+      "id": "background-020",
+      "surface": "background",
+      "action": "Invalid radial shape",
+      "status": "pass",
+      "expected": "Invalid radial shape leaves CSS unchanged",
+      "actual": {
+        "before": "radial-gradient(closest-side at 0% 0%, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%)",
+        "after": "radial-gradient(closest-side at 0% 0%, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%)",
+        "alerts": [
+          "Enter a valid background-image value."
+        ]
+      }
+    },
+    {
+      "id": "background-021",
+      "surface": "background",
+      "action": "Image URL validation",
+      "status": "pass",
+      "expected": "Unsafe URL reports HTTP(S) error and preserves layer",
+      "actual": {
+        "css": "radial-gradient(closest-side at 0% 0%, rgb(152, 222, 183) 0%, rgb(100, 118, 255) 100%)",
+        "alerts": [
+          "Use an HTTP(S) image URL.",
+          "Enter a valid background-image value."
+        ]
+      }
+    },
+    {
+      "id": "background-022",
+      "surface": "background",
+      "action": "Image URL",
+      "status": "pass",
+      "expected": "HTTP(S) image URL applies",
+      "actual": "url(\"https://example.com/audit.png\")"
+    },
+    {
+      "id": "background-023",
+      "surface": "background",
+      "action": "Repeat no-repeat",
+      "status": "pass",
+      "expected": "Repeat updates to no-repeat",
+      "actual": "no-repeat"
+    },
+    {
+      "id": "background-024",
+      "surface": "background",
+      "action": "Repeat repeat",
+      "status": "pass",
+      "expected": "Repeat updates to repeat",
+      "actual": "repeat"
+    },
+    {
+      "id": "background-025",
+      "surface": "background",
+      "action": "Repeat repeat-x",
+      "status": "pass",
+      "expected": "Repeat updates to repeat-x",
+      "actual": "repeat-x"
+    },
+    {
+      "id": "background-026",
+      "surface": "background",
+      "action": "Repeat repeat-y",
+      "status": "pass",
+      "expected": "Repeat updates to repeat-y",
+      "actual": "repeat-y"
+    },
+    {
+      "id": "background-027",
+      "surface": "background",
+      "action": "Repeat space",
+      "status": "pass",
+      "expected": "Repeat updates to space",
+      "actual": "space"
+    },
+    {
+      "id": "background-028",
+      "surface": "background",
+      "action": "Repeat round",
+      "status": "pass",
+      "expected": "Repeat updates to round",
+      "actual": "round"
+    },
+    {
+      "id": "background-029",
+      "surface": "background",
+      "action": "Image placement",
+      "status": "pass",
+      "expected": "Image placement fields update",
+      "actual": {
+        "position": "10px 20px",
+        "size": "cover"
+      }
+    },
+    {
+      "id": "background-030",
+      "surface": "background",
+      "action": "Background preset inventory",
+      "status": "pass",
+      "expected": "28 current presets exposed",
+      "actual": [
+        "Background preset Porcelain",
+        "Background preset Limestone",
+        "Background preset Mist",
+        "Background preset Graphite",
+        "Background preset Terracotta",
+        "Background preset Amber",
+        "Background preset Apricot",
+        "Background preset Rosewood",
+        "Background preset Glacier",
+        "Background preset Tidal",
+        "Background preset Periwinkle",
+        "Background preset Arctic",
+        "Background preset Citrus",
+        "Background preset Orchid",
+        "Background preset Coral",
+        "Background preset Electric",
+        "Background preset Pistachio",
+        "Background preset Lavender",
+        "Background preset Petal",
+        "Background preset Sky",
+        "Background preset Midnight",
+        "Background preset Forest",
+        "Background preset Plum",
+        "Background preset Obsidian",
+        "Background preset Frost",
+        "Background preset Pearl",
+        "Background preset Sea glass",
+        "Background preset Smoke"
+      ]
+    },
+    {
+      "id": "background-031",
+      "surface": "background",
+      "action": "Background preset Porcelain",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(247, 247, 242) 0%, rgb(205, 211, 205) 100%)"
+      }
+    },
+    {
+      "id": "background-032",
+      "surface": "background",
+      "action": "Background preset Limestone",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(228, 221, 209) 0%, rgb(157, 166, 154) 100%)"
+      }
+    },
+    {
+      "id": "background-033",
+      "surface": "background",
+      "action": "Background preset Mist",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(244, 245, 247) 0%, rgb(195, 202, 215) 100%)"
+      }
+    },
+    {
+      "id": "background-034",
+      "surface": "background",
+      "action": "Background preset Graphite",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(115, 121, 130) 0%, rgb(48, 53, 62) 100%)"
+      }
+    },
+    {
+      "id": "background-035",
+      "surface": "background",
+      "action": "Background preset Terracotta",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(240, 197, 164) 0%, rgb(189, 94, 80) 100%)"
+      }
+    },
+    {
+      "id": "background-036",
+      "surface": "background",
+      "action": "Background preset Amber",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(255, 228, 165) 0%, rgb(217, 154, 85) 100%)"
+      }
+    },
+    {
+      "id": "background-037",
+      "surface": "background",
+      "action": "Background preset Apricot",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(255, 230, 197) 0%, rgb(239, 156, 130) 100%)"
+      }
+    },
+    {
+      "id": "background-038",
+      "surface": "background",
+      "action": "Background preset Rosewood",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(214, 166, 169) 0%, rgb(118, 84, 94) 100%)"
+      }
+    },
+    {
+      "id": "background-039",
+      "surface": "background",
+      "action": "Background preset Glacier",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(216, 245, 238) 0%, rgb(124, 155, 225) 100%)"
+      }
+    },
+    {
+      "id": "background-040",
+      "surface": "background",
+      "action": "Background preset Tidal",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(132, 212, 207) 0%, rgb(52, 92, 145) 100%)"
+      }
+    },
+    {
+      "id": "background-041",
+      "surface": "background",
+      "action": "Background preset Periwinkle",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(217, 216, 255) 0%, rgb(133, 143, 198) 100%)"
+      }
+    },
+    {
+      "id": "background-042",
+      "surface": "background",
+      "action": "Background preset Arctic",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(231, 246, 255) 0%, rgb(146, 184, 201) 100%)"
+      }
+    },
+    {
+      "id": "background-043",
+      "surface": "background",
+      "action": "Background preset Citrus",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(239, 255, 128) 0%, rgb(120, 212, 156) 100%)"
+      }
+    },
+    {
+      "id": "background-044",
+      "surface": "background",
+      "action": "Background preset Orchid",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(236, 172, 255) 0%, rgb(124, 114, 242) 100%)"
+      }
+    },
+    {
+      "id": "background-045",
+      "surface": "background",
+      "action": "Background preset Coral",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(255, 203, 133) 0%, rgb(243, 111, 120) 100%)"
+      }
+    },
+    {
+      "id": "background-046",
+      "surface": "background",
+      "action": "Background preset Electric",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(117, 224, 237) 0%, rgb(114, 116, 239) 100%)"
+      }
+    },
+    {
+      "id": "background-047",
+      "surface": "background",
+      "action": "Background preset Pistachio",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(232, 239, 207) 0%, rgb(184, 215, 190) 100%)"
+      }
+    },
+    {
+      "id": "background-048",
+      "surface": "background",
+      "action": "Background preset Lavender",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(230, 220, 245) 0%, rgb(188, 186, 221) 100%)"
+      }
+    },
+    {
+      "id": "background-049",
+      "surface": "background",
+      "action": "Background preset Petal",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(245, 229, 234) 0%, rgb(223, 191, 198) 100%)"
+      }
+    },
+    {
+      "id": "background-050",
+      "surface": "background",
+      "action": "Background preset Sky",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(232, 242, 250) 0%, rgb(179, 214, 232) 100%)"
+      }
+    },
+    {
+      "id": "background-051",
+      "surface": "background",
+      "action": "Background preset Midnight",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(52, 60, 97) 0%, rgb(22, 29, 49) 100%)"
+      }
+    },
+    {
+      "id": "background-052",
+      "surface": "background",
+      "action": "Background preset Forest",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(61, 92, 80) 0%, rgb(25, 47, 43) 100%)"
+      }
+    },
+    {
+      "id": "background-053",
+      "surface": "background",
+      "action": "Background preset Plum",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(104, 80, 107) 0%, rgb(45, 35, 61) 100%)"
+      }
+    },
+    {
+      "id": "background-054",
+      "surface": "background",
+      "action": "Background preset Obsidian",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgb(65, 74, 83) 0%, rgb(27, 32, 40) 100%)"
+      }
+    },
+    {
+      "id": "background-055",
+      "surface": "background",
+      "action": "Background preset Frost",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(214, 232, 255, 0.094) 100%)"
+      }
+    },
+    {
+      "id": "background-056",
+      "surface": "background",
+      "action": "Background preset Pearl",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgba(255, 248, 232, 0.4) 0%, rgba(255, 255, 255, 0.08) 100%)"
+      }
+    },
+    {
+      "id": "background-057",
+      "surface": "background",
+      "action": "Background preset Sea glass",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgba(184, 255, 222, 0.4) 0%, rgba(205, 234, 255, 0.094) 100%)"
+      }
+    },
+    {
+      "id": "background-058",
+      "surface": "background",
+      "action": "Background preset Smoke",
+      "status": "pass",
+      "expected": "Preset applies and selected state matches",
+      "actual": {
+        "selected": "true",
+        "css": "linear-gradient(135deg, rgba(202, 208, 217, 0.2) 0%, rgba(255, 255, 255, 0.03) 100%)"
+      }
+    },
+    {
+      "id": "background-059",
+      "surface": "background",
+      "action": "Background 390px",
+      "status": "pass",
+      "expected": "Layer rows and gradient editor fit inspector",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 28,
+          "y": 12,
+          "width": 350,
+          "height": 746
+        },
+        "bounds": {
+          "w": 390,
+          "h": 844
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "background-060",
+      "surface": "background",
+      "action": "Background 320px",
+      "status": "pass",
+      "expected": "Layer rows and gradient editor fit inspector",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 12,
+          "y": 12,
+          "width": 296,
+          "height": 746
+        },
+        "bounds": {
+          "w": 320,
+          "h": 844
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "background-061",
+      "surface": "background",
+      "action": "Background 200% zoom",
+      "status": "pass",
+      "expected": "Editor fits zoomed viewport",
+      "actual": {
+        "okay": true,
+        "rect": {
+          "x": 348,
+          "y": 8,
+          "width": 350,
+          "height": 422
+        },
+        "bounds": {
+          "w": 720,
+          "h": 500
+        },
+        "overflow": 0,
+        "popup": null
+      }
+    },
+    {
+      "id": "background-062",
+      "surface": "background",
+      "action": "Complex double-position/hint representation",
+      "status": "fail",
+      "expected": "An interpolation midpoint hint should not expose a color control",
+      "actual": {
+        "controls": [
+          {
+            "label": "Stop 1 color",
+            "value": "rgb(255, 0, 0)"
+          },
+          {
+            "label": "Stop 2 color",
+            "value": "rgb(255, 0, 0)"
+          },
+          {
+            "label": "Stop 3 color",
+            "value": "45%"
+          },
+          {
+            "label": "Stop 4 color",
+            "value": "rgb(0, 0, 255)"
+          }
+        ],
+        "css": "linear-gradient(90deg, rgb(255, 0, 0) 0%, rgb(255, 0, 0) 20%, 45%, rgb(0, 0, 255) 100%), radial-gradient(circle at 20% 30%, rgb(255, 255, 255) 10px, rgb(0, 0, 0) 80px)"
+      },
+      "classification": "B wrong state",
+      "severity": "Medium",
+      "module": "src/editing/rich.ts parseGradient + src/ui/design/RichBackground.tsx",
+      "rootCause": "Chrome normalizes the double position into two identical red stops; parseGradient then treats the standalone 45% interpolation hint as an additional color stop.",
+      "priority": "P2",
+      "fixPhase": "Rich gradient UI/parser"
+    },
+    {
+      "id": "background-063",
+      "surface": "background",
+      "action": "Complex gradient untouched token preservation",
+      "status": "pass",
+      "expected": "Angle edit preserves double positions and interpolation hint",
+      "actual": "linear-gradient(45deg, rgb(255, 0, 0) 0%, rgb(255, 0, 0) 20%, 45%, rgb(0, 0, 255) 100%), radial-gradient(circle at 20% 30%, rgb(255, 255, 255) 10px, rgb(0, 0, 0) 80px)"
+    },
+    {
+      "id": "background-064",
+      "surface": "background",
+      "action": "Nonuniform background metadata",
+      "status": "pass",
+      "expected": "Second layer presents its own metadata",
+      "actual": {
+        "position": "100% 100%",
+        "size": "30px 40px",
+        "repeat": "no-repeat"
+      }
+    },
+    {
+      "id": "background-065",
+      "surface": "background",
+      "action": "Complex gradient Reset",
+      "status": "pass",
+      "expected": "Reset restores original complex layers",
+      "actual": "linear-gradient(90deg, rgb(255, 0, 0) 0%, rgb(255, 0, 0) 20%, 45%, rgb(0, 0, 255) 100%), radial-gradient(circle at 20% 30%, rgb(255, 255, 255) 10px, rgb(0, 0, 0) 80px)"
+    }
+  ],
+  "pageErrors": [],
+  "counts": {
+    "pass": 64,
+    "fail": 1
+  }
+}

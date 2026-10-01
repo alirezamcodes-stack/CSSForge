@@ -1,0 +1,1074 @@
+{
+  "name": "choices",
+  "observations": [
+    {
+      "id": "choices-001",
+      "case": "Font family: choose Arial",
+      "status": "pass",
+      "expected": "Arial",
+      "actual": "Arial",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-002",
+      "case": "Font family: active trigger",
+      "status": "pass",
+      "expected": "Arial",
+      "actual": "Arial"
+    },
+    {
+      "id": "choices-003",
+      "case": "Font family: choose Georgia",
+      "status": "pass",
+      "expected": "Georgia",
+      "actual": "Georgia",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-004",
+      "case": "Font family: active trigger",
+      "status": "pass",
+      "expected": "Georgia",
+      "actual": "Georgia"
+    },
+    {
+      "id": "choices-005",
+      "case": "Font family: choose Verdana",
+      "status": "pass",
+      "expected": "Verdana",
+      "actual": "Verdana",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-006",
+      "case": "Font family: active trigger",
+      "status": "pass",
+      "expected": "Verdana",
+      "actual": "Verdana"
+    },
+    {
+      "id": "choices-007",
+      "case": "Font family: choose system-ui",
+      "status": "pass",
+      "expected": "system-ui",
+      "actual": "system-ui",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-008",
+      "case": "Font family: active trigger",
+      "status": "pass",
+      "expected": "system-ui",
+      "actual": "system-ui"
+    },
+    {
+      "id": "choices-009",
+      "case": "Font family: choose serif",
+      "status": "pass",
+      "expected": "serif",
+      "actual": "serif",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-010",
+      "case": "Font family: active trigger",
+      "status": "pass",
+      "expected": "serif",
+      "actual": "serif"
+    },
+    {
+      "id": "choices-011",
+      "case": "Font family: choose sans-serif",
+      "status": "pass",
+      "expected": "sans-serif",
+      "actual": "sans-serif",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-012",
+      "case": "Font family: active trigger",
+      "status": "pass",
+      "expected": "sans-serif",
+      "actual": "sans-serif"
+    },
+    {
+      "id": "choices-013",
+      "case": "Font family: choose monospace",
+      "status": "pass",
+      "expected": "monospace",
+      "actual": "monospace",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-014",
+      "case": "Font family: active trigger",
+      "status": "pass",
+      "expected": "monospace",
+      "actual": "monospace"
+    },
+    {
+      "id": "choices-015",
+      "case": "Font weight: choose 100",
+      "status": "pass",
+      "expected": "100",
+      "actual": "100",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-016",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "100",
+      "actual": "100"
+    },
+    {
+      "id": "choices-017",
+      "case": "Font weight: choose 200",
+      "status": "pass",
+      "expected": "200",
+      "actual": "200",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-018",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "200",
+      "actual": "200"
+    },
+    {
+      "id": "choices-019",
+      "case": "Font weight: choose 300",
+      "status": "pass",
+      "expected": "300",
+      "actual": "300",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-020",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "300",
+      "actual": "300"
+    },
+    {
+      "id": "choices-021",
+      "case": "Font weight: choose 400",
+      "status": "pass",
+      "expected": "400",
+      "actual": "400",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-022",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "400",
+      "actual": "400"
+    },
+    {
+      "id": "choices-023",
+      "case": "Font weight: choose 500",
+      "status": "pass",
+      "expected": "500",
+      "actual": "500",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-024",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "500",
+      "actual": "500"
+    },
+    {
+      "id": "choices-025",
+      "case": "Font weight: choose 600",
+      "status": "pass",
+      "expected": "600",
+      "actual": "600",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-026",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "600",
+      "actual": "600"
+    },
+    {
+      "id": "choices-027",
+      "case": "Font weight: choose 700",
+      "status": "pass",
+      "expected": "700",
+      "actual": "700",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-028",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "700",
+      "actual": "700"
+    },
+    {
+      "id": "choices-029",
+      "case": "Font weight: choose 800",
+      "status": "pass",
+      "expected": "800",
+      "actual": "800",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-030",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "800",
+      "actual": "800"
+    },
+    {
+      "id": "choices-031",
+      "case": "Font weight: choose 900",
+      "status": "pass",
+      "expected": "900",
+      "actual": "900",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-032",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "900",
+      "actual": "900"
+    },
+    {
+      "id": "choices-033",
+      "case": "Font weight: choose normal",
+      "status": "pass",
+      "expected": "400",
+      "actual": "400",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-034",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "normal",
+      "actual": "normal"
+    },
+    {
+      "id": "choices-035",
+      "case": "Font weight: choose bold",
+      "status": "pass",
+      "expected": "700",
+      "actual": "700",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-036",
+      "case": "Font weight: active trigger",
+      "status": "pass",
+      "expected": "bold",
+      "actual": "bold"
+    },
+    {
+      "id": "choices-037",
+      "case": "Text decoration: choose none",
+      "status": "pass",
+      "expected": "none",
+      "actual": "none",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-038",
+      "case": "Text decoration: active trigger",
+      "status": "pass",
+      "expected": "none",
+      "actual": "none"
+    },
+    {
+      "id": "choices-039",
+      "case": "Text decoration: choose underline",
+      "status": "pass",
+      "expected": "underline",
+      "actual": "underline",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-040",
+      "case": "Text decoration: active trigger",
+      "status": "pass",
+      "expected": "underline",
+      "actual": "underline"
+    },
+    {
+      "id": "choices-041",
+      "case": "Text decoration: choose line-through",
+      "status": "pass",
+      "expected": "line-through",
+      "actual": "line-through",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-042",
+      "case": "Text decoration: active trigger",
+      "status": "pass",
+      "expected": "line-through",
+      "actual": "line-through"
+    },
+    {
+      "id": "choices-043",
+      "case": "Text decoration: choose overline",
+      "status": "pass",
+      "expected": "overline",
+      "actual": "overline",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-044",
+      "case": "Text decoration: active trigger",
+      "status": "pass",
+      "expected": "overline",
+      "actual": "overline"
+    },
+    {
+      "id": "choices-045",
+      "case": "Text transform: choose none",
+      "status": "pass",
+      "expected": "none",
+      "actual": "none",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-046",
+      "case": "Text transform: active trigger",
+      "status": "pass",
+      "expected": "none",
+      "actual": "none"
+    },
+    {
+      "id": "choices-047",
+      "case": "Text transform: choose uppercase",
+      "status": "pass",
+      "expected": "uppercase",
+      "actual": "uppercase",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-048",
+      "case": "Text transform: active trigger",
+      "status": "pass",
+      "expected": "uppercase",
+      "actual": "uppercase"
+    },
+    {
+      "id": "choices-049",
+      "case": "Text transform: choose lowercase",
+      "status": "pass",
+      "expected": "lowercase",
+      "actual": "lowercase",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-050",
+      "case": "Text transform: active trigger",
+      "status": "pass",
+      "expected": "lowercase",
+      "actual": "lowercase"
+    },
+    {
+      "id": "choices-051",
+      "case": "Text transform: choose capitalize",
+      "status": "pass",
+      "expected": "capitalize",
+      "actual": "capitalize",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-052",
+      "case": "Text transform: active trigger",
+      "status": "pass",
+      "expected": "capitalize",
+      "actual": "capitalize"
+    },
+    {
+      "id": "choices-053",
+      "case": "Display mode: choose block",
+      "status": "pass",
+      "expected": "block",
+      "actual": "block",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-054",
+      "case": "Display mode: active trigger",
+      "status": "pass",
+      "expected": "block",
+      "actual": "block"
+    },
+    {
+      "id": "choices-055",
+      "case": "Display mode: choose inline",
+      "status": "mismatch",
+      "expected": "inline",
+      "actual": "inline-block",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-056",
+      "case": "Display mode: active trigger",
+      "status": "pass",
+      "expected": "inline",
+      "actual": "inline"
+    },
+    {
+      "id": "choices-057",
+      "case": "Display mode: choose inline-block",
+      "status": "pass",
+      "expected": "inline-block",
+      "actual": "inline-block",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-058",
+      "case": "Display mode: active trigger",
+      "status": "pass",
+      "expected": "inline-block",
+      "actual": "inline-block"
+    },
+    {
+      "id": "choices-059",
+      "case": "Display mode: choose flex",
+      "status": "pass",
+      "expected": "flex",
+      "actual": "flex",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-060",
+      "case": "Display mode: active trigger",
+      "status": "pass",
+      "expected": "flex",
+      "actual": "flex"
+    },
+    {
+      "id": "choices-061",
+      "case": "Display mode: choose inline-flex",
+      "status": "pass",
+      "expected": "inline-flex",
+      "actual": "inline-flex",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-062",
+      "case": "Display mode: active trigger",
+      "status": "pass",
+      "expected": "inline-flex",
+      "actual": "inline-flex"
+    },
+    {
+      "id": "choices-063",
+      "case": "Display mode: choose grid",
+      "status": "pass",
+      "expected": "grid",
+      "actual": "grid",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-064",
+      "case": "Display mode: active trigger",
+      "status": "pass",
+      "expected": "grid",
+      "actual": "grid"
+    },
+    {
+      "id": "choices-065",
+      "case": "Display mode: choose inline-grid",
+      "status": "pass",
+      "expected": "inline-grid",
+      "actual": "inline-grid",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-066",
+      "case": "Display mode: active trigger",
+      "status": "pass",
+      "expected": "inline-grid",
+      "actual": "inline-grid"
+    },
+    {
+      "id": "choices-067",
+      "case": "Display mode: choose flow-root",
+      "status": "pass",
+      "expected": "flow-root",
+      "actual": "flow-root",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-068",
+      "case": "Display mode: active trigger",
+      "status": "pass",
+      "expected": "flow-root",
+      "actual": "flow-root"
+    },
+    {
+      "id": "choices-069",
+      "case": "Display mode: choose contents",
+      "status": "pass",
+      "expected": "contents",
+      "actual": "contents",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-070",
+      "case": "Display mode: active trigger",
+      "status": "pass",
+      "expected": "contents",
+      "actual": "contents"
+    },
+    {
+      "id": "choices-071",
+      "case": "Display mode: choose none",
+      "status": "pass",
+      "expected": "none",
+      "actual": "none",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-072",
+      "case": "Display mode: active trigger",
+      "status": "pass",
+      "expected": "none",
+      "actual": "none"
+    },
+    {
+      "id": "choices-073",
+      "case": "Border style: choose none",
+      "status": "pass",
+      "expected": "none",
+      "actual": "none",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-074",
+      "case": "Border style: active trigger",
+      "status": "pass",
+      "expected": "none",
+      "actual": "none"
+    },
+    {
+      "id": "choices-075",
+      "case": "Border style: choose solid",
+      "status": "pass",
+      "expected": "solid",
+      "actual": "solid",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-076",
+      "case": "Border style: active trigger",
+      "status": "pass",
+      "expected": "solid",
+      "actual": "solid"
+    },
+    {
+      "id": "choices-077",
+      "case": "Border style: choose dashed",
+      "status": "pass",
+      "expected": "dashed",
+      "actual": "dashed",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-078",
+      "case": "Border style: active trigger",
+      "status": "pass",
+      "expected": "dashed",
+      "actual": "dashed"
+    },
+    {
+      "id": "choices-079",
+      "case": "Border style: choose dotted",
+      "status": "pass",
+      "expected": "dotted",
+      "actual": "dotted",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-080",
+      "case": "Border style: active trigger",
+      "status": "pass",
+      "expected": "dotted",
+      "actual": "dotted"
+    },
+    {
+      "id": "choices-081",
+      "case": "Border style: choose double",
+      "status": "pass",
+      "expected": "double",
+      "actual": "double",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-082",
+      "case": "Border style: active trigger",
+      "status": "pass",
+      "expected": "double",
+      "actual": "double"
+    },
+    {
+      "id": "choices-083",
+      "case": "Border style: choose groove",
+      "status": "pass",
+      "expected": "groove",
+      "actual": "groove",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-084",
+      "case": "Border style: active trigger",
+      "status": "pass",
+      "expected": "groove",
+      "actual": "groove"
+    },
+    {
+      "id": "choices-085",
+      "case": "Border style: choose ridge",
+      "status": "pass",
+      "expected": "ridge",
+      "actual": "ridge",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-086",
+      "case": "Border style: active trigger",
+      "status": "pass",
+      "expected": "ridge",
+      "actual": "ridge"
+    },
+    {
+      "id": "choices-087",
+      "case": "Border style: choose inset",
+      "status": "pass",
+      "expected": "inset",
+      "actual": "inset",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-088",
+      "case": "Border style: active trigger",
+      "status": "pass",
+      "expected": "inset",
+      "actual": "inset"
+    },
+    {
+      "id": "choices-089",
+      "case": "Border style: choose outset",
+      "status": "pass",
+      "expected": "outset",
+      "actual": "outset",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-090",
+      "case": "Border style: active trigger",
+      "status": "pass",
+      "expected": "outset",
+      "actual": "outset"
+    },
+    {
+      "id": "choices-091",
+      "case": "Position: choose static",
+      "status": "pass",
+      "expected": "static",
+      "actual": "static",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-092",
+      "case": "Position: active trigger",
+      "status": "pass",
+      "expected": "static",
+      "actual": "static"
+    },
+    {
+      "id": "choices-093",
+      "case": "Position static: offsets visibility",
+      "status": "pass",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "id": "choices-094",
+      "case": "Position: choose relative",
+      "status": "pass",
+      "expected": "relative",
+      "actual": "relative",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-095",
+      "case": "Position: active trigger",
+      "status": "pass",
+      "expected": "relative",
+      "actual": "relative"
+    },
+    {
+      "id": "choices-096",
+      "case": "Position relative: offsets visibility",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "choices-097",
+      "case": "Position: choose absolute",
+      "status": "pass",
+      "expected": "absolute",
+      "actual": "absolute",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-098",
+      "case": "Position: active trigger",
+      "status": "pass",
+      "expected": "absolute",
+      "actual": "absolute"
+    },
+    {
+      "id": "choices-099",
+      "case": "Position absolute: offsets visibility",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "choices-100",
+      "case": "Position: choose fixed",
+      "status": "pass",
+      "expected": "fixed",
+      "actual": "fixed",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-101",
+      "case": "Position: active trigger",
+      "status": "pass",
+      "expected": "fixed",
+      "actual": "fixed"
+    },
+    {
+      "id": "choices-102",
+      "case": "Position fixed: offsets visibility",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "choices-103",
+      "case": "Position: choose sticky",
+      "status": "pass",
+      "expected": "sticky",
+      "actual": "sticky",
+      "module": "src/ui/design/EditControls.tsx"
+    },
+    {
+      "id": "choices-104",
+      "case": "Position: active trigger",
+      "status": "pass",
+      "expected": "sticky",
+      "actual": "sticky"
+    },
+    {
+      "id": "choices-105",
+      "case": "Position sticky: offsets visibility",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "choices-106",
+      "case": "Custom font family multi-token edit",
+      "status": "pass",
+      "expected": "\"Courier New\", monospace",
+      "actual": "\"Courier New\", monospace"
+    },
+    {
+      "id": "choices-107",
+      "case": "Align left: keyboard action",
+      "status": "pass",
+      "expected": {
+        "computed": "left",
+        "pressed": "true"
+      },
+      "actual": {
+        "computed": "left",
+        "pressed": "true"
+      }
+    },
+    {
+      "id": "choices-108",
+      "case": "Align center: keyboard action",
+      "status": "pass",
+      "expected": {
+        "computed": "center",
+        "pressed": "true"
+      },
+      "actual": {
+        "computed": "center",
+        "pressed": "true"
+      }
+    },
+    {
+      "id": "choices-109",
+      "case": "Align right: keyboard action",
+      "status": "pass",
+      "expected": {
+        "computed": "right",
+        "pressed": "true"
+      },
+      "actual": {
+        "computed": "right",
+        "pressed": "true"
+      }
+    },
+    {
+      "id": "choices-110",
+      "case": "Align justify: keyboard action",
+      "status": "pass",
+      "expected": {
+        "computed": "justify",
+        "pressed": "true"
+      },
+      "actual": {
+        "computed": "justify",
+        "pressed": "true"
+      }
+    },
+    {
+      "id": "choices-111",
+      "case": "Text color: #123456",
+      "status": "pass",
+      "expected": "rgb(18, 52, 86)",
+      "actual": "rgb(18, 52, 86)",
+      "module": "src/ui/shared/ColorControl.tsx"
+    },
+    {
+      "id": "choices-112",
+      "case": "Text color: rgba(10, 20, 30, .5)",
+      "status": "pass",
+      "expected": "rgba(10, 20, 30, 0.5)",
+      "actual": "rgba(10, 20, 30, 0.5)",
+      "module": "src/ui/shared/ColorControl.tsx"
+    },
+    {
+      "id": "choices-113",
+      "case": "Text color: rebeccapurple",
+      "status": "pass",
+      "expected": "rgb(102, 51, 153)",
+      "actual": "rgb(102, 51, 153)",
+      "module": "src/ui/shared/ColorControl.tsx"
+    },
+    {
+      "id": "choices-114",
+      "case": "Text color: var(--unknown, red)",
+      "status": "pass",
+      "expected": "rgb(255, 0, 0)",
+      "actual": "rgb(255, 0, 0)",
+      "module": "src/ui/shared/ColorControl.tsx"
+    },
+    {
+      "id": "choices-115",
+      "case": "Text color: currentColor",
+      "status": "pass",
+      "expected": "rgb(20, 40, 60)",
+      "actual": "rgb(20, 40, 60)",
+      "module": "src/ui/shared/ColorControl.tsx"
+    },
+    {
+      "id": "choices-116",
+      "case": "Text color: invalid rejection",
+      "status": "pass",
+      "expected": {
+        "computed": "rgb(20, 40, 60)",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "rgb(20, 40, 60)",
+        "invalid": "true"
+      }
+    },
+    {
+      "id": "choices-117",
+      "case": "Border color: #123456",
+      "status": "pass",
+      "expected": "rgb(18, 52, 86)",
+      "actual": "rgb(18, 52, 86)",
+      "module": "src/ui/shared/ColorControl.tsx"
+    },
+    {
+      "id": "choices-118",
+      "case": "Border color: rgba(10, 20, 30, .5)",
+      "status": "pass",
+      "expected": "rgba(10, 20, 30, 0.5)",
+      "actual": "rgba(10, 20, 30, 0.5)",
+      "module": "src/ui/shared/ColorControl.tsx"
+    },
+    {
+      "id": "choices-119",
+      "case": "Border color: rebeccapurple",
+      "status": "pass",
+      "expected": "rgb(102, 51, 153)",
+      "actual": "rgb(102, 51, 153)",
+      "module": "src/ui/shared/ColorControl.tsx"
+    },
+    {
+      "id": "choices-120",
+      "case": "Border color: var(--unknown, red)",
+      "status": "pass",
+      "expected": "rgb(255, 0, 0)",
+      "actual": "rgb(255, 0, 0)",
+      "module": "src/ui/shared/ColorControl.tsx"
+    },
+    {
+      "id": "choices-121",
+      "case": "Border color: currentColor",
+      "status": "pass",
+      "expected": "rgb(40, 50, 60)",
+      "actual": "rgb(40, 50, 60)",
+      "module": "src/ui/shared/ColorControl.tsx"
+    },
+    {
+      "id": "choices-122",
+      "case": "Border color: invalid rejection",
+      "status": "pass",
+      "expected": {
+        "computed": "rgb(40, 50, 60)",
+        "invalid": "true"
+      },
+      "actual": {
+        "computed": "rgb(40, 50, 60)",
+        "invalid": "true"
+      }
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "artifacts/diagnostics/current-ui-audit/design/04-typography-baseline.png",
+    "artifacts/diagnostics/current-ui-audit/design/05-positioning-baseline.png"
+  ],
+  "inventory": {
+    "selects": [
+      {
+        "label": "Font family",
+        "property": "font-family",
+        "section": "Typography",
+        "values": [
+          "Arial",
+          "Georgia",
+          "Verdana",
+          "system-ui",
+          "serif",
+          "sans-serif",
+          "monospace"
+        ]
+      },
+      {
+        "label": "Font weight",
+        "property": "font-weight",
+        "section": "Typography",
+        "values": [
+          "100",
+          "200",
+          "300",
+          "400",
+          "500",
+          "600",
+          "700",
+          "800",
+          "900",
+          "normal",
+          "bold"
+        ]
+      },
+      {
+        "label": "Text decoration",
+        "property": "text-decoration-line",
+        "section": "Typography",
+        "values": [
+          "none",
+          "underline",
+          "line-through",
+          "overline"
+        ]
+      },
+      {
+        "label": "Text transform",
+        "property": "text-transform",
+        "section": "Typography",
+        "values": [
+          "none",
+          "uppercase",
+          "lowercase",
+          "capitalize"
+        ]
+      },
+      {
+        "label": "Display mode",
+        "property": "display",
+        "section": "Display",
+        "values": [
+          "block",
+          "inline",
+          "inline-block",
+          "flex",
+          "inline-flex",
+          "grid",
+          "inline-grid",
+          "flow-root",
+          "contents",
+          "none"
+        ]
+      },
+      {
+        "label": "Border style",
+        "property": "border-style",
+        "section": "Border",
+        "values": [
+          "none",
+          "solid",
+          "dashed",
+          "dotted",
+          "double",
+          "groove",
+          "ridge",
+          "inset",
+          "outset"
+        ]
+      },
+      {
+        "label": "Position",
+        "property": "position",
+        "section": "Positioning",
+        "values": [
+          "static",
+          "relative",
+          "absolute",
+          "fixed",
+          "sticky"
+        ]
+      }
+    ],
+    "alignment": [
+      "left",
+      "center",
+      "right",
+      "justify"
+    ],
+    "manualColors": [
+      "Text color",
+      "Border color"
+    ],
+    "pickerCoverage": "effects audit sibling"
+  }
+}

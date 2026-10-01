@@ -1,0 +1,172 @@
+{
+  "surface": "focused-color",
+  "scope": "Built Chrome MV3, actual visible user actions; native computed style is read only.",
+  "observations": [
+    {
+      "id": "focused-color-001",
+      "surface": "focused-color",
+      "action": "Closed Text color Escape cancellation",
+      "status": "fail",
+      "expected": "Field tooltip promises Escape reverts current gesture",
+      "actual": {
+        "before": "rgb(255, 255, 255)",
+        "after": "rgb(0, 255, 0)",
+        "title": "Browser: rgb(255, 255, 255)\nNo session override\nDrag horizontally or use arrows. Escape reverts the current gesture.",
+        "value": "#00ff00"
+      },
+      "classification": "A functional",
+      "severity": "Medium",
+      "module": "src/ui/shared/ColorControl.tsx + src/ui/design/EditControls.tsx",
+      "rootCause": "EditField supplies the numeric control Escape promise, but ColorControl only handles Enter and does not cancel its gesture.",
+      "priority": "P2",
+      "fixPhase": "Shared color UI",
+      "evidence": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\effects\\focused-color-escape.png"
+    },
+    {
+      "id": "focused-color-002",
+      "surface": "focused-color",
+      "action": "Undo after Escape",
+      "status": "pass",
+      "expected": "Undo restores color after Escape retained edit",
+      "actual": "rgb(255, 255, 255)"
+    },
+    {
+      "id": "focused-color-003",
+      "surface": "focused-color",
+      "action": "Alpha editing currentColor",
+      "status": "fail",
+      "expected": "Alpha change resolves the rendered white currentColor before applying transparency",
+      "actual": {
+        "before": "rgb(255, 255, 255) 0px 4px 12px 0px",
+        "popupBefore": "Box shadow color\nHEX\nRGB\nHSL\nAlpha\nRecent colors\nEnter a color, or choose a new one to replace this token.",
+        "after": "rgba(0, 0, 0, 0.5) 0px 4px 12px 0px",
+        "field": "#00000080"
+      },
+      "classification": "A functional",
+      "severity": "Medium",
+      "module": "src/ui/shared/ColorControl.tsx",
+      "rootCause": "When Culori cannot parse a valid CSS token such as currentColor, alpha handler uses parsed ?? #000 and replaces its hue with black.",
+      "priority": "P2",
+      "fixPhase": "Shared color token handling",
+      "evidence": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\effects\\focused-color-currentcolor-alpha.png"
+    },
+    {
+      "id": "focused-color-004",
+      "surface": "focused-color",
+      "action": "CurrentColor alpha Undo",
+      "status": "pass",
+      "expected": "Undo restores original currentColor shadow",
+      "actual": "rgb(255, 255, 255) 0px 4px 12px 0px"
+    },
+    {
+      "id": "focused-color-005",
+      "surface": "focused-color",
+      "action": "Shadow x numeric arrow modifiers",
+      "status": "pass",
+      "expected": "Arrow modifiers step +1, +10, -.1",
+      "actual": "10.9"
+    },
+    {
+      "id": "focused-color-006",
+      "surface": "focused-color",
+      "action": "Shadow numeric Escape",
+      "status": "pass",
+      "expected": "Escape cancels numeric typing gesture",
+      "actual": {
+        "before": "rgb(255, 255, 255) 10.9px 4px 12px 0px",
+        "after": "rgb(255, 255, 255) 10.9px 4px 12px 0px"
+      }
+    },
+    {
+      "id": "focused-color-007",
+      "surface": "focused-color",
+      "action": "Shadow numeric pointer scrub",
+      "status": "pass",
+      "expected": "Dragging numeric field changes its component",
+      "actual": {
+        "before": "rgb(255, 255, 255) 10.9px 4px 12px 0px",
+        "after": "rgb(255, 255, 255) 25.9px 4px 12px 0px"
+      }
+    },
+    {
+      "id": "focused-color-008",
+      "surface": "focused-color",
+      "action": "Numeric scrub Undo",
+      "status": "pass",
+      "expected": "Committed pointer scrub is one undo gesture",
+      "actual": "rgb(255, 255, 255) 10.9px 4px 12px 0px"
+    },
+    {
+      "id": "focused-color-009",
+      "surface": "focused-color",
+      "action": "Selected target overlay crosses color picker",
+      "status": "fail",
+      "expected": "Target identity/outline should not draw over a color dialog",
+      "actual": {
+        "popupBox": {
+          "x": 38,
+          "y": 389,
+          "width": 268,
+          "height": 421.5
+        },
+        "outlineBox": {
+          "x": 49,
+          "y": 548.25,
+          "width": 200.09375,
+          "height": 50
+        },
+        "labelBox": {
+          "x": 49,
+          "y": 520.25,
+          "width": 211.703125,
+          "height": 24
+        },
+        "overlaps": true
+      },
+      "classification": "E layout",
+      "severity": "Low",
+      "module": "src/picker/overlay.ts + src/ui/popovers/Popover.tsx",
+      "rootCause": "Selected target overlay remains in the browser top layer above the ordinary extension popover; lower z-index alone does not establish ordering across top layer and normal layers.",
+      "priority": "P3",
+      "fixPhase": "Overlay/UI stacking",
+      "evidence": "C:\\Users\\alire\\Documents\\ChatGPT\\CSSForge\\artifacts\\diagnostics\\current-ui-audit\\effects\\focused-color-narrow-outline-overlap.png"
+    },
+    {
+      "id": "focused-color-010",
+      "surface": "focused-color",
+      "action": "Filter capability inventory",
+      "status": "expected",
+      "expected": "Current UI exposes eight sliders/eight numeric inputs plus Reset",
+      "actual": {
+        "sliders": 8,
+        "inputs": 8,
+        "buttons": [
+          "Filters",
+          "Reset filters"
+        ],
+        "toggles": 0,
+        "orderControls": 0
+      },
+      "classification": "H expected",
+      "module": "src/ui/design/RichEffects.tsx"
+    },
+    {
+      "id": "focused-color-011",
+      "surface": "focused-color",
+      "action": "Repeated session Reset",
+      "status": "pass",
+      "expected": "Repeated Reset returns all effects to initial page values",
+      "actual": {
+        "color": "rgb(255, 255, 255)",
+        "box": "none",
+        "filter": "none"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "counts": {
+    "fail": 3,
+    "pass": 7,
+    "expected": 1
+  }
+}

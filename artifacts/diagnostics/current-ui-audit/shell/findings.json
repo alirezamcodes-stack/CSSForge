@@ -1,0 +1,185 @@
+{
+  "findings": [
+    {
+      "id": "UI01",
+      "surface": "Inspector shell on transformed pages",
+      "category": "E",
+      "severity": "High",
+      "priority": "P1",
+      "title": "html/body transforms move the inspector header and upper controls off-screen",
+      "repro": [
+        "Activate CSSForge on the hostile Fieldnotes fixture and pick #checkout.",
+        "Set document.documentElement.style.transform (or document.body.style.transform) to translate(30px,20px) scale(.9).",
+        "Open Measurement tools and inspect the inspector bounds."
+      ],
+      "expected": "The inspector stays anchored to the viewport with its header and controls reachable.",
+      "actual": "The 1440×900 viewport contains an inspector at x1063.2,y−768.4,width315,height1513.8. The header and upper Design controls are off-screen for both html and body transforms. Dock and Measurement remain clickable.",
+      "rootCause": "The normal-document UI and its fixed/absolute descendants inherit the transformed ancestor containing block; the selection overlay alone uses the browser top layer.",
+      "modules": [
+        "entrypoints/content.tsx",
+        "src/ui/ui.module.css",
+        "src/ui/interactions/useInspectorDrag.ts"
+      ],
+      "evidence": [
+        "SH06.json",
+        "07-transform-html.png",
+        "07-transform-body.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: viewport anchoring and clamping under host transforms."
+    },
+    {
+      "id": "UI02",
+      "surface": "Host-page stacking",
+      "category": "E",
+      "severity": "High",
+      "priority": "P1",
+      "title": "A maximum-z-index host overlay covers and intercepts the current UI",
+      "repro": [
+        "Activate CSSForge and pick a page element.",
+        "Append a fixed inset:0 host div with z-index:2147483647 and pointer-events:auto.",
+        "Check document.elementFromPoint at the Measurement dock button centre and attempt to operate CSSForge."
+      ],
+      "expected": "Inspector, dock, popovers and modal controls remain operable above host page UI.",
+      "actual": "The top hit is div#host-cover, and the screenshot shows the host covering the inspector and dock. Removing the cover restores the Measurement popover. The page selection overlay remains above the cover.",
+      "rootCause": "App UI uses normal-document stacking (app z-index2147483646), while createOverlay uses showPopover top-layer placement. A higher host stacking layer can occlude the UI.",
+      "modules": [
+        "entrypoints/content.tsx",
+        "src/ui/ui.module.css",
+        "src/picker/overlay.ts"
+      ],
+      "evidence": [
+        "SH06.json",
+        "08-host-high-z.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: ensure existing UI layers stay above hostile page stacking."
+    },
+    {
+      "id": "UI03",
+      "surface": "Selection highlight versus all CSSForge surfaces",
+      "category": "E",
+      "severity": "Medium",
+      "priority": "P1",
+      "title": "Selection outline and identity label paint above inspector, dock and review/popover content",
+      "repro": [
+        "Pick #checkout and move the inspector to the upper-left over the selected button.",
+        "Alternatively open Changes while that target is selected, or use a 320px viewport and open Text color.",
+        "Observe the mint outline and dark target label crossing CSSForge content."
+      ],
+      "expected": "Target feedback stays behind CSSForge control, popover and review surfaces or is hidden while those surfaces cover the target.",
+      "actual": "The target outline/label crosses Typography controls, the ColorControl spectrum, the dock and the Changes review surface. Pointer events remain disabled on the feedback, but it obscures text and color controls.",
+      "rootCause": "createOverlay calls showPopover; its top-layer paint order outranks ordinary CSSForge app/modal z-indices. Suspending picking does not hide the selected feedback.",
+      "modules": [
+        "src/picker/overlay.ts",
+        "src/ui/App.tsx",
+        "entrypoints/content.tsx"
+      ],
+      "evidence": [
+        "02-inspector-normal.png",
+        "04-live-changes.png",
+        "05-zoom-200.png",
+        "06-short-viewport.png",
+        "../effects/color-narrow-320.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: coordinate existing selection feedback and UI stacking."
+    },
+    {
+      "id": "J01",
+      "surface": "Background tools",
+      "category": "J",
+      "severity": "Medium",
+      "priority": "P1",
+      "title": "Enabled Background tools dock action has no connected tool",
+      "repro": [
+        "Focus the Background tools dock button and press Enter (or click).",
+        "Inspect the popover; repeat the trigger click to close it."
+      ],
+      "expected": "An enabled tool affordance provides its stated current action or clearly communicates unavailability before activation.",
+      "actual": "The popover titled Background tools only says “This tool is not connected yet.” It has no action controls; the trigger is enabled and displays active/expanded state.",
+      "rootCause": "LiveDock later() deliberately renders placeholder popovers.",
+      "modules": [
+        "src/ui/dock/LiveDock.tsx"
+      ],
+      "evidence": [
+        "SH03.json"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: hide or disable existing placeholders with truthful labeling; do not implement future tools."
+    },
+    {
+      "id": "J02",
+      "surface": "Color tools",
+      "category": "J",
+      "severity": "Medium",
+      "priority": "P1",
+      "title": "Enabled Color tools dock action has no connected tool",
+      "repro": [
+        "Focus the Color tools dock button and press Enter (or click).",
+        "Inspect the popover; repeat the trigger click to close it."
+      ],
+      "expected": "An enabled tool affordance provides its stated current action or clearly communicates unavailability before activation.",
+      "actual": "The popover titled Color tools only says “This tool is not connected yet.” It has no action controls; the trigger is enabled and displays active/expanded state.",
+      "rootCause": "LiveDock later() deliberately renders placeholder popovers.",
+      "modules": [
+        "src/ui/dock/LiveDock.tsx"
+      ],
+      "evidence": [
+        "SH03.json"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: hide or disable existing placeholders with truthful labeling; do not implement future tools."
+    },
+    {
+      "id": "J03",
+      "surface": "Eyedropper information",
+      "category": "J",
+      "severity": "Medium",
+      "priority": "P1",
+      "title": "Enabled Eyedropper information dock action has no connected tool",
+      "repro": [
+        "Focus the Eyedropper information dock button and press Enter (or click).",
+        "Inspect the popover; repeat the trigger click to close it."
+      ],
+      "expected": "An enabled tool affordance provides its stated current action or clearly communicates unavailability before activation.",
+      "actual": "The popover titled Color sampling only says “This tool is not connected yet.” It has no action controls; the trigger is enabled and displays active/expanded state.",
+      "rootCause": "LiveDock later() deliberately renders placeholder popovers.",
+      "modules": [
+        "src/ui/dock/LiveDock.tsx"
+      ],
+      "evidence": [
+        "SH03.json"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: hide or disable existing placeholders with truthful labeling; do not implement future tools."
+    },
+    {
+      "id": "J04",
+      "surface": "Changes",
+      "category": "J",
+      "severity": "Medium",
+      "priority": "P2",
+      "title": "Changes is a live session summary with incomplete review content",
+      "repro": [
+        "Apply Font size27px and Text color#abcdef to #checkout.",
+        "Open Changes from dock or More tools.",
+        "Inspect available content, press Undo last edit, then Reset session edits and Close."
+      ],
+      "expected": "The current surface accurately describes its available session actions and makes its incomplete review scope clear.",
+      "actual": "The edited-element count and Undo/Reset are real and update browser values; focus containment and opener return work. There is no selector/property/before-after/transaction list, copy/export or detailed review. The only explanation says detailed review/export is not connected. This is not the preview fixture surface.",
+      "rootCause": "LiveSurface renders only editedCount, SessionActions and a limitation paragraph; fixture ChangesSurface is not mounted by the production App.",
+      "modules": [
+        "src/ui/inspector/LiveInspection.tsx",
+        "src/ui/design/EditControls.tsx"
+      ],
+      "evidence": [
+        "SH04.json",
+        "04-live-changes.png"
+      ],
+      "next": "CURRENT UI FUNCTIONAL FIXES: present the existing session summary truthfully; defer full Changes/History and Export."
+    }
+  ],
+  "nonbugs": [
+    "SH01 corner-click iframe observation was superseded by SH08 native hit-verified outer-border selection; both same-origin and cross-origin iframe elements select correctly.",
+    "Zero-size descendants are selectable through Child but have no drawable rectangle.",
+    "Hover/selected highlight geometry matches native bounding rectangles, including 1×1px, transformed, SVG, open and nested shadow roots and slotted content.",
+    "SH05 normal/390/320/short and actual125/150/200% zoom inspector/dock/popovers fit; 390×280 provides only79px Design scroll area but remains scrollable.",
+    "Global host button/input styles and custom fonts remain isolated from the UI; extension activation does not alter host document bounds."
+  ],
+  "diagnosticGroups": 8
+}

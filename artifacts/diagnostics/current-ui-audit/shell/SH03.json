@@ -1,0 +1,154 @@
+{
+  "case": "SH03 every visible live dock action tooltip state keyboard and repeated click",
+  "actual": {
+    "rows": [
+      {
+        "case": "inventory",
+        "buttons": [
+          {
+            "label": "Pick page element",
+            "disabled": false,
+            "pressed": "false"
+          },
+          {
+            "label": "Open Changes",
+            "disabled": false,
+            "pressed": "false"
+          },
+          {
+            "label": "Open Navigator",
+            "disabled": false,
+            "pressed": "false"
+          },
+          {
+            "label": "Background tools",
+            "disabled": false,
+            "pressed": null
+          },
+          {
+            "label": "Measurement tools",
+            "disabled": false,
+            "pressed": null
+          },
+          {
+            "label": "Color tools",
+            "disabled": false,
+            "pressed": null
+          },
+          {
+            "label": "Eyedropper information",
+            "disabled": false,
+            "pressed": null
+          },
+          {
+            "label": "More tools",
+            "disabled": false,
+            "pressed": null
+          },
+          {
+            "label": "Hide inspector panel",
+            "disabled": false,
+            "pressed": "true"
+          },
+          {
+            "label": "Deactivate CSSForge",
+            "disabled": false,
+            "pressed": null
+          }
+        ]
+      },
+      {
+        "name": "Background tools",
+        "text": "Background tools\n\nThis tool is not connected yet.",
+        "active": "true",
+        "expanded": "true",
+        "buttons": []
+      },
+      {
+        "name": "Background tools",
+        "case": "repeat click closes",
+        "closed": true
+      },
+      {
+        "name": "Measurement tools",
+        "text": "Selected dimensions\n\n219.11 × 53 px",
+        "active": "true",
+        "expanded": "true",
+        "buttons": []
+      },
+      {
+        "name": "Measurement tools",
+        "case": "repeat click closes",
+        "closed": true
+      },
+      {
+        "name": "Color tools",
+        "text": "Color tools\n\nThis tool is not connected yet.",
+        "active": "true",
+        "expanded": "true",
+        "buttons": []
+      },
+      {
+        "name": "Color tools",
+        "case": "repeat click closes",
+        "closed": true
+      },
+      {
+        "name": "Eyedropper information",
+        "text": "Color sampling\n\nThis tool is not connected yet.",
+        "active": "true",
+        "expanded": "true",
+        "buttons": []
+      },
+      {
+        "name": "Eyedropper information",
+        "case": "repeat click closes",
+        "closed": true
+      },
+      {
+        "name": "More tools",
+        "text": "CSSForge\nReview changes\nOpen Navigator",
+        "active": "true",
+        "expanded": "true",
+        "buttons": [
+          "Review changes",
+          "Open Navigator"
+        ]
+      },
+      {
+        "name": "More tools",
+        "case": "repeat click closes",
+        "closed": true
+      },
+      {
+        "case": "hide inspector",
+        "hidden": true
+      },
+      {
+        "case": "pick enabled",
+        "active": "true"
+      },
+      {
+        "case": "Escape cancels picker",
+        "pickVisible": true
+      },
+      {
+        "case": "Changes opened",
+        "visible": true
+      },
+      {
+        "case": "Navigator opened",
+        "visible": true
+      },
+      {
+        "case": "power",
+        "hosts": 0
+      },
+      {
+        "case": "actual action reactivation",
+        "visible": true
+      }
+    ],
+    "errors": []
+  }
+}

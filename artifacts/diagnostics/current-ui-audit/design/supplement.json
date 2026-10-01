@@ -1,0 +1,519 @@
+{
+  "name": "supplement",
+  "observations": [
+    {
+      "id": "supplement-001",
+      "case": "All parent typography controls match native declarations",
+      "status": "pass",
+      "expected": {
+        "font-family": "Arial",
+        "font-size": "30px",
+        "font-weight": "700",
+        "line-height": "54px",
+        "letter-spacing": "2px",
+        "text-align": "center",
+        "text-transform": "uppercase",
+        "text-decoration-line": "underline",
+        "color": "rgb(170, 17, 34)"
+      },
+      "actual": {
+        "font-family": "Arial",
+        "font-size": "30px",
+        "font-weight": "700",
+        "line-height": "54px",
+        "letter-spacing": "2px",
+        "text-align": "center",
+        "text-transform": "uppercase",
+        "text-decoration-line": "underline",
+        "color": "rgb(170, 17, 34)"
+      },
+      "module": "src/ui/design/LiveDesignView.tsx"
+    },
+    {
+      "id": "supplement-002",
+      "case": "All inherited child typography matches native CSS behavior",
+      "status": "pass",
+      "expected": {
+        "font-family": "Arial",
+        "font-size": "30px",
+        "font-weight": "700",
+        "line-height": "54px",
+        "letter-spacing": "2px",
+        "text-align": "center",
+        "text-transform": "uppercase",
+        "text-decoration-line": "none",
+        "color": "rgb(170, 17, 34)"
+      },
+      "actual": {
+        "font-family": "Arial",
+        "font-size": "30px",
+        "font-weight": "700",
+        "line-height": "54px",
+        "letter-spacing": "2px",
+        "text-align": "center",
+        "text-transform": "uppercase",
+        "text-decoration-line": "none",
+        "color": "rgb(170, 17, 34)"
+      },
+      "module": "src/ui/design/LiveDesignView.tsx"
+    },
+    {
+      "id": "supplement-003",
+      "case": "All descendant-owned typography matches native CSS behavior",
+      "status": "pass",
+      "expected": {
+        "font-family": "Verdana",
+        "font-size": "16px",
+        "font-weight": "200",
+        "line-height": "32px",
+        "letter-spacing": "3px",
+        "text-align": "right",
+        "text-transform": "lowercase",
+        "text-decoration-line": "overline",
+        "color": "rgb(90, 100, 110)"
+      },
+      "actual": {
+        "font-family": "Verdana",
+        "font-size": "16px",
+        "font-weight": "200",
+        "line-height": "32px",
+        "letter-spacing": "3px",
+        "text-align": "right",
+        "text-transform": "lowercase",
+        "text-decoration-line": "overline",
+        "color": "rgb(90, 100, 110)"
+      },
+      "module": "src/ui/design/LiveDesignView.tsx"
+    },
+    {
+      "id": "supplement-004",
+      "case": "Typography decoration Undo restores parent",
+      "status": "pass",
+      "expected": "none",
+      "actual": "none"
+    },
+    {
+      "id": "supplement-005",
+      "case": "Typography Reset restores parent baseline",
+      "status": "pass",
+      "expected": "24px",
+      "actual": "24px"
+    },
+    {
+      "id": "supplement-006",
+      "case": "SVG root dimensions enabled",
+      "status": "pass",
+      "expected": {
+        "width": true,
+        "height": true
+      },
+      "actual": {
+        "width": true,
+        "height": true
+      }
+    },
+    {
+      "id": "supplement-007",
+      "case": "SVG root dimensions initial value",
+      "status": "pass",
+      "expected": {
+        "width": "160",
+        "height": "80"
+      },
+      "actual": {
+        "width": "160",
+        "height": "80"
+      }
+    },
+    {
+      "id": "supplement-008",
+      "case": "SVG root size edits apply",
+      "status": "pass",
+      "expected": {
+        "width": "200px",
+        "height": "100px"
+      },
+      "actual": {
+        "width": "200px",
+        "height": "100px"
+      }
+    },
+    {
+      "id": "supplement-009",
+      "case": "SVG root height Undo",
+      "status": "pass",
+      "expected": "80px",
+      "actual": "80px"
+    },
+    {
+      "id": "supplement-010",
+      "case": "SVG root size Reset",
+      "status": "pass",
+      "expected": "160px",
+      "actual": "160px"
+    },
+    {
+      "id": "supplement-011",
+      "case": "SVG rect size controls enabled",
+      "status": "pass",
+      "expected": {
+        "width": true,
+        "height": true
+      },
+      "actual": {
+        "width": true,
+        "height": true
+      }
+    },
+    {
+      "id": "supplement-012",
+      "case": "SVG rect dimensions edit geometry",
+      "status": "pass",
+      "expected": {
+        "width": "80px",
+        "height": "40px"
+      },
+      "actual": {
+        "width": "80px",
+        "height": "40px"
+      }
+    },
+    {
+      "id": "supplement-013",
+      "case": "SVG rect height Undo",
+      "status": "pass",
+      "expected": "30px",
+      "actual": "30px"
+    },
+    {
+      "id": "supplement-014",
+      "case": "SVG rect width Reset",
+      "status": "pass",
+      "expected": "60px",
+      "actual": "60px"
+    },
+    {
+      "id": "supplement-015",
+      "case": "SVG circle size controls currently disabled",
+      "status": "pass",
+      "expected": {
+        "width": true,
+        "height": true
+      },
+      "actual": {
+        "width": true,
+        "height": true
+      }
+    },
+    {
+      "id": "supplement-016",
+      "case": "Z-index Alt+ArrowDown generates invalid fractional draft",
+      "status": "mismatch",
+      "expected": {
+        "computed": "4",
+        "ui": "4",
+        "invalid": null,
+        "unit": null
+      },
+      "actual": {
+        "computed": "5",
+        "ui": "4.9",
+        "invalid": "true",
+        "unit": null
+      },
+      "module": "src/ui/shared/NumericScrubber.tsx"
+    },
+    {
+      "id": "supplement-017",
+      "case": "Width bare zero accepted",
+      "status": "pass",
+      "expected": null,
+      "actual": null
+    },
+    {
+      "id": "supplement-018",
+      "case": "Width large value accepted",
+      "status": "pass",
+      "expected": "10000px",
+      "actual": "10000px"
+    },
+    {
+      "id": "supplement-019",
+      "case": "Border shorthand multi-side token retained",
+      "status": "pass",
+      "expected": "1px 2px 3px 4px",
+      "actual": "1px 2px 3px 4px"
+    },
+    {
+      "id": "supplement-020",
+      "case": "Border shorthand multi-side native result",
+      "status": "pass",
+      "expected": [
+        "1px",
+        "2px",
+        "3px",
+        "4px"
+      ],
+      "actual": [
+        "1px",
+        "2px",
+        "3px",
+        "4px"
+      ]
+    },
+    {
+      "id": "supplement-021",
+      "case": "Radius shorthand multi-corner token retained",
+      "status": "pass",
+      "expected": "1px 2px 3px 4px",
+      "actual": "1px 2px 3px 4px"
+    },
+    {
+      "id": "supplement-022",
+      "case": "Radius geometry shared shorthand sync",
+      "status": "pass",
+      "expected": "1px 2px 3px 4px",
+      "actual": "1px 2px 3px 4px"
+    },
+    {
+      "id": "supplement-023",
+      "case": "Font family: ArrowDown opens keyboard menu",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-024",
+      "case": "Font family: Home focuses first enabled option",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-025",
+      "case": "Font family: Tab then Shift+Tab returns option focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-026",
+      "case": "Font family: keyboard Escape returns trigger focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-027",
+      "case": "Font weight: ArrowDown opens keyboard menu",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-028",
+      "case": "Font weight: Home focuses first enabled option",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-029",
+      "case": "Font weight: Tab then Shift+Tab returns option focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-030",
+      "case": "Font weight: keyboard Escape returns trigger focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-031",
+      "case": "Text decoration: ArrowDown opens keyboard menu",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-032",
+      "case": "Text decoration: Home focuses first enabled option",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-033",
+      "case": "Text decoration: Tab then Shift+Tab returns option focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-034",
+      "case": "Text decoration: keyboard Escape returns trigger focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-035",
+      "case": "Text transform: ArrowDown opens keyboard menu",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-036",
+      "case": "Text transform: Home focuses first enabled option",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-037",
+      "case": "Text transform: Tab then Shift+Tab returns option focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-038",
+      "case": "Text transform: keyboard Escape returns trigger focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-039",
+      "case": "Display mode: ArrowDown opens keyboard menu",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-040",
+      "case": "Display mode: Home focuses first enabled option",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-041",
+      "case": "Display mode: Tab then Shift+Tab returns option focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-042",
+      "case": "Display mode: keyboard Escape returns trigger focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-043",
+      "case": "Border style: ArrowDown opens keyboard menu",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-044",
+      "case": "Border style: Home focuses first enabled option",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-045",
+      "case": "Border style: Tab then Shift+Tab returns option focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-046",
+      "case": "Border style: keyboard Escape returns trigger focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-047",
+      "case": "Position: ArrowDown opens keyboard menu",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-048",
+      "case": "Position: Home focuses first enabled option",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-049",
+      "case": "Position: Tab then Shift+Tab returns option focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-050",
+      "case": "Position: keyboard Escape returns trigger focus",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-051",
+      "case": "Proven width percentage conversion is enabled",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-052",
+      "case": "Proven width percent conversion preserves size",
+      "status": "pass",
+      "expected": "200px",
+      "actual": "200px"
+    },
+    {
+      "id": "supplement-053",
+      "case": "Proven width percent authored UI token",
+      "status": "pass",
+      "expected": "%",
+      "actual": "%"
+    },
+    {
+      "id": "supplement-054",
+      "case": "Square box radius percentage conversion is enabled",
+      "status": "pass",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "id": "supplement-055",
+      "case": "Square box radius percentage token",
+      "status": "pass",
+      "expected": "5%",
+      "actual": "5%"
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "artifacts/diagnostics/current-ui-audit/design/supplement-typography-inheritance.png",
+    "artifacts/diagnostics/current-ui-audit/design/supplement-svg-root-edited.png",
+    "artifacts/diagnostics/current-ui-audit/design/supplement-svg-rect-edited.png",
+    "artifacts/diagnostics/current-ui-audit/design/supplement-svg-circle-disabled.png",
+    "artifacts/diagnostics/current-ui-audit/design/supplement-z-index-alt-step.png",
+    "artifacts/diagnostics/current-ui-audit/design/supplement-border-shorthand.png"
+  ]
+}

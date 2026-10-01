@@ -1,0 +1,92 @@
+{
+  "case": "SH06 host resets clipping transforms and high z-index interference",
+  "actual": {
+    "rows": [
+      {
+        "case": "global host styles",
+        "host": {
+          "color": "rgb(255, 0, 0)",
+          "font": "48px"
+        },
+        "ui": {
+          "color": "rgb(197, 200, 206)",
+          "font": "13px",
+          "border": "0px"
+        }
+      },
+      {
+        "case": "transformed host",
+        "node": "html",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "panel": {
+          "x": 1063.199951171875,
+          "y": -768.4000244140625,
+          "width": 315,
+          "height": 1513.7999267578125
+        },
+        "tools": {
+          "x": 500.25,
+          "y": 763.39990234375,
+          "width": 499.5,
+          "height": 46.800048828125
+        },
+        "panelWithin": false,
+        "dockWithin": true,
+        "overlap": false,
+        "interactionError": null,
+        "popup": {
+          "x": 706.3499755859375,
+          "y": 690.5,
+          "width": 241.20001220703125,
+          "height": 77.0343017578125
+        }
+      },
+      {
+        "case": "transformed host",
+        "node": "body",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "panel": {
+          "x": 1063.199951171875,
+          "y": -768.4000244140625,
+          "width": 315,
+          "height": 1513.7999267578125
+        },
+        "tools": {
+          "x": 500.25,
+          "y": 763.39990234375,
+          "width": 499.5,
+          "height": 46.800048828125
+        },
+        "panelWithin": false,
+        "dockWithin": true,
+        "overlap": false,
+        "interactionError": null,
+        "popup": {
+          "x": 706.3499755859375,
+          "y": 690.5,
+          "width": 241.20001220703125,
+          "height": 77.0343017578125
+        }
+      },
+      {
+        "case": "highest host overlay",
+        "hit": {
+          "tag": "div",
+          "id": "host-cover"
+        },
+        "uiHostZ": "auto"
+      },
+      {
+        "case": "after overlay removed",
+        "dialogVisible": true
+      }
+    ],
+    "errors": []
+  }
+}
