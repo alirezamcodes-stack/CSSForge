@@ -1,13 +1,13 @@
-import { useInspection, useEditing } from '../../picker/context';
+import { useInspection } from '../../picker/context';
 import { dimensions, fontSummary } from '../../picker/identity';
 import { useUI, type Task } from '../../state/ui';
 import { Icon, IconButton } from '../shared/Icon';
 import { Popover } from '../popovers/Popover';
-import { Surface } from '../shared/Surface';
 import type { useInspectorDrag } from '../interactions/useInspectorDrag';
 import s from '../ui.module.css';
 import { SessionActions } from '../design/EditControls';
 import { LiveNavigator } from '../html/LiveHTMLView';
+import { LiveChangesSurface } from '../changes/LiveChangesSurface';
 
 export function TargetNavigation() {
   const { picker, selection } = useInspection();
@@ -27,8 +27,6 @@ export function LiveTask({ task }: { task: Task }) {
   </div>;
 }
 export function LiveSurface({ surface }: { surface: 'navigator' | 'changes' }) {
-  const { selection } = useInspection();
-  const { editedCount } = useEditing();
-  if (surface === 'changes') return <Surface title="Changes" subtitle={`${editedCount} edited elements · current session`} wide><SessionActions /><p className={s.fixtureNote}>Session edit controls: undo the last edit or reset all session edits. Detailed review and export are unavailable.</p></Surface>;
+  if (surface === 'changes') return <LiveChangesSurface />;
   return <LiveNavigator />;
 }

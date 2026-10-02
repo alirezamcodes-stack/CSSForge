@@ -4,7 +4,7 @@ CSSForge is a Chrome Manifest V3 extension for inspecting selected page elements
 
 The current implementation includes a scoped CSSOM source index, a conservative readable-author cascade engine, stable target locators and bounded replacement reconciliation. Normal Design and Code edits use CSSForge-owned stylesheets. An author-mutation engine exists and is regression-tested, but safe-author mode has no normal product control.
 
-The [current support contract](docs/current-support-contract.md) defines supported behavior and limits. The [release contract](docs/current-release-contract.md) defines the local package workflow and outstanding public-distribution requirements. The [Phase 08A report](docs/phase-08a-editing-truth-release-hardening.md) records the implementation and exact verification results. Historical milestone reports describe their original checkpoints.
+The [current support contract](docs/current-support-contract.md) defines supported behavior and limits. The [release contract](docs/current-release-contract.md) defines the local package workflow and outstanding public-distribution requirements. The [Phase 08B report](docs/phase-08b-detailed-changes-copy-export.md) records current Changes/Copy/Export implementation and exact verification results. Historical milestone reports describe their original checkpoints.
 
 ## Current workflows
 
@@ -12,7 +12,7 @@ The [current support contract](docs/current-support-contract.md) defines support
 - **Design:** geometry, spacing, typography, colors, backgrounds, linear/radial gradients, borders, positioning, multiple box/text shadows and eight filter controls. Numeric/color/token controls validate drafts and use the session Undo/Reset controller.
 - **Contexts:** separate Base, discovered media and terminal hover/focus/active/before/after edits. Context selection does not force browser state, create generated content or simulate a viewport.
 - **Code:** inline authored CSS, readable matching stylesheet rules, referenced keyframes and session overrides; CSSOM values, priorities and supported cascade status; explicit source refresh. Supported declaration edits create session overrides. Authored declarations and keyframes are not a general stylesheet editor.
-- **Changes:** current edited-element count, Undo last edit and Reset session edits. Detailed diffs, persistent history, Copy and Export are unavailable in the live extension.
+- **Changes:** current net declarations grouped by logical element and media/pseudo context, captured original/requested values and shared edit effectiveness. Copy target CSS, Copy all CSS and local `.css` export prepare validated selectors on request. Disabled declarations are omitted; shadow/unavailable targets and author recovery records are explicitly excluded from flat session CSS. Undo and Reset remain controller-owned. Clipboard availability depends on the page/browser context; sessions are not persistent.
 
 Accepting an override and proving its effect are separate facts. Stronger author-important rules can beat session edits. The editing workflow distinguishes supported active cascade results from inactive contexts and unverified effects; it does not promise browser-equivalent certainty or escalate selector strength automatically. Browser-computed values remain separate from requested override tokens.
 
@@ -43,7 +43,7 @@ For the independent demonstration canvas:
 pnpm preview
 ```
 
-Open `http://127.0.0.1:5173`. Preview fixture data and fixture-only copy affordances are not live extension capabilities.
+Open `http://127.0.0.1:5173`. Preview Changes and its copy action use demonstration data; live Changes reviews and copies the controller's current page edits.
 
 ## Verify
 

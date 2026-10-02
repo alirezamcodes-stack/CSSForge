@@ -3,6 +3,8 @@ import { baseContext, contextKey, discoverMedia, pseudos, type EditContext, type
 import { readConversionContext } from './conversionContext';
 import type { ValueProperty, ConversionContext, ValueReference } from './values';
 import type { EditEffect } from './effectiveness';
+import { deriveChanges, type Baseline, type ChangeTarget } from './changes';
+import { identityOf } from '../picker/identity';
 import type { SourceIndex } from '../engine/sources';
 import { createTargetLifecycle, type TargetIdentity } from '../picker/targetLifecycle';
 import { observeTarget } from '../picker/invalidation';
@@ -15,15 +17,15 @@ import { createAuthorMutation, type AuthorChange, type AuthorLedger, type Mutati
 export type FieldValue = { computed: string; presented: string; authored?: string; override?: string };
 export type DesignSnapshot = { targetId: string; bindingGeneration: number; values: Record<Property, FieldValue>; canSize: boolean };
 export type OverrideGroup = { context: EditContext; declarations: { property: Property; value: string; enabled: boolean }[] };
-export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; effectiveness: EditEffect[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean; authorRevision: number; mutationPolicy: MutationPolicy; lastMutation: MutationResult | null };
+export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; effectiveness: EditEffect[]; changes: ChangeTarget[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean; authorRevision: number; mutationPolicy: MutationPolicy; lastMutation: MutationResult | null };
 type Values = Partial<Record<Property, string>>;
 type Scope = { context: EditContext; values: Values; disabled?: Values };
 export type MigrationTicket = Readonly<{ targetId: string; identity: TargetIdentity; session: object; generation: number }>;
-type Target = { id: string; bindingGeneration: number; identity: TargetIdentity; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; retiredAttributes: string[]; scopes: Map<string, Scope>; layer?: HTMLStyleElement; stop?: () => void; guard?: () => void; retired?: boolean; staging?: boolean; pending?: MigrationTicket; media: ReturnType<typeof discoverMedia> };
+type Target = { id: string; label:string; effects:EditEffect[]; bindingGeneration: number; identity: TargetIdentity; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; retiredAttributes: string[]; scopes: Map<string, Scope>; layer?: HTMLStyleElement; stop?: () => void; guard?: () => void; retired?: boolean; staging?: boolean; pending?: MigrationTicket; media: ReturnType<typeof discoverMedia> };
 // Editing ownership only, never replacement identity evidence. Shared factory instances cannot claim one node twice.
 const editOwners = new WeakMap<Element, Target>();
-export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string }[]; order: number; gesture?: string; author?: AuthorChange };
-export const emptyEditState = (): EditState => ({ design: null, overrides: [], effectiveness: [], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false, authorRevision: 0, mutationPolicy: { mode: 'SESSION_OVERRIDE' }, lastMutation: null });
+export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string; baseline?:Baseline }[]; order: number; gesture?: string; author?: AuthorChange };
+export const emptyEditState = (): EditState => ({ design: null, overrides: [], effectiveness: [], changes:[], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false, authorRevision: 0, mutationPolicy: { mode: 'SESSION_OVERRIDE' }, lastMutation: null });
 
 /** One transaction controller. Session overrides remain default; author mutation requires explicit policy. */
 export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: () => void, sources: SourceIndex, lifecycle = createTargetLifecycle(doc, owns), authorLedger?: AuthorLedger) {
@@ -64,6 +66,21 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       ...Object.entries(scope.disabled ?? {}).map(([property, value]) => ({ property: property as Property, value, enabled: false })),
     ] })).filter(group => group.declarations.length) : [];
     if (!target || !state.overrides.length) state.effectiveness = [];
+    state.changes = deriveChanges([...targets.values()].map(target=>({targetId:target.id,label:target.label,bindingGeneration:target.bindingGeneration,available:safe(target),root:target.root===doc?'document':'shadow-root',effects:target.effects,scopes:[...target.scopes.values()].map(scope=>({context:scope.context,declarations:[
+      ...Object.entries(scope.values).map(([property,value])=>({property,value,enabled:true})),
+      ...Object.entries(scope.disabled??{}).map(([property,value])=>({property,value,enabled:false})),
+    ]}))})),history);
+    // Dormant author rollback records are reviewable, but never pretend to be session CSS.
+    for(const transaction of history) if(transaction.author) {
+      const author=transaction.author;
+      let group=state.changes.find(item=>item.targetId===transaction.targetId);
+      if(!group){const owner=targets.get(transaction.targetId);group={targetId:transaction.targetId,label:owner?.label??'Author recovery',bindingGeneration:owner?.bindingGeneration??0,available:!!owner&&safe(owner),root:author.target.root===doc?'document':'shadow-root',contexts:[]};state.changes.push(group);}
+      let scope=group.contexts.find(item=>contextKey(item.context)===contextKey(transaction.context));
+      if(!scope){scope={context:{...transaction.context,media:[...transaction.context.media]},declarations:[]};group.contexts.push(scope);}
+      const previous=scope.declarations.find(item=>item.property===author.target.property&&item.provenance==='author-recovery');
+      if(previous){previous.value=author.current.value;previous.enabled=author.current.exists;previous.priority=author.current.priority;}
+      else scope.declarations.push({property:author.target.property,value:author.current.value,enabled:author.current.exists,priority:author.current.priority,baseline:author.before.exists?{kind:'authored',value:author.before.value}:{kind:'unknown'},provenance:'author-recovery'});
+    }
     listeners.forEach(listener => listener());
   };
   const safe = (target: Target) => !target.retired && lifecycle.safe(target.identity);
@@ -89,7 +106,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     if (!target) {
       if (editOwners.has(element)) { publish({ design: null, error: 'Another CSSForge session owns this editing target.' }); return; }
       const id = String(++sequence); let attribute = prefix; while (element.hasAttribute(attribute)) attribute += '-x';
-      target = { id, bindingGeneration: 0, identity: lifecycle.bind(element), element, root: root as Document | ShadowRoot, attribute, retiredAttributes: [], scopes: new Map(), media: { contexts: [], limited: false } };
+      target = { id, label:identityOf(element), effects:[], bindingGeneration: 0, identity: lifecycle.bind(element), element, root: root as Document | ShadowRoot, attribute, retiredAttributes: [], scopes: new Map(), media: { contexts: [], limited: false } };
       targets.set(id, target); byElement.set(element, target); byBinding.set(target.identity, target); editOwners.set(element, target);
     }
     if (!safe(target)) { publish({ design: null, error: 'This element moved to another document tree. Reset session edits before inspecting it again.' }); return; }
@@ -161,7 +178,12 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       if (!validateValue(property, value, win.CSS.supports.bind(win.CSS))) return fail(`Enter a valid ${property} value.`);
       if (!state.context.pseudo.startsWith('::') && target.element.style.getPropertyPriority(property) === 'important') return fail('An inline !important declaration prevents this override. Original page styles are preserved.');
       if ((property === 'width' || property === 'height') && !state.design!.canSize) return fail('This display mode does not provide an editable size box.');
-      if (scope.values[property] !== value) changes.push({ property, previous: scope.values[property], previousDisabled: scope.disabled?.[property], value });
+      if (scope.values[property] !== value) {
+        // Sample only the pre-write snapshot. Conditional browser values cannot prove a contextual original.
+        const field=state.design!.values[property];
+        const baseline:Baseline=state.context.media.length||state.context.pseudo?{kind:'unknown'}:field?.authored?{kind:'authored',value:field.authored}:field?{kind:'computed',value:field.computed}:{kind:'unknown'};
+        changes.push({ property, previous: scope.values[property], previousDisabled: scope.disabled?.[property], value, baseline });
+      }
     }
     if (!changes.length) { publish({ error: null }); return true; }
     const previousValues = { ...scope.values }, previousDisabled = { ...scope.disabled };
@@ -222,9 +244,17 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     containment.destroy();
     targets.clear(); byElement = new WeakMap(); byBinding = new WeakMap(); history.length = 0; listeners.clear(); lossHandler = cancelReconciliation = undefined; state = emptyEditState();
   }
+  // Recovery is reviewable before a new element is selected or any edit is published.
+  publish();
   return {
     inspect, quarantine, authorMutation,
-    setEffectiveness(effectiveness: EditEffect[]) { if (!destroyed && JSON.stringify(state.effectiveness) !== JSON.stringify(effectiveness)) publish({ effectiveness }); },
+    setEffectiveness(effectiveness: EditEffect[],targetId=state.design?.targetId) {
+      const target=targetId&&targets.get(targetId);
+      const current=state.design?.targetId===targetId;
+      if(!destroyed&&target&&(JSON.stringify(target.effects)!==JSON.stringify(effectiveness)||(current&&JSON.stringify(state.effectiveness)!==JSON.stringify(effectiveness)))){target.effects=effectiveness;publish(current?{effectiveness}:{});}
+    },
+    changeBindings() { return [...targets.values()].filter(target=>safe(target)&&edited(target)).map(target=>({targetId:target.id,identity:target.identity})); },
+    invalidateChangeEffects() { for(const target of targets.values()) target.effects=[]; },
     applyBatch: (...args: Parameters<typeof applyBatch>) => exclusive(() => applyBatch(...args), false),
     applyAuthor: (...args: Parameters<typeof applyAuthor>) => exclusive(() => applyAuthor(...args), false),
     setMutationPolicy(policy: MutationPolicy) { if (!destroyed) publish({ mutationPolicy: { mode: policy.mode, allowShared: policy.allowShared }, error: null }); },

@@ -184,7 +184,7 @@ test('J04 Changes reports real count, limitations, Undo/Reset and restores modal
     await pick(page,'#checkout');await edit(page,'Font size','24px');
     const opener=dock(page).getByRole('button',{name:'Open Changes',exact:true});await opener.click();
     const dialog=page.getByRole('dialog',{name:'Changes',exact:true});await expect(dialog).toContainText('1 edited elements');
-    await expect(dialog).toContainText('Detailed review and export are unavailable');await expect(dialog.getByRole('button',{name:/Export/})).toHaveCount(0);
+    await expect(dialog).toContainText('Current requested:');await expect(dialog.getByRole('button',{name:'Export CSS',exact:true})).toBeEnabled();
     await dialog.getByRole('button',{name:'Undo last edit',exact:true}).click();await expect(dialog).toContainText('0 edited elements');await expect(page.locator('#checkout')).toHaveCSS('font-size','18px');
     await page.keyboard.press('Escape');await expect(opener).toBeFocused();await edit(page,'Font size','28px');await opener.click();
     await dialog.getByRole('button',{name:'Reset session edits',exact:true}).click();await expect(dialog).toContainText('0 edited elements');await expect(page.locator('#checkout')).toHaveCSS('font-size','18px');

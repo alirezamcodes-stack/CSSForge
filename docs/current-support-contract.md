@@ -1,6 +1,6 @@
 # Current CSSForge support contract
 
-Current product contract for the Chrome MV3 extension. This document describes implemented behavior; it is not a roadmap or a claim of universal CSS support. Exact run results belong in [the Phase 08A report](phase-08a-editing-truth-release-hardening.md); the earlier [project audit](current-project-audit.md) remains a historical snapshot.
+Current product contract for the Chrome MV3 extension. This document describes implemented behavior; it is not a roadmap or a claim of universal CSS support. Exact current run results belong in [the Phase 08B report](phase-08b-detailed-changes-copy-export.md); the earlier [project audit](current-project-audit.md) and [Phase 08A report](phase-08a-editing-truth-release-hardening.md) remain historical snapshots.
 
 ## Supported today
 
@@ -14,7 +14,8 @@ Current product contract for the Chrome MV3 extension. This document describes i
 | Edit result | A recorded declaration is distinct from its effect. Supported active cascade evidence can show an edit winning or overridden; inactive contexts remain pending and uncertain effects remain unverified. Computed values are separate from override tokens. Status refresh does not add edit transactions. |
 | Code | Inline CSSOM declarations, readable matching rules, priorities, source contexts, referenced read-only keyframes, supported cascade status and explicit Refresh sources. Editing supported values uses session overrides; adding properties uses the supported registry. |
 | HTML / Navigator | Read-only bounded real DOM traversal, lazy branch expansion and selection/navigation; open shadow boundaries and assigned-slot navigation. No HTML source editing. |
-| Changes / Undo / Reset | Edited-element count and session actions. Undo reverses recorded transactions; Reset removes session overrides across edited targets and contexts. |
+| Changes / Undo / Reset | Current owned declarations grouped by logical target and separate contexts. First accepted transaction captures known pre-edit values; unproven originals remain unknown. Requested tokens, disabled state, provenance and shared effectiveness/browser values remain distinct. Undo reverses recorded transactions; Reset removes session overrides across edited targets and contexts. Counts describe edited elements and current declarations, not chronological events. |
+| Copy / Export | Explicit Copy target CSS, Copy all CSS and local `cssforge-changes.css` download. Selector generation/validation occurs only during output preparation. Enabled session declarations retain their actual `!important` priority and nested media/pseudo contexts. Output and warning/omission counts are deterministic for unchanged current ownership. |
 | UI assets | Bundled Geist Sans/Mono, centralized theme tokens and Lucide UI icons; packaged notices/licenses. UI font loading uses bundled data. |
 
 ## Partial / conservative
@@ -27,11 +28,13 @@ Current product contract for the Chrome MV3 extension. This document describes i
 - **Replacement:** recovery is bounded and requires strong unique identity evidence. Ambiguous, weak, late, cross-root or unsupported replacements are not guessed. Safe recovery of committed session ownership does not authorize a stale physical-owner draft.
 - **Freshness:** source/cascade snapshots refresh at meaningful selection/edit/source lifecycle points or explicit Refresh. Unrelated CSSOM/media/DOM changes are not universally observed; raw pointer hover does not scan stylesheets or resolve cascades.
 - **Visual result:** stronger authored `!important`, layout constraints, inheritance, motion and unsupported cascade cases can prevent the requested rendered result. Session editing does not automatically rewrite authors or escalate specificity.
+- **Output:** generated selectors describe the current element and may change meaning after page changes; structural/attribute/class risks are reported. Exported selectors can have different specificity from the session marker. Blocked/unverified requests remain copyable with warnings, without promising the same rendered result. Disabled declarations are excluded. Shadow-root/unavailable targets, failed unique selectors and dormant author recovery records are excluded with explicit counts/reasons; flat CSS does not pierce shadow boundaries. Clipboard uses a trusted button gesture and the native API without additional extension permission; unavailable/rejected clipboard contexts report failure. Download uses a local Blob URL and cleans it up.
+- **Original values:** ordinary Base values are captured from the pre-write inspection snapshot as inline-authored tokens or browser-computed values, not reconstructed original stylesheet source. Conditional originals are unknown when not proven. Undo removes rolled-back baseline records; a fresh first edit captures a fresh baseline. Review is current owned state, including an override whose token happens to equal its baseline.
 - **Geometry:** selected dimensions and overlay positioning are available; this is not a ruler/measurement toolkit or continuous animation inspection.
 
 ## Not currently supported
 
-- Detailed Changes diffs, persistent review/history, Redo, live Copy/Export, share links or saved sessions.
+- Persistent review/history, Redo, share links or saved sessions.
 - Responsive device/viewport tooling, rulers, eyedropper/color sampling, asset management or animation tooling.
 - General arbitrary stylesheet/keyframe editing, original source-file writes, HTML editing or a complete style-owner/effective-target workflow.
 - Durable edits across deactivation, reload, navigation or browser restart. Selection changes and panel hiding preserve active session edits; Reset/deactivation remove them. The document-lifetime author recovery ledger is not persistent session storage.

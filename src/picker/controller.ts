@@ -16,6 +16,7 @@ import { createSelectorEngine, type SelectorRequest } from '../engine/selectors'
 import { createReconciliation, reconciliationLimits } from '../engine/reconciliation';
 import type { AuthorLedger } from '../engine/mutation';
 import { editEffect, hasActiveOutsideContext, type ContextActivity } from '../editing/effectiveness';
+import { serializeChanges } from '../export/css';
 
 export type Selection = {
   identity: string; tag: string; id: string; classes: string[];
@@ -38,7 +39,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   let unobserve = () => {};
   let candidates: TargetCandidate[] = [];
   let source: SourceSnapshot | null = null;
-  let destroyed = false;
+  let destroyed = false, reviewingChanges = false, changesPreparations = 0, changesSerializations = 0;
   let suspended = false;
   let handlingLoss = false, suppressMigration = false, selectionGeneration = 0;
   let regions: Element[] = [];
@@ -58,32 +59,42 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   const editor = createEditSession(doc, owns, () => {
     source = null;
     cascade.invalidate();
+    editor.invalidateChangeEffects();
     if (selected && selectedIdentity && lifecycle.safe(selectedIdentity)) {
       const computed = win.getComputedStyle(selected);
       editor.inspect(selected, computed);
       refreshEffectiveness(computed);
       if (state.selection) publish({ ...state, selection: { ...state.selection, rect: rectOf(selected.getBoundingClientRect()), fontFamily: computed.fontFamily, fontSize: computed.fontSize } });
     } else clearLostTarget();
+    if(reviewingChanges) refreshChanges();
     frame.schedule();
   }, sources, lifecycle, authorLedger);
   const cascade = createCascade(doc, sources, element => editor.sourceGroups(element), undefined, element => editor.sourcePosition(element));
   // Refresh only at editing/selection/source boundaries. Pointer and geometry frames never resolve edit truth.
-  function refreshEffectiveness(computed?: CSSStyleDeclaration) {
-    if (!selected || !selectedIdentity || !lifecycle.safe(selectedIdentity)) return;
-    const groups = editor.sourceGroups(selected);
-    const effects = sources.overrides(selected, groups).rules.flatMap(rule => {
+  function effectsFor(element:Element,computed?: CSSStyleDeclaration) {
+    const groups = editor.sourceGroups(element);
+    return sources.overrides(element, groups).rules.flatMap(rule => {
       const context = rule.editContext!;
       let activity: ContextActivity = 'active';
       if (context.media.some(query => !win.matchMedia(query).matches)) activity = 'inactive-media';
       else if (context.pseudo.startsWith('::')) activity = 'unverified-pseudo';
-      else if (context.pseudo && !selected!.matches(context.pseudo)) activity = 'inactive-pseudo';
-      const result = cascade.read(selected!, context);
+      else if (context.pseudo && !element.matches(context.pseudo)) activity = 'inactive-pseudo';
+      const result = cascade.read(element, context);
       const snapshot = editor.getSnapshot();
       return rule.declarations.map(declaration => editEffect(declaration, context, result, activity,
-        computed?.getPropertyValue(declaration.property) ?? (!snapshot.context.pseudo.startsWith('::') ? snapshot.design?.values[declaration.property as keyof typeof snapshot.design.values]?.computed : undefined),
-        hasActiveOutsideContext(result, declaration.id, selected!)));
+        context.pseudo.startsWith('::')?undefined:computed?.getPropertyValue(declaration.property) ?? (element===selected&&!snapshot.context.pseudo.startsWith('::') ? snapshot.design?.values[declaration.property as keyof typeof snapshot.design.values]?.computed : undefined),
+        hasActiveOutsideContext(result, declaration.id, element)));
     });
-    editor.setEffectiveness(effects);
+  }
+  function refreshEffectiveness(computed?: CSSStyleDeclaration) {
+    if (!selected || !selectedIdentity || !lifecycle.safe(selectedIdentity)) return;
+    editor.setEffectiveness(effectsFor(selected,computed));
+  }
+  function refreshChanges(fresh=false) {
+    for(const binding of editor.changeBindings()) {
+      if(fresh){sources.invalidate(binding.identity.element);cascade.invalidate(binding.identity.element);}
+      editor.setEffectiveness(effectsFor(binding.identity.element,win.getComputedStyle(binding.identity.element)),binding.targetId);
+    }
   }
   const reconciliation = createReconciliation<MigrationTicket>(doc, lifecycle, {
     owns,
@@ -234,6 +245,18 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     locatorStats: locators.getStats,
     selectorStats: selectors.getStats,
     generateSelector(request: SelectorRequest = {}) { clearLostTarget(); return selectedIdentity ? selectors.generate(selectedIdentity, request) : null; },
+    setChangesReview(active:boolean) { reviewingChanges=active;if(active)refreshChanges(true); },
+    prepareChanges(targetId?:string) {
+      changesPreparations++;refreshChanges(true);
+      const bindings=new Map(editor.changeBindings().map(binding=>[binding.targetId,binding.identity]));
+      const prepared=editor.getSnapshot().changes.filter(target=>!targetId||target.targetId===targetId).map(target=>{
+        const identity=bindings.get(target.targetId);
+        const result=identity&&target.root==='document'?selectors.generate(identity,{refresh:true}):null;
+        return {...target,available:!!identity,selector:result?.state==='unique'&&result.validation.matchesTarget?result.selector:null,risks:[...(result?.risks??[])]};
+      });
+      changesSerializations++;return serializeChanges(prepared);
+    },
+    changesStats:()=>({preparations:changesPreparations,serializations:changesSerializations}),
     validateAuthoredSelector(selectorText: string, request: SelectorRequest = {}) { clearLostTarget(); return selectedIdentity ? selectors.validateAuthored(selectedIdentity, selectorText, request) : null; },
     invalidateSelector() { if (selectedIdentity) selectors.invalidate(selectedIdentity); },
     resolveTarget(request: ResolveRequest = {}) { clearLostTarget(); return locator ? (locatorResult = locators.resolve(locator, request)) : null; },
