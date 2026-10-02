@@ -14,11 +14,11 @@ export function DOMNavigation() {
   ] as const).map(([label, enabled, action], index) => <button key={label} disabled={!enabled} onClick={action}><Icon name={(['parent', 'child', 'left', 'right'] as const)[index]} />{label}</button>)}</nav>;
 }
 export function LiveDOMTree() {
-  const { picker } = useInspection(), { design } = useEditing();
+  const { picker } = useInspection(), { design, structureRevision } = useEditing();
   const [revision, setRevision] = useState(0);
   const [focusedId, setFocusedId] = useState<string | null>(null);
   const treeRoot = useRef<HTMLDivElement>(null);
-  const snapshot = useMemo(() => picker!.tree(), [picker, design?.targetId, revision]);
+  const snapshot = useMemo(() => picker!.tree(), [picker, design?.targetId, revision, structureRevision]);
   const tabStop = snapshot.rows.some(row => row.id === focusedId) ? focusedId : (snapshot.rows.find(row => row.selected) ?? snapshot.rows[0])?.id;
   useLayoutEffect(() => { treeRoot.current?.querySelector('[aria-selected=true]')?.scrollIntoView({ block: 'nearest' }); }, [design?.targetId]);
   return <><div className={t.toolbar}><span>DOM around selection</span><button onClick={() => setRevision(value => value + 1)}>Refresh tree</button></div><div ref={treeRoot} className={t.tree} role="tree" aria-label="Page DOM tree">{snapshot.rows.map((row, index) => <div key={row.id} className={`${t.row} ${row.selected ? t.selected : ''}`} style={{ paddingLeft: 12 + Math.min(row.depth, 7) * 12 }}>

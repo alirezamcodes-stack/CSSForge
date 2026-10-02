@@ -14,22 +14,25 @@ import type { LocatorResolution } from '../engine/locator';
 import { reconciliationLimits } from '../engine/reconciliation/model';
 import { createAuthorMutation, type AuthorChange, type AuthorLedger, type MutationPolicy, type MutationRequest, type MutationResult } from '../engine/mutation';
 import { createDOMLedger, createDOMMutation, type DOMLedger, type DOMTextChange, type TextPlan, type TextFailure } from './dom';
+import { createStructureMutation, type DOMStructureChange, type StructurePlan, type StructureFailure, type StructureOperation, type InsertPosition } from './dom/structure';
 
 export type FieldValue = { computed: string; presented: string; authored?: string; override?: string };
 export type DesignSnapshot = { targetId: string; bindingGeneration: number; values: Record<Property, FieldValue>; canSize: boolean };
 export type OverrideGroup = { context: EditContext; declarations: { property: Property; value: string; enabled: boolean }[] };
-export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; effectiveness: EditEffect[]; changes: ChangeTarget[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean; authorRevision: number; mutationPolicy: MutationPolicy; lastMutation: MutationResult | null };
+export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; effectiveness: EditEffect[]; changes: ChangeTarget[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean; authorRevision: number; structureRevision:number; mutationPolicy: MutationPolicy; lastMutation: MutationResult | null };
 type Values = Partial<Record<Property, string>>;
 type Scope = { context: EditContext; values: Values; disabled?: Values };
 export type MigrationTicket = Readonly<{ targetId: string; identity: TargetIdentity; session: object; generation: number }>;
-type Target = { id: string; label:string; effects:EditEffect[]; bindingGeneration: number; identity: TargetIdentity; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; retiredAttributes: string[]; scopes: Map<string, Scope>; layer?: HTMLStyleElement; stop?: () => void; guard?: () => void; retired?: boolean; staging?: boolean; pending?: MigrationTicket; media: ReturnType<typeof discoverMedia> };
+type Target = { id: string; label:string; effects:EditEffect[]; bindingGeneration: number; identity: TargetIdentity; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; retiredAttributes: string[]; scopes: Map<string, Scope>; layer?: HTMLStyleElement; stop?: () => void; guard?: () => void; retired?: boolean; parked?: boolean; staging?: boolean; pending?: MigrationTicket; media: ReturnType<typeof discoverMedia> };
 // Editing ownership only, never replacement identity evidence. Shared factory instances cannot claim one node twice.
 const editOwners = new WeakMap<Element, Target>();
-export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string; baseline?:Baseline }[]; order: number; gesture?: string; author?: AuthorChange; dom?:DOMTextChange };
-export const emptyEditState = (): EditState => ({ design: null, overrides: [], effectiveness: [], changes:[], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false, authorRevision: 0, mutationPolicy: { mode: 'SESSION_OVERRIDE' }, lastMutation: null });
+// Exact CSSForge-created stylesheet Nodes are metadata, never page placement anchors.
+const editLayers = new WeakSet<Node>();
+export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string; baseline?:Baseline }[]; order: number; gesture?: string; author?: AuthorChange; dom?:DOMTextChange; structure?:DOMStructureChange };
+export const emptyEditState = (): EditState => ({ design: null, overrides: [], effectiveness: [], changes:[], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false, authorRevision: 0, structureRevision:0, mutationPolicy: { mode: 'SESSION_OVERRIDE' }, lastMutation: null });
 
 /** One transaction controller. Session overrides remain default; author mutation requires explicit policy. */
-export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: (domain?:'dom') => void, sources: SourceIndex, lifecycle = createTargetLifecycle(doc, owns), authorLedger?: AuthorLedger, domLedger:DOMLedger=createDOMLedger(doc)) {
+export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: (domain?:'dom'|'structure') => void, sources: SourceIndex, lifecycle = createTargetLifecycle(doc, owns), authorLedger?: AuthorLedger, domLedger:DOMLedger=createDOMLedger(doc)) {
   const win = doc.defaultView!;
   const prefix = `data-cssforge-target-${crypto.randomUUID().replaceAll('-', '')}`;
   const targets = new Map<string, Target>(); let byElement = new WeakMap<Element, Target>();
@@ -47,6 +50,23 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     const target=targets.get(plan.targetId);
     return !destroyed && state.design?.targetId===plan.targetId && target?.bindingGeneration===plan.bindingGeneration && target.identity===plan.identity && safe(target);
   },()=>{publish();onChange('dom');},sessionToken);
+  const intentionalRemovals = new WeakSet<Element>();
+  const structureMutation = createStructureMutation(doc,domLedger,identity=>lifecycle.safe(identity),plan=>{
+    const target=targets.get(plan.targetId);
+    return !destroyed&&state.design?.targetId===plan.targetId&&target?.bindingGeneration===plan.bindingGeneration&&target.identity===plan.identity&&safe(target);
+  },(element,name,value)=>{const target=editOwners.get(element);return !!target&&target.attribute===name&&target.id===value;},
+  ()=>{publish({structureRevision:state.structureRevision+1});onChange('structure');},sessionToken,
+  record=>history.some(transaction=>transaction.order>record.order&&(
+    !!transaction.structure&&[record.node,record.before.previous,record.before.next,record.after.previous,record.after.next].includes(transaction.structure.node)||
+    !!transaction.structure&&transaction.structure.node.contains(record.node)||
+    !!transaction.dom&&record.node.contains(transaction.dom.plan.owner)||!!targets.get(transaction.targetId)&&record.node.contains(targets.get(transaction.targetId)!.element))),
+  record=>{
+    if(record.kind!=='DOM_DELETE')return;
+    intentionalRemovals.add(record.node);
+    for(const row of record.snapshot)if(row.node.nodeType===1){
+      const target=byElement.get(row.node as Element);if(target){target.parked=true;release(target,false);}
+    }
+  },node=>editLayers.has(node)||node.nodeType===1&&owns(node as Element));
   // Only unresolved author records cross UI lifecycles. Session layers/gestures never do.
   const recoveredOwners = new WeakMap<object, Map<string, string>>(); let recoverySequence = 0;
   for (const author of authorMutation.active()) {
@@ -64,13 +84,19 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     group.set(dom.plan.targetId,targetId);recoveredOwners.set(dom.session,group);
     history.push({targetId,context:baseContext(),changes:[],order:dom.order,dom});
   }
+  for(const structure of structureMutation.active()) {
+    const group=recoveredOwners.get(structure.session)??new Map<string,string>();
+    const targetId=group.get(structure.plan.targetId)??`recovery-${++recoverySequence}`;
+    group.set(structure.plan.targetId,targetId);recoveredOwners.set(structure.session,group);
+    history.push({targetId,context:baseContext(),changes:[],order:structure.order,structure});
+  }
   history.sort((a,b)=>a.order-b.order);order=Math.max(order,...history.map(item=>item.order));
-  if (history.length) state = { ...state, undoCount: history.length, editedCount: recoverySequence, error: history.some(item=>item.dom)?'Pending text/author rollback retained; page changes were preserved.':'Pending author rollback retained; page changes were preserved.' };
-  const edited = (target: Target) => history.some(transaction => transaction.targetId === target.id && (transaction.author||transaction.dom)) || [...target.scopes.values()].some(scope => Object.keys(scope.values).length || Object.keys(scope.disabled ?? {}).length);
+  if (history.length) state = { ...state, undoCount: history.length, editedCount: recoverySequence, error: history.some(item=>item.structure)?'Pending DOM/author rollback retained; page changes were preserved.':history.some(item=>item.dom)?'Pending text/author rollback retained; page changes were preserved.':'Pending author rollback retained; page changes were preserved.' };
+  const edited = (target: Target) => history.some(transaction => transaction.targetId === target.id && (transaction.author||transaction.dom||transaction.structure)) || [...target.scopes.values()].some(scope => Object.keys(scope.values).length || Object.keys(scope.disabled ?? {}).length);
   const publish = (patch: Partial<EditState> = {}) => {
     const editedIds = new Set([...targets.values()].filter(edited).map(target => target.id));
     // Pending recovery remains session-wide and Reset must stay usable after reactivation.
-    for (const transaction of history) if (transaction.author||transaction.dom) editedIds.add(transaction.targetId);
+    for (const transaction of history) if (transaction.author||transaction.dom||transaction.structure) editedIds.add(transaction.targetId);
     state = { ...state, undoCount: history.length, editedCount: editedIds.size, ...patch };
     const target = state.design && targets.get(state.design.targetId);
     state.overrides = target ? [...target.scopes.values()].map(scope => ({ context: scope.context, declarations: [
@@ -106,11 +132,19 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       if(previous)previous.group.texts![previous.index]=row;
       else {targetRows.set(record.plan.node,{group,index:group.texts.length});group.texts.push(row);}
     }
+    structureMutation.refresh();
+    const projected=structureMutation.rows(history.flatMap(transaction=>transaction.structure?[transaction.structure]:[]));
+    for(const transaction of history) if(transaction.structure&&projected.includes(transaction.structure)) {
+      const record=transaction.structure,owner=targets.get(transaction.targetId);
+      let group=state.changes.find(item=>item.targetId===transaction.targetId);
+      if(!group){group={targetId:transaction.targetId,label:owner?.label??record.plan.label,bindingGeneration:owner?.bindingGeneration??record.plan.bindingGeneration,available:!!owner&&safe(owner),root:record.plan.root===doc?'document':'shadow-root',contexts:[]};state.changes.push(group);}
+      (group.structures??=[]).push({kind:record.kind,label:record.label,location:record.location,state:record.state,reason:record.reason});
+    }
     listeners.forEach(listener => listener());
   };
-  const safe = (target: Target) => !target.retired && lifecycle.safe(target.identity);
+  const safe = (target: Target) => !target.retired && !target.parked && lifecycle.safe(target.identity);
   const quarantine = (target = state.design ? targets.get(state.design.targetId) : undefined) => {
-    if (target && targets.get(target.id) === target && !target.retired && !safe(target)) {
+    if (target && targets.get(target.id) === target && !target.retired && !target.parked && !safe(target)) {
       const retain = state.design?.targetId === target.id && edited(target) && target.retiredAttributes.length < reconciliationLimits.migrationsPerTarget && lossHandler?.(target.identity) === true;
       target.retired = true; release(target, false);
       if (retain) target.pending = Object.freeze({ targetId: target.id, identity: target.identity, session: sessionToken, generation: ++migrationGeneration });
@@ -158,7 +192,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   };
   const render = (target: Target) => {
     if (![...target.scopes.values()].some(scope => Object.keys(scope.values).length)) { release(target); return; }
-    const layer = doc.createElement('style'); layer.dataset.cssforgeEditLayer = target.id;
+    const layer = doc.createElement('style'); editLayers.add(layer);layer.dataset.cssforgeEditLayer = target.id;
     (target.root === doc ? doc.head ?? doc.documentElement : target.root).appendChild(layer);
     try {
       if (!layer.sheet) throw new Error('Style layer unavailable');
@@ -264,16 +298,57 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     if (destroyed) return;
     if (transactionBusy) { destroyRequested = true; return; }
     destroyed = true; destroyRequested = false;
+    if(history.some(transaction=>transaction.structure)) {
+      const blocked=new Set<Element>(),blockedTexts=new Set<Text>();
+      for(const transaction of [...history].reverse()) {
+        if(transaction.structure){const record=transaction.structure;if([...blocked].some(node=>record.node===node||record.node.contains(node))||[...blockedTexts].some(node=>record.node.contains(node))||!rollbackStructure(record))blocked.add(record.node);}
+        else if(transaction.dom){const node=transaction.dom.plan.node;if(blockedTexts.has(node)||!domMutation.rollback(transaction.dom))blockedTexts.add(node);}
+        else if(transaction.author&&!authorMutation.rollback(transaction.author)&&transaction.author.target.binding.element)blocked.add(transaction.author.target.binding.element);
+      }
+    }
     authorMutation.destroy();
     domMutation.destroy();
+    structureMutation.destroy();
     for (const target of targets.values()) { release(target); if (editOwners.get(target.element) === target) editOwners.delete(target.element); }
     containment.destroy();
     targets.clear(); byElement = new WeakMap(); byBinding = new WeakMap(); history.length = 0; listeners.clear(); lossHandler = cancelReconciliation = undefined; state = emptyEditState();
   }
+  function rollbackStructure(record:DOMStructureChange) {
+    if(!structureMutation.rollback(record))return false;
+    const target=byElement.get(record.node);
+    if(record.kind==='DOM_DELETE'){
+      intentionalRemovals.delete(record.node);
+      for(const row of record.snapshot)if(row.node.nodeType===1){
+        const restored=byElement.get(row.node as Element);
+        if(restored){restored.parked=false;try{render(restored);}catch{release(restored,false);record.reason='Native node restored, but the page blocked restoration of its CSSForge style layer.';}}
+      }
+    }else if(record.kind==='DOM_INSERT'||record.kind==='DOM_DUPLICATE'){
+      intentionalRemovals.add(record.node);
+      if(target){target.parked=true;release(target,false);}
+    }
+    return true;
+  }
   // Recovery is reviewable before a new element is selected or any edit is published.
   publish();
   return {
-    inspect, quarantine, authorMutation, domMutation,
+    inspect, quarantine, authorMutation, domMutation, structureMutation,
+    intentionalRemoval: (element:Element)=>intentionalRemovals.has(element),
+    clearIntentionalSelection() { publish({design:null,error:null}); },
+    prepareStructure(operation:StructureOperation,position:InsertPosition='after'):StructurePlan|StructureFailure {
+      const target=state.design&&targets.get(state.design.targetId);
+      if(!target||!safe(target))return {state:'UNAVAILABLE',reason:'Select an available element first.'};
+      return structureMutation.prepare(target.id,target.bindingGeneration,target.identity,target.label,operation,position);
+    },
+    applyStructure(plan:StructurePlan,tag?:string,text?:string) {
+      return exclusive(()=>{
+        const result=structureMutation.apply(plan,order+1,tag,text);
+        if(result.state==='applied'){
+          history.push({targetId:plan.targetId,context:baseContext(),changes:[],order:++order,structure:result.change});
+          publish({error:result.change.reason??null,structureRevision:state.structureRevision+1});onChange('structure');
+        }else publish({error:result.reason});
+        return result;
+      },{state:'FAILED' as const,reason:'Another transaction is in progress.'});
+    },
     prepareText():TextPlan|TextFailure {
       const target=state.design&&targets.get(state.design.targetId);
       if(!target||!safe(target))return {state:'UNAVAILABLE',reason:'Select an available element first.'};
@@ -379,6 +454,11 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     undo() {
       return exclusive(() => {
         if (destroyed) return;
+        if(history.at(-1)?.structure){
+          const record=history.at(-1)!.structure!;
+          if(!rollbackStructure(record)){publish({error:'Structure changed or unavailable. Undo retained; page changes were preserved.'});return;}
+          history.pop();publish({error:record.reason??null,structureRevision:state.structureRevision+1});onChange('structure');return;
+        }
         if(history.at(-1)?.dom) {
           if(!domMutation.rollback(history.at(-1)!.dom!)){publish({error:'Text changed or unavailable. Undo retained; page text was preserved.'});return;}
           history.pop();publish({error:null});onChange('dom');return;
@@ -413,25 +493,30 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
         authorMutation.resetGeneration();
         // Restore author changes in reverse history order. Conflicts remain recoverable and are never overwritten.
         let conflict = false;
-        const blockedTexts=new Set<Text>();let hadDOM=false;
+        const blockedTexts=new Set<Text>(),blockedStructures=new Set<Element>();let hadDOM=false;
+        const hadStructure=history.some(transaction=>transaction.structure);
         for (let index = history.length - 1; index >= 0; index--) {
           const transaction = history[index];
+          if(transaction.structure){hadDOM=true;const record=transaction.structure;
+            if([...blockedStructures].some(node=>record.node===node||record.node.contains(node))||[...blockedTexts].some(node=>record.node.contains(node))||!rollbackStructure(record)){blockedStructures.add(record.node);conflict=true;continue;}
+            history.splice(index,1);continue;
+          }
           if(transaction.dom){hadDOM=true;const node=transaction.dom.plan.node;
             if(blockedTexts.has(node)||!domMutation.rollback(transaction.dom)){blockedTexts.add(node);conflict=true;continue;}
             history.splice(index,1);continue;
           }
           if (!transaction.author) { history.splice(index, 1); continue; }
-          if (!authorMutation.rollback(transaction.author)) { conflict = true; continue; }
+          if (!authorMutation.rollback(transaction.author)) { conflict = true;const element=transaction.author.target.binding.element;if(element)blockedStructures.add(element);continue; }
           history.splice(index, 1);
         }
-        for (let index = history.length - 1; index >= 0; index--) if (!history[index].author&&!history[index].dom) history.splice(index, 1);
+        for (let index = history.length - 1; index >= 0; index--) if (!history[index].author&&!history[index].dom&&!history[index].structure) history.splice(index, 1);
         for (const target of targets.values()) { release(target); if (editOwners.get(target.element) === target) editOwners.delete(target.element); }
         containment.destroy();
         for (const target of targets.values()) target.scopes.clear();
         targets.clear(); byElement = new WeakMap(); byBinding = new WeakMap();
         if (!conflict) history.length = 0;
-        const resetError = conflict ? hadDOM?'Text or author source changed or blocked reset. Pending rollback retained; page changes were preserved.':'Author source changed or blocked reset. Pending author rollback retained; page changes were preserved.' : null;
-        publish({ error: resetError, context: baseContext(), authorRevision: state.authorRevision + 1, lastMutation: null, mutationPolicy: { mode: 'SESSION_OVERRIDE' } }); onChange(hadDOM?'dom':undefined);
+        const resetError = conflict ? hadDOM?`${hadStructure?'DOM':'Text'} or author source changed or blocked reset. Pending rollback retained; page changes were preserved.`:'Author source changed or blocked reset. Pending author rollback retained; page changes were preserved.' : null;
+        publish({ error: resetError, context: baseContext(), authorRevision: state.authorRevision + 1,structureRevision:state.structureRevision+(hadStructure?1:0), lastMutation: null, mutationPolicy: { mode: 'SESSION_OVERRIDE' } }); onChange(hadDOM?'dom':undefined);
         if (conflict) publish({ error: resetError });
       }, undefined);
     },

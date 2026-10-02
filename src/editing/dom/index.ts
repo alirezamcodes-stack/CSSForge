@@ -1,18 +1,22 @@
 import type { TargetIdentity } from '../../picker/targetLifecycle';
 import { resolveText, textLimit } from './resolve';
 import type { DOMTextChange, TextFailure, TextPlan, TextResult } from './model';
+import type { DOMStructureChange } from './structure';
 export type { DOMTextChange, TextFailure, TextPlan, TextResult, TextChangeRow } from './model';
 
 /** Ownership ledger, not a history stack. The editing session owns transaction order. */
 export function createDOMLedger(doc: Document) {
   let root = doc.documentElement, retired = false;
   const records = new Set<DOMTextChange>();
-  const retire = (reason: string) => { for (const record of records) { record.state = 'retired'; record.reason = reason; } records.clear(); retired = true; };
+  const structureRecords = new Set<DOMStructureChange>();
+  const retire = (reason: string) => { for (const record of [...records,...structureRecords]) { record.state = 'retired'; record.reason = reason; } records.clear(); structureRecords.clear(); retired = true; };
   return {
     retire,
     current() { if (root !== doc.documentElement) retire('Document tree was replaced.'); return !retired; },
     attach() { this.current(); if (retired) { root = doc.documentElement; retired = false; } return records; },
     active() { this.current(); return [...records]; },
+    structures() { this.attach(); return structureRecords; },
+    activeStructures() { this.current(); return [...structureRecords]; },
   };
 }
 export type DOMLedger = ReturnType<typeof createDOMLedger>;

@@ -59,14 +59,15 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   const sources = createSourceIndex(doc, owns, lifecycle);
   const editor = createEditSession(doc, owns, domain => {
     source = null;
-    if(domain==='dom') sources.invalidateMatches();
+    if(domain==='dom'||domain==='structure') sources.invalidateMatches();
     cascade.invalidate();
     editor.invalidateChangeEffects();
     if (selected && selectedIdentity && lifecycle.safe(selectedIdentity)) {
       const computed = win.getComputedStyle(selected);
       editor.inspect(selected, computed);
       refreshEffectiveness(computed);
-      if (state.selection) publish({ ...state, selection: { ...state.selection, rect: rectOf(selected.getBoundingClientRect()), fontFamily: computed.fontFamily, fontSize: computed.fontSize } });
+      if (state.selection) publish({ ...state, selection: { ...state.selection, rect: rectOf(selected.getBoundingClientRect()), fontFamily: computed.fontFamily, fontSize: computed.fontSize,
+        hasParent:!!parentOf(selected),hasChild:!!childOf(selected),hasPrevious:!!siblingOf(selected,'previousElementSibling'),hasNext:!!siblingOf(selected,'nextElementSibling') } });
     } else clearLostTarget();
     if(reviewingChanges) refreshChanges();
     frame.schedule();
@@ -160,6 +161,13 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   function clearLostTarget() {
     if (handlingLoss || !selected || (selectedIdentity && lifecycle.safe(selectedIdentity))) return;
     handlingLoss = true;
+    if(editor.intentionalRemoval(selected)){
+      if(selectedIdentity)selectors.invalidate(selectedIdentity);
+      reconciliation.cancel('Explicit structural removal.');locator=null;locatorResult=null;
+      selected=null;selectedIdentity=null;hovered=null;source=null;candidates=[];regions=[];selectionGeneration++;
+      unobserve();unobserve=()=>{};observer?.disconnect();overlay.hide();
+      editor.clearIntentionalSelection();publish({...state,selection:null});handlingLoss=false;return;
+    }
     const old = selected, identity = selectedIdentity, captured = locator, watchedRegions = regions;
     const ticket = identity ? editor.prepareMigration(identity) : null;
     if (identity) selectors.invalidate(identity);

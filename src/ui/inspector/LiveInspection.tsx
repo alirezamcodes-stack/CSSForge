@@ -9,6 +9,7 @@ import { SessionActions } from '../design/EditControls';
 import { LiveNavigator } from '../html/LiveHTMLView';
 import { LiveChangesSurface } from '../changes/LiveChangesSurface';
 import { EditTextAction, InlineTextEditor } from '../text/InlineTextEditor';
+import { StructureActions, InsertElementEditor } from '../text/StructureEditor';
 
 export function TargetNavigation() {
   const { picker, selection } = useInspection();
@@ -16,7 +17,7 @@ export function TargetNavigation() {
 }
 export function LiveHeader({ handleProps }: { handleProps: ReturnType<typeof useInspectorDrag>['handleProps'] }) {
   const { selection, active, picker } = useInspection();
-  return <header className={s.inspectorHeader} {...handleProps}><div className={s.identityRow}><strong className={s.liveIdentity} data-testid="selected-identity">{selection ? selection.identity.split(/(?=[#.])/).map((part, index) => <span key={index} className={part.startsWith('#') ? s.identityId : part.startsWith('.') ? s.identityClass : undefined}>{part}</span>) : (active ? 'Pick an element' : 'No element selected')}</strong><div className={s.headerActions}><IconButton icon="layers" label="Open Navigator" onClick={() => useUI.getState().setSurface('navigator')} /><Popover id="Inspector menu" iconOnly label={<Icon name="more" />}><div className={s.menuCaption}>Element inspection</div><button className={s.menuOption} onClick={() => { useUI.getState().setPopover(null); picker?.start(); }}>Pick an element<Icon name="cursor" /></button><EditTextAction /><TargetNavigation /><SessionActions /><button className={s.menuOption} onClick={() => useUI.getState().setInspector(false)}>Hide inspector<Icon name="close" /></button></Popover><IconButton icon="close" label="Hide inspector" onClick={() => useUI.getState().setInspector(false)} /></div></div><div className={s.metadata}>{selection ? <><span data-testid="selected-dimensions"><Icon name="ruler" />{dimensions(selection.rect)}</span><span className={s.liveFont} data-testid="selected-font"><Icon name="font" /><u>{fontSummary(selection.fontFamily)}</u> {selection.fontSize}</span></> : <span>Point to the page, then click to inspect.</span>}</div></header>;
+  return <header className={s.inspectorHeader} {...handleProps}><div className={s.identityRow}><strong className={s.liveIdentity} data-testid="selected-identity">{selection ? selection.identity.split(/(?=[#.])/).map((part, index) => <span key={index} className={part.startsWith('#') ? s.identityId : part.startsWith('.') ? s.identityClass : undefined}>{part}</span>) : (active ? 'Pick an element' : 'No element selected')}</strong><div className={s.headerActions}><IconButton icon="layers" label="Open Navigator" onClick={() => useUI.getState().setSurface('navigator')} /><Popover id="Inspector menu" iconOnly label={<Icon name="more" />}><div className={s.menuCaption}>Element inspection</div><button className={s.menuOption} onClick={() => { useUI.getState().setPopover(null); picker?.start(); }}>Pick an element<Icon name="cursor" /></button><EditTextAction /><StructureActions /><TargetNavigation /><SessionActions /><button className={s.menuOption} onClick={() => useUI.getState().setInspector(false)}>Hide inspector<Icon name="close" /></button></Popover><IconButton icon="close" label="Hide inspector" onClick={() => useUI.getState().setInspector(false)} /></div></div><div className={s.metadata}>{selection ? <><span data-testid="selected-dimensions"><Icon name="ruler" />{dimensions(selection.rect)}</span><span className={s.liveFont} data-testid="selected-font"><Icon name="font" /><u>{fontSummary(selection.fontFamily)}</u> {selection.fontSize}</span></> : <span>Point to the page, then click to inspect.</span>}</div></header>;
 }
 export function LiveTask({ task }: { task: Task }) {
   const { selection, active, picker } = useInspection();
@@ -27,7 +28,8 @@ export function LiveTask({ task }: { task: Task }) {
     <p className={s.fixtureNote}>{task === 'Design' ? 'Pick an element to edit its core Design properties.' : task === 'Code' ? 'Authored CSS inspection and editing are not connected yet.' : 'Use parent and child selection above. The document tree is not connected yet.'}</p>
   </div>;
 }
-export function LiveSurface({ surface }: { surface: 'navigator' | 'changes' | 'text' }) {
+export function LiveSurface({ surface }: { surface: 'navigator' | 'changes' | 'text' | 'insert' }) {
+  if (surface === 'insert') return <InsertElementEditor />;
   if (surface === 'text') return <InlineTextEditor />;
   if (surface === 'changes') return <LiveChangesSurface />;
   return <LiveNavigator />;

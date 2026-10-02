@@ -3,7 +3,7 @@ import { captureSurfaceOrigin, restorePopoverFocus } from '../ui/interactions/fo
 import { fixtureMedia, fixturePseudo, fixtureFonts } from '../fixtures/options';
 
 export type Task = 'Design' | 'Code' | 'HTML';
-export type Surface = 'navigator' | 'changes' | 'text' | null;
+export type Surface = 'navigator' | 'changes' | 'text' | 'insert' | null;
 export type Position = { x: number; y: number };
 const dockPopovers = ['Background tools', 'Measurement tools', 'Color tools', 'Eyedropper information', 'More tools'] as const;
 export type DockTool = typeof dockPopovers[number] | Exclude<Surface, null>;

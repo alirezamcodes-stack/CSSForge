@@ -1,10 +1,11 @@
 import { contextKey, type EditContext } from './contexts';
 import type { EditEffect } from './effectiveness';
 import type { TextChangeRow } from './dom';
+import type { StructureRow } from './dom/structure';
 
 export type Baseline = { kind: 'computed' | 'authored' | 'unknown'; value?: string };
 export type ChangeDeclaration = { property:string; value:string; enabled:boolean; priority:string; baseline:Baseline; provenance:'session'|'author-recovery'; effect?:EditEffect };
-export type ChangeTarget = { targetId:string; label:string; bindingGeneration:number; available:boolean; root:'document'|'shadow-root'; texts?:TextChangeRow[]; contexts:{context:EditContext; declarations:ChangeDeclaration[]}[] };
+export type ChangeTarget = { targetId:string; label:string; bindingGeneration:number; available:boolean; root:'document'|'shadow-root'; texts?:TextChangeRow[]; structures?:StructureRow[]; contexts:{context:EditContext; declarations:ChangeDeclaration[]}[] };
 export type ChangeOwner = Omit<ChangeTarget,'contexts'> & { scopes:{context:EditContext; declarations:{property:string;value:string;enabled:boolean}[]}[]; effects:EditEffect[] };
 type HistoryEntry = { targetId:string; context:EditContext; changes:{property:string;baseline?:Baseline}[] };
 
@@ -25,5 +26,7 @@ export function deriveChanges(owners:ChangeOwner[],history:HistoryEntry[]):Chang
 }
 
 export const declarationCount=(targets:ChangeTarget[])=>targets.reduce((sum,target)=>sum+target.contexts.reduce((count,scope)=>count+scope.declarations.length,0),0);
-export const domChangeCount=(targets:ChangeTarget[])=>targets.reduce((sum,target)=>sum+(target.texts?.length??0),0);
+export const textChangeCount=(targets:ChangeTarget[])=>targets.reduce((sum,target)=>sum+(target.texts?.length??0),0);
+export const structureChangeCount=(targets:ChangeTarget[])=>targets.reduce((sum,target)=>sum+(target.structures?.length??0),0);
+export const domChangeCount=(targets:ChangeTarget[])=>textChangeCount(targets)+structureChangeCount(targets);
 export const contextLabel=(context:EditContext)=>[...context.media.map(query=>`@media ${query}`),context.pseudo||(!context.media.length?'Base':'')].filter(Boolean).join(' · ');
