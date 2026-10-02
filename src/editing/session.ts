@@ -13,6 +13,7 @@ import { createMarkerContainment } from './markerContainment';
 import type { LocatorResolution } from '../engine/locator';
 import { reconciliationLimits } from '../engine/reconciliation/model';
 import { createAuthorMutation, type AuthorChange, type AuthorLedger, type MutationPolicy, type MutationRequest, type MutationResult } from '../engine/mutation';
+import { createDOMLedger, createDOMMutation, type DOMLedger, type DOMTextChange, type TextPlan, type TextFailure } from './dom';
 
 export type FieldValue = { computed: string; presented: string; authored?: string; override?: string };
 export type DesignSnapshot = { targetId: string; bindingGeneration: number; values: Record<Property, FieldValue>; canSize: boolean };
@@ -24,11 +25,11 @@ export type MigrationTicket = Readonly<{ targetId: string; identity: TargetIdent
 type Target = { id: string; label:string; effects:EditEffect[]; bindingGeneration: number; identity: TargetIdentity; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; retiredAttributes: string[]; scopes: Map<string, Scope>; layer?: HTMLStyleElement; stop?: () => void; guard?: () => void; retired?: boolean; staging?: boolean; pending?: MigrationTicket; media: ReturnType<typeof discoverMedia> };
 // Editing ownership only, never replacement identity evidence. Shared factory instances cannot claim one node twice.
 const editOwners = new WeakMap<Element, Target>();
-export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string; baseline?:Baseline }[]; order: number; gesture?: string; author?: AuthorChange };
+export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string; baseline?:Baseline }[]; order: number; gesture?: string; author?: AuthorChange; dom?:DOMTextChange };
 export const emptyEditState = (): EditState => ({ design: null, overrides: [], effectiveness: [], changes:[], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false, authorRevision: 0, mutationPolicy: { mode: 'SESSION_OVERRIDE' }, lastMutation: null });
 
 /** One transaction controller. Session overrides remain default; author mutation requires explicit policy. */
-export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: () => void, sources: SourceIndex, lifecycle = createTargetLifecycle(doc, owns), authorLedger?: AuthorLedger) {
+export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: (domain?:'dom') => void, sources: SourceIndex, lifecycle = createTargetLifecycle(doc, owns), authorLedger?: AuthorLedger, domLedger:DOMLedger=createDOMLedger(doc)) {
   const win = doc.defaultView!;
   const prefix = `data-cssforge-target-${crypto.randomUUID().replaceAll('-', '')}`;
   const targets = new Map<string, Target>(); let byElement = new WeakMap<Element, Target>();
@@ -42,6 +43,10 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     const target = state.design && targets.get(state.design.targetId);
     return !!target && safe(target) && target.element === request.element && contextKey(state.context) === contextKey(request.context);
   }, authorLedger);
+  const domMutation = createDOMMutation(doc,domLedger,identity=>lifecycle.safe(identity),plan=>{
+    const target=targets.get(plan.targetId);
+    return !destroyed && state.design?.targetId===plan.targetId && target?.bindingGeneration===plan.bindingGeneration && target.identity===plan.identity && safe(target);
+  },()=>{publish();onChange('dom');},sessionToken);
   // Only unresolved author records cross UI lifecycles. Session layers/gestures never do.
   const recoveredOwners = new WeakMap<object, Map<string, string>>(); let recoverySequence = 0;
   for (const author of authorMutation.active()) {
@@ -51,14 +56,21 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       targetId = group.get(author.owner.targetId) ?? `recovery-${++recoverySequence}`;
       group.set(author.owner.targetId, targetId); recoveredOwners.set(author.owner.session, group);
     } else targetId = `recovery-${++recoverySequence}`;
-    history.push({ targetId, context: author.target.context, changes: [], order: ++order, author });
+    history.push({ targetId, context: author.target.context, changes: [], order: author.owner?.order??++order, author });
   }
-  if (history.length) state = { ...state, undoCount: history.length, editedCount: recoverySequence, error: 'Pending author rollback retained; page changes were preserved.' };
-  const edited = (target: Target) => history.some(transaction => transaction.targetId === target.id && transaction.author) || [...target.scopes.values()].some(scope => Object.keys(scope.values).length || Object.keys(scope.disabled ?? {}).length);
+  for(const dom of domMutation.active()) {
+    const group=recoveredOwners.get(dom.session)??new Map<string,string>();
+    const targetId=group.get(dom.plan.targetId)??`recovery-${++recoverySequence}`;
+    group.set(dom.plan.targetId,targetId);recoveredOwners.set(dom.session,group);
+    history.push({targetId,context:baseContext(),changes:[],order:dom.order,dom});
+  }
+  history.sort((a,b)=>a.order-b.order);order=Math.max(order,...history.map(item=>item.order));
+  if (history.length) state = { ...state, undoCount: history.length, editedCount: recoverySequence, error: history.some(item=>item.dom)?'Pending text/author rollback retained; page changes were preserved.':'Pending author rollback retained; page changes were preserved.' };
+  const edited = (target: Target) => history.some(transaction => transaction.targetId === target.id && (transaction.author||transaction.dom)) || [...target.scopes.values()].some(scope => Object.keys(scope.values).length || Object.keys(scope.disabled ?? {}).length);
   const publish = (patch: Partial<EditState> = {}) => {
     const editedIds = new Set([...targets.values()].filter(edited).map(target => target.id));
     // Pending recovery remains session-wide and Reset must stay usable after reactivation.
-    for (const transaction of history) if (transaction.author) editedIds.add(transaction.targetId);
+    for (const transaction of history) if (transaction.author||transaction.dom) editedIds.add(transaction.targetId);
     state = { ...state, undoCount: history.length, editedCount: editedIds.size, ...patch };
     const target = state.design && targets.get(state.design.targetId);
     state.overrides = target ? [...target.scopes.values()].map(scope => ({ context: scope.context, declarations: [
@@ -80,6 +92,19 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       const previous=scope.declarations.find(item=>item.property===author.target.property&&item.provenance==='author-recovery');
       if(previous){previous.value=author.current.value;previous.enabled=author.current.exists;previous.priority=author.current.priority;}
       else scope.declarations.push({property:author.target.property,value:author.current.value,enabled:author.current.exists,priority:author.current.priority,baseline:author.before.exists?{kind:'authored',value:author.before.value}:{kind:'unknown'},provenance:'author-recovery'});
+    }
+    domMutation.refresh();
+    const textRows=new Map<string,Map<Text,{group:ChangeTarget;index:number}>>();
+    for(const transaction of history) if(transaction.dom) {
+      const record=transaction.dom,owner=targets.get(transaction.targetId);
+      let group=state.changes.find(item=>item.targetId===transaction.targetId);
+      if(!group){group={targetId:transaction.targetId,label:owner?.label??record.plan.label,bindingGeneration:owner?.bindingGeneration??record.plan.bindingGeneration,available:!!owner&&safe(owner),root:record.plan.root===doc?'document':'shadow-root',contexts:[]};state.changes.push(group);}
+      group.texts??=[];
+      const targetRows=textRows.get(transaction.targetId)??new Map<Text,{group:ChangeTarget;index:number}>();textRows.set(transaction.targetId,targetRows);
+      const previous=targetRows.get(record.plan.node),before=previous?.group.texts?.[previous.index].before??record.before;
+      const row={kind:record.kind,before,applied:record.applied,current:record.current,bindingGeneration:record.plan.bindingGeneration,available:record.state==='applied',state:record.state,reason:record.reason};
+      if(previous)previous.group.texts![previous.index]=row;
+      else {targetRows.set(record.plan.node,{group,index:group.texts.length});group.texts.push(row);}
     }
     listeners.forEach(listener => listener());
   };
@@ -204,13 +229,13 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       ? { state: 'fallback', safeFallback: true, reason: 'An existing session declaration owns this property.' }
       : authorMutation.mutate({ ...options, element: target.element, property, value, context: state.context });
     if (result.state === 'mutated') {
-      result.change.owner = { session: sessionToken, targetId };
+      result.change.owner = { session: sessionToken, targetId, order:order+1 };
       history.push({ targetId, context: { ...state.context, media: [...state.context.media] }, changes: [], order: ++order, author: result.change });
       publish({ error: null, lastMutation: result, authorRevision: state.authorRevision + 1 }); onChange(); return true;
     }
     if (result.state === 'unchanged') { publish({ error: null, lastMutation: result }); return true; }
     if (result.change) {
-      result.change.owner = { session: sessionToken, targetId };
+      result.change.owner = { session: sessionToken, targetId, order:order+1 };
       history.push({ targetId, context: { ...state.context, media: [...state.context.media] }, changes: [], order: ++order, author: result.change });
       publish({ error: result.reason, lastMutation: result, authorRevision: state.authorRevision + 1 }); onChange(); return false;
     }
@@ -240,6 +265,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     if (transactionBusy) { destroyRequested = true; return; }
     destroyed = true; destroyRequested = false;
     authorMutation.destroy();
+    domMutation.destroy();
     for (const target of targets.values()) { release(target); if (editOwners.get(target.element) === target) editOwners.delete(target.element); }
     containment.destroy();
     targets.clear(); byElement = new WeakMap(); byBinding = new WeakMap(); history.length = 0; listeners.clear(); lossHandler = cancelReconciliation = undefined; state = emptyEditState();
@@ -247,7 +273,22 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   // Recovery is reviewable before a new element is selected or any edit is published.
   publish();
   return {
-    inspect, quarantine, authorMutation,
+    inspect, quarantine, authorMutation, domMutation,
+    prepareText():TextPlan|TextFailure {
+      const target=state.design&&targets.get(state.design.targetId);
+      if(!target||!safe(target))return {state:'UNAVAILABLE',reason:'Select an available element first.'};
+      return domMutation.prepare(target.id,target.bindingGeneration,target.identity,target.label);
+    },
+    applyText(plan:TextPlan,value:string) {
+      return exclusive(()=>{
+        const result=domMutation.apply(plan,value,order+1);
+        if('change' in result&&result.change) {
+          history.push({targetId:plan.targetId,context:baseContext(),changes:[],order:++order,dom:result.change});
+          publish({error:result.state==='applied'?result.change.reason??null:result.reason});onChange('dom');
+        }else if('reason' in result)publish({error:result.reason});
+        return result;
+      },{state:'FAILED' as const,reason:'Another transaction is in progress.'});
+    },
     setEffectiveness(effectiveness: EditEffect[],targetId=state.design?.targetId) {
       const target=targetId&&targets.get(targetId);
       const current=state.design?.targetId===targetId;
@@ -338,6 +379,10 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     undo() {
       return exclusive(() => {
         if (destroyed) return;
+        if(history.at(-1)?.dom) {
+          if(!domMutation.rollback(history.at(-1)!.dom!)){publish({error:'Text changed or unavailable. Undo retained; page text was preserved.'});return;}
+          history.pop();publish({error:null});onChange('dom');return;
+        }
         if (history.at(-1)?.author) {
           const transaction = history.at(-1)!;
           if (!authorMutation.rollback(transaction.author!)) { publish({ error: 'Author source changed or blocked rollback. Undo retained; page changes were preserved.' }); return; }
@@ -368,20 +413,25 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
         authorMutation.resetGeneration();
         // Restore author changes in reverse history order. Conflicts remain recoverable and are never overwritten.
         let conflict = false;
+        const blockedTexts=new Set<Text>();let hadDOM=false;
         for (let index = history.length - 1; index >= 0; index--) {
           const transaction = history[index];
+          if(transaction.dom){hadDOM=true;const node=transaction.dom.plan.node;
+            if(blockedTexts.has(node)||!domMutation.rollback(transaction.dom)){blockedTexts.add(node);conflict=true;continue;}
+            history.splice(index,1);continue;
+          }
           if (!transaction.author) { history.splice(index, 1); continue; }
           if (!authorMutation.rollback(transaction.author)) { conflict = true; continue; }
           history.splice(index, 1);
         }
-        for (let index = history.length - 1; index >= 0; index--) if (!history[index].author) history.splice(index, 1);
+        for (let index = history.length - 1; index >= 0; index--) if (!history[index].author&&!history[index].dom) history.splice(index, 1);
         for (const target of targets.values()) { release(target); if (editOwners.get(target.element) === target) editOwners.delete(target.element); }
         containment.destroy();
         for (const target of targets.values()) target.scopes.clear();
         targets.clear(); byElement = new WeakMap(); byBinding = new WeakMap();
         if (!conflict) history.length = 0;
-        const resetError = conflict ? 'Author source changed or blocked reset. Pending author rollback retained; page changes were preserved.' : null;
-        publish({ error: resetError, context: baseContext(), authorRevision: state.authorRevision + 1, lastMutation: null, mutationPolicy: { mode: 'SESSION_OVERRIDE' } }); onChange();
+        const resetError = conflict ? hadDOM?'Text or author source changed or blocked reset. Pending rollback retained; page changes were preserved.':'Author source changed or blocked reset. Pending author rollback retained; page changes were preserved.' : null;
+        publish({ error: resetError, context: baseContext(), authorRevision: state.authorRevision + 1, lastMutation: null, mutationPolicy: { mode: 'SESSION_OVERRIDE' } }); onChange(hadDOM?'dom':undefined);
         if (conflict) publish({ error: resetError });
       }, undefined);
     },

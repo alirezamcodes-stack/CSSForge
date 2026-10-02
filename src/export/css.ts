@@ -1,6 +1,6 @@
 import type { ChangeTarget } from '../editing/changes';
 export type PreparedTarget = ChangeTarget & {selector?:string|null; risks:string[]};
-export type CSSOutput = {css:string;exported:number;omitted:number;warnings:string[];issues:string[]};
+export type CSSOutput = {css:string;exported:number;omitted:number;warnings:string[];issues:string[];domOmitted?:number};
 function terminalPseudo(selector:string,pseudo:string) {
   if(!pseudo||!selector.endsWith(pseudo))return false;
   let escapes=0,index=selector.length-pseudo.length-1;
@@ -31,5 +31,6 @@ export function serializeChanges(targets:PreparedTarget[]):CSSOutput {
       blocks.push(lines.join('\n'));exported+=supported.length;
     }
   }
-  return {css:blocks.length?blocks.join('\n\n')+'\n':'',exported,omitted,warnings,issues};
+  const domOmitted=targets.reduce((sum,target)=>sum+(target.texts?.length??0),0);
+  return {css:blocks.length?blocks.join('\n\n')+'\n':'',exported,omitted,warnings,issues,...(domOmitted?{domOmitted}:{})};
 }

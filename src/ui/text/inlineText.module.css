@@ -1,0 +1,9 @@
+.editor{display:flex;flex-direction:column;gap:10px;min-width:0;padding:4px 0}
+.editor label{font-size:13px;font-weight:600}
+.editor textarea{box-sizing:border-box;width:100%;min-height:140px;max-height:35vh;resize:vertical;border:1px solid var(--divider);border-radius:6px;background:var(--surface-deep);color:var(--text);padding:10px;font:13px/1.6 var(--font-code);white-space:pre-wrap;overflow-wrap:anywhere}
+.editor p,.reason{font-size:11px;line-height:1.6;overflow-wrap:anywhere}
+.reason{max-width:250px;margin:4px 10px}
+.actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px}
+.actions button{border:1px solid var(--divider);border-radius:6px;background:var(--surface-deep);color:var(--text);font:inherit;padding:8px 12px;min-height:36px;cursor:pointer}
+.actions button:disabled{opacity:.55;cursor:default}
+.editor textarea:focus-visible,.actions button:focus-visible{outline:2px solid var(--text);outline-offset:2px}

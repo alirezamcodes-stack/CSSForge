@@ -7,6 +7,11 @@ const owner = (): ChangeOwner => ({ targetId:'1', label:'button#target', binding
 const history = [18,20,24].map((value,index)=>({targetId:'1',context,changes:[{property:'font-size',value:`${[20,24,22][index]}px`,baseline:{value:`${value}px`,kind:'computed' as const}}]}));
 
 describe('current changes projection',()=>{
+  it('counts DOM omission separately and never serializes text or an empty CSS block',()=>{
+    const target:PreparedTarget={...deriveChanges([owner()],history)[0],selector:'#target',risks:[],texts:[{kind:'DOM_TEXT_MUTATION',before:'A',applied:'<script>secret</script>',current:'<script>secret</script>',bindingGeneration:0,available:true,state:'applied'}]};
+    const output=serializeChanges([target]);expect(output.domOmitted).toBe(1);expect(output.css).not.toContain('secret');expect(output.exported).toBe(1);
+    target.contexts=[];expect(serializeChanges([target])).toMatchObject({css:'',exported:0,omitted:0,domOmitted:1});
+  });
   it('collapses repeated writes using the first proven baseline',()=>{
     const result=deriveChanges([owner()],history);
     expect(result[0].contexts[0].declarations).toHaveLength(1);

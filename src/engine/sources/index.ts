@@ -155,6 +155,8 @@ export function createSourceIndex(doc: Document, owns: (element: Element) => boo
       }
     },
     getStats: () => ({ scopeScans: scans }),
+    /** DOM text can change :empty/:has and inherited matches. Keep indexed CSSOM. */
+    invalidateMatches() { selected = new WeakMap(); },
     destroy() { scopes = new WeakMap(); selected = new WeakMap(); identities = new WeakMap(); },
   };
 }

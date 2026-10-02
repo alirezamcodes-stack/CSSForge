@@ -17,6 +17,7 @@ import { createReconciliation, reconciliationLimits } from '../engine/reconcilia
 import type { AuthorLedger } from '../engine/mutation';
 import { editEffect, hasActiveOutsideContext, type ContextActivity } from '../editing/effectiveness';
 import { serializeChanges } from '../export/css';
+import type { DOMLedger } from '../editing/dom';
 
 export type Selection = {
   identity: string; tag: string; id: string; classes: string[];
@@ -27,7 +28,7 @@ export type Selection = {
 export type PickerState = { active: boolean; selection: Selection | null };
 
 /** DOM references and transient pointer state live here, never in UI/persisted state. */
-export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: () => void, authorLedger?: AuthorLedger) {
+export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: () => void, authorLedger?: AuthorLedger, domLedger?:DOMLedger) {
   const win = doc.defaultView!;
   const overlay = createOverlay(doc);
   const owned = new Set<Element>([uiHost, overlay.host]);
@@ -56,8 +57,9 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   let locator: TargetLocator | null = null, locatorResult: LocatorResolution | null = null;
   const valid = lifecycle.valid;
   const sources = createSourceIndex(doc, owns, lifecycle);
-  const editor = createEditSession(doc, owns, () => {
+  const editor = createEditSession(doc, owns, domain => {
     source = null;
+    if(domain==='dom') sources.invalidateMatches();
     cascade.invalidate();
     editor.invalidateChangeEffects();
     if (selected && selectedIdentity && lifecycle.safe(selectedIdentity)) {
@@ -68,7 +70,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     } else clearLostTarget();
     if(reviewingChanges) refreshChanges();
     frame.schedule();
-  }, sources, lifecycle, authorLedger);
+  }, sources, lifecycle, authorLedger, domLedger);
   const cascade = createCascade(doc, sources, element => editor.sourceGroups(element), undefined, element => editor.sourcePosition(element));
   // Refresh only at editing/selection/source boundaries. Pointer and geometry frames never resolve edit truth.
   function effectsFor(element:Element,computed?: CSSStyleDeclaration) {
@@ -92,6 +94,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   }
   function refreshChanges(fresh=false) {
     for(const binding of editor.changeBindings()) {
+      if(!editor.sourceGroups(binding.identity.element).length)continue;
       if(fresh){sources.invalidate(binding.identity.element);cascade.invalidate(binding.identity.element);}
       editor.setEffectiveness(effectsFor(binding.identity.element,win.getComputedStyle(binding.identity.element)),binding.targetId);
     }
@@ -251,7 +254,8 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
       const bindings=new Map(editor.changeBindings().map(binding=>[binding.targetId,binding.identity]));
       const prepared=editor.getSnapshot().changes.filter(target=>!targetId||target.targetId===targetId).map(target=>{
         const identity=bindings.get(target.targetId);
-        const result=identity&&target.root==='document'?selectors.generate(identity,{refresh:true}):null;
+        const hasCSS=target.contexts.some(scope=>scope.declarations.some(row=>row.enabled&&row.provenance==='session'));
+        const result=hasCSS&&identity&&target.root==='document'?selectors.generate(identity,{refresh:true}):null;
         return {...target,available:!!identity,selector:result?.state==='unique'&&result.validation.matchesTarget?result.selector:null,risks:[...(result?.risks??[])]};
       });
       changesSerializations++;return serializeChanges(prepared);

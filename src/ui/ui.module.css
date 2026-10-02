@@ -338,3 +338,6 @@
 .boxModel [data-scrubbing]:focus-within{background:var(--group-surface);box-shadow:inset 0 0 0 1px var(--focus-ring);border-radius:var(--radius-control)}
 .boxModel [data-scrubbing]:has(input[aria-invalid=true]){box-shadow:inset 0 0 0 1px var(--error)}
 @media(max-width:600px){.dock svg{width:16px;height:16px}.navigatorSurface .surfaceHeader h2{font-size:14px}}
+
+.compactSurface{width:480px;height:auto;padding:18px;border-radius:var(--radius-surface)}
+.compactSurface .surfaceHeader{margin-bottom:12px}.compactSurface .surfaceHeader h2{font-size:16px;letter-spacing:0}

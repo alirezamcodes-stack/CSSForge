@@ -1,6 +1,6 @@
 import type { CSSOutput } from './css';
 export const exportFilename='cssforge-changes.css';
-export const outputSummary=(output:CSSOutput)=>`${output.exported} declarations included · ${output.omitted} not representable${output.warnings.length?` · ${output.warnings.length} warnings`:''}`;
+export const outputSummary=(output:CSSOutput)=>`${output.exported} declarations included · ${output.omitted} not representable${output.domOmitted?` · ${output.domOmitted} DOM changes omitted`:''}${output.warnings.length?` · ${output.warnings.length} warnings`:''}`;
 export async function copyCSS(css:string,clipboard:Pick<Clipboard,'writeText'>=navigator.clipboard) {
   if(!css) throw new Error('No representable active declarations.');
   await clipboard.writeText(css);

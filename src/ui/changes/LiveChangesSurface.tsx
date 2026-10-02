@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useEditing, useInspection } from '../../picker/context';
 import { contextKey } from '../../editing/contexts';
-import { contextLabel, declarationCount } from '../../editing/changes';
+import { contextLabel, declarationCount, domChangeCount } from '../../editing/changes';
 import { copyCSS, downloadCSS, outputSummary } from '../../export/actions';
 import type { CSSOutput } from '../../export/css';
 import { Surface } from '../shared/Surface';
@@ -14,7 +14,7 @@ export function LiveChangesSurface() {
   const [feedback,setFeedback]=useState(''),[output,setOutput]=useState<CSSOutput|null>(null),[busy,setBusy]=useState(false);
   const pending=useRef(false),mounted=useRef(true);
   useEffect(()=>{mounted.current=true;picker?.setChangesReview(true);return()=>{mounted.current=false;picker?.setChangesReview(false);};},[picker]);
-  const signature=JSON.stringify(changes.map(target=>[target.targetId,target.bindingGeneration,target.available,target.contexts.map(scope=>[scope.context,scope.declarations.map(row=>[row.property,row.value,row.enabled])])]));
+  const signature=JSON.stringify(changes.map(target=>[target.targetId,target.bindingGeneration,target.available,target.texts,target.contexts.map(scope=>[scope.context,scope.declarations.map(row=>[row.property,row.value,row.enabled])])]));
   useEffect(()=>{setOutput(null);setFeedback('');},[signature]);
   async function act(kind:'copy'|'export',targetId?:string) {
     if(!picker||pending.current)return;
@@ -30,12 +30,13 @@ export function LiveChangesSurface() {
   }
   const active=changes.some(target=>target.contexts.some(scope=>scope.declarations.some(row=>row.enabled)));
   const targetLabel=(target:typeof changes[number])=>target.label+(changes.filter(item=>item.label===target.label).length>1?` (target ${target.targetId})`:'');
-  return <Surface title="Changes" subtitle={`${changes.length} edited elements · ${declarationCount(changes)} current declarations · current session`} wide>
+  return <Surface title="Changes" subtitle={`${changes.length} edited elements · ${declarationCount(changes)} current declarations (CSS) · ${domChangeCount(changes)} DOM changes · current session`} wide>
     <div className={s.toolbar}><SessionActions /><div className={s.buttons}>
       <button disabled={!active||busy} onClick={()=>void act('copy')}>Copy all CSS</button>
       <button disabled={!active||busy} onClick={()=>void act('export')}>Export CSS</button>
     </div></div>
     <p className={s.note}>Current owned declarations. Original values are captured before the first edit where known. Copy includes enabled session declarations with their !important priority; selectors are prepared on request.</p>
+    {!!domChangeCount(changes)&&<p className={s.note}>{domChangeCount(changes)} DOM changes omitted from CSS copy and export. Text is reviewed and reversed through this session.</p>}
     <p className={s.feedback} role="status" aria-live="polite">{feedback}</p>
     {output&&<div className={s.notices}>{[...output.issues,...output.warnings].map((notice,index)=><p key={index}>{notice}</p>)}</div>}
     <div className={s.groups} data-testid="live-changes">
@@ -43,6 +44,10 @@ export function LiveChangesSurface() {
         <header><h3>{targetLabel(target)}</h3><button disabled={busy||!target.available||target.root==='shadow-root'||!target.contexts.some(scope=>scope.declarations.some(row=>row.enabled&&row.provenance==='session'))} onClick={()=>void act('copy',target.targetId)} aria-label={`Copy target CSS for ${targetLabel(target)}`}>Copy target CSS</button></header>
         {target.root==='shadow-root'&&<p className={s.note}>Shadow DOM: flat document CSS cannot reach this target. Copy and export exclude its declarations.</p>}
         {!target.available&&<p className={s.note}>Target unavailable. No selector is inferred from its old identity.</p>}
+        {target.texts?.map((row,index)=><section key={index} aria-label="DOM text"><h4>DOM text · DOM_TEXT_MUTATION</h4><div className={s.row} data-change-kind="DOM_TEXT_MUTATION">
+          <strong className={s.property}>Text content</strong><div className={s.values}><span>Original (text): <code>{row.before===''?'(empty)':row.before}</code></span><span>Applied: <code>{row.applied===''?'(empty)':row.applied}</code></span><span>Current: <code>{row.current===null?'Unavailable':row.current===''?'(empty)':row.current}</code></span></div>
+          <div className={s.state}><span>{row.available?'Applied · exact Text owned':row.state} · DOM change · excluded from CSS</span>{row.reason&&<span>{row.reason}</span>}</div>
+        </div></section>)}
         {target.contexts.map(scope=><section key={contextKey(scope.context)} aria-label={contextLabel(scope.context)}>
           <h4>{contextLabel(scope.context)}</h4>
           {scope.declarations.map(row=><div key={`${row.provenance}:${row.property}`} className={s.row} data-change-property={row.property}>

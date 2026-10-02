@@ -21,7 +21,7 @@ type AuthorRecord = {
   readonly attempted: DeclarationSnapshot; current: DeclarationSnapshot;
   readonly beforeCSS: string; readonly afterCSS: string; readonly generation: number;
   readonly session: object; readonly strategy: MutationTarget['strategy']; state: AuthorRecordState; reason?: string;
-  owner?: { session: object; targetId: string };
+  owner?: { session: object; targetId: string; order?: number };
 };
 export type AppliedAuthorChange = AuthorRecord & { readonly kind: 'applied' };
 export type PartialAuthorChange = AuthorRecord & { readonly kind: 'partial' };
