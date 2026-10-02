@@ -30,7 +30,7 @@ async function launch(info: TestInfo, html: string) {
   return { ...runtime, read, generate };
 }
 async function evidence(info: TestInfo, result: unknown) {
-  const directory = 'artifacts/diagnostics/selectors'; await mkdir(directory, { recursive: true });
+  const directory = 'test-results/diagnostics/selectors'; await mkdir(directory, { recursive: true });
   const file = `${directory}/${info.title.split(' ')[0]}.json`; await writeFile(file, JSON.stringify(result, null, 2)); await info.attach('selector-outcome', { path: file, contentType: 'application/json' });
 }
 function unique(result: any) { expect(result).toMatchObject({ state: 'unique', origin: 'generated', proof: true, validation: { count: 1, matchesTarget: true } }); expect(result.path.every((segment: any) => segment.valid)).toBe(true); expect(result.selector).not.toContain('cssforge'); }

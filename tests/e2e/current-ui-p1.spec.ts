@@ -3,7 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { setup, fixture, pick, inspector, dock, identity, aligned, withinViewport } from './extensionHarness';
 import { feedbackPaintComparison, feedbackRasterBounds } from './paintOrder';
 
-const evidence = 'artifacts/diagnostics/current-ui-p1';
+const evidence = 'test-results/diagnostics/current-ui-p1';
 const button = (page: Page, name: string) => page.getByRole('button', { name, exact: true });
 const field = (page: Page, name: string) => page.getByRole('textbox', { name, exact: true });
 async function edit(page: Page, name: string, value: string) { await field(page, name).fill(value); await field(page, name).press('Enter'); }

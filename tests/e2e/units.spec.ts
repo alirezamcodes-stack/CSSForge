@@ -3,7 +3,7 @@ import { mkdir } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
 import { setup, fixture, pick, withinViewport } from './extensionHarness';
 declare const chrome: typeof browser;
-const out = 'artifacts/screenshots/phase-06.5.4';
+const out = 'test-results/diagnostics/phase-06.5.4';
 const field = (page:Page,name:string) => page.getByRole('textbox',{name,exact:true});
 async function edit(page:Page,name:string,value:string) { await field(page,name).fill(value); await field(page,name).press('Enter'); }
 async function convert(page:Page,name:string,unit:string) {

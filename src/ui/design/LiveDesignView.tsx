@@ -9,13 +9,17 @@ import t from './typography.module.css';
 import { RichContextControls, contextKey } from './RichControls';
 import { RichBackground } from './RichBackground';
 import { RichShadow, RichFilters } from './RichEffects';
+import { EditEffectiveness } from '../shared/EditEffectiveness';
 
 export function LiveDesignView() {
-  const { design, editor, context } = useEditing();
+  const { design, editor, context, effectiveness } = useEditing();
   const { selection } = useInspection();
   if (!design || !selection) return null;
-  return <div className={s.design} key={design.targetId + contextKey(context)} data-testid="live-design">
+  return <div className={s.design} key={`${design.targetId}:${design.bindingGeneration}:${contextKey(context)}`} data-testid="live-design">
     <RichContextControls />
+    {effectiveness.some(effect => contextKey(effect.context) === contextKey(context)) && <div aria-label="Edit effectiveness" role="region">
+      {effectiveness.filter(effect => contextKey(effect.context) === contextKey(context)).map(effect => <EditEffectiveness key={effect.property} effect={effect} />)}
+    </div>}
     <div className={`${s.geometry} ${s.editGeometry}`}><span><i>X</i>{Math.round(selection.rect.x)}</span><span><i>Y</i>{Math.round(selection.rect.y)}</span><span title="Border radius"><Icon name="radius" /><EditField compact property="border-radius" label="Geometry radius" /></span><span><i>W</i><EditField compact property="width" label="Width" disabled={!design.canSize} /></span><span><i>H</i><EditField compact property="height" label="Height" disabled={!design.canSize} /></span><span className={s.muted}>Computed</span></div>
     <LiveSpacingEditor />
     <Section name="Typography"><div className={t.typography}>

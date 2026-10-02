@@ -2,6 +2,7 @@ import { editorValue, normalizeValue, properties, validateValue, type Property }
 import { baseContext, contextKey, discoverMedia, pseudos, type EditContext, type MediaContext } from './contexts';
 import { readConversionContext } from './conversionContext';
 import type { ValueProperty, ConversionContext, ValueReference } from './values';
+import type { EditEffect } from './effectiveness';
 import type { SourceIndex } from '../engine/sources';
 import { createTargetLifecycle, type TargetIdentity } from '../picker/targetLifecycle';
 import { observeTarget } from '../picker/invalidation';
@@ -14,7 +15,7 @@ import { createAuthorMutation, type AuthorChange, type AuthorLedger, type Mutati
 export type FieldValue = { computed: string; presented: string; authored?: string; override?: string };
 export type DesignSnapshot = { targetId: string; bindingGeneration: number; values: Record<Property, FieldValue>; canSize: boolean };
 export type OverrideGroup = { context: EditContext; declarations: { property: Property; value: string; enabled: boolean }[] };
-export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean; authorRevision: number; mutationPolicy: MutationPolicy; lastMutation: MutationResult | null };
+export type EditState = { design: DesignSnapshot | null; overrides: OverrideGroup[]; effectiveness: EditEffect[]; undoCount: number; editedCount: number; error: string | null; context: EditContext; mediaContexts: MediaContext[]; mediaLimited: boolean; authorRevision: number; mutationPolicy: MutationPolicy; lastMutation: MutationResult | null };
 type Values = Partial<Record<Property, string>>;
 type Scope = { context: EditContext; values: Values; disabled?: Values };
 export type MigrationTicket = Readonly<{ targetId: string; identity: TargetIdentity; session: object; generation: number }>;
@@ -22,7 +23,7 @@ type Target = { id: string; bindingGeneration: number; identity: TargetIdentity;
 // Editing ownership only, never replacement identity evidence. Shared factory instances cannot claim one node twice.
 const editOwners = new WeakMap<Element, Target>();
 export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string }[]; order: number; gesture?: string; author?: AuthorChange };
-export const emptyEditState = (): EditState => ({ design: null, overrides: [], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false, authorRevision: 0, mutationPolicy: { mode: 'SESSION_OVERRIDE' }, lastMutation: null });
+export const emptyEditState = (): EditState => ({ design: null, overrides: [], effectiveness: [], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false, authorRevision: 0, mutationPolicy: { mode: 'SESSION_OVERRIDE' }, lastMutation: null });
 
 /** One transaction controller. Session overrides remain default; author mutation requires explicit policy. */
 export function createEditSession(doc: Document, owns: (element: Element) => boolean, onChange: () => void, sources: SourceIndex, lifecycle = createTargetLifecycle(doc, owns), authorLedger?: AuthorLedger) {
@@ -62,6 +63,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       ...Object.entries(scope.values).map(([property, value]) => ({ property: property as Property, value, enabled: true })),
       ...Object.entries(scope.disabled ?? {}).map(([property, value]) => ({ property: property as Property, value, enabled: false })),
     ] })).filter(group => group.declarations.length) : [];
+    if (!target || !state.overrides.length) state.effectiveness = [];
     listeners.forEach(listener => listener());
   };
   const safe = (target: Target) => !target.retired && lifecycle.safe(target.identity);
@@ -222,6 +224,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   }
   return {
     inspect, quarantine, authorMutation,
+    setEffectiveness(effectiveness: EditEffect[]) { if (!destroyed && JSON.stringify(state.effectiveness) !== JSON.stringify(effectiveness)) publish({ effectiveness }); },
     applyBatch: (...args: Parameters<typeof applyBatch>) => exclusive(() => applyBatch(...args), false),
     applyAuthor: (...args: Parameters<typeof applyAuthor>) => exclusive(() => applyAuthor(...args), false),
     setMutationPolicy(policy: MutationPolicy) { if (!destroyed) publish({ mutationPolicy: { mode: policy.mode, allowShared: policy.allowShared }, error: null }); },

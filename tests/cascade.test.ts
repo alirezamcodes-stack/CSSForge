@@ -7,6 +7,7 @@ import type { SelectedSources, SourceRule, SourceSheet } from '../src/engine/sou
 import type { SourceIndex } from '../src/engine/sources';
 import { declarationStatus } from '../src/engine/cascade/status';
 import type { CascadeResult } from '../src/engine/cascade/model';
+import { editEffect, hasActiveOutsideContext } from '../src/editing/effectiveness';
 
 let serial = 0;
 function candidate(value: string, options: Partial<Candidate> & { important?: boolean; kind?: SourceSheet['kind'] } = {}): Candidate {
@@ -16,6 +17,35 @@ function candidate(value: string, options: Partial<Candidate> & { important?: bo
   const source: SourceSheet = { id: sourceId, scopeId: 'doc', kind: options.kind ?? 'style', label: '<style>', url: null, order: 0, disabled: false, rules: [rule], accessibility: { readable: true } };
   return { declaration, rule, source, property, value, specificity: [0, 1, 0], order: [0, 0, 0], layer: null, state: 'matched', issues: [], ...options };
 }
+it('edit effectiveness requires every expanded shorthand contribution to win with certain evidence', () => {
+  const own = candidate('blue', { important: true, kind: 'override', property: 'border-top-color' });
+  own.declaration.property = 'border-color';
+  const bottom = { ...own, property: 'border-bottom-color' };
+  const author = candidate('red', { important: true, property: 'border-top-color', specificity: [1, 0, 0] });
+  const context = { media: [], pseudo: '' } as const;
+  const result = (top = resolveCandidates('border-top-color', [own]), other = resolveCandidates('border-bottom-color', [bottom])): CascadeResult => ({ context: { media: [], pseudo: '' }, properties: { 'border-top-color': top, 'border-bottom-color': other }, scope: 'readable-author', browserEquivalent: false, issues: [] });
+  expect(editEffect(own.declaration, { ...context, media: [] }, result(), 'active', 'rgb(0, 0, 255)').state).toBe('effective');
+  expect(editEffect(own.declaration, { ...context, media: [] }, result(resolveCandidates('border-top-color', [own, author])), 'active').state).toBe('blocked');
+  expect(editEffect(own.declaration, { ...context, media: [] }, result(resolveCandidates('border-top-color', [own, author], ['inaccessible-source'])), 'active').state).toBe('unknown');
+});
+it('edit effectiveness keeps accepted inactive and unverified contexts distinct from known cascade losses', () => {
+  const own = candidate('calc(100px + 30px)', { important: true, kind: 'override', property: 'width' });
+  const context = { media: [], pseudo: '' } as const;
+  const result: CascadeResult = { context: { media: [], pseudo: '' }, properties: { width: resolveCandidates('width', [own]) }, scope: 'readable-author', browserEquivalent: false, issues: [] };
+  const state = (activity: Parameters<typeof editEffect>[3]) => editEffect(own.declaration, { ...context, media: [] }, result, activity, '130px').state;
+  expect(state('active')).toBe('effective'); expect(state('inactive-media')).toBe('pending'); expect(state('inactive-pseudo')).toBe('pending'); expect(state('unverified-pseudo')).toBe('unknown');
+  expect(editEffect(own.declaration, { ...context, media: [] }, result, 'active', '130px', true).state).toBe('unknown');
+});
+it('outside-context selector errors and unsupported candidates withhold certainty after an accepted edit', () => {
+  const own = candidate('32px', { important: true, kind: 'override', property: 'font-size' });
+  const outside = candidate('20px', { important: true, property: 'font-size', state: 'inactive', inactiveReason: 'media' });
+  outside.rule.selectorText = 'h|button';
+  const result: CascadeResult = { context: { media: ['(min-width: 1000px)'], pseudo: '' }, properties: { 'font-size': resolveCandidates('font-size', [own, outside]) }, scope: 'readable-author', browserEquivalent: false, issues: [] };
+  const element = { matches() { throw new DOMException('Unresolvable stylesheet namespace', 'SyntaxError'); } } as unknown as Element;
+  expect(hasActiveOutsideContext(result, own.declaration.id, element)).toBe(true);
+  outside.issues = ['unsupported-selector'];
+  expect(hasActiveOutsideContext(result, own.declaration.id, { matches() { return false; } } as unknown as Element)).toBe(true);
+});
 it('resolves specificity and source-order ties with structured loss reasons', () => {
   const early = candidate('red'), late = candidate('blue', { order: [1, 0, 0] });
   const tie = resolveCandidates('color', [early, late]); expect(tie.winner).toBe(late); expect(tie.overridden[0].reason).toBe('source-order');

@@ -7,7 +7,7 @@ type Runtime = Awaited<ReturnType<typeof launch>>;
 const inline = '<button is="integration-button" id="target" style="font-size:18px;color:purple">Target</button>';
 const callback = (body: string) => `<script>customElements.define('integration-button',class extends HTMLButtonElement{static get observedAttributes(){return ['style']}attributeChangedCallback(){${body}}},{extends:'button'});</script>`;
 async function evidence(info: TestInfo, actual: unknown) {
-  const dir = 'artifacts/diagnostics/engine-integration'; await mkdir(dir, { recursive: true });
+  const dir = 'test-results/diagnostics/engine-integration'; await mkdir(dir, { recursive: true });
   const file = `${dir}/${info.title.split(' ')[0]}.json`;
   await writeFile(file, JSON.stringify({ case: info.title, actual }, null, 2));
   await info.attach('engine-integration', { path: file, contentType: 'application/json' });

@@ -14,6 +14,7 @@ import s from './liveCode.module.css';
 import type { CascadeResult } from '../../engine/cascade/model';
 import { declarationStatus } from '../../engine/cascade/status';
 import { adjacentSourceRuns } from './sourcePresentation';
+import { EditEffectiveness } from '../shared/EditEffectiveness';
 
 const CascadeContext = createContext<CascadeResult | null>(null);
 
@@ -39,7 +40,8 @@ function ValueEditor({ value, label, commit, cancel }: { value: string; label: s
 }
 
 function DeclarationRow({ declaration, context, editable, owned = false, enabled = true }: { declaration: Declaration & { id?: string }; context: EditContext; editable: boolean; owned?: boolean; enabled?: boolean }) {
-  const { editor, design, mutationPolicy } = useEditing();
+  const { editor, design, mutationPolicy, effectiveness } = useEditing();
+  const effect = owned ? effectiveness.find(effect => effect.property === declaration.property && contextKey(effect.context) === contextKey(context)) : undefined;
   const status = declarationStatus(useContext(CascadeContext), declaration.id);
   const [editing, setEditing] = useState(false), [error, setError] = useState('');
   const focusKey = JSON.stringify([owned, contextKey(context), declaration.sourceId, declaration.ruleId, declaration.property]);
@@ -77,6 +79,7 @@ function DeclarationRow({ declaration, context, editable, owned = false, enabled
       {supported && swatch && /^(color|background-color|border-color)$/.test(declaration.property) && <input type="color" className={s.swatch} aria-label={`Code color ${declaration.property}`} value={swatch} onChange={event => commit(event.target.value)} title={authorMode ? 'Apply color with safe author policy' : 'Apply a color override'} />}
     </div>
     {declaration.mutationState === 'cssforge-mutated-author' && <small className={s.sourceState}>CSSForge author edit</small>}
+    {effect && <EditEffectiveness effect={effect} />}
     {editing && <small className={s.hint}>{authorMode ? 'Enter to apply safely; uncertain sources use overrides' : 'Enter to apply as an override'} <button onClick={finish}>Cancel</button></small>}
     {error && <p className={s.error} role="alert">{error}</p>}
   </div>;

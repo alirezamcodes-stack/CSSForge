@@ -20,8 +20,8 @@ async function edit(row: Locator, property: string, value: string) {
 }
 async function shot(page: Page, name: string) {
   if (process.env.CSSFORGE_CAPTURE_PHASE !== '06') return;
-  await mkdir('artifacts/screenshots/phase-06', { recursive: true });
-  await page.screenshot({ path: `artifacts/screenshots/phase-06/${name}.png` });
+  await mkdir('test-results/diagnostics/phase-06', { recursive: true });
+  await page.screenshot({ path: `test-results/diagnostics/phase-06/${name}.png` });
 }
 test('Code shows authored sources and safely edits, validates, toggles, undoes and resets', async ({}, info) => {
   const { page, context, errors, action } = await launch(info);

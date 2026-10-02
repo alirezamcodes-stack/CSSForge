@@ -28,7 +28,7 @@ async function launch(page: Page) {
   });
 }
 async function evidence(info: TestInfo, data: unknown) {
-  const prefix = info.title.split(' ')[0], directory = ['A08', 'A13'].includes(prefix) ? 'artifacts/diagnostics/reconciliation' : 'artifacts/diagnostics/selection-hardening';
+  const prefix = info.title.split(' ')[0], directory = ['A08', 'A13'].includes(prefix) ? 'test-results/diagnostics/reconciliation' : 'test-results/diagnostics/selection-hardening';
   await mkdir(directory, { recursive: true });
   const file = path.resolve(`${directory}/${prefix}.json`);
   await writeFile(file, JSON.stringify(data, null, 2)); await info.attach('diagnostic-evidence', { path: file, contentType: 'application/json' });
@@ -182,6 +182,8 @@ test('A07 open nested shadow roots slots and closed hosts retain truthful scope 
       await page.evaluate(() => window.selectionAudit.picker.parent()); expect((await selection(page))?.id).toBe('outer-host');
     }
   }
+  await page.evaluate(() => window.selectionAudit.picker.parent()); expect((await selection(page))?.id).toBe('slot');
+  await page.evaluate(() => window.selectionAudit.picker.parent()); expect((await selection(page))?.id).toBe('slot-wrap');
   await page.evaluate(() => window.selectionAudit.picker.parent()); expect((await selection(page))?.id).toBe('slot-host');
   await page.evaluate(() => window.selectionAudit.picker.child()); expect((await selection(page))?.id).toBe('slot-wrap');
   await page.evaluate(() => window.selectionAudit.picker.child()); expect((await selection(page))?.id).toBe('slot');

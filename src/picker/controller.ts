@@ -15,6 +15,7 @@ import { createTargetLocator, type TargetLocator, type LocatorResolution, type R
 import { createSelectorEngine, type SelectorRequest } from '../engine/selectors';
 import { createReconciliation, reconciliationLimits } from '../engine/reconciliation';
 import type { AuthorLedger } from '../engine/mutation';
+import { editEffect, hasActiveOutsideContext, type ContextActivity } from '../editing/effectiveness';
 
 export type Selection = {
   identity: string; tag: string; id: string; classes: string[];
@@ -60,11 +61,30 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     if (selected && selectedIdentity && lifecycle.safe(selectedIdentity)) {
       const computed = win.getComputedStyle(selected);
       editor.inspect(selected, computed);
+      refreshEffectiveness(computed);
       if (state.selection) publish({ ...state, selection: { ...state.selection, rect: rectOf(selected.getBoundingClientRect()), fontFamily: computed.fontFamily, fontSize: computed.fontSize } });
     } else clearLostTarget();
     frame.schedule();
   }, sources, lifecycle, authorLedger);
   const cascade = createCascade(doc, sources, element => editor.sourceGroups(element), undefined, element => editor.sourcePosition(element));
+  // Refresh only at editing/selection/source boundaries. Pointer and geometry frames never resolve edit truth.
+  function refreshEffectiveness(computed?: CSSStyleDeclaration) {
+    if (!selected || !selectedIdentity || !lifecycle.safe(selectedIdentity)) return;
+    const groups = editor.sourceGroups(selected);
+    const effects = sources.overrides(selected, groups).rules.flatMap(rule => {
+      const context = rule.editContext!;
+      let activity: ContextActivity = 'active';
+      if (context.media.some(query => !win.matchMedia(query).matches)) activity = 'inactive-media';
+      else if (context.pseudo.startsWith('::')) activity = 'unverified-pseudo';
+      else if (context.pseudo && !selected!.matches(context.pseudo)) activity = 'inactive-pseudo';
+      const result = cascade.read(selected!, context);
+      const snapshot = editor.getSnapshot();
+      return rule.declarations.map(declaration => editEffect(declaration, context, result, activity,
+        computed?.getPropertyValue(declaration.property) ?? (!snapshot.context.pseudo.startsWith('::') ? snapshot.design?.values[declaration.property as keyof typeof snapshot.design.values]?.computed : undefined),
+        hasActiveOutsideContext(result, declaration.id, selected!)));
+    });
+    editor.setEffectiveness(effects);
+  }
   const reconciliation = createReconciliation<MigrationTicket>(doc, lifecycle, {
     owns,
     resolve(captured) { return locatorResult = locators.resolve(captured); },
@@ -152,6 +172,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     for (let depth = 0; parent && depth < reconciliationLimits.regionAncestors; depth++, parent = parent.parentElement) regions.push(parent);
     const computed = win.getComputedStyle(element);
     editor.inspect(element, computed, true);
+    refreshEffectiveness(computed);
     publish({ active: false, selection: {
       identity: identityOf(element), tag: element.localName, id: element.id,
       classes: Array.from(element.classList), rect: rectOf(element.getBoundingClientRect()),
@@ -217,7 +238,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     invalidateSelector() { if (selectedIdentity) selectors.invalidate(selectedIdentity); },
     resolveTarget(request: ResolveRequest = {}) { clearLostTarget(); return locator ? (locatorResult = locators.resolve(locator, request)) : null; },
     candidates: () => candidates.filter(item => lifecycle.admissible(item.element)),
-    source(force = false) { clearLostTarget(); if (!valid(selected)) return null; if (!source || force) { if (force) { sources.invalidate(selected); cascade.invalidate(selected); } source = presentSource(sources.read(selected), (id, declaration) => editor.authorMutation.declarationState(id, declaration, selected!)); editor.inspect(selected, undefined, true); } return source; },
+    source(force = false) { clearLostTarget(); if (!valid(selected)) return null; if (!source || force) { if (force) { sources.invalidate(selected); cascade.invalidate(selected); } source = presentSource(sources.read(selected), (id, declaration) => editor.authorMutation.declarationState(id, declaration, selected!)); editor.inspect(selected, undefined, true); refreshEffectiveness(); } return source; },
     cascade() { clearLostTarget(); return valid(selected) ? cascade.read(selected, editor.getSnapshot().context) : null; },
     cascadeStats: cascade.getStats,
     sourceOverrides(groups: SessionGroup[]) { return valid(selected) ? sources.overrides(selected, groups).rules : []; },

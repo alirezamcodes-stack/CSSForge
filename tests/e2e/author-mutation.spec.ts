@@ -20,7 +20,7 @@ async function launch(info: TestInfo, html: string, routes?: (page: Page) => Pro
   return { ...runtime, read, status, author };
 }
 async function evidence(info: TestInfo, result: unknown) {
-  const directory = 'artifacts/diagnostics/author-mutation'; await mkdir(directory, { recursive: true });
+  const directory = 'test-results/diagnostics/author-mutation'; await mkdir(directory, { recursive: true });
   const path = `${directory}/${info.title.split(' ')[0]}.json`; await writeFile(path, JSON.stringify(result, null, 2)); await info.attach('mutation-result', { path, contentType: 'application/json' });
 }
 async function ruleCSS(page: Page) { return page.locator('#author').evaluate(node => (node as HTMLStyleElement).sheet!.cssRules[0].cssText); }
