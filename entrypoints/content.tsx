@@ -4,6 +4,7 @@ import '../src/styles/tokens.css';
 import { createPicker, type Picker } from '../src/picker/controller';
 import { useUI } from '../src/state/ui';
 import { createAuthorLedger } from '../src/engine/mutation';
+import { createDOMLedger } from '../src/editing/dom';
 
 export default defineContentScript({
   matches: ['http://*/*', 'https://*/*'],
@@ -11,6 +12,7 @@ export default defineContentScript({
   cssInjectionMode: 'ui',
   async main(ctx) {
     const authorLedger = createAuthorLedger(document);
+    const domLedger = createDOMLedger(document);
     let picker: Picker | undefined;
     let mounted = false;
     let unsubscribe: (() => void) | undefined;
@@ -28,7 +30,7 @@ export default defineContentScript({
         // page transforms and stacking. Only existing UI controls receive input.
         for (const [property, value] of Object.entries({ position: 'fixed', inset: '0', margin: '0', padding: '0', border: '0', width: '100%', height: '100%', overflow: 'visible', 'pointer-events': 'none' })) host.style.setProperty(property, value, 'important');
         host.setAttribute('popover', 'manual');
-        picker = createPicker(document, host, () => useUI.getState().setInspector(true), authorLedger);
+        picker = createPicker(document, host, () => useUI.getState().setInspector(true), authorLedger, domLedger);
         // The picker mounts its noninteractive feedback first. The shell is the
         // next top-layer entry, so all its controls paint above that feedback.
         host.showPopover();
@@ -52,7 +54,7 @@ export default defineContentScript({
       if (mounted) deactivate(); else { ui.mount(); mounted = true; }
     };
     browser.runtime.onMessage.addListener(listener);
-    const pageLost = () => { deactivate(); authorLedger.retire('Document navigation or replacement.'); };
+    const pageLost = () => { deactivate(); authorLedger.retire('Document navigation or replacement.'); domLedger.retire('Document navigation or replacement.'); };
     window.addEventListener('pagehide', pageLost);
     ctx.onInvalidated(() => { browser.runtime.onMessage.removeListener(listener); window.removeEventListener('pagehide', pageLost); pageLost(); });
   },
