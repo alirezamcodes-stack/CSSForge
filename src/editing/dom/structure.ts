@@ -1,5 +1,6 @@
 import type { TargetIdentity } from '../../picker/targetLifecycle';
 import type { DOMLedger } from './index';
+import { inlineStyleHasResourceURL } from './resources';
 
 export type StructureOperation = 'insert' | 'duplicate' | 'delete' | 'up' | 'down';
 export type InsertPosition = 'before' | 'after' | 'first' | 'last';
@@ -74,7 +75,7 @@ function snapshot(node: Element, duplicate: boolean, markerOwned: MarkerOwned, c
       for (const attribute of Array.from(element.attributes)) {
         if (markerOwned(element, attribute.name, attribute.value)) continue;
         if (++attributes > structureLimits.attributes || (attributeText += attribute.name.length + attribute.value.length) > structureLimits.attributeText) return failure('UNSUPPORTED', 'Subtree attributes exceed the structural safety limit.');
-        if (duplicate && (idrefs.has(attribute.name) || attribute.name.startsWith('on') || ['src','srcset','srcdoc','action','formaction','href','xlink:href'].includes(attribute.name) || attribute.name==='style'&&/url\s*\(/i.test(attribute.value))) return failure('UNSUPPORTED', 'Duplicate refuses IDs, ID references, inline handlers and resource attributes.');
+        if (duplicate && (idrefs.has(attribute.name) || attribute.name.startsWith('on') || ['src','srcset','srcdoc','action','formaction','href','xlink:href'].includes(attribute.name) || attribute.name==='style'&&inlineStyleHasResourceURL(attribute.value, element.ownerDocument.defaultView!.Document.prototype.createElement.call(element.ownerDocument, 'div').style))) return failure('UNSUPPORTED', 'Duplicate refuses IDs, ID references, inline handlers and resource attributes.');
         attrs.push(JSON.stringify([attribute.name, attribute.value]));
       }
     } else if (current.nodeType === 3 || current.nodeType === 8) {

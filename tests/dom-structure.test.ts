@@ -83,6 +83,23 @@ describe('exact native structure domain before UI integration', () => {
   it.each(['id','for','aria-labelledby','aria-describedby','aria-controls','href','onclick','src'])('refuses duplicate unsafe %s without a transaction', name => {
     const f = fixture(); f.owner.setAttribute(name, name === 'href' ? '#target' : 'value'); expect((f.prepare('duplicate') as any).state).toBe('UNSUPPORTED'); expect(f.ledger.activeStructures()).toEqual([]);
   });
+  it('refuses a resource-bearing descendant before any clone/write/history and preserves exact attributes', () => {
+    const f = fixture(), child = f.doc.createElement('span'), raw = 'background-image:u\\72l("data:,x")';
+    child.setAttribute('style', raw); f.owner.appendChild(child);
+    const original = NativeDocument.prototype.createElement;
+    const probe = vi.spyOn(NativeDocument.prototype, 'createElement').mockImplementation(function(this: NativeDocument, tag: string) {
+      const node = original.call(this, tag);
+      Object.assign(node, { style: { cssText: 'background-image: url("data:,x");', setProperty() {}, getPropertyValue: () => 'url("data:,")' } });
+      return node;
+    });
+    const clone = vi.spyOn(NativeNode.prototype, 'cloneNode');
+    try {
+      expect((f.prepare('duplicate') as unknown as { state: string }).state).toBe('UNSUPPORTED');
+      expect(clone).not.toHaveBeenCalled(); expect(f.mutation.getStats().writes).toBe(0);
+      expect(f.ledger.activeStructures()).toEqual([]); expect(child.getAttribute('style')).toBe(raw);
+      expect(f.parent.childNodes).toEqual([f.before, f.owner, f.after]);
+    } finally { probe.mockRestore(); clone.mockRestore(); }
+  });
   it.each(['script','style','iframe','canvas','input','form','x-host','svg'])('refuses unsafe %s descendants as a whole', tag => {
     const f = fixture(), child = f.doc.createElement(tag); if (tag === 'svg') child.namespaceURI = 'svg'; f.owner.appendChild(child);
     expect((f.prepare('duplicate') as any).state).toBe('UNSUPPORTED'); expect((f.prepare('delete') as any).state).toBe('UNSUPPORTED');
