@@ -2,6 +2,7 @@ import { useEffect, type RefObject } from 'react';
 import { useUI } from '../../state/ui';
 import { cancelActiveDrag } from './focus';
 import { useInspection } from '../../picker/context';
+import { isEyeDropperPending } from '../../platform/eyedropper';
 
 export function useEscapePolicy(ref: RefObject<HTMLElement | null>) {
   const { picker } = useInspection();
@@ -9,6 +10,7 @@ export function useEscapePolicy(ref: RefObject<HTMLElement | null>) {
     const doc = ref.current!.ownerDocument;
     const onKey = (event: KeyboardEvent) => {
       if (event.key !== 'Escape' || event.isComposing) return;
+      if (isEyeDropperPending()) return;
       if (event.composedPath().some(node => node instanceof HTMLElement && node.hasAttribute('data-escape-cancel'))) return;
       const state = useUI.getState();
       const inside = event.composedPath().includes(ref.current!);

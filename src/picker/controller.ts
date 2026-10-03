@@ -42,6 +42,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
   let source: SourceSnapshot | null = null;
   let destroyed = false, reviewingChanges = false, changesPreparations = 0, changesSerializations = 0;
   let suspended = false;
+  const suspensions = new Set<'surface' | 'sampling'>();
   let handlingLoss = false, suppressMigration = false, selectionGeneration = 0;
   let regions: Element[] = [];
   const publish = (next: PickerState) => { state = next; subscribers.forEach(notify => notify()); };
@@ -82,7 +83,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
       if (context.media.some(query => !win.matchMedia(query).matches)) activity = 'inactive-media';
       else if (context.pseudo.startsWith('::')) activity = 'unverified-pseudo';
       else if (context.pseudo && !element.matches(context.pseudo)) activity = 'inactive-pseudo';
-      const result = cascade.read(element, context);
+      const result = cascade.readProperties(element, context, rule.declarations);
       const snapshot = editor.getSnapshot();
       return rule.declarations.map(declaration => editEffect(declaration, context, result, activity,
         context.pseudo.startsWith('::')?undefined:computed?.getPropertyValue(declaration.property) ?? (element===selected&&!snapshot.context.pseudo.startsWith('::') ? snapshot.design?.values[declaration.property as keyof typeof snapshot.design.values]?.computed : undefined),
@@ -285,7 +286,7 @@ export function createPicker(doc: Document, uiHost: HTMLElement, onSelection: ()
     getSnapshot: () => { clearLostTarget(); return state; },
     start() { if (destroyed || state.active) return; reconciliation.cancel('Explicit repick started.'); hovered = null; publish({ ...state, active: true }); frame.schedule(); },
     cancel() { if (!state.active) return false; hovered = null; publish({ ...state, active: false }); frame.schedule(); return true; },
-    setSuspended(value: boolean) { suspended = value; if (value) leave(); },
+    setSuspended(value: boolean, reason: 'surface' | 'sampling' = 'surface') { if (value) suspensions.add(reason); else suspensions.delete(reason); suspended = suspensions.size > 0; if (value) leave(); },
     parent() { if (selected) select(parentOf(selected)); },
     child() { if (selected) select(childOf(selected)); },
     previous() { if (selected) select(siblingOf(selected, 'previousElementSibling')); },

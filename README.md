@@ -4,12 +4,13 @@ CSSForge is a Chrome Manifest V3 extension for inspecting selected page elements
 
 The current implementation includes a scoped CSSOM source index, a conservative readable-author cascade engine, stable target locators and bounded replacement reconciliation. Normal Design and Code edits use CSSForge-owned stylesheets. An author-mutation engine exists and is regression-tested, but safe-author mode has no normal product control.
 
-The [current support contract](docs/current-support-contract.md) defines supported behavior and limits. The [release contract](docs/current-release-contract.md) defines the local package workflow and outstanding public-distribution requirements. The [Phase 09B report](docs/phase-09b-dom-structure-editing.md) records native structural ownership, unified history and exact verification results. Historical milestone reports describe their original checkpoints.
+The [current support contract](docs/current-support-contract.md) defines supported behavior and limits. The [release contract](docs/current-release-contract.md) defines the local package workflow and outstanding public-distribution requirements. The [Phase 10A report](docs/phase-10a-native-eyedropper.md) records native color sampling, cancellation, target freshness and exact verification results. Historical milestone reports describe their original checkpoints.
 
 ## Current workflows
 
 - **Pick and inspect:** explicit element picking, hover feedback, dimensions/fonts, parent/child/sibling navigation and bounded HTML/Navigator trees. Open ShadowRoots and assigned-slot navigation are supported within the documented scope.
 - **Design:** geometry, spacing, typography, colors, backgrounds, linear/radial gradients, borders, positioning, multiple box/text shadows and eight filter controls. Numeric/color/token controls validate drafts and use the session Undo/Reset controller.
+- **Native color sampling:** open an existing color picker and choose Sample screen color. Where the browser exposes EyeDropper, a trusted activation starts native sampling; one successful opaque sRGB color uses the selected HEX/RGB/HSL format and the existing CSS transaction. Escape cancels native sampling. Changes to the target, physical binding, editing context or control discard pending results. No sampler is added to the dock; unavailable contexts show a disabled reason.
 - **Contexts:** separate Base, discovered media and terminal hover/focus/active/before/after edits. Context selection does not force browser state, create generated content or simulate a viewport.
 - **Code:** inline authored CSS, readable matching stylesheet rules, referenced keyframes and session overrides; CSSOM values, priorities and supported cascade status; explicit source refresh. Supported declaration edits create session overrides. Authored declarations and keyframes are not a general stylesheet editor.
 - **Inline text:** Inspector menu → Edit text safely edits one direct Text node in supported HTML elements. Explicit Apply, Cancel/Escape, multiline input and Ctrl/⌘ Enter use the shared CSS/text Undo history. Nested markup, form values, editable surfaces and unsupported roots are refused. Host updates are preserved as conflicts; replacement text is never guessed.
@@ -31,7 +32,7 @@ pnpm build
 
 In Chrome, open `chrome://extensions`, enable Developer mode, choose **Load unpacked**, and select `.output/chrome-mv3`. Pin CSSForge, open an ordinary HTTP(S) page, and click its toolbar action. Point to an element and click to select it. The dock cursor starts another pick; Escape cancels picking. The dock power button or another toolbar action deactivates CSSForge. Browser/store/restricted pages are unavailable and receive toolbar feedback.
 
-The extension requests `activeTab` and `scripting`, has no host permissions and is injected after toolbar activation. It does not register automatic all-site content scripts. Chrome 154.0.8037.93 is the Phase 08A verification runtime; lower Chrome versions and other browsers are unverified. A minimum Chrome version is not yet established.
+The extension requests `activeTab` and `scripting`, has no host permissions and is injected after toolbar activation. It does not register automatic all-site content scripts. Chrome 154.0.8037.93 is the current verification runtime; lower Chrome versions and other browsers are unverified. A minimum Chrome version is not yet established. EyeDropper capability is feature-detected in the current page context. Real Windows pixel selection and native Escape are verified. The [Phase 10A report](docs/phase-10a-native-eyedropper.md) records the later heavy-page cascade performance fix and stable tested editing/lifecycle workloads. Phase 10A is ready for review; product acceptance is pending, and the exact original real-page hang and residual heap growth remain unconfirmed.
 
 ```sh
 pnpm zip
@@ -64,6 +65,7 @@ Packaged-extension tests use installed Chrome by default, disposable profiles an
 - `src/picker/`: DOM ownership, pointer feedback, navigation, lifecycle and bounded trees.
 - `src/engine/`: source indexing, cascade/specificity/inheritance, locators, selector descriptions, reconciliation and guarded native author mutation.
 - `src/editing/`: property/value models, session overrides, contexts, transaction grouping and Undo/Reset.
+- `src/platform/`: the thin native EyeDropper capability/request boundary.
 - `src/ui/`, `src/state/`, `src/styles/`: connected surfaces, shared controls, presentation state and centralized semantic tokens.
 - `tests/`: unit, native-browser and packaged-extension regressions.
 

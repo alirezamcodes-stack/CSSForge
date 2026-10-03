@@ -17,6 +17,9 @@ it('preserves background lists with cycling companion values', () => {
   const layers = backgroundLayers({ image: 'url("a.png"), linear-gradient(red, blue)', position: 'center', size: 'cover, 50%', repeat: 'no-repeat' });
   expect(layers[1]).toEqual({ image: 'linear-gradient(red, blue)', position: 'center', size: '50%', repeat: 'no-repeat' });
 });
+it('preserves color-space interpolation gradients outside the simple stop editor', () => {
+  for (const value of ['linear-gradient(in oklab, red, blue)', 'linear-gradient(45deg in hsl longer hue, red, blue)', 'radial-gradient(circle at center in srgb, red, blue)']) expect(parseGradient(value)).toBeNull();
+});
 it('hidden layer tokens retain the exact original image for undo and showing', () => {
   const original = 'linear-gradient(135deg, rgb(1, 2, 3), #abc)';
   expect(originalImage(hiddenImage(original))).toBe(original);

@@ -19,6 +19,8 @@ export type Gradient = { type: 'linear' | 'radial'; direction: string; stops: { 
 export function parseGradient(value: string): Gradient | null {
   const match = value.match(/^(linear|radial)-gradient\((.*)\)$/s); if (!match) return null;
   const args = splitCSS(match[2]); let direction = match[1] === 'linear' ? '180deg' : 'ellipse at center';
+  // The simple model has no interpolation field; never turn it into a color stop.
+  if (splitCSS(args[0] ?? '', ' ').some(token => token.toLowerCase() === 'in')) return null;
   if (/^(to |[-+\d.]+(?:deg|turn|rad|grad)$|circle|ellipse|at |closest-|farthest-)/.test(args[0])) direction = args.shift()!;
   // Hints and double-position stops cannot be represented by this simple editor.
   // Leave the original gradient intact rather than inventing colors or positions.

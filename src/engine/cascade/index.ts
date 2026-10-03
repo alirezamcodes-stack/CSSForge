@@ -1,7 +1,7 @@
 import { properties as editorProperties } from '../../editing/properties';
 import { baseContext, contextKey, type EditContext } from '../../editing/contexts';
 import type { SourceIndex } from '../sources';
-import type { SessionGroup, SourceRule, SourceSheet } from '../sources/model';
+import type { Declaration, SessionGroup, SourceRule, SourceSheet } from '../sources/model';
 import type { Candidate, CascadeResult, Issue, LossReason, PropertyCascade } from './model';
 import { compareSpecificity } from './specificity';
 import { selectorMatch } from './matching';
@@ -38,8 +38,8 @@ export function resolveCandidates(property: string, candidates: Candidate[], iss
 
 export function createCascade(doc: Document, sources: Pick<SourceIndex, 'read' | 'overrides'>, sessionGroups: (element: Element) => SessionGroup[] = () => [], expand: Expand = createExpander(doc), sessionPosition?: (element: Element) => number | undefined) {
   let cache = new WeakMap<Element, Map<string, { source: ReturnType<SourceIndex['read']>; result: CascadeResult }>>(), resolutions = 0;
-  function read(element: Element, context: EditContext = baseContext(), requested: readonly string[] = editorProperties, depth = 0): CascadeResult {
-    const snapshot = sources.read(element), key = JSON.stringify([contextKey(context), requested]);
+  function read(element: Element, context: EditContext = baseContext(), requested: readonly string[] = editorProperties, depth = 0, contributions?: ReadonlySet<string>): CascadeResult {
+    const snapshot = sources.read(element), key = JSON.stringify(contributions ? ['properties', contextKey(context), requested] : [contextKey(context), requested]);
     const previous = cache.get(element)?.get(key); if (previous?.source === snapshot) return previous.result;
     resolutions++;
     const globalIssues: Issue[] = [];
@@ -86,6 +86,9 @@ export function createCascade(doc: Document, sources: Pick<SourceIndex, 'read' |
             const issue = item.uncertain ? ['unsupported-shorthand' as const] : [];
             // Physical/logical mapping depends on writing mode, which this engine does not resolve.
             if (activeState !== 'inactive' && /(?:^|-)(?:inline|block)(?:-|$)/.test(item.property)) globalIssues.push('logical-property');
+            // Effectiveness needs only the edited declaration's contributions.
+            // Global checks above still inspect unrelated declarations.
+            if (contributions && !contributions.has(item.property)) continue;
             const candidate: Candidate = { declaration, rule, source, property: item.property, value: item.value, selector: match.selector, specificity: match.weight,
               order: [source.order, rule.order, declaration.order], layer: layer ? layerIndex : null,
               state: item.uncertain && activeState !== 'inactive' ? 'unresolved' : activeState,
@@ -111,10 +114,10 @@ export function createCascade(doc: Document, sources: Pick<SourceIndex, 'read' |
 
     const root = element.getRootNode();
     const parent = context.pseudo.startsWith('::') ? element : element.parentElement ?? ('host' in root && (root as ShadowRoot).mode === 'open' ? (root as ShadowRoot).host : null);
-    const parentRequested = unique([...requested, ...candidates.keys()]);
-    const parentResult = parent && depth < 64 ? read(parent, baseContext(), parentRequested, depth + 1) : null;
+    const parentRequested = contributions ? requested : unique([...requested, ...candidates.keys()]);
+    const parentResult = parent && depth < 64 ? read(parent, baseContext(), parentRequested, depth + 1, contributions) : null;
     if (parent && depth >= 64) globalIssues.push('source-limit');
-    const names = new Set([...requested.flatMap(property => expand(property, 'initial').map(item => item.property)), ...inheritedProperties, ...candidates.keys(), ...Object.keys(parentResult?.properties ?? {}).filter(property => property.startsWith('--'))]);
+    const names = contributions ?? new Set([...requested.flatMap(property => expand(property, 'initial').map(item => item.property)), ...inheritedProperties, ...candidates.keys(), ...Object.keys(parentResult?.properties ?? {}).filter(property => property.startsWith('--'))]);
     const result: CascadeResult = { context, scope: 'readable-author', browserEquivalent: false, properties: {}, issues: unique(['unindexed-origin', ...globalIssues]) };
     for (const property of names) {
       const resolved = resolveCandidates(property, candidates.get(property) ?? [], [...globalIssues, ...(uncertainProperties.get(property) ?? [])]);
@@ -140,7 +143,11 @@ export function createCascade(doc: Document, sources: Pick<SourceIndex, 'read' |
     }
     const entries = cache.get(element) ?? new Map(); entries.set(key, { source: snapshot, result }); cache.set(element, entries); return result;
   }
-  return { read, invalidate(element?: Element) {
+  function readProperties(element: Element, context: EditContext, declarations: readonly Pick<Declaration, 'property' | 'value'>[]) {
+    const properties = unique(declarations.flatMap(declaration => expand(declaration.property, declaration.value).map(item => item.property)));
+    return read(element, context, properties, 0, new Set(properties));
+  }
+  return { read, readProperties, invalidate(element?: Element) {
     if (!element) { cache = new WeakMap(); return; }
     let node: Element | null = element;
     for (let depth = 0; node && depth < 64; depth++) { cache.delete(node); const root = node.getRootNode(); node = node.parentElement ?? ('host' in root ? (root as ShadowRoot).host : null); }

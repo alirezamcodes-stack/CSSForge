@@ -16,7 +16,7 @@ export function EditField({ property, label, disabled = false, color = false, co
     const sides = property === 'border-color' ? splitCSS(field.presented, ' ') : [];
     const sideColors = sides.length > 1 && sides.every(side => CSS.supports('color', side));
     const mixed = sideColors && new Set(sides.map(side => colorToken(side) ?? side.toLowerCase())).size > 1;
-    return <ColorControl label={label} value={sideColors && !mixed ? sides[0] : field.presented} mixed={mixed} onChange={apply} title={title} overridden={!!field.override} />;
+    return <ColorControl label={label} samplingContext={property} value={sideColors && !mixed ? sides[0] : field.presented} mixed={mixed} onChange={apply} title={title} overridden={!!field.override} />;
   }
   if (property === 'font-family') return <TokenInput label={label} value={field.presented} onChange={apply} />;
   const unitless = ['z-index', 'font-weight', 'line-height'].includes(property);
