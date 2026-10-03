@@ -44,6 +44,14 @@ describe('bounded reconciliation generations and authorization', () => {
     const irrelevant = new NodeElement(f.doc); irrelevant.localName = 'span'; f.delivery([{ type: 'childList', target: f.doc, addedNodes: [irrelevant as unknown as Element] }]); expect(f.resolve).toHaveBeenCalledOnce();
     f.state('resolved-unique'); f.delivery(); expect(f.engine.getSnapshot().state).toBe('migrated'); expect(f.resolve).toHaveBeenCalledTimes(2);
   });
+  it.each(['childList', 'attributes'])('does not trust a layer lookalike during %s delivery', type => {
+    const f = fixture(); f.engine.start(f.locator, f.ticket, []);
+    const lookalike = new NodeElement(f.doc); lookalike.hasAttribute = () => true;
+    f.state('resolved-unique');
+    f.delivery([{ type, target: lookalike as unknown as Document, addedNodes: [lookalike as unknown as Element] }]);
+    expect(f.engine.getSnapshot().state).toBe('migrated');
+    expect(f.resolve).toHaveBeenCalledTimes(2);
+  });
   it('expires without polling or resurrection', () => {
     const f = fixture(); f.engine.start(f.locator, f.ticket, []); vi.advanceTimersByTime(reconciliationLimits.windowMs + 1);
     expect(f.engine.getSnapshot().state).toBe('missing'); expect(f.resolve).toHaveBeenCalledOnce(); f.state('resolved-unique'); f.delivery(); expect(f.migrate).not.toHaveBeenCalled();

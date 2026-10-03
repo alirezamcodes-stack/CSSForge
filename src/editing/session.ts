@@ -10,6 +10,7 @@ import { createTargetLifecycle, type TargetIdentity } from '../picker/targetLife
 import { observeTarget } from '../picker/invalidation';
 import { supportsSize } from './capabilities';
 import { createMarkerContainment } from './markerContainment';
+import { isEditLayer, ownEditLayer, releaseEditLayer } from './layerOwnership';
 import type { LocatorResolution } from '../engine/locator';
 import { reconciliationLimits } from '../engine/reconciliation/model';
 import { createAuthorMutation, type AuthorChange, type AuthorLedger, type MutationPolicy, type MutationRequest, type MutationResult } from '../engine/mutation';
@@ -26,8 +27,6 @@ export type MigrationTicket = Readonly<{ targetId: string; identity: TargetIdent
 type Target = { id: string; label:string; effects:EditEffect[]; bindingGeneration: number; identity: TargetIdentity; element: HTMLElement | SVGElement; root: Document | ShadowRoot; attribute: string; retiredAttributes: string[]; scopes: Map<string, Scope>; layer?: HTMLStyleElement; stop?: () => void; guard?: () => void; retired?: boolean; parked?: boolean; staging?: boolean; pending?: MigrationTicket; media: ReturnType<typeof discoverMedia> };
 // Editing ownership only, never replacement identity evidence. Shared factory instances cannot claim one node twice.
 const editOwners = new WeakMap<Element, Target>();
-// Exact CSSForge-created stylesheet Nodes are metadata, never page placement anchors.
-const editLayers = new WeakSet<Node>();
 export type Transaction = { targetId: string; context: EditContext; changes: { property: Property; previous?: string; previousDisabled?: string; value?: string; baseline?:Baseline }[]; order: number; gesture?: string; author?: AuthorChange; dom?:DOMTextChange; structure?:DOMStructureChange };
 export const emptyEditState = (): EditState => ({ design: null, overrides: [], effectiveness: [], changes:[], undoCount: 0, editedCount: 0, error: null, context: baseContext(), mediaContexts: [], mediaLimited: false, authorRevision: 0, structureRevision:0, mutationPolicy: { mode: 'SESSION_OVERRIDE' }, lastMutation: null });
 
@@ -66,7 +65,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
     for(const row of record.snapshot)if(row.node.nodeType===1){
       const target=byElement.get(row.node as Element);if(target){target.parked=true;release(target,false);}
     }
-  },node=>editLayers.has(node)||node.nodeType===1&&owns(node as Element));
+  },node=>isEditLayer(node)||node.nodeType===1&&owns(node as Element));
   // Only unresolved author records cross UI lifecycles. Session layers/gestures never do.
   const recoveredOwners = new WeakMap<object, Map<string, string>>(); let recoverySequence = 0;
   for (const author of authorMutation.active()) {
@@ -186,15 +185,15 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
   }
   const release = (target: Target, cleanCopies = true) => {
     target.stop?.(); target.stop = undefined; target.guard?.(); target.guard = undefined;
-    target.layer?.remove(); target.layer = undefined;
+    releaseEditLayer(target.layer); target.layer = undefined;
     if (target.element.getAttribute(target.attribute) === target.id) target.element.removeAttribute(target.attribute);
     if (cleanCopies) for (const attribute of [target.attribute, ...target.retiredAttributes]) for (const copy of target.root.querySelectorAll(`[${attribute}="${target.id}"]`)) copy.removeAttribute(attribute);
   };
   const render = (target: Target) => {
     if (![...target.scopes.values()].some(scope => Object.keys(scope.values).length)) { release(target); return; }
-    const layer = doc.createElement('style'); editLayers.add(layer);layer.dataset.cssforgeEditLayer = target.id;
-    (target.root === doc ? doc.head ?? doc.documentElement : target.root).appendChild(layer);
+    const layer = doc.createElement('style'); ownEditLayer(layer); layer.dataset.cssforgeEditLayer = target.id;
     try {
+      (target.root === doc ? doc.head ?? doc.documentElement : target.root).appendChild(layer);
       if (!layer.sheet) throw new Error('Style layer unavailable');
       // Base before conditional rules; media order follows proven context discovery.
       const scopes = [...target.scopes.values()].filter(scope => Object.keys(scope.values).length).sort((a, b) => a.context.media.length - b.context.media.length);
@@ -205,9 +204,10 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
         const rule = sheet.cssRules[i] as CSSStyleRule;
         for (const [property, value] of Object.entries(scope.values)) rule.style.setProperty(property, value, 'important');
       }
-    } catch (error) { layer.remove(); throw error; }
-    for (const copy of target.root.querySelectorAll(`[${target.attribute}="${target.id}"]`)) if (copy !== target.element) copy.removeAttribute(target.attribute);
-    target.element.setAttribute(target.attribute, target.id); target.layer?.remove(); target.layer = layer;
+      for (const copy of target.root.querySelectorAll(`[${target.attribute}="${target.id}"]`)) if (copy !== target.element) copy.removeAttribute(target.attribute);
+      target.element.setAttribute(target.attribute, target.id);
+    } catch (error) { releaseEditLayer(layer); throw error; }
+    releaseEditLayer(target.layer); target.layer = layer;
     if (!target.stop) {
       const watch = () => {
         target.stop?.();
@@ -410,7 +410,7 @@ export function createEditSession(doc: Document, owns: (element: Element) => boo
       for (const sheet of sheets) {
         if (sheet === target.layer.sheet) return authorsBefore - 0.5;
         const owner = sheet.ownerNode as Element | null;
-        if (!owner || (!owns(owner) && !owner.hasAttribute?.('data-cssforge-edit-layer'))) authorsBefore++;
+        if (!owner || (!owns(owner) && !isEditLayer(owner))) authorsBefore++;
       }
       return undefined;
     },

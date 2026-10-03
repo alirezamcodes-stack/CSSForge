@@ -1,3 +1,5 @@
+import { isEditLayer } from './layerOwnership';
+
 type Owner = { element: Element; attribute: string; id: string; quarantine: () => void };
 
 /** Marker hygiene only: no replacement matching or document traversal. Active editing roots
@@ -28,7 +30,7 @@ export function createMarkerContainment(doc: Document, owns: (element: Element) 
               if (--budget < 0) { [...owners].forEach(item => item.quarantine()); return; }
               const node = pending.pop()!;
               if (!(node instanceof win.Element)) continue;
-              if (node.hasAttribute('data-cssforge-edit-layer') || owns(node)) continue;
+              if (isEditLayer(node) || owns(node)) continue;
               removeCopies(node, owners);
               // Only the added subtree, with a shared delivery budget; never query the root.
               for (let child = node.firstElementChild; child; child = child.nextElementSibling) {

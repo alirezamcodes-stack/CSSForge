@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { createSourceIndex } from '../src/engine/sources';
 import { presentSource } from '../src/editing/readable';
 import { discoverMedia } from '../src/editing/contexts';
+import { ownEditLayer, releaseEditLayer } from '../src/editing/layerOwnership';
 
 // CSSOM-shaped objects isolate index/cache behavior; browser tests cover native CSSOM serialization.
 function style(values: Record<string, string>, important: string[] = []) {
@@ -21,6 +22,21 @@ function fixture(sheets: CSSStyleSheet[] = [], inline = style({})) {
 }
 
 describe('central CSS source index', () => {
+  it('retains page-owned layer lookalikes and excludes only registered live native layers', () => {
+    const lookalike = { hasAttribute: () => true } as unknown as Element;
+    const actual = { hasAttribute: () => false, remove() {} } as unknown as HTMLStyleElement;
+    const pageSheet = sheet([rule('.card', { color: 'green' })], { ownerNode: lookalike });
+    const internalSheet = sheet([rule('.card', { color: 'red' })], { ownerNode: actual });
+    const { index, element } = fixture([pageSheet, internalSheet]);
+    ownEditLayer(actual);
+    try {
+      expect(index.read(element).matches.map(item => item.rule.declarations[0].value)).toEqual(['green']);
+      releaseEditLayer(actual);
+      index.invalidate();
+      // A retired node retained/reinserted by the page is no longer an internal source.
+      expect(index.read(element).matches.map(item => item.rule.declarations[0].value)).toEqual(['green', 'red']);
+    } finally { releaseEditLayer(actual); index.destroy(); }
+  });
   it('preserves inline order, important, custom properties and authored functions/units with ownership', () => {
     const { index, element } = fixture([], style({ '--token': '12px', 'font-size': '2rem', color: 'var(--text)', width: 'calc(100% - 2rem)', padding: '1em 2em', height: '50%' }, ['color']));
     const source = index.read(element), inline = source.inline;
@@ -85,8 +101,10 @@ describe('central CSS source index', () => {
     Object.assign(shadow, { mode: 'closed' }); expect(createSourceIndex(doc).read(element).sheets).toEqual([]);
   });
   it('excludes generated override styles and models current enabled/disabled session data separately without scans', () => {
-    const owned = sheet([rule('.card')], { ownerNode: { hasAttribute: () => true } });
+    const owner = { remove() {} } as HTMLStyleElement;
+    const owned = sheet([rule('.card')], { ownerNode: owner });
     const { element, index } = fixture([owned]);
+    ownEditLayer(owner);
     expect(index.read(element).sheets).toEqual([]);
     const groups = [{ context: { media: ['print'], pseudo: ':hover' as const }, declarations: [{ property: 'color', value: 'red', enabled: false }] }];
     const session = index.overrides(element, groups);
@@ -94,6 +112,7 @@ describe('central CSS source index', () => {
     expect(session.rules[0].declarations[0]).toMatchObject({ value: 'red', enabled: false, important: true, sourceId: session.id });
     expect(index.overrides(element, groups).rules[0].id).toBe(session.rules[0].id);
     expect(index.getStats().scopeScans).toBe(1);
+    releaseEditLayer(owner);
   });
   it('indexes all readable keyframes and projects only referenced frames with their contexts', () => {
     const frame = { type: 8, keyText: '50%', style: style({ opacity: '.5' }), cssText: '50% { opacity: .5; }' } as unknown as CSSRule;

@@ -1,14 +1,14 @@
 # CSSForge current state
 
-Audited **2026-10-03**, Europe/Berlin. This dashboard and [the detailed audit](post-10a-full-project-audit.md) are the current project health references. Earlier phase reports remain historical evidence.
+Audited **2026-10-03**, Europe/Berlin; updated for Phase 10B.1. This dashboard records current status; [the detailed audit](post-10a-full-project-audit.md) remains the unchanged pre-fix record. Earlier phase reports remain historical evidence.
 
 ## Baseline and health
 
-- Initial baseline verified clean: `main`, HEAD and `origin/main` **`ad32eedf81f051a7f5ac3508e2d6a7c243f37b1e`**, exact tag **`phase-10a`**.
-- Commit: `feat: add native eyedropper and optimize edit performance`.
-- The selected-element editing foundation works in its supported scope. Five important product defects and three minor UX/accessibility defects remain. No P0 or P1 finding was established in this audit.
-- The full report inventories **21 findings: P0 0 / P1 0 / P2 9 / P3 12**. This includes release gaps, debt and unverified risks; it is not a count of 21 confirmed product bugs.
-- Audit only: no fixes, dependency updates, commits, pushes, tag changes or next feature phase.
+- Phase 10B.1 baseline verified clean: `fix/phase-10b-ownership`, HEAD/main/`origin/main`/`pre-phase-10b` **`c6638691b9972081f0ddfc559e4515d327404276`**, `docs: add post-10a project health audit`. Phase 10B.1 changes remain uncommitted on this branch.
+- Protected `phase-10a` remains **`ad32eedf81f051a7f5ac3508e2d6a7c243f37b1e`**; `pre-phase-10b` remains at the baseline above.
+- The selected-element editing foundation works in its supported scope. F01/F02 are fixed; three important product defects and three minor UX/accessibility defects remain (F03–F08). No P0 or P1 finding was established in the audit.
+- The pre-fix report inventories **21 findings: P0 0 / P1 0 / P2 9 / P3 12**. This includes release gaps, debt and unverified risks; it is not a count of 21 confirmed product bugs.
+- Phase 10B.1 changes only internal layer ownership and marker containment, including the same predicate in source ordering, observation and reconciliation. No other finding, dependency, configuration or feature work was performed; no commit, push or tag change.
 
 ## Implemented foundation
 
@@ -25,12 +25,12 @@ The live extension provides explicit toolbar activation, picking, Design control
 - Media/state context selection does not force browser state or simulate viewport size. Export contains representable enabled session CSS; DOM operations, unavailable/shadow targets and source-recovery records are explicitly omitted.
 - No durable sessions, reload persistence or Redo. Ordinary transaction history has no size cap.
 
-## Confirmed current product defects
+## Audit product findings and current status
 
-| ID | Severity | Current defect |
+| ID | Audit severity | Current status / defect |
 | --- | --- | --- |
-| F01 | P2 | A page stylesheet carrying the internal layer attribute is excluded from source analysis, allowing false “Applied” feedback despite a stronger author rule. |
-| F02 | P2 | A host clone carrying that attribute bypasses marker containment and temporarily inherits the original target’s CSS override. |
+| F01 | P2 | **Fixed by Phase 10B.1.** Attribute-only stylesheet exclusion caused false “Applied” feedback despite a stronger author rule; exact live layer identity now retains page-owned lookalike author CSS and truthful effects. |
+| F02 | P2 | **Fixed by Phase 10B.1.** A marked host clone bypassed containment and inherited the original override; exact live layer identity now permits copied-marker sanitation on page-owned clones and wrappers. |
 | F03 | P2 | Duplicate’s raw `url(` check misses an escaped CSS URL function; the browser accepts the URL and the supposedly resource-safe subtree is duplicated. |
 | F04 | P2 | Color-slider arrow keys reach popup button navigation and move focus away from the slider. |
 | F05 | P2 | A stale structure action is safely refused, but its explanation disappears when invoked from HTML. |
@@ -38,9 +38,11 @@ The live extension provides explicit toolbar activation, picking, Design control
 | F07 | P3 | Code add-declaration validation lacks field-associated error semantics and precise property/value feedback. |
 | F08 | P3 | Repeated same-class tree nodes can have identical accessible names despite distinct visible text. |
 
-These are fresh runtime observations, with source causes documented in the detailed report. F01–F03 also exist in the earlier 09B source; this audit does not attribute them to 10A. No fix has been applied.
+The detailed report preserves the original runtime findings and source causes. F01–F03 also existed in the earlier 09B source and were not attributed to 10A. F03–F08 remain unchanged. Phase 10B.1 shares the existing WeakSet across ownership consumers and revokes layer identity on replacement, Reset, teardown and failed insertion; layer attributes remain metadata.
 
 ## Performance, memory and remaining uncertainty
+
+The measurements below remain pre-fix audit evidence. Phase 10B.1 adds constant-time identity lookup without new scans, observers, persistent subscriptions or RAF loops. Current scoped-cascade, hot-path and eight-cycle teardown guards passed; listener/context-observer counts stayed flat. This does not resolve the audit's hang or heap uncertainty.
 
 Fresh simple/heavy edit workloads completed with correct final values and ordinary Undo. Heavy p95 input-to-second-RAF proxies ranged **36.0–73.2 ms**, with a **92.3 ms** maximum; no corroborated multi-second stall. These are paint-opportunity proxies, not pixel-presentation measurements. The original real-page hang remains **unreproduced and unresolved**.
 
@@ -58,6 +60,20 @@ Native sampler ownership/cancellation tests pass. The current walkthrough exerci
 - **MISSING:** persistence/Redo, viewport/device tooling, pseudo-state forcing, asset management and animation authoring. Read-only keyframe inspection and background URL editing do not provide those tools.
 
 ## Verification and release
+
+Phase 10B.1 verification used zero browser retries. Three unit regressions and 22 real-extension ownership cases were added; the new cases passed in both relevant and critical runs.
+
+| Phase 10B.1 check | Result |
+| --- | --- |
+| Focused unit / corrected shadow checks | 32/0/0 in 677 ms; 3/0/0 in 9.5 s (passed/failed/skipped) |
+| `pnpm typecheck`, `pnpm test`, `pnpm build` | Typecheck passed; 397/0/0 across 24 files in 2.23 s; production build passed in 5.025 s |
+| Relevant browser gate | 180/0/0 in 5.7 min |
+| Full audit critical gate plus new cases | **503/1/0 in 21.5 min**; same 3 historical screenshot-only cases deselected |
+| Single unchanged UI03 diagnostic | 1/0/0 in 9.8 s; separate from the failed critical gate |
+
+The critical failure is classified **FLAKE**: UI03-normal's Changes comparison differed in 15 gray text pixels (maximum channel delta 46 versus limit 1), without visible red feedback bleed; its unchanged diagnostic passed. The full gate remains recorded as failed. First focused browser attempt was 19/3/0 in 1.1 min: **TEST DEFECT**, new shadow assertions demanded blocked certainty where ordinary and marked controls correctly returned existing unverified evidence. Only those new assertions were corrected. Pre-fix characterization reproduced two expected product failures (0/2/0); an initial sandboxed unit command hit executable-shim resolution (**ENVIRONMENT**), then the installed CLI passed. First logs/traces are preserved under `.preview/phase-10b-ownership/`. No UI tolerance or rendering change was made.
+
+The following release/package checks are the **historical pre-fix audit results**, not a new Phase 10B.1 package certification:
 
 | Check | Fresh result |
 | --- | --- |
@@ -77,11 +93,11 @@ The earlier interrupted supplemental attempt is preserved separately; it is not 
 
 ## Dependency-ordered next work
 
-1. Fix internal stylesheet/node identity classification and escaped-resource duplication checks with scoped regressions; preserve mutation/rollback safety.
+1. Review the uncommitted Phase 10B.1 F01/F02 correction. F03 escaped-resource duplication policy remains the next separate correctness task; preserve mutation/rollback safety.
 2. Fix color-slider keyboard ownership and visible HTML action refusals; correct the three smaller UX/accessibility defects.
 3. Repair stale test contracts and distinguish assertion gates from diagnostic collectors; keep first-failure history and separate generated evidence from historical captures.
 4. Complete release notices, icons, current support documentation and a tested compatibility/store policy before public distribution.
 5. Obtain a representative real-page hang reproduction and heap-retainer attribution before choosing performance/memory fixes. Consider broad render/open-positioning work only against an observed user cost.
 6. Scope later tools against verified product needs. Keep safe-author UI dormant; do not treat missing tools as already implemented.
 
-The audit created only the two report documents intentionally. Legacy tests also regenerated tracked historical artifacts; those outputs are preserved and listed in the detailed report’s final Git record. Production source, tests, configuration and dependency files are unchanged.
+The historical audit's side effects remain documented in its final Git record. Phase 10B.1 changes only six production files, three test files and this dashboard. No tracked historical PNG/JSON, historical report, dependency or configuration file changed; nothing is staged or committed.

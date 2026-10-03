@@ -1,3 +1,5 @@
+import { isEditLayer } from '../editing/layerOwnership';
+
 /** Bounded selected-target/ancestor observers. No polling, subtree scan or source work. */
 export function observeTarget(element: Element, invalidate: () => void, owns: (element: Element) => boolean = () => false) {
   const win = element.ownerDocument.defaultView!;
@@ -6,7 +8,7 @@ export function observeTarget(element: Element, invalidate: () => void, owns: (e
   const watched = new Set<Node>();
   let nearby = 0;
   const watch = (node: Node) => {
-    if (watched.has(node) || (node instanceof win.Element && (owns(node) || node.hasAttribute('data-cssforge-edit-layer')))) return;
+    if (watched.has(node) || isEditLayer(node) || (node instanceof win.Element && owns(node))) return;
     watched.add(node);
     mutations.observe(node, { attributes: node instanceof win.Element, childList: true, characterData: true });
     if (node instanceof win.Element) sizes.observe(node);

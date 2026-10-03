@@ -1,4 +1,5 @@
 import { splitCSS } from '../../editing/rich';
+import { isEditLayer } from '../../editing/layerOwnership';
 import { matchingContexts } from './matching';
 import type { Declaration, RuleContext, SelectedSources, SessionGroup, SourceAccessibility, SourceRule, SourceSheet } from './model';
 import type { TargetLifecycle } from '../../picker/targetLifecycle';
@@ -45,7 +46,7 @@ export function createSourceIndex(doc: Document, owns: (element: Element) => boo
     for (const sheet of [...regular, ...adopted]) {
       if (seen.has(sheet)) continue; seen.add(sheet);
       const owner = sheet.ownerNode as Element | null;
-      if (owner && (owns(owner) || owner.hasAttribute?.('data-cssforge-edit-layer'))) continue;
+      if (owner && (owns(owner) || isEditLayer(owner))) continue;
       if (sheets.length >= 50) { notices.add('Stylesheet inspection limit reached (50 per scope).'); break; }
       const sourceId = id(sheet, 'sheet');
       const source: SourceSheet = { id: sourceId, scopeId: id(root, 'scope'), kind: adopted.has(sheet) ? 'adopted' : sheet.href ? 'linked' : 'style', label: sheet.href ?? (adopted.has(sheet) ? 'adopted stylesheet' : '<style>'), url: sheet.href, order: sheets.length, disabled: sheet.disabled, accessibility: readable, rules: [] };

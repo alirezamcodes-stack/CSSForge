@@ -1,4 +1,5 @@
 import type { TargetLifecycle } from '../../picker/targetLifecycle';
+import { isEditLayer } from '../../editing/layerOwnership';
 import type { TargetLocator, LocatorResolution } from '../locator';
 import { reconciliationLimits as limits, type ReconciliationResult, type ReconciliationState } from './model';
 export * from './model';
@@ -73,13 +74,13 @@ export function createReconciliation<T>(doc: Document, lifecycle: TargetLifecycl
         const inspect = (node: Node): boolean => {
           if (++inspected > limits.nodesPerDelivery || ++pending!.nodes > limits.nodesTotal) return false;
           stats.candidateNodes++;
-          if (!(node instanceof win.Element) || hooks.owns(node) || node.hasAttribute('data-cssforge-edit-layer')) return true;
+          if (!(node instanceof win.Element) || hooks.owns(node) || isEditLayer(node)) return true;
           if (node.localName === locator.evidence.tag && node.namespaceURI === locator.evidence.namespace) plausible = true;
           for (let child = node.firstElementChild; child; child = child.nextElementSibling) if (!inspect(child)) return false;
           return true;
         };
         for (const record of records) {
-          if (record.target instanceof win.Element && (hooks.owns(record.target) || record.target.hasAttribute('data-cssforge-edit-layer'))) continue;
+          if (record.target instanceof win.Element && (hooks.owns(record.target) || isEditLayer(record.target))) continue;
           if (record.type === 'attributes') { if (!inspect(record.target)) { finish('migration-rejected', 'Candidate node budget exceeded.'); return; } }
           else for (const node of record.addedNodes) if (!inspect(node)) { finish('migration-rejected', 'Candidate node budget exceeded.'); return; }
         }
