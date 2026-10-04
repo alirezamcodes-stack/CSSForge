@@ -14,14 +14,15 @@ export function DOMNavigation() {
   ] as const).map(([label, enabled, action], index) => <button key={label} disabled={!enabled} onClick={action}><Icon name={(['parent', 'child', 'left', 'right'] as const)[index]} />{label}</button>)}</nav>;
 }
 export function LiveDOMTree() {
-  const { picker } = useInspection(), { design, structureRevision } = useEditing();
+  const { picker } = useInspection(), { design, structureRevision, error } = useEditing();
+  const inspectorMenuOpen = useUI(state => state.activePopover === 'Inspector menu');
   const [revision, setRevision] = useState(0);
   const [focusedId, setFocusedId] = useState<string | null>(null);
   const treeRoot = useRef<HTMLDivElement>(null);
   const snapshot = useMemo(() => picker!.tree(), [picker, design?.targetId, revision, structureRevision]);
   const tabStop = snapshot.rows.some(row => row.id === focusedId) ? focusedId : (snapshot.rows.find(row => row.selected) ?? snapshot.rows[0])?.id;
   useLayoutEffect(() => { treeRoot.current?.querySelector('[aria-selected=true]')?.scrollIntoView({ block: 'nearest' }); }, [design?.targetId]);
-  return <><div className={t.toolbar}><span>DOM around selection</span><button onClick={() => setRevision(value => value + 1)}>Refresh tree</button></div><div ref={treeRoot} className={t.tree} role="tree" aria-label="Page DOM tree">{snapshot.rows.map((row, index) => <div key={row.id} className={`${t.row} ${row.selected ? t.selected : ''}`} style={{ paddingLeft: 12 + Math.min(row.depth, 7) * 12 }}>
+  return <>{error && !inspectorMenuOpen && <p className={s.editError} role="alert">{error}</p>}<div className={t.toolbar}><span>DOM around selection</span><button onClick={() => setRevision(value => value + 1)}>Refresh tree</button></div><div ref={treeRoot} className={t.tree} role="tree" aria-label="Page DOM tree">{snapshot.rows.map((row, index) => <div key={row.id} className={`${t.row} ${row.selected ? t.selected : ''}`} style={{ paddingLeft: 12 + Math.min(row.depth, 7) * 12 }}>
     <button className={t.expand} tabIndex={-1} disabled={!row.expandable} aria-label={`${row.expanded ? 'Collapse' : 'Expand'} ${row.label}`} onClick={() => { picker!.toggleNode(row.id); setRevision(value => value + 1); }}>{row.expandable && <Icon name={row.expanded ? 'chevron' : 'chevronRight'} />}</button>
     <button role="treeitem" aria-label={row.label} aria-level={row.depth + 1} aria-selected={row.selected} aria-expanded={row.expandable ? row.expanded : undefined} tabIndex={row.id === tabStop ? 0 : -1} className={t.node} title={row.label} onFocus={() => setFocusedId(row.id)} onClick={() => picker!.selectNode(row.id)} onKeyDown={event => {
       const items = Array.from(event.currentTarget.closest('[role=tree]')!.querySelectorAll<HTMLButtonElement>('[role=treeitem]'));

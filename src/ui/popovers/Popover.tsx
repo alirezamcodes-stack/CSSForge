@@ -24,7 +24,8 @@ export function Popover({ id, label, children, className = '', iconOnly = false,
       if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); setPopover(id); }
     }}><span className={s.triggerLabel}>{label}</span>{!iconOnly && <Icon name="chevron" />}</button></Tooltip>
     {open && <FloatingHost {...(portal ? { root: getUIRoot() } : {})}><FloatingFocusManager context={context} modal={false} closeOnFocusOut={!interactionLocked} returnFocus><div ref={refs.setFloating} style={floatingStyles} className={s.popover} {...interactions.getFloatingProps()} aria-label={id} onKeyDown={event => {
-      if (event.target instanceof HTMLInputElement) return;
+      if (event.defaultPrevented) return;
+      if (event.target instanceof HTMLElement && event.target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="slider"], [role="textbox"], [role="spinbutton"], [role="combobox"]')) return;
       if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
       const buttons = Array.from(content.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)') ?? []);
       if (!buttons.length) return;
