@@ -1,14 +1,14 @@
 # CSSForge current state
 
-Audited **2026-10-03**, Europe/Berlin; updated **2026-10-04** for Phase 10B.4. This dashboard records current status; [the detailed audit](post-10a-full-project-audit.md) remains the unchanged pre-fix record. Earlier phase reports remain historical evidence.
+Audited **2026-10-03**, Europe/Berlin; updated **2026-10-04** for Phase 10B.5. This dashboard records current status; [the detailed audit](post-10a-full-project-audit.md) remains the unchanged pre-fix record. Earlier phase reports remain historical evidence.
 
 ## Baseline and health
 
-- Phase 10B.4 baseline verified clean: `fix/phase-10b-ux-a11y`, HEAD/main/`origin/main` **`dfc3c406ee89777b8f855183c74dbe753504d710`**, `fix: harden interaction and refusal feedback`. F01–F05 hardening is merged in this baseline; Phase 10B.4 changes remain uncommitted on this branch.
+- Phase 10B.5 baseline verified clean: `chore/phase-10b-maintenance`, HEAD/main/`origin/main` **`c585c9f51c0178dfcfd5080df74f7797c3b13802`**, `fix: harden ux and accessibility`. F01–F08 hardening is merged in this baseline; Phase 10B.5 maintenance changes remain uncommitted on this branch.
 - Protected `phase-10a` remains **`ad32eedf81f051a7f5ac3508e2d6a7c243f37b1e`**; `pre-phase-10b` remains **`c6638691b9972081f0ddfc559e4515d327404276`**.
-- The selected-element editing foundation works in its supported scope. F01–F08 are fixed in the current working tree. Phase 10B is not declared complete: Phase 10B.5 test/docs maintenance remains pending. No P0 or P1 finding was established in the audit.
+- The selected-element editing foundation works in its supported scope. F01–F08 remain fixed. Phase 10B.5 maintenance is completed within F11/F17/F18/F19: focused, standard, relevant and final critical checks pass. Changes await human review; Phase 10B is not declared complete or tagged. No new product regression was established.
 - The pre-fix report inventories **21 findings: P0 0 / P1 0 / P2 9 / P3 12**. This includes release gaps, debt and unverified risks; it is not a count of 21 confirmed product bugs.
-- Phase 10B.4 changes only Code/HTML no-selection copy, Add Declaration validation/accessibility, shared tree accessible naming, focused tests and this dashboard. Existing mutation guards, history, targeting, ownership, resource policy and native sampler code remain unchanged. No dependency/configuration or release change was made.
+- Phase 10B.5 changes only current documentation, stale test contracts, verification classification/configuration, generated evidence routing and related tests. Production source, mutation guards, history, targeting, ownership, resource policy and native sampler implementations remain unchanged. No dependency upgrade, feature or release implementation was made.
 
 ## Implemented foundation
 
@@ -38,7 +38,7 @@ The live extension provides explicit toolbar activation, picking, Design control
 | F07 | P3 | **Fixed by Phase 10B.4.** Unsupported properties and invalid values have separate field errors, stable unique descriptions and invalid-state semantics; correction clears obsolete associations and valid Apply/Undo retains the existing transaction path. |
 | F08 | P3 | **Fixed by Phase 10B.4.** HTML/Navigator names include the bounded visible tag/ID/classes, boundary and normalized direct-text preview; visible distinctions survive without hidden identity or descendant traversal. |
 
-The detailed report preserves the original runtime findings and source causes. F01–F03 also existed in the earlier 09B source and were not attributed to 10A. F06–F08 are now fixed in the current working tree; the historical report remains unchanged. Phase 10B.1 shares the existing WeakSet across ownership consumers and revokes layer identity on replacement, Reset, teardown and failed insertion; layer attributes remain metadata.
+The detailed report preserves the original runtime findings and source causes. F01–F03 also existed in the earlier 09B source and were not attributed to 10A. F06–F08 are fixed in the current baseline; the historical report remains unchanged. Phase 10B.1 shares the existing WeakSet across ownership consumers and revokes layer identity on replacement, Reset, teardown and failed insertion; layer attributes remain metadata.
 
 Phase 10B.2 uses detached native CSSOM for accepted declarations, the existing CSS parser for function tokens, and a native grammar probe for escaped names. No source style is rewritten. The existing conservative refusal includes unused custom-property URL tokens and inline `var()` fallbacks; quoted text/comments and browser-ignored declarations are inert. Referenced variables, stylesheet/inherited resources and other resource-function policies are not newly inspected. No computed-style/layout reads, network feature, new observers/subscriptions/RAF loops or persistent caches were added.
 
@@ -66,6 +66,25 @@ Native sampler ownership/cancellation tests pass. The current walkthrough exerci
 - **MISSING:** persistence/Redo, viewport/device tooling, pseudo-state forcing, asset management and animation authoring. Read-only keyframe inspection and background URL editing do not provide those tools.
 
 ## Verification and release
+
+Phase 10B.5 reconciles F11's contradictory text/structure support sentence and current-result links; F19's Font family two-Escape and dock “Session edit controls” contracts; F17's observational collector classification; and F18's historical comparison/output ownership. See [verification instructions](verification.md) for exact gate commands and separate diagnostics/historical commands. No product behavior was changed.
+
+| Phase 10B.5 check | Passed / failed / skipped; duration |
+| --- | --- |
+| Corrected identity / portable structural / newer token gates | 3/0/0, 10.2 s |
+| Corrected SH04 collector / explicit historical comparison | 1/0/0 collection/local assertions, 3.3 s; 1/0/0 comparison, 3.8 s; reported separately from gates |
+| Evidence-boundary unit regressions | 3/0/0, 335 ms |
+| `pnpm typecheck`, `pnpm test`, `pnpm build` | Typecheck passed (7.708 s command); 418/0/0 across 26 files, 2.91 s; build passed, 5.037 s |
+| Relevant browser gate | 178/0/0, 7.6 min (456.737 s command); prior 175 plus two maintenance gates and one capture/output-routing case |
+| Final critical browser gate | **541/0/0, 20.7 min (1244.190 s command)**; same 3 historical screenshot-only exclusions; retries zero |
+
+Before contract correction (after output routing only), the two stale F19 contracts reproduced **TEST DEFECTS**; the historical structural control passed (1/2/0, 43.3 s). The first collector discovery command inherited the default exclusion (**TEST DEFECT**, zero selected); explicit Playwright configs corrected classification/discovery without loosening expectations. A relevant-gate startup hit Windows pnpm regex-pipe interpretation/EPIPE (**ENVIRONMENT**, no completed test results); the corrected invocation uses a fresh output directory. First logs/traces are retained under `.preview/phase-10b-maintenance/`. No full-suite rerun was used to manufacture a green total.
+
+The final critical gate passed all 22 ownership, 18 resource-policy, eight interaction and nine UX/accessibility cases protecting F01–F08, plus the existing text/structure, sampler, cascade, lifecycle and targeting checks. Both UI03/P2 raster checks and the menu-to-surface focus case passed. Their prior intermittent failures and unresolved causes remain historical evidence; this passing run does not establish a flake fix. No classification rerun was needed, and earlier failed critical gates retain their failed results.
+
+Default discovery selects 552 assertion-gate cases across 48 files. The four intentionally observational audit files contain 24 separately selected diagnostic cases; their local assertions and catches/mismatch recording remain intact. Completion certifies only what they explicitly assert; generated JSON must be reviewed. SH04's fresh JSON shows correct Undo/Reset values, focus containment/return and zero errors. SH01's padding-box iframe point is labeled truthfully; SH08 records exterior border clicks. No assertive regression was converted to a collector.
+
+The portable structural gate reads no historical baseline; an explicit `@historical` case retains every original declaration/order and density-improvement comparison against a provisioned input. All fresh fixed PNG/JSON/performance writers and Playwright profiles/traces/results now use one contained run directory; normal defaults are unique `.preview/verification/<timestamp>-<process ID>` roots. Existing ignore rules suffice. All **1,210/1,210** tracked artifact/historical-audit hashes remained identical after focused, relevant and final critical verification; 13 formerly tracked-path professional captures were generated exclusively inside the fresh run. Final status contains only the 40 intended maintenance paths (35 modified, five new), all unstaged/uncommitted; no fresh historical writes occurred. No historical file was deleted, untracked, rewritten or restored.
 
 Phase 10B.4 added nine real-extension cases: two truthful Code/HTML empty-state and native deselection/recovery workflows, five property/value/accessibility/keyboard/normalization/refusal workflows, and two shared HTML/Navigator naming/selection workflows. These include third-class and long-ID distinctions, bounded direct text, whitespace, identical rows, deterministic refresh and click/Enter/Space target alignment. F04/F05, 09B, 10A, ownership and resource-policy guards passed in the final relevant gate with zero retries.
 
@@ -136,14 +155,14 @@ The following release/package checks are the **historical pre-fix audit results*
 
 The earlier interrupted supplemental attempt is preserved separately; it is not merged into a clean run. The detailed report provides logs, first-failure evidence, workload measurements and hashes.
 
-**Focused, unit, build and relevant checks pass; the current critical gate remains failed and unresolved risks remain recorded. Public distribution is not ready:** bundled dependency notices are incomplete, approved release icons are missing, and minimum/support Chrome policy, compatibility and store/disclosure checks remain open. Version is `0.1.0`; nothing was published.
+**Phase 10B.5 focused, unit, build, relevant and final critical checks pass; unresolved risks remain recorded. Public distribution is not ready:** bundled dependency notices are incomplete, approved release icons are missing, and minimum/support Chrome policy, compatibility and store/disclosure checks remain open. Version is `0.1.0`; nothing was published.
 
 ## Dependency-ordered next work
 
-1. Review the uncommitted Phase 10B.4 F06/F07/F08 correction; F01–F05 are already merged in the current baseline. Preserve existing mutation/rollback safety.
-2. Phase 10B.5 remains pending separately authorized work: repair stale test contracts and distinguish assertion gates from diagnostic collectors; keep first-failure history and separate generated evidence from historical captures. Phase 10B is not complete.
+1. Review the completed, uncommitted Phase 10B.5 maintenance; F01–F08 are merged in the baseline. Preserve existing mutation/rollback safety and every first failure. Phase 10B is not declared complete or tagged pending human review.
+2. Keep collectors, historical comparisons and current assertion gates separate; follow the verification instructions and retain generated/historical evidence ownership boundaries.
 3. Complete release notices, icons, current support documentation and a tested compatibility/store policy before public distribution.
 4. Obtain a representative real-page hang reproduction and heap-retainer attribution before choosing performance/memory fixes. Consider broad render/open-positioning work only against an observed user cost.
 5. Scope later tools against verified product needs. Keep safe-author UI dormant; do not treat missing tools as already implemented.
 
-The historical audit's side effects remain documented in its final Git record. Phase 10B.4 changes four production files, four browser-test files (three necessary assertion updates and one new focused suite) and this dashboard. No tracked historical PNG/JSON, historical report, F01–F05 implementation behavior, dependency or configuration file changed; nothing is staged or committed. Phase 10B.5/later work was not started; no commit, push, merge, tag or branch switch occurred.
+The historical audit's side effects remain documented in its final Git record. Phase 10B.5 modifies current docs, test/verification configuration and test evidence writers only; production source, entrypoints, dependencies/lockfile, ignore rules and historical evidence remain untouched. All intended maintenance is unstaged/uncommitted. No feature, release, performance/memory work, commit, push, merge, tag or branch switch occurred.

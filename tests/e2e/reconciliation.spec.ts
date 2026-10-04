@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type TestInfo } from '@playwright/test';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { setup, pick, identity, dock } from './extensionHarness';
@@ -21,7 +22,7 @@ async function edit(page: Parameters<typeof pick>[0], name = 'Font size', value 
   const input = page.getByRole('textbox', { name, exact: true }); await input.fill(value); await input.press('Enter');
 }
 async function evidence(info: TestInfo, result: unknown) {
-  const directory = 'test-results/diagnostics/reconciliation'; await mkdir(directory, { recursive: true });
+  const directory = evidencePath('test-results/diagnostics/reconciliation'); await mkdir(directory, { recursive: true });
   const file = `${directory}/${info.title.split(' ')[0]}.json`; await writeFile(file, JSON.stringify(result, null, 2)); await info.attach('reconciliation-outcome', { path: file, contentType: 'application/json' });
 }
 

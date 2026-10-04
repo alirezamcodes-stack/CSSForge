@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
@@ -8,7 +9,7 @@ async function input(page: Page, label: string, value: string) { await field(pag
 async function action(page: Page, label: string) { await page.getByRole('button', { name:'Inspector menu', exact:true }).click(); await page.getByRole('dialog', { name:'Inspector menu', exact:true }).getByRole('button', { name:label, exact:true }).click(); await page.keyboard.press('Escape'); }
 async function choice(page: Page, label: string, value: string) { await page.getByRole('button', { name:label, exact:true }).click(); await page.getByRole('dialog', { name:label, exact:true }).getByRole('button', { name:value, exact:true }).click(); }
 async function sections(page: Page, opened: string[]) { for (const name of ['Spacing','Typography','Background','Display','Border','Positioning','Box shadow','Text shadow','Filters']) { const header = page.locator(`[data-section="${name}"]`).getByRole('button', { name, exact:true }); if (await header.getAttribute('aria-expanded') !== String(opened.includes(name))) await header.click(); } }
-async function shot(page: Page, name: string, section?: string) { await mkdir('artifacts/screenshots/phase-06.5', { recursive:true }); if (section) await page.locator(`[data-section="${section}"]`).evaluate(node => node.scrollIntoView({ block:'start' })); await page.screenshot({ path:`artifacts/screenshots/phase-06.5/${name}.png`, animations:'disabled' }); }
+async function shot(page: Page, name: string, section?: string) { await mkdir(evidencePath('artifacts/screenshots/phase-06.5'), { recursive:true }); if (section) await page.locator(`[data-section="${section}"]`).evaluate(node => node.scrollIntoView({ block:'start' })); await page.screenshot({ path:evidencePath(`artifacts/screenshots/phase-06.5/${name}.png`), animations:'disabled' }); }
 
 test('NumericScrubber inputs, unit preservation, step modifiers, drag, Escape and transaction isolation', async ({}, info) => {
   const { page,context,errors } = await setup(info);
@@ -83,7 +84,7 @@ test('Phase 06.5 thirteen focused views, coherent tokens/icons, narrow viewport 
     await sections(page,['Filters']); await input(page,'Contrast value','130%'); await input(page,'Hue rotate value','15deg'); await shot(page,'09-filters','Filters');
     await page.getByRole('tab',{name:'Code',exact:true}).click(); await shot(page,'10-code');
     await page.getByRole('button',{name:'Open Navigator',exact:true}).first().click(); await shot(page,'11-navigator'); await page.keyboard.press('Escape');
-    await dock(page).screenshot({path:'artifacts/screenshots/phase-06.5/12-bottom-dock.png'});
+    await dock(page).screenshot({path:evidencePath('artifacts/screenshots/phase-06.5/12-bottom-dock.png')});
     await page.getByRole('tab',{name:'Design',exact:true}).click(); await sections(page,['Typography']); await page.setViewportSize({width:390,height:844}); await withinViewport(page); await shot(page,'13-narrow-viewport','Typography');
     await page.getByRole('button',{name:'Text color picker',exact:true}).click(); const popup=page.getByRole('dialog',{name:'Text color picker',exact:true}); const b=(await popup.boundingBox())!; expect(b.x).toBeGreaterThanOrEqual(0); expect(b.x+b.width).toBeLessThanOrEqual(390); await page.keyboard.press('Escape');
     await page.setViewportSize({width:1440,height:1000}); await worker.evaluate(id=>chrome.tabs.setZoom(id,2),tabId); await expect.poll(()=>worker.evaluate(id=>chrome.tabs.getZoom(id),tabId)).toBe(2); await withinViewport(page); await input(page,'Font size','20'); await expect(page.locator('#checkout')).toHaveCSS('font-size','20px'); expect(errors).toEqual([]);

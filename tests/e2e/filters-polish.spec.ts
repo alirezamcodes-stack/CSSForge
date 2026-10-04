@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
@@ -9,7 +10,7 @@ async function edit(page: Page, name: string, value: string) { await field(page,
 async function action(page: Page, name: string) { await page.getByRole('button', { name: 'Inspector menu', exact: true }).click(); await page.getByRole('dialog', { name: 'Inspector menu', exact: true }).getByRole('button', { name, exact: true }).click(); await page.keyboard.press('Escape'); }
 async function capture(page: Page, name: string) {
   await page.locator('[data-section="Filters"]').evaluate(node => node.scrollIntoView({ block: 'start' })); await page.mouse.move(0, 0);
-  await page.screenshot({ path: `artifacts/screenshots/phase-06.5.2D/${name}.png`, animations: 'disabled' });
+  await page.screenshot({ path: evidencePath(`artifacts/screenshots/phase-06.5.2D/${name}.png`), animations: 'disabled' });
 }
 async function fits(page: Page) {
   await withinViewport(page);
@@ -26,7 +27,7 @@ async function fits(page: Page) {
 test('Phase 06.5.2D three filter views, all values, sliders, reset, narrow and zoom', async ({}, info) => {
   const { page, context, worker, tabId, errors } = await setup(info);
   try {
-    await mkdir('artifacts/screenshots/phase-06.5.2D', { recursive: true });
+    await mkdir(evidencePath('artifacts/screenshots/phase-06.5.2D'), { recursive: true });
     await page.setViewportSize({ width: 1440, height: 1100 }); await pick(page, '#checkout');
     for (const name of ['Spacing', 'Typography', 'Background', 'Display', 'Border', 'Positioning', 'Box shadow', 'Text shadow', 'Filters']) {
       const header = page.locator(`[data-section="${name}"]`).getByRole('button', { name, exact: true });

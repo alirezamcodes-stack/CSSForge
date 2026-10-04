@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
@@ -12,7 +13,7 @@ async function choose(page: Page, name: string, value: string) {
 }
 async function shot(page: Page, name: string) {
   await page.mouse.move(0, 0);
-  await page.screenshot({ path: `artifacts/screenshots/phase-06.5.2A/${name}.png`, animations: 'disabled' });
+  await page.screenshot({ path: evidencePath(`artifacts/screenshots/phase-06.5.2A/${name}.png`), animations: 'disabled' });
 }
 async function fits(page: Page, color = false) {
   await withinViewport(page);
@@ -32,7 +33,7 @@ async function fits(page: Page, color = false) {
 test('Phase 06.5.2A three Typography views, editing, alignment, narrow color and 200% zoom', async ({}, info) => {
   const { page, context, worker, tabId, errors } = await setup(info);
   try {
-    await mkdir('artifacts/screenshots/phase-06.5.2A', { recursive: true });
+    await mkdir(evidencePath('artifacts/screenshots/phase-06.5.2A'), { recursive: true });
     await page.setViewportSize({ width: 1440, height: 1100 }); await pick(page, '#checkout');
     for (const name of ['Spacing', 'Typography', 'Background', 'Display', 'Border', 'Positioning', 'Box shadow', 'Text shadow', 'Filters']) {
       const button = page.locator(`[data-section="${name}"]`).getByRole('button', { name, exact: true });

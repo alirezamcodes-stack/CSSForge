@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -6,7 +7,7 @@ import { setup, pick, fixture, inspector } from './extensionHarness';
 declare const chrome: typeof browser;
 
 // Diagnostic collection only. Product observations deliberately do not abort coverage.
-const destination = path.resolve('artifacts/diagnostics/current-ui-audit/effects');
+const destination = path.resolve(evidencePath('artifacts/diagnostics/current-ui-audit/effects'));
 const sectionNames = ['Spacing', 'Typography', 'Background', 'Display', 'Border', 'Positioning', 'Box shadow', 'Text shadow', 'Filters'];
 const auditFixture = fixture.replace('</style>', `
 #complex-gradient{background-image:linear-gradient(90deg,red 0% 20%,45%,blue 100%),radial-gradient(circle at 20% 30%,#fff 10px,#000 80px);background-position:10% 20%,right bottom;background-size:75% 80%,30px 40px;background-repeat:repeat-x,no-repeat}
@@ -33,6 +34,7 @@ function recorder(surface:string) {
 async function fits(page:Page,popup?:Locator) { const rect=await inspector(page).boundingBox(), bounds=await page.evaluate(()=>({w:innerWidth,h:innerHeight})); const panel=page.getByRole('tabpanel',{name:'Design',exact:true}); const overflow=await panel.evaluate(node=>node.scrollWidth-node.clientWidth); const box=popup?await popup.boundingBox():null; return {okay:!!rect&&rect.x>=0&&rect.y>=0&&rect.x+rect.width<=bounds.w+1&&rect.y+rect.height<=bounds.h+1&&overflow<=1&&(!box||box.x>=0&&box.y>=0&&box.x+box.width<=bounds.w+1&&box.y+box.height<=bounds.h+1),rect,bounds,overflow,popup:box}; }
 test.beforeAll(async()=>{await mkdir(destination,{recursive:true});});
 
+test.describe('Observational collector — review generated JSON; completion is not product certification', { tag: '@diagnostic' }, () => {
 test('Current UI audit — every ColorControl instance, formats, alpha, invalid values, reopen and undo',async({},info)=>{
   test.setTimeout(240000); const r=recorder('color'); const {page,context,worker,tabId,errors}=await setup(info,auditFixture); page.setDefaultTimeout(5000);
   try {
@@ -149,4 +151,6 @@ test('Current UI audit — remaining Effects gestures, isolation, short viewport
   });
   await action(page,'Reset session edits');await action(page,'Reset session edits');r.add('All Effects repeated reset',await css(page,'#checkout','background-image')==='none'&&await css(page,'#checkout','box-shadow')==='none'&&await css(page,'#checkout','text-shadow')==='none'&&await css(page,'#checkout','filter')==='none','Repeated session reset returns every Effects chain to native initial values',{background:await css(page,'#checkout','background-image'),box:await css(page,'#checkout','box-shadow'),text:await css(page,'#checkout','text-shadow'),filter:await css(page,'#checkout','filter')});
  }finally{await r.save(errors);await context.close();}
+});
+
 });

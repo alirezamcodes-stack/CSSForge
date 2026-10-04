@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { expect, type TestInfo } from '@playwright/test';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { setup, pick, dock, inspector } from './extensionHarness';
@@ -27,7 +28,7 @@ export async function launch(info: TestInfo, fixture = html()) {
 }
 type Outcome = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H';
 export async function evidence(info: TestInfo, outcomes: Outcome[], actual: unknown, expectedPolicy: string, defect = false) {
-  const directory = 'test-results/diagnostics/mutation-conflict-fixes'; await mkdir(directory, { recursive: true });
+  const directory = evidencePath('test-results/diagnostics/mutation-conflict-fixes'); await mkdir(directory, { recursive: true });
   const file = `${directory}/${info.title.split(' ')[0]}.json`;
   await writeFile(file, JSON.stringify({ case: info.title, outcomes, defect, expectedPolicy, actual }, null, 2)); await info.attach('conflict-audit', { path: file, contentType: 'application/json' });
 }

@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
@@ -6,7 +7,7 @@ declare const chrome: typeof browser;
 test('built Chrome picker selects real data, navigates, tracks geometry and captures five Phase 03 views', async ({}, info) => {
   const { context, page, errors } = await setup(info);
   try {
-    await mkdir('artifacts/screenshots/phase-03', { recursive: true });
+    await mkdir(evidencePath('artifacts/screenshots/phase-03'), { recursive: true });
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(1440);
     await expect(inspector(page)).toHaveCSS('width', '350px');
     await expect(page.getByRole('tab', { name: 'Design', exact: true })).toHaveCSS('font-size', '12px');
@@ -14,7 +15,7 @@ test('built Chrome picker selects real data, navigates, tracks geometry and capt
     await expect(outline(page)).toHaveAttribute('data-mode', 'hover');
     await expect(page.getByTestId('target-label')).toContainText('button#checkout.primary');
     await aligned(page, '#checkout');
-    await page.screenshot({ path: 'artifacts/screenshots/phase-03/01-hover.png' });
+    await page.screenshot({ path: evidencePath('artifacts/screenshots/phase-03/01-hover.png') });
     await page.locator('#checkout').click();
     await expect(identity(page)).toHaveText('button#checkout.primary');
     await expect(page.getByTestId('selected-font')).toHaveText('Arial 18px');
@@ -23,7 +24,7 @@ test('built Chrome picker selects real data, navigates, tracks geometry and capt
     expect(await page.evaluate(() => (window as any).hostEvents)).toEqual({ click: 0, pointerdown: 0, mousedown: 0, submit: 0 });
     await page.mouse.move(800, 100); await aligned(page, '#checkout');
     await expect(outline(page)).toHaveAttribute('data-mode', 'selected');
-    await page.screenshot({ path: 'artifacts/screenshots/phase-03/02-selected-inspector.png' });
+    await page.screenshot({ path: evidencePath('artifacts/screenshots/phase-03/02-selected-inspector.png') });
     await page.getByRole('button', { name: 'Select parent', exact: true }).click();
     await expect(identity(page)).toHaveText('section#collection.card');
     await expect(page.getByTestId('selected-font')).toHaveText('Georgia 21px');
@@ -31,10 +32,10 @@ test('built Chrome picker selects real data, navigates, tracks geometry and capt
     await page.getByRole('button', { name: 'Select child', exact: true }).click();
     await expect(identity(page)).toHaveText('h2#headline');
     await expect(page.getByTestId('selected-font')).toHaveText('Georgia 28px');
-    await page.screenshot({ path: 'artifacts/screenshots/phase-03/03-parent-child.png' });
+    await page.screenshot({ path: evidencePath('artifacts/screenshots/phase-03/03-parent-child.png') });
     await page.evaluate(() => scrollTo(0, 190));
     await aligned(page, '#headline');
-    await page.screenshot({ path: 'artifacts/screenshots/phase-03/04-after-scroll.png' });
+    await page.screenshot({ path: evidencePath('artifacts/screenshots/phase-03/04-after-scroll.png') });
     await page.setViewportSize({ width: 1000, height: 800 }); await aligned(page, '#headline');
     const handle = page.getByRole('group', { name: 'Move inspector' });
     const box = (await handle.boundingBox())!;
@@ -48,7 +49,7 @@ test('built Chrome picker selects real data, navigates, tracks geometry and capt
     await dock(page).getByRole('button', { name: 'Hide inspector panel' }).click();
     await pick(page, '#checkout'); await expect(inspector(page)).toBeVisible();
     await withinViewport(page); await aligned(page, '#checkout');
-    await page.screenshot({ path: 'artifacts/screenshots/phase-03/05-narrow.png' });
+    await page.screenshot({ path: evidencePath('artifacts/screenshots/phase-03/05-narrow.png') });
     expect(errors).toEqual([]);
   } finally { await context.close(); }
 });

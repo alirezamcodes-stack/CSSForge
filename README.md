@@ -4,7 +4,7 @@ CSSForge is a Chrome Manifest V3 extension for inspecting selected page elements
 
 The current implementation includes a scoped CSSOM source index, a conservative readable-author cascade engine, stable target locators and bounded replacement reconciliation. Normal Design and Code edits use CSSForge-owned stylesheets. An author-mutation engine exists and is regression-tested, but safe-author mode has no normal product control.
 
-The [current support contract](docs/current-support-contract.md) defines supported behavior and limits. The [release contract](docs/current-release-contract.md) defines the local package workflow and outstanding public-distribution requirements. The [Phase 10A report](docs/phase-10a-native-eyedropper.md) records native color sampling, cancellation, target freshness and exact verification results. Historical milestone reports describe their original checkpoints.
+The [current support contract](docs/current-support-contract.md) defines supported behavior and limits. [CURRENT-STATE](docs/CURRENT-STATE.md) records current status and verification results. The [release contract](docs/current-release-contract.md) defines the local package workflow and outstanding public-distribution requirements. The Phase 10A report and other milestone reports describe their original checkpoints.
 
 ## Current workflows
 
@@ -32,7 +32,7 @@ pnpm build
 
 In Chrome, open `chrome://extensions`, enable Developer mode, choose **Load unpacked**, and select `.output/chrome-mv3`. Pin CSSForge, open an ordinary HTTP(S) page, and click its toolbar action. Point to an element and click to select it. The dock cursor starts another pick; Escape cancels picking. The dock power button or another toolbar action deactivates CSSForge. Browser/store/restricted pages are unavailable and receive toolbar feedback.
 
-The extension requests `activeTab` and `scripting`, has no host permissions and is injected after toolbar activation. It does not register automatic all-site content scripts. Chrome 154.0.8037.93 is the current verification runtime; lower Chrome versions and other browsers are unverified. A minimum Chrome version is not yet established. EyeDropper capability is feature-detected in the current page context. Real Windows pixel selection and native Escape are verified. The [Phase 10A report](docs/phase-10a-native-eyedropper.md) records the later heavy-page cascade performance fix and stable tested editing/lifecycle workloads. Phase 10A is ready for review; product acceptance is pending, and the exact original real-page hang and residual heap growth remain unconfirmed.
+The extension requests `activeTab` and `scripting`, has no host permissions and is injected after toolbar activation. It does not register automatic all-site content scripts. Chrome 154.0.8037.93 is the recorded verification runtime; lower Chrome versions and other browsers are unverified. A minimum Chrome version is not yet established. EyeDropper capability is feature-detected in the current page context. Real Windows pixel selection and native Escape have historical verification evidence. The [Phase 10A report](docs/phase-10a-native-eyedropper.md) records the heavy-page cascade performance correction and tested workloads; [CURRENT-STATE](docs/CURRENT-STATE.md) records later hardening, verification and remaining limits. The exact original real-page hang and residual heap growth remain unresolved.
 
 ```sh
 pnpm zip
@@ -57,7 +57,7 @@ pnpm build
 pnpm test:e2e
 ```
 
-Packaged-extension tests use installed Chrome by default, disposable profiles and the CDP `Extensions.loadUnpacked` API. Set `CSSFORGE_BROWSER_CHANNEL=chromium` only when using a compatible installed Playwright runtime. This test-loading requirement does not establish the extension's minimum Chrome version. Use the current implementation report for exact commands, executed suites, retries and remaining verification limits. Keep browser profiles/output inside ignored `.preview`, `test-results` or `playwright-report` directories.
+Packaged-extension tests use installed Chrome by default, disposable profiles and the CDP `Extensions.loadUnpacked` API. Set `CSSFORGE_BROWSER_CHANNEL=chromium` only when using a compatible installed Playwright runtime. This test-loading requirement does not establish the extension's minimum Chrome version. [Verification instructions](docs/verification.md) distinguish correctness gates, observational collectors and explicit historical comparisons. Fresh output uses an ignored run-specific `.preview/verification` directory; checked-in `artifacts` remain historical. Retries are zero. See CURRENT-STATE for exact executed results and remaining limits.
 
 ## Implementation ownership
 

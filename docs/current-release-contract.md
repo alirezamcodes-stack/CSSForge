@@ -16,7 +16,7 @@ pnpm zip
 - `pnpm zip` runs `wxt zip -b chrome --mv3`. WXT performs a production build and archives its output; no custom release infrastructure or publishing action is involved.
 - WXT's default filename template is `{{name}}-{{version}}-{{browser}}.zip`: currently `.output/cssforge-0.1.0-chrome.zip`. Version/filename follows the package/manifest version.
 - Chrome packaging does not enable a separate sources ZIP by default. No sources ZIP, upload, signing, version automation, store API or CI release system is added.
-- `.output` is ignored generated output. The ZIP contains the built extension, not the preview/reference/history directories. Verify the exact output manifest and ZIP contents for the release candidate; use [the Phase 08A report](phase-08a-editing-truth-release-hardening.md) for recorded results.
+- `.output` is ignored generated output. The ZIP contains the built extension, not the preview/reference/history directories. Verify the exact output manifest and ZIP contents for the release candidate; [CURRENT-STATE](CURRENT-STATE.md) distinguishes current checks from historical package results.
 
 The command is provided by the installed WXT CLI (`zip [root]`, browser and MV3 options); its implementation builds before archiving the configured output directory. It does not rely on an invented external packaging service.
 
@@ -49,6 +49,7 @@ Local build/ZIP generation does not close these requirements:
 1. Approved release icon assets and verified manifest/action references.
 2. An evidence-based supported/minimum Chrome policy, or an explicitly reviewed current-version-only support policy; no guessed manifest minimum.
 3. Manual Chrome Web Store submission/listing, required disclosures/privacy determination and release review. No store copy or certification is fabricated here.
-4. Review the exact candidate's verification report, generated manifest, notices and ZIP contents before distribution.
+4. Complete the bundled dependency notice inventory identified by the audit; existing packaged notices are incomplete.
+5. Review the exact candidate's verification report, generated manifest, notices and ZIP contents before distribution.
 
-Historical audit findings remain intact. The [current support contract](current-support-contract.md) describes product capability; [the Phase 08A report](phase-08a-editing-truth-release-hardening.md) records what was actually verified for this implementation.
+Historical audit findings remain intact. The [current support contract](current-support-contract.md) describes product capability; [CURRENT-STATE](CURRENT-STATE.md) records current verification and remaining limits. The Phase 08A report remains a historical checkpoint.

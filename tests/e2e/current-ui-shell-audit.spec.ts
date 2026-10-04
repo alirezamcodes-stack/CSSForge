@@ -1,9 +1,10 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page, type TestInfo } from '@playwright/test';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
 import { setup, fixture, pick, dock, inspector, identity, outline } from './extensionHarness';
 declare const chrome: typeof browser;
-const directory='artifacts/diagnostics/current-ui-p1/audit/shell';
+const directory=evidencePath('artifacts/diagnostics/current-ui-p1/audit/shell');
 const selectionFixture=(await readFile('tests/e2e/fixtures/selection-audit.html','utf8')).replace('<cssforge-ui></cssforge-ui>','');
 async function save(info:TestInfo,actual:unknown) {
   await mkdir(directory,{recursive:true});const path=`${directory}/${info.title.split(' ')[0]}.json`;
@@ -23,6 +24,7 @@ async function menuAction(page:Page,label:string) {
   await page.getByRole('dialog',{name:'Inspector menu',exact:true}).getByRole('button',{name:label,exact:true}).click();await page.keyboard.press('Escape');
 }
 
+test.describe('Observational collector — review generated JSON; completion is not product certification', { tag: '@diagnostic' }, () => {
 test('SH01 built picker target geometry and lifecycle matrix',async({},info)=>{
   test.setTimeout(90000);const r=await setup(info,selectionFixture,async page=>{
     await page.route('http://frames.test/selection-audit-frame.html',route=>route.fulfill({contentType:'text/html',body:'<button>Frame</button>'}));
@@ -39,7 +41,7 @@ test('SH01 built picker target geometry and lifecycle matrix',async({},info)=>{
     await pick(r.page,'#zero-host');await r.page.getByRole('button',{name:'Select child',exact:true}).click();
     rows.push({case:'zero-size through child navigation',selected:await selected(r.page),highlightVisible:await outline(r.page).isVisible()});
     await dock(r.page).getByRole('button',{name:'Pick page element',exact:true}).click();
-    await r.page.locator('#same-frame').click({position:{x:2,y:2}});rows.push({case:'iframe border selection',selected:await selected(r.page)});await r.page.keyboard.press('Escape');
+    await r.page.locator('#same-frame').click({position:{x:2,y:2}});rows.push({case:'iframe padding-box point (2,2); SH08 records actual exterior border selection',selected:await selected(r.page)});await r.page.keyboard.press('Escape');
     await pick(r.page,'#dynamic');await edit(r.page,'Font size','27px');
     await r.page.locator('#dynamic').evaluate(node=>node.outerHTML='<div id="dynamic" class="box" style="font-size:18px">Re-rendered</div>');
     await expect(r.page.locator('#dynamic')).toHaveCSS('font-size','27px');
@@ -109,7 +111,7 @@ test('SH04 live Changes truth all interactions and focus containment',async({},i
     await changes.getByRole('button',{name:'Undo last edit',exact:true}).click();rows.push({case:'Undo from Changes',color:await r.page.locator('#checkout').evaluate(node=>getComputedStyle(node).color),text:await changes.innerText()});
     await changes.getByRole('button',{name:'Reset session edits',exact:true}).click();rows.push({case:'Reset from Changes',font:await r.page.locator('#checkout').evaluate(node=>getComputedStyle(node).fontSize),text:await changes.innerText()});
     await changes.getByRole('button',{name:'Close Changes',exact:true}).click();rows.push({case:'Close focus origin',focused:await dock(r.page).getByRole('button',{name:'Open Changes',exact:true}).evaluate(node=>node===(node.getRootNode() as ShadowRoot).activeElement)});
-    await dock(r.page).getByRole('button',{name:'More tools',exact:true}).click();await r.page.getByRole('button',{name:'Review changes',exact:true}).click();await r.page.keyboard.press('Escape');
+    await dock(r.page).getByRole('button',{name:'More tools',exact:true}).click();await r.page.getByRole('button',{name:'Session edit controls',exact:true}).click();await expect(changes).toBeVisible();await r.page.keyboard.press('Escape');await expect(changes).toBeHidden();await expect(dock(r.page).getByRole('button',{name:'More tools',exact:true})).toBeFocused();
     rows.push({case:'nested menu origin',focused:await dock(r.page).getByRole('button',{name:'More tools',exact:true}).evaluate(node=>node===(node.getRootNode() as ShadowRoot).activeElement)});
     await save(info,{rows,errors:r.errors});
   }finally{await r.context.close();}
@@ -192,4 +194,6 @@ test('SH07 keyboard focus tabs popovers host events and current control inventor
     await r.page.getByRole('button',{name:'Measurement tools',exact:true}).click();await r.page.locator('#host-link').click();rows.push({case:'outside click',popupCount:await r.page.getByRole('dialog').count(),hostHash:new URL(r.page.url()).hash});
     await shot(r.page,'09-current-design');await save(info,{rows,errors:r.errors});
   }finally{await r.context.close();}
+});
+
 });

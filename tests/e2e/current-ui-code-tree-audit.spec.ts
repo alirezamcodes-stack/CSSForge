@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page, type Locator, type TestInfo } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -5,7 +6,7 @@ import { setup, pick, identity, inspector, dock } from './extensionHarness';
 
 // Diagnostic only: product observations never assert a known issue or prevent
 // later controls being exercised. All user edits go through the shipped UI.
-const directory = path.resolve('artifacts/diagnostics/current-ui-p1/audit/code-tree');
+const directory = path.resolve(evidencePath('artifacts/diagnostics/current-ui-p1/audit/code-tree'));
 const fixture = `<!doctype html><html><head><meta charset="utf-8"><title>CSSForge current UI audit</title><style id="author">
 *{box-sizing:border-box}body{margin:0;background:#f1eee6;color:#243b32;font:17px Arial;min-height:20000px}header{padding:28px 40px;border-bottom:1px solid #bbc9bd}main{padding:32px 40px;max-width:900px}h1{font:38px Georgia;margin:0 0 18px}.card{padding:24px;background:#fffdf7;border:1px solid #c4cec2;border-radius:14px;margin:22px 0}.primary{font-size:18px;color:rgb(255,255,255);background-color:#294c3b;border:0;padding:16px 24px;border-radius:6px;letter-spacing:1px}.primary::before{content:"↗ ";color:gold}.primary::after{content:" ✓";color:cyan}.primary:hover{color:rgb(220,120,40)}.primary:focus{outline:3px solid #e0a141}.primary:active{transform:translateY(1px)}
 @media (min-width:1000px){.primary{letter-spacing:2px}.primary:hover{background-color:rgb(42,94,62)}@media (prefers-reduced-motion:no-preference){.primary{line-height:1.4}}}
@@ -91,6 +92,7 @@ async function step(observations: Observation[], id: string, action: string, exp
   catch (e) { observations.push({ id, action, expected, actionError: String(e) }); }
 }
 
+test.describe('Observational collector — review generated JSON; completion is not product certification', { tag: '@diagnostic' }, () => {
 test('current UI diagnostic — Code attribution, editing, validation, refresh and migration', async ({}, info) => {
   test.setTimeout(150000);
   const r = await launch(info), { page } = r, observations: Observation[] = [], findings: Finding[] = [];
@@ -181,4 +183,6 @@ test('current UI diagnostic — focused follow-up evidence for Code keyboard, sw
     await expect(page.getByRole('treeitem',{selected:true})).toHaveAccessibleName('strong#slotted-label');
     await save(info,'followup-observations',{runtime:{chrome:r.version},observations,pageErrors:r.errors});
   }finally{await r.context.close()}
+});
+
 });

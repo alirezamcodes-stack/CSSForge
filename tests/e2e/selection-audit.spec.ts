@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page, type TestInfo } from '@playwright/test';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -28,7 +29,7 @@ async function launch(page: Page) {
   });
 }
 async function evidence(info: TestInfo, data: unknown) {
-  const prefix = info.title.split(' ')[0], directory = ['A08', 'A13'].includes(prefix) ? 'test-results/diagnostics/reconciliation' : 'test-results/diagnostics/selection-hardening';
+  const prefix = info.title.split(' ')[0], directory = ['A08', 'A13'].includes(prefix) ? evidencePath('test-results/diagnostics/reconciliation') : evidencePath('test-results/diagnostics/selection-hardening');
   await mkdir(directory, { recursive: true });
   const file = path.resolve(`${directory}/${prefix}.json`);
   await writeFile(file, JSON.stringify(data, null, 2)); await info.attach('diagnostic-evidence', { path: file, contentType: 'application/json' });

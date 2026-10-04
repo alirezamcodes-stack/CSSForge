@@ -1,9 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { evidencePath } from './evidence';
+import { test, expect, type TestInfo } from '@playwright/test';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { setup, fixture, pick, inspector } from './extensionHarness';
 
 const phase = process.env.CSSFORGE_STRUCTURAL_STAGE ?? 'final';
-const out = `artifacts/diagnostics/current-ui-visual-polish/structural-semantic/${phase}`;
 // Adjacent readable rules with shared context and a distinct same-label sheet:
 // grouping must never infer stylesheet identity from the human-readable label.
 const html = fixture.replace('</style>', `
@@ -12,8 +12,8 @@ const html = fixture.replace('</style>', `
 @media print{.primary{padding:0}#checkout{border:0}.primary#checkout{color:black}}
 </style><style>@media print{#checkout{opacity:.9}}</style>`);
 
-test('reference-scale structural density and truthful adjacent source presentation', async ({}, info) => {
-  test.setTimeout(90000); await mkdir(out, { recursive: true });
+async function structuralCheck(info: TestInfo, historicalBaseline?: string) {
+  test.setTimeout(90000); const out = evidencePath(`artifacts/diagnostics/current-ui-visual-polish/structural-semantic/${historicalBaseline ? 'historical-comparison' : phase}`); await mkdir(out, { recursive: true });
   const r = await setup(info, html), { page } = r;
   try {
     await page.setViewportSize({ width: 1440, height: 1228 }); await pick(page, '#checkout');
@@ -65,8 +65,9 @@ test('reference-scale structural density and truthful adjacent source presentati
       expect(identities.every(Boolean)).toBe(true); expect(new Set(identities).size).toBe(1);
       expect(await run.locator('[data-source-rule]').count()).toBeGreaterThan(0);
     }
-    if (phase === 'final') {
-      const baseline = JSON.parse(await readFile('artifacts/diagnostics/current-ui-visual-polish/structural-semantic/before/density.json', 'utf8'));
+    if (historicalBaseline) {
+      // Explicit historical input; never regenerated from the current result.
+      const baseline = JSON.parse(await readFile(historicalBaseline, 'utf8'));
       expect(code.records, 'Every original declaration, source/rule/context identity and order remains unchanged').toEqual(baseline.code.records);
       expect(code.visibleDeclarations).toBeGreaterThan(baseline.code.visibleDeclarations);
       expect(code.repeatedMediaHeaders).toBeLessThan(baseline.code.repeatedMediaHeaders);
@@ -82,8 +83,18 @@ test('reference-scale structural density and truthful adjacent source presentati
       const contrast = Object.fromEntries(roles.filter(role => !['surface','raised','popover-surface'].includes(role)).map(role => { const a = luminance(colors[role]), b = luminance(colors.surface); return [role, Math.round((Math.max(a,b)+.05)/(Math.min(a,b)+.05)*100)/100]; }));
       return { colors, contrastAgainstBase: contrast };
     });
-    if (phase === 'final') for (const [role, ratio] of Object.entries(theme.contrastAgainstBase)) expect(ratio, `${role} contrast against base surface`).toBeGreaterThanOrEqual(4.5);
+    for (const [role, ratio] of Object.entries(theme.contrastAgainstBase)) expect(ratio, `${role} contrast against base surface`).toBeGreaterThanOrEqual(4.5);
     await writeFile(`${out}/density.json`, JSON.stringify({ chrome: r.context.browser()!.version(), inspector: await inspector(page).boundingBox(), design, code, shell, theme }, null, 2));
     expect(r.errors).toEqual([]);
   } finally { await r.context.close(); }
+}
+
+test('current structural source identity and selected token contrast invariants', async ({}, info) => {
+  await structuralCheck(info);
+});
+
+test('historical structural density improvement against a provisioned milestone', { tag: '@historical' }, async ({}, info) => {
+  const baseline = process.env.CSSFORGE_STRUCTURAL_BASELINE;
+  if (!baseline) throw Error('Set CSSFORGE_STRUCTURAL_BASELINE to an explicit historical density.json input');
+  await structuralCheck(info, baseline);
 });

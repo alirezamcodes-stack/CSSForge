@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
@@ -11,7 +12,7 @@ async function undo(page: Page) { await button(page, 'Inspector menu').click(); 
 async function capture(page: Page, name: string, presets = false) {
   await page.locator(presets ? '[data-section="Background"] details' : '[data-section="Background"]').evaluate(node => node.scrollIntoView({ block: 'start' }));
   await page.mouse.move(0, 0);
-  await page.screenshot({ path: `artifacts/screenshots/phase-06.5.2B/${name}.png`, animations: 'disabled' });
+  await page.screenshot({ path: evidencePath(`artifacts/screenshots/phase-06.5.2B/${name}.png`), animations: 'disabled' });
 }
 async function fits(page: Page) {
   await withinViewport(page);
@@ -24,7 +25,7 @@ async function fits(page: Page) {
 test('Phase 06.5.2B five Background views, stop dragging, layers, presets, narrow and zoom', async ({}, info) => {
   const { page, context, worker, tabId, errors } = await setup(info);
   try {
-    await mkdir('artifacts/screenshots/phase-06.5.2B', { recursive: true });
+    await mkdir(evidencePath('artifacts/screenshots/phase-06.5.2B'), { recursive: true });
     await page.setViewportSize({ width: 1440, height: 1100 }); await pick(page, '#checkout');
     for (const name of ['Spacing', 'Typography', 'Background', 'Display', 'Border', 'Positioning', 'Box shadow', 'Text shadow', 'Filters']) {
       const header = page.locator(`[data-section="${name}"]`).getByRole('button', { name, exact: true });

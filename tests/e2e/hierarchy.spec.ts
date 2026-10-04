@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
@@ -21,7 +22,7 @@ async function edit(page: Page, name: string, value: string) {
 async function capture(page: Page, name: string, section?: string) {
   if (section) await page.locator(`[data-section="${section}"]`).evaluate(node => node.scrollIntoView({ block: 'start' }));
   await page.mouse.move(0, 0);
-  await page.screenshot({ path: `artifacts/screenshots/phase-06.5.1/${name}.png`, animations: 'disabled' });
+  await page.screenshot({ path: evidencePath(`artifacts/screenshots/phase-06.5.1/${name}.png`), animations: 'disabled' });
 }
 async function fits(page: Page) {
   await withinViewport(page);
@@ -32,7 +33,7 @@ async function fits(page: Page) {
 test('Phase 06.5.1 six hierarchy views, Design editing, section boundaries, narrow and 200% zoom', async ({}, info) => {
   const { page, context, worker, tabId, errors } = await setup(info);
   try {
-    await mkdir('artifacts/screenshots/phase-06.5.1', { recursive: true });
+    await mkdir(evidencePath('artifacts/screenshots/phase-06.5.1'), { recursive: true });
     await page.setViewportSize({ width: 1440, height: 1100 });
     await pick(page, '#checkout');
     const target = page.locator('#checkout');

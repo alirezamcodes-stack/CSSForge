@@ -1,9 +1,10 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Locator, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { setup, fixture, pick, dock, inspector, withinViewport } from './extensionHarness';
 
 const phase = process.env.CSSFORGE_POLISH_STAGE ?? 'final';
-const out = `artifacts/diagnostics/current-ui-visual-polish/${phase}`;
+const out = evidencePath(`artifacts/diagnostics/current-ui-visual-polish/${phase}`);
 const html = fixture.replace('</style>', '#checkout{border:1px solid #84a897;background-image:linear-gradient(110deg,#315943 0%,#638470 55%,#a2b89f 100%);box-shadow:0 4px 12px #17332930;text-shadow:0 1px 2px #17332940;letter-spacing:.2px}@media(min-width:800px){#checkout{max-width:360px}}#checkout:hover{border-color:#afcbb9}</style>');
 const button = (page: Page, name: string) => page.getByRole('button', { name, exact: true });
 const field = (page: Page, name: string) => page.getByRole('textbox', { name, exact: true });

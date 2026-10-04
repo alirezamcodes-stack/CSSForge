@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
@@ -31,13 +32,13 @@ async function slider(page: Page, label: string, value: string) {
 async function capture(page: Page, name: string, section?: string) {
   if (process.env.CSSFORGE_CAPTURE_PHASE !== '05') return;
   if (section) await page.locator(`[data-section="${section}"]`).scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `test-results/diagnostics/phase-05/${name}.png` });
+  await page.screenshot({ path: evidencePath(`test-results/diagnostics/phase-05/${name}.png`) });
 }
 
 test('proven media and actual pseudo rules stay separate and reversible', async ({}, info) => {
   const { context, page, errors } = await setup(info, richFixture);
   try {
-    await mkdir('test-results/diagnostics/phase-05', { recursive: true });
+    await mkdir(evidencePath('test-results/diagnostics/phase-05'), { recursive: true });
     await pick(page, '#checkout'); const target = page.locator('#checkout');
     await input(page, 'Background color', '#123456');
     await page.getByRole('button', { name: 'Media', exact: true }).click();

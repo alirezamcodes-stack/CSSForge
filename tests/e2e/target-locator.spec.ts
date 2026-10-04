@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type CDPSession, type Page, type TestInfo } from '@playwright/test';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { setup, pick, identity } from './extensionHarness';
@@ -25,7 +26,7 @@ async function evaluate<T>(cdp: CDPSession, contextId: number, expression: strin
 }
 async function lost(page: Page) { await expect(identity(page)).toHaveText('No element selected'); await expect(page.getByTestId('live-design')).toHaveCount(0); await expect(page.getByTestId('live-code')).toHaveCount(0); }
 async function evidence(info: TestInfo, result: unknown) {
-  const directory = info.title.startsWith('L01 ') ? 'test-results/diagnostics/reconciliation' : 'test-results/diagnostics/target-locator'; await mkdir(directory, { recursive: true });
+  const directory = info.title.startsWith('L01 ') ? evidencePath('test-results/diagnostics/reconciliation') : evidencePath('test-results/diagnostics/target-locator'); await mkdir(directory, { recursive: true });
   const file = `${directory}/${info.title.split(' ')[0]}.json`; await writeFile(file, JSON.stringify(result, null, 2)); await info.attach('locator-outcome', { path: file, contentType: 'application/json' });
 }
 

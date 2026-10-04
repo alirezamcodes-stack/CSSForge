@@ -1,9 +1,10 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
 import { setup, pick, dock, inspector, withinViewport, fixture } from './extensionHarness';
 declare const chrome: typeof browser;
-const output = 'artifacts/screenshots/phase-06.5.3';
+const output = evidencePath('artifacts/screenshots/phase-06.5.3');
 async function shot(page: Page, name: string) { await page.mouse.move(0, 0); await page.screenshot({ path: `${output}/${name}.png`, animations: 'disabled' }); }
 async function fits(page: Page, element: Locator) {
   const viewport = await page.evaluate(() => ({ width: innerWidth, height: innerHeight }));
@@ -78,7 +79,14 @@ test('Phase 06.5.3 identity, real fonts, seven views, narrow and zoom', async ({
       await page.setViewportSize({ width,height:844 }); await chromeFits(page);
       for (const label of ['Media','State or pseudo','Font family','Text color picker']) {
         const trigger = page.getByRole('button', { name:label,exact:true }); await trigger.click();
-        await fits(page,page.getByRole('dialog', { name:label,exact:true })); await page.keyboard.press('Escape'); await expect(trigger).toBeFocused();
+        const popup = page.getByRole('dialog', { name:label,exact:true }); await fits(page,popup);
+        if (label === 'Font family') {
+          const draft = popup.getByRole('textbox', { name:'Custom font family',exact:true });
+          await expect(draft).toBeFocused(); await draft.press('Escape');
+          await expect(draft).not.toBeFocused(); await expect(popup).toBeVisible();
+          await expect(trigger).toHaveAttribute('aria-expanded','true');
+        }
+        await page.keyboard.press('Escape'); await expect(popup).toBeHidden(); await expect(trigger).toBeFocused();
       }
       const measure = dock(page).getByRole('button', { name:'Measurement tools',exact:true });
       await measure.focus(); const tooltip = page.getByRole('tooltip', { name:'Measurement tools',exact:true });

@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import type { browser } from 'wxt/browser';
@@ -15,7 +16,7 @@ async function openSection(page: Page, name: string) {
 async function action(page: Page, name: string) { await button(page, 'Inspector menu').click(); await page.getByRole('dialog', { name: 'Inspector menu', exact: true }).getByRole('button', { name, exact: true }).click(); await page.keyboard.press('Escape'); }
 async function capture(page: Page, name: string, title: string) {
   await section(page, title).evaluate(node => node.scrollIntoView({ block: 'start' })); await page.mouse.move(0, 0);
-  await page.screenshot({ path: `artifacts/screenshots/phase-06.5.2C/${name}.png`, animations: 'disabled' });
+  await page.screenshot({ path: evidencePath(`artifacts/screenshots/phase-06.5.2C/${name}.png`), animations: 'disabled' });
 }
 async function fits(page: Page, color?: string) {
   await withinViewport(page);
@@ -38,7 +39,7 @@ async function fits(page: Page, color?: string) {
 test('Phase 06.5.2C six shadow views, layer clarity, edits, presets, undo, narrow and zoom', async ({}, info) => {
   const { page, context, worker, tabId, errors } = await setup(info);
   try {
-    await mkdir('artifacts/screenshots/phase-06.5.2C', { recursive: true });
+    await mkdir(evidencePath('artifacts/screenshots/phase-06.5.2C'), { recursive: true });
     await page.setViewportSize({ width: 1440, height: 1100 }); await pick(page, '#checkout');
     const target = page.locator('#checkout');
     await openSection(page, 'Box shadow');

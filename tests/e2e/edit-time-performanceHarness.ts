@@ -1,3 +1,4 @@
+import { evidencePath } from './evidence';
 import { chromium, expect, type CDPSession, type Page, type TestInfo } from '@playwright/test';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -293,7 +294,7 @@ export async function measureWorkload(r: EditingRuntime, info: TestInfo, workloa
   }
   await page.waitForTimeout(200);
   const label = (process.env.CSSFORGE_EDIT_PERF_LABEL ?? 'current').replace(/[^\w-]/g, '-');
-  const directory = path.resolve('.preview/edit-time-performance'); await mkdir(directory, { recursive: true });
+  const directory = evidencePath('diagnostics/edit-time-performance'); await mkdir(directory, { recursive: true });
   const filename = path.join(directory, `${label}-${r.metadata.profile}-${workload.id}.json`);
   const tracing = process.env.CSSFORGE_EDIT_PERF_TRACE === '1' && r.metadata.profile === 'heavy' && workload.id === 'width';
   const diagnosticAvailable = await r.read<boolean>('typeof globalThis.__editPerf?.reset === "function" && typeof globalThis.__editPerf?.snapshot === "function"');
@@ -409,7 +410,7 @@ export async function measureOwnershipCycles(r: EditingRuntime, info: TestInfo) 
     cycles.push({ cycle, milliseconds: nodePerformance.now() - began, ...active, widthWrites: timings.writes.reduce((sum, item) => sum + item.layers, 0), deactivatedMetrics: deactivated.metrics, deactivatedDiagnostic: deactivated.diagnostic, deactivatedOwnership: deactivated.ownership });
   }
   const label = (process.env.CSSFORGE_EDIT_PERF_LABEL ?? 'current').replace(/[^\w-]/g, '-');
-  const directory = path.resolve('.preview/edit-time-performance'); await mkdir(directory, { recursive: true });
+  const directory = evidencePath('diagnostics/edit-time-performance'); await mkdir(directory, { recursive: true });
   const filename = path.join(directory, `${label}-heavy-ownership-cycles.json`);
   await writeFile(filename, JSON.stringify({ metadata: r.metadata, cycles, notes: ['Diagnostic event/caller history is reset before GC, retaining live ownership; both occur outside timing windows.', 'Native post-GC listener totals and diagnostic live/actual Set ownership are recorded separately for active and deactivated phases.', 'Cycle duration includes real UI selection/scrub/Undo/color/section/Changes/deactivation/reactivation, not just the 500ms drag.'] }, null, 2));
   await info.attach('heavy-ownership-cycles', { path: filename, contentType: 'application/json' });

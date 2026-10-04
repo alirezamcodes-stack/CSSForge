@@ -1,9 +1,10 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { setup, fixture, pick, inspector } from './extensionHarness';
 
 // Diagnostic audit only. All product changes happen through exposed UI controls.
-const out = 'artifacts/diagnostics/current-ui-p1/audit/design';
+const out = evidencePath('artifacts/diagnostics/current-ui-p1/audit/design');
 const auditFixture = fixture.replace('</main>', `<section id="audit-parent" style="width:600px;height:300px;position:relative;font:24px/1.5 Georgia;color:rgb(20,40,60);text-align:left;--audit-length:18px;--audit-line:1.5;--audit-opacity:.6;--audit-index:7"><button id="audit-target" style="display:inline-block;position:relative;top:0;right:0;bottom:0;left:0;z-index:1;width:240px;height:80px;margin:8px;padding:8px;border:2px solid rgb(70,80,90);border-radius:8px;font:20px/1.4 Arial;letter-spacing:1px;color:rgb(40,50,60);opacity:1">Audit control target</button><div><span id="audit-inherited" style="display:inline-block">Inherited child</span><span id="audit-owned" style="display:inline-block;font-size:16px;color:rgb(90,100,110);font-family:Verdana;line-height:2">Owned child</span></div></section></main>`);
 type Observation = { id: string; case: string; status: 'pass'|'mismatch'|'error'|'observed'|'expected-limitation'; expected?: unknown; actual?: unknown; evidence?: string; module?: string };
 type Run = { name: string; observations: Observation[]; errors: string[]; inventory?: unknown; screenshots: string[] };
@@ -57,6 +58,7 @@ const numericFields:NumericField[] = [
   {label:'Z-index',property:'z-index',section:'Positioning',value:'5',computed:'5',keyword:'auto',negative:true,integer:true,unitless:true},
 ];
 
+test.describe('Observational collector — review generated JSON; completion is not product certification', { tag: '@diagnostic' }, () => {
 test('current UI design audit — every exposed numeric field and raw CSS grammar',async({},info)=>{
   test.setTimeout(180000);
   const run:Run={name:'numeric',observations:[],errors:[],screenshots:[]};
@@ -346,4 +348,6 @@ test('current UI design audit — native viewport zoom captures',async({},info)=
     }
     await worker.evaluate(async id=>{await(globalThis as any).chrome.tabs.setZoom(id,1);},tabId);
   } finally {run.errors=errors;await save(run);await context.close();}
+});
+
 });

@@ -1,9 +1,10 @@
+import { evidencePath } from './evidence';
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { setup, fixture, pick, dock, inspector, withinViewport } from './extensionHarness';
 import { feedbackPaintComparison, feedbackRasterBounds } from './paintOrder';
 
-const out = 'test-results/diagnostics/current-ui-p2';
+const out = evidencePath('test-results/diagnostics/current-ui-p2');
 const html = fixture.replace('</style>', `
 #checkout{position:relative;z-index:5;border:3px solid #789abc;box-shadow:1px 2px 3px #123456;text-shadow:1px 2px 3px #345678;background-image:linear-gradient(90deg,red 0%,green 50%,blue 100%)}
 #leaf{position:absolute;left:0;top:0;width:4px;height:4px;overflow:hidden}
