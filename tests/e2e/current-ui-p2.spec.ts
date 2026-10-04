@@ -148,7 +148,7 @@ for(const surface of ['HTML','Navigator']) test(`CA63 ${surface} complete tree k
   try {
     await pick(page,'#checkout');if(surface==='HTML')await page.getByRole('tab',{name:'HTML',exact:true}).click();else await dock(page).getByRole('button',{name:'Open Navigator',exact:true}).click();
     const tree=page.getByRole('tree',{name:'Page DOM tree',exact:true});
-    const parent=tree.getByRole('treeitem',{name:'button#checkout.primary',exact:true}), child=tree.getByRole('treeitem',{name:'span#leaf',exact:true});
+    const parent=tree.getByRole('treeitem',{name:'button#checkout.primary',exact:true}), child=tree.getByRole('treeitem',{name:'span#leaf · Explore the collection',exact:true});
     await parent.focus();if(await parent.getAttribute('aria-expanded')==='true')await parent.press('ArrowLeft');
     await expect(parent).toHaveAttribute('aria-expanded','false');await parent.press('ArrowRight');await expect(parent).toHaveAttribute('aria-expanded','true');await expect(parent).toBeFocused();
     await parent.press('ArrowRight');await expect(child).toBeFocused();await expect(child).toHaveAttribute('tabindex','0');await expect(parent).toHaveAttribute('tabindex','-1');

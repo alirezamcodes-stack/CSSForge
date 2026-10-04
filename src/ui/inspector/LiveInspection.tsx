@@ -25,7 +25,7 @@ export function LiveTask({ task }: { task: Task }) {
     <p className={s.fixtureNote} role="status">{active ? 'Picking · click an element. Escape cancels.' : selection ? 'Element selected · page interactions are enabled.' : 'Select an element to see its dimensions and font.'}</p>
     <button className={s.outlineButton} onClick={() => active ? picker?.cancel() : picker?.start()}><Icon name="cursor" />{active ? 'Cancel picking' : 'Pick an element'}</button>
     {selection && <><TargetNavigation />{task === 'Design' && <dl className={s.selectionFacts}><dt>Element</dt><dd>{selection.tag}</dd><dt>Dimensions</dt><dd>{dimensions(selection.rect)} px</dd><dt>Font family</dt><dd>{selection.fontFamily}</dd><dt>Font size</dt><dd>{selection.fontSize}</dd></dl>}</>}
-    <p className={s.fixtureNote}>{task === 'Design' ? 'Pick an element to edit its core Design properties.' : task === 'Code' ? 'Authored CSS inspection and editing are not connected yet.' : 'Use parent and child selection above. The document tree is not connected yet.'}</p>
+    <p className={s.fixtureNote}>{task === 'Design' ? 'Pick an element to edit its core Design properties.' : task === 'Code' ? 'Select an element to inspect its CSS and add session edits.' : 'Select an element to inspect its DOM and navigate the page tree.'}</p>
   </div>;
 }
 export function LiveSurface({ surface }: { surface: 'navigator' | 'changes' | 'text' | 'insert' }) {

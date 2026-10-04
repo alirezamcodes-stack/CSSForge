@@ -1,10 +1,18 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useEditing, useInspection } from '../../picker/context';
 import { useUI } from '../../state/ui';
+import type { TreeRow } from '../../picker/tree';
 import { Surface } from '../shared/Surface';
 import { Icon } from '../shared/Icon';
 import s from '../ui.module.css';
 import t from './liveTree.module.css';
+
+function treeName(row: TreeRow) {
+  const classes = row.classes.trim().replace(/\s+/g, '.');
+  const identity = `${row.tag.slice(0, 85)}${row.elementId ? `#${row.elementId}` : ''}${classes ? `.${classes}` : ''}`
+    .replace(/[\u0000-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g, '�');
+  return [identity, row.boundary, row.text.replace(/\s+/g, ' ').trim()].filter(Boolean).join(' · ');
+}
 
 export function DOMNavigation() {
   const { picker, selection } = useInspection();
@@ -24,7 +32,7 @@ export function LiveDOMTree() {
   useLayoutEffect(() => { treeRoot.current?.querySelector('[aria-selected=true]')?.scrollIntoView({ block: 'nearest' }); }, [design?.targetId]);
   return <>{error && !inspectorMenuOpen && <p className={s.editError} role="alert">{error}</p>}<div className={t.toolbar}><span>DOM around selection</span><button onClick={() => setRevision(value => value + 1)}>Refresh tree</button></div><div ref={treeRoot} className={t.tree} role="tree" aria-label="Page DOM tree">{snapshot.rows.map((row, index) => <div key={row.id} className={`${t.row} ${row.selected ? t.selected : ''}`} style={{ paddingLeft: 12 + Math.min(row.depth, 7) * 12 }}>
     <button className={t.expand} tabIndex={-1} disabled={!row.expandable} aria-label={`${row.expanded ? 'Collapse' : 'Expand'} ${row.label}`} onClick={() => { picker!.toggleNode(row.id); setRevision(value => value + 1); }}>{row.expandable && <Icon name={row.expanded ? 'chevron' : 'chevronRight'} />}</button>
-    <button role="treeitem" aria-label={row.label} aria-level={row.depth + 1} aria-selected={row.selected} aria-expanded={row.expandable ? row.expanded : undefined} tabIndex={row.id === tabStop ? 0 : -1} className={t.node} title={row.label} onFocus={() => setFocusedId(row.id)} onClick={() => picker!.selectNode(row.id)} onKeyDown={event => {
+    <button role="treeitem" aria-label={treeName(row)} aria-level={row.depth + 1} aria-selected={row.selected} aria-expanded={row.expandable ? row.expanded : undefined} tabIndex={row.id === tabStop ? 0 : -1} className={t.node} title={row.label} onFocus={() => setFocusedId(row.id)} onClick={() => picker!.selectNode(row.id)} onKeyDown={event => {
       const items = Array.from(event.currentTarget.closest('[role=tree]')!.querySelectorAll<HTMLButtonElement>('[role=treeitem]'));
       if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) { event.preventDefault(); items[event.key === 'Home' ? 0 : event.key === 'End' ? items.length - 1 : Math.max(0, Math.min(items.length - 1, index + (event.key === 'ArrowDown' ? 1 : -1)))]?.focus(); }
       if (event.key === 'ArrowRight') {

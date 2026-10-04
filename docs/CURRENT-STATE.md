@@ -1,14 +1,14 @@
 # CSSForge current state
 
-Audited **2026-10-03**, Europe/Berlin; updated **2026-10-04** for Phase 10B.3. This dashboard records current status; [the detailed audit](post-10a-full-project-audit.md) remains the unchanged pre-fix record. Earlier phase reports remain historical evidence.
+Audited **2026-10-03**, Europe/Berlin; updated **2026-10-04** for Phase 10B.4. This dashboard records current status; [the detailed audit](post-10a-full-project-audit.md) remains the unchanged pre-fix record. Earlier phase reports remain historical evidence.
 
 ## Baseline and health
 
-- Phase 10B.3 baseline verified clean: `fix/phase-10b-interaction`, HEAD/main/`origin/main` **`bbcfe27f508cd9e30606122ec53ad9ae3506df8c`**, `fix: harden duplicate resource policy`. F01–F03 hardening is merged in this baseline; Phase 10B.3 changes remain uncommitted on this branch.
+- Phase 10B.4 baseline verified clean: `fix/phase-10b-ux-a11y`, HEAD/main/`origin/main` **`dfc3c406ee89777b8f855183c74dbe753504d710`**, `fix: harden interaction and refusal feedback`. F01–F05 hardening is merged in this baseline; Phase 10B.4 changes remain uncommitted on this branch.
 - Protected `phase-10a` remains **`ad32eedf81f051a7f5ac3508e2d6a7c243f37b1e`**; `pre-phase-10b` remains **`c6638691b9972081f0ddfc559e4515d327404276`**.
-- The selected-element editing foundation works in its supported scope. F01–F05 are fixed; three minor UX/accessibility defects remain (F06–F08). No P0 or P1 finding was established in the audit.
+- The selected-element editing foundation works in its supported scope. F01–F08 are fixed in the current working tree. Phase 10B is not declared complete: Phase 10B.5 test/docs maintenance remains pending. No P0 or P1 finding was established in the audit.
 - The pre-fix report inventories **21 findings: P0 0 / P1 0 / P2 9 / P3 12**. This includes release gaps, debt and unverified risks; it is not a count of 21 confirmed product bugs.
-- Phase 10B.3 changes only popover child-key ownership, HTML/tree session-error presentation, focused tests and this dashboard. Existing mutation guards, history, ownership and resource policy remain unchanged. No F06+ work, dependency/configuration change, commit, push, merge or tag change.
+- Phase 10B.4 changes only Code/HTML no-selection copy, Add Declaration validation/accessibility, shared tree accessible naming, focused tests and this dashboard. Existing mutation guards, history, targeting, ownership, resource policy and native sampler code remain unchanged. No dependency/configuration or release change was made.
 
 ## Implemented foundation
 
@@ -34,17 +34,19 @@ The live extension provides explicit toolbar activation, picking, Design control
 | F03 | P2 | **Fixed by Phase 10B.2.** Raw spelling missed browser-valid escaped URL functions; accepted inline URL-function tokens now receive consistent whole-Duplicate refusal, including custom values and fallbacks. |
 | F04 | P2 | **Fixed by Phase 10B.3.** Popover respects consumed events and interactive descendants; repeated slider arrows retain focus, and unhandled Home/End no longer move it to popup buttons. |
 | F05 | P2 | **Fixed by Phase 10B.3.** HTML/tree renders the existing session refusal after menu closure; stale exact-gap moves preserve host order/history and fresh valid actions clear the error normally. |
-| F06 | P3 | No-selection Code/HTML guidance falsely says connected features are not connected. |
-| F07 | P3 | Code add-declaration validation lacks field-associated error semantics and precise property/value feedback. |
-| F08 | P3 | Repeated same-class tree nodes can have identical accessible names despite distinct visible text. |
+| F06 | P3 | **Fixed by Phase 10B.4.** Code/HTML identify selection as the prerequisite; public selection, native Delete deselection and selection recovery show the correct surface without reactivation. |
+| F07 | P3 | **Fixed by Phase 10B.4.** Unsupported properties and invalid values have separate field errors, stable unique descriptions and invalid-state semantics; correction clears obsolete associations and valid Apply/Undo retains the existing transaction path. |
+| F08 | P3 | **Fixed by Phase 10B.4.** HTML/Navigator names include the bounded visible tag/ID/classes, boundary and normalized direct-text preview; visible distinctions survive without hidden identity or descendant traversal. |
 
-The detailed report preserves the original runtime findings and source causes. F01–F03 also existed in the earlier 09B source and were not attributed to 10A. F06–F08 remain open and unchanged. Phase 10B.1 shares the existing WeakSet across ownership consumers and revokes layer identity on replacement, Reset, teardown and failed insertion; layer attributes remain metadata.
+The detailed report preserves the original runtime findings and source causes. F01–F03 also existed in the earlier 09B source and were not attributed to 10A. F06–F08 are now fixed in the current working tree; the historical report remains unchanged. Phase 10B.1 shares the existing WeakSet across ownership consumers and revokes layer identity on replacement, Reset, teardown and failed insertion; layer attributes remain metadata.
 
 Phase 10B.2 uses detached native CSSOM for accepted declarations, the existing CSS parser for function tokens, and a native grammar probe for escaped names. No source style is rewritten. The existing conservative refusal includes unused custom-property URL tokens and inline `var()` fallbacks; quoted text/comments and browser-ignored declarations are inert. Referenced variables, stylesheet/inherited resources and other resource-function policies are not newly inspected. No computed-style/layout reads, network feature, new observers/subscriptions/RAF loops or persistent caches were added.
 
 Phase 10B.3 keeps react-colorful's existing keyboard semantics: spectrum changes on all arrows; hue/alpha consume vertical arrows without changing their value; Home/End are unhandled and leave slider focus/value intact. Generic popup button navigation, caret keys, Tab, pointer/formats/alpha/recent colors, popup Escape/focus return and sampling Escape priority passed runtime checks. Refusal presentation reuses LiveDOMTree's existing editor snapshot and alert pattern, with a narrow menu-open boolean selector to avoid duplicate HTML/menu alerts. It adds no error store, editor subscription, mutation authority, retry, global listener, observer or RAF loop.
 
 ## Performance, memory and remaining uncertainty
+
+Phase 10B.4 reuses the existing property whitelist, value normalizer/validator and native CSS.supports before the unchanged applyBatch authority. CSS-valid execution refusals remain form errors rather than invalid CSS fields. Field errors retain the existing alert pattern and drafts, with stable useId descriptions that clear on correction. Tree naming reads only existing row fields: ID/classes are already bounded to 100 characters each and direct text to 80; genuine identical rows keep identical names. Shared HTML/Navigator selection and keyboard behavior passed real-extension checks. No new observer, scan, polling, RAF, store, global listener, computed-style work or editable property was introduced.
 
 The measurements below remain pre-fix audit evidence. Phase 10B.1 adds constant-time identity lookup without new scans, observers, persistent subscriptions or RAF loops. Current scoped-cascade, hot-path and eight-cycle teardown guards passed; listener/context-observer counts stayed flat. This does not resolve the audit's hang or heap uncertainty.
 
@@ -64,6 +66,21 @@ Native sampler ownership/cancellation tests pass. The current walkthrough exerci
 - **MISSING:** persistence/Redo, viewport/device tooling, pseudo-state forcing, asset management and animation authoring. Read-only keyframe inspection and background URL editing do not provide those tools.
 
 ## Verification and release
+
+Phase 10B.4 added nine real-extension cases: two truthful Code/HTML empty-state and native deselection/recovery workflows, five property/value/accessibility/keyboard/normalization/refusal workflows, and two shared HTML/Navigator naming/selection workflows. These include third-class and long-ID distinctions, bounded direct text, whitespace, identical rows, deterministic refresh and click/Enter/Space target alignment. F04/F05, 09B, 10A, ownership and resource-policy guards passed in the final relevant gate with zero retries.
+
+| Phase 10B.4 check | Passed / failed / skipped; duration |
+| --- | --- |
+| Final focused plus directly related browser / existing units | 16/0/0, 39.9 s (9 new plus 7 existing); 72/0/0 across 4 files, 1.77 s |
+| Final `pnpm typecheck`, `pnpm test`, `pnpm build` | Typecheck passed (7.678 s command); 415/0/0 across 25 files, 3.32 s; build passed, 5.197 s |
+| Final relevant browser gate | 175/0/0, 6.8 min (411.598 s command) |
+| Current critical gate plus F06/F07/F08 cases | **537/2/0, 18.1 min (1084.512 s command)**; same 3 historical screenshot-only cases deselected |
+| Single unchanged UI03 raster diagnostic | 1/0/0, 6.1 s (7.195 s command); separate from the failed critical gate |
+| Single unchanged preview modal-focus diagnostic | 1/0/0, 4.0 s (5.037 s command); separate from the failed critical gate |
+
+Pre-fix controls reproduced all three expected **PRODUCT DEFECTS** (0/3/0; case durations 6.4/6.6/6.3 s). The initial focused run passed 9/0/0 in 20.0 s and the initial relevant gate passed 175/0/0 in 6.6 min. Source review then strengthened F08 coverage for extra visible classes/long IDs: its first run reproduced one **PRODUCT DEFECT** (0/1/0; 6.8 s case), because the interim compact identity still dropped a visible third class. Expectations were retained; the shared UI name builder now uses the actual bounded visible ID/class fields. The final focused/direct and relevant runs above include this stronger coverage. All first logs/traces are preserved separately under `.preview/phase-10b-ux-a11y/`; no test expectation was loosened. Accessible names/descriptions and keyboard behavior were verified in real Chrome, without actual screen-reader/IME/older-browser certification. Existing hang, heap, native OS sampling and raster uncertainties remain as described below.
+
+Both critical failures are classified **FLAKE**, with their causes unresolved. UI03-normal's Changes comparison has the exact same two PNG hashes and 15 gray text-pixel differences (maximum channel delta 46 versus limit 1, alpha unchanged) as the Phase 10B.1/10B.2 UI03 and Phase 10B.3 P2 failures; narrow/zoom200 and P2 passed in this gate, and the unchanged isolated UI03 diagnostic passed. The second failure was the existing preview menu-to-Changes Tab-containment assertion at `interactions.spec.ts:132` (824 ms case): the immediate ShadowRoot activeElement containment check returned false before any Navigator steps. That unchanged case passed the final relevant run, prior B1/B2/B3 critical gates, and one isolated diagnostic. Surface/FloatingFocusManager and fixture Changes code are untouched; no timing fix or test rewrite was made. First traces/error contexts/logs, raster PNG/JSON and all four phases' hash comparison are preserved. The full critical gate remains **failed**, irrespective of the diagnostics. All nine F06–F08 cases, eight F04/F05 cases, 22 ownership cases and 18 resource-policy cases passed in it; lifecycle/performance guards also passed.
 
 Phase 10B.3 added eight real-extension cases: five keyboard/shared-color checks and three HTML/Design/Code stale-Move workflows. Refused operations add zero structural writes/history; fresh Move succeeds and Undo restores the exact host order. All new cases and relevant guards passed with zero browser retries.
 
@@ -119,15 +136,14 @@ The following release/package checks are the **historical pre-fix audit results*
 
 The earlier interrupted supplemental attempt is preserved separately; it is not merged into a clean run. The detailed report provides logs, first-failure evidence, workload measurements and hashes.
 
-**Local engineering verification passed within tested scope, with known defects. Public distribution is not ready:** bundled dependency notices are incomplete, approved release icons are missing, and minimum/support Chrome policy, compatibility and store/disclosure checks remain open. Version is `0.1.0`; nothing was published.
+**Focused, unit, build and relevant checks pass; the current critical gate remains failed and unresolved risks remain recorded. Public distribution is not ready:** bundled dependency notices are incomplete, approved release icons are missing, and minimum/support Chrome policy, compatibility and store/disclosure checks remain open. Version is `0.1.0`; nothing was published.
 
 ## Dependency-ordered next work
 
-1. Review the uncommitted Phase 10B.3 F04/F05 correction; F01–F03 are already merged in the current baseline. Preserve existing mutation/rollback safety.
-2. Correct the three smaller UX/accessibility defects (F06–F08) in separately authorized work.
-3. Repair stale test contracts and distinguish assertion gates from diagnostic collectors; keep first-failure history and separate generated evidence from historical captures.
-4. Complete release notices, icons, current support documentation and a tested compatibility/store policy before public distribution.
-5. Obtain a representative real-page hang reproduction and heap-retainer attribution before choosing performance/memory fixes. Consider broad render/open-positioning work only against an observed user cost.
-6. Scope later tools against verified product needs. Keep safe-author UI dormant; do not treat missing tools as already implemented.
+1. Review the uncommitted Phase 10B.4 F06/F07/F08 correction; F01–F05 are already merged in the current baseline. Preserve existing mutation/rollback safety.
+2. Phase 10B.5 remains pending separately authorized work: repair stale test contracts and distinguish assertion gates from diagnostic collectors; keep first-failure history and separate generated evidence from historical captures. Phase 10B is not complete.
+3. Complete release notices, icons, current support documentation and a tested compatibility/store policy before public distribution.
+4. Obtain a representative real-page hang reproduction and heap-retainer attribution before choosing performance/memory fixes. Consider broad render/open-positioning work only against an observed user cost.
+5. Scope later tools against verified product needs. Keep safe-author UI dormant; do not treat missing tools as already implemented.
 
-The historical audit's side effects remain documented in its final Git record. Phase 10B.3 changes only two production files, one test file and this dashboard. No tracked historical PNG/JSON, historical report, F01–F03 implementation, dependency or configuration file changed; nothing is staged or committed.
+The historical audit's side effects remain documented in its final Git record. Phase 10B.4 changes four production files, four browser-test files (three necessary assertion updates and one new focused suite) and this dashboard. No tracked historical PNG/JSON, historical report, F01–F05 implementation behavior, dependency or configuration file changed; nothing is staged or committed. Phase 10B.5/later work was not started; no commit, push, merge, tag or branch switch occurred.

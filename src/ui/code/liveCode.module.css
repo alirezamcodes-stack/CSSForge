@@ -228,10 +228,13 @@
 .actions { margin: 0 16px; }
 .addForm { margin: 8px 16px; }
 .addForm small { display: block; margin-bottom: 5px; color: var(--text-muted); font: 11px/1.5 var(--font-ui); }
-.addForm > div { display: flex; align-items: center; gap: 5px; }
+.addForm > div { display: flex; align-items: flex-start; gap: 5px; }
+.addForm > div > span { line-height: 30px; }
+.addField { min-width: 0; width: 36%; }
+.addForm .error { margin: 4px 0 6px; }
 .code .addForm input {
   min-width: 0;
-  width: 36%;
+  width: 100%;
   height: 30px;
   border: 1px solid var(--control-border);
   border-radius: var(--radius-control);

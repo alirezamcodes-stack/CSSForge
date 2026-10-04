@@ -144,20 +144,20 @@ const slotFixture = fixture.replace('<div id="open-host"></div>', '<div id="open
 test('CA64 assigned and nested assigned nodes appear once with coherent Parent Child Refresh and ordinary DOM', async ({}, info) => {
   const r = await setup(info, slotFixture), observations: unknown[] = [];
   try {
-    for (const [selector, slot] of [['#slotted-label', 'slot#outer-slot'], ['#nested-slotted', 'slot#deep-slot']]) {
+    for (const [selector, slot, text] of [['#slotted-label', 'slot#outer-slot', 'Assigned label'], ['#nested-slotted', 'slot#deep-slot', 'Nested assigned label']]) {
       await pick(r.page, selector); await r.page.getByRole('tab', { name: 'HTML', exact: true }).click();
       let tree = r.page.getByRole('tree', { name: 'Page DOM tree' });
-      const selectedName = await identity(r.page).innerText();
-      await expect(tree.getByRole('treeitem', { name: selectedName, exact: true })).toHaveCount(1); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(selectedName);
-      await button(r.page, 'Refresh tree').click(); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(selectedName);
+      const selectedName = await identity(r.page).innerText(), accessibleName = `${selectedName} · ${text}`;
+      await expect(tree.getByRole('treeitem', { name: accessibleName, exact: true })).toHaveCount(1); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(accessibleName);
+      await button(r.page, 'Refresh tree').click(); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(accessibleName);
       await button(r.page, 'Parent').click(); await expect(identity(r.page)).toHaveText(slot); await button(r.page, 'Child').click(); await expect(identity(r.page)).toHaveText(selectedName); await aligned(r.page, selector);
       await dock(r.page).getByRole('button', { name: 'Open Navigator', exact: true }).click(); const modal = r.page.getByRole('dialog', { name: 'Navigator', exact: true }); tree = modal.getByRole('tree');
-      await expect(tree.getByRole('treeitem', { name: selectedName, exact: true })).toHaveCount(1); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(selectedName); await modal.getByRole('button', { name: 'Refresh tree', exact: true }).click(); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(selectedName);
+      await expect(tree.getByRole('treeitem', { name: accessibleName, exact: true })).toHaveCount(1); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(accessibleName); await modal.getByRole('button', { name: 'Refresh tree', exact: true }).click(); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(accessibleName);
       const names = await tree.getByRole('treeitem').evaluateAll(nodes => nodes.map(node => node.getAttribute('aria-label'))); expect(new Set(names).size).toBe(names.length);
-      await modal.getByRole('button', { name: 'Parent', exact: true }).click(); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(slot); await modal.getByRole('button', { name: 'Child', exact: true }).click(); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(selectedName);
+      await modal.getByRole('button', { name: 'Parent', exact: true }).click(); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(slot); await modal.getByRole('button', { name: 'Child', exact: true }).click(); await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName(accessibleName);
       await shot(r.page, `CA64-${selector.slice(1)}-navigator`); await r.page.keyboard.press('Escape'); observations.push({ selectedName, slot, unique: true, refresh: true, parentChild: true });
     }
-    await pick(r.page, '#checkout'); await expect(r.page.getByRole('treeitem', { selected: true })).toHaveAccessibleName('button#checkout.primary'); await button(r.page, 'Parent').click(); await expect(identity(r.page)).toHaveText('section#collection.card');
+    await pick(r.page, '#checkout'); await expect(r.page.getByRole('treeitem', { selected: true })).toHaveAccessibleName('button#checkout.primary · Explore the collection'); await button(r.page, 'Parent').click(); await expect(identity(r.page)).toHaveText('section#collection.card');
     expect(r.errors).toEqual([]); await save(info, observations);
   } finally { await r.context.close(); }
 });

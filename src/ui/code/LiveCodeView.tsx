@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { EditorState } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
 import { css } from '@codemirror/lang-css';
@@ -6,7 +6,7 @@ import { syntaxHighlighting, HighlightStyle } from '@codemirror/language';
 import { tags } from '@lezer/highlight';
 import { useEditing, useInspection } from '../../picker/context';
 import { baseContext, contextKey, type EditContext } from '../../editing/contexts';
-import { properties, type Property } from '../../editing/properties';
+import { normalizeValue, properties, validateValue, type Property } from '../../editing/properties';
 import type { Declaration, SourceSnapshot } from '../../editing/readable';
 import { SessionActions } from '../design/EditControls';
 import { Icon } from '../shared/Icon';
@@ -87,12 +87,26 @@ function DeclarationRow({ declaration, context, editable, owned = false, enabled
 
 function AddDeclaration() {
   const { editor, design, context } = useEditing();
-  const [open, setOpen] = useState(false), [property, setProperty] = useState(''), [value, setValue] = useState(''), [error, setError] = useState('');
+  const id = useId();
+  const [open, setOpen] = useState(false), [property, setProperty] = useState(''), [value, setValue] = useState('');
+  const [error, setError] = useState<{ property?: string; value?: string; form?: string }>({});
+  const validate = (name: string, draft: string) => {
+    const property = name.trim() as Property;
+    if (!properties.includes(property)) return { property: 'Enter a supported CSS property.' };
+    if (!validateValue(property, normalizeValue(property, draft), CSS.supports.bind(CSS))) return { value: `Enter a valid ${property} value.` };
+    return {};
+  };
   if (!open) return <button className={s.add} onClick={() => setOpen(true)}><Icon name="plus" />Add session declaration</button>;
-  return <form className={s.addForm} onSubmit={event => { event.preventDefault(); const success = editor!.applyBatch(design!.targetId, { [property.trim()]: value }, undefined, contextKey(context)); setError(success ? '' : editor!.getSnapshot().error ?? 'Invalid declaration.'); if (success) { setOpen(false); setProperty(''); setValue(''); } }}>
+  return <form className={s.addForm} onSubmit={event => {
+    event.preventDefault(); const invalid = validate(property, value);
+    if (invalid.property || invalid.value) { setError(invalid); return; }
+    const success = editor!.applyBatch(design!.targetId, { [property.trim()]: value }, undefined, contextKey(context));
+    setError(success ? {} : { form: editor!.getSnapshot().error ?? 'This declaration could not be applied.' });
+    if (success) { setOpen(false); setProperty(''); setValue(''); }
+  }}>
     <small>New override · {context.media.join(' → ') || 'Base'} {context.pseudo}</small>
-    <div><input aria-label="CSS property" placeholder="property" value={property} onChange={event => setProperty(event.target.value)} /><span>:</span><input aria-label="New CSS value" placeholder="value" value={value} onChange={event => setValue(event.target.value)} /><button type="submit">Apply</button></div>
-    {error && <p className={s.error} role="alert">{error}</p>}
+    <div><div className={s.addField}><input aria-label="CSS property" aria-invalid={!!error.property || undefined} aria-describedby={error.property ? `${id}-property-error` : undefined} placeholder="property" value={property} onChange={event => { const next = event.target.value; setProperty(next); if (error.property || error.value || error.form) setError(validate(next, value)); }} />{error.property && <p id={`${id}-property-error`} className={s.error} role="alert">{error.property}</p>}</div><span>:</span><div className={s.addField}><input aria-label="New CSS value" aria-invalid={!!error.value || undefined} aria-describedby={error.value ? `${id}-value-error` : undefined} placeholder="value" value={value} onChange={event => { const next = event.target.value; setValue(next); if (error.property || error.value || error.form) setError(validate(property, next)); }} />{error.value && <p id={`${id}-value-error`} className={s.error} role="alert">{error.value}</p>}</div><button type="submit">Apply</button></div>
+    {error.form && <p className={s.error} role="alert">{error.form}</p>}
   </form>;
 }
 

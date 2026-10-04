@@ -54,7 +54,7 @@ test('Code shows authored sources and safely edits, validates, toggles, undoes a
     await own(page).getByRole('textbox', { name: 'CSS property', exact: true }).fill('unsupported-property');
     await own(page).getByRole('textbox', { name: 'New CSS value' }).fill('red');
     await own(page).getByRole('button', { name: 'Apply', exact: true }).click();
-    await expect(own(page).getByRole('alert').first()).toContainText('Enter a valid unsupported-property value');
+    await expect(own(page).getByRole('textbox', { name: 'CSS property', exact: true })).toHaveAccessibleDescription('Enter a supported CSS property.');
     await own(page).getByRole('textbox', { name: 'CSS property', exact: true }).fill('color');
     await own(page).getByRole('button', { name: 'Apply', exact: true }).click();
     await expect(page.locator('#checkout')).toHaveCSS('color', 'rgb(255, 0, 0)');
@@ -90,7 +90,7 @@ test('HTML and Navigator select real parents, children, siblings and open shadow
   try {
     await pick(page, '#checkout'); await page.getByRole('tab', { name: 'HTML', exact: true }).click();
     let tree = page.getByRole('tree', { name: 'Page DOM tree' });
-    await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName('button#checkout.primary');
+    await expect(tree.getByRole('treeitem', { selected: true })).toHaveAccessibleName('button#checkout.primary · Explore the collection');
     await expect(tree).not.toContainText('cssforge');
     await page.getByRole('button', { name: 'Previous sibling', exact: true }).click(); await expect(identity(page)).toHaveText('p');
     await page.getByRole('button', { name: 'Next sibling', exact: true }).click(); await expect(identity(page)).toHaveText('button#checkout.primary');
